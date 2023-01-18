@@ -11,7 +11,8 @@ namespace TownOfUs.NeutralRoles.GuardianAngelMod
         Crew,
         Amnesiac,
         Survivor,
-        Jester
+        Jester,
+        Vulture,
     }
 
     [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]
@@ -65,7 +66,7 @@ namespace TownOfUs.NeutralRoles.GuardianAngelMod
                 var task = new GameObject("JesterTask").AddComponent<ImportantTextTask>();
                 task.transform.SetParent(player.transform, false);
                 task.Text =
-                    $"{jester.ColorString}Role: {jester.Name}\nYour target was killed. Now you get voted out!\nFake Tasks:";
+                    $"{jester.ColorString}Role: {jester.Name}\nYour target was killed. Now get voted out to win\nFake Tasks:";
                 player.myTasks.Insert(0, task);
             }
             else if (CustomGameOptions.GaOnTargetDeath == BecomeOptions.Amnesiac)
@@ -74,7 +75,7 @@ namespace TownOfUs.NeutralRoles.GuardianAngelMod
                 var task = new GameObject("AmnesiacTask").AddComponent<ImportantTextTask>();
                 task.transform.SetParent(player.transform, false);
                 task.Text =
-                    $"{amnesiac.ColorString}Role: {amnesiac.Name}\nYour target was killed. Now remember a new role!";
+                    $"{amnesiac.ColorString}Role: {amnesiac.Name}\nYour target was killed. Now remember a new role";
                 player.myTasks.Insert(0, task);
             }
             else if (CustomGameOptions.GaOnTargetDeath == BecomeOptions.Survivor)
@@ -83,7 +84,7 @@ namespace TownOfUs.NeutralRoles.GuardianAngelMod
                 var task = new GameObject("SurvivorTask").AddComponent<ImportantTextTask>();
                 task.transform.SetParent(player.transform, false);
                 task.Text =
-                    $"{surv.ColorString}Role: {surv.Name}\nYour target was killed. Now you just need to live!";
+                    $"{surv.ColorString}Role: {surv.Name}\nYour target was killed. Now just stay alive";
                 player.myTasks.Insert(0, task);
             }
             else

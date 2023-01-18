@@ -21,7 +21,7 @@ namespace TownOfUs.CrewmateRoles.DetectiveMod
                 return;
 
             var isDetectiveAlive = __instance.Is(RoleEnum.Detective);
-            var areReportsEnabled = CustomGameOptions.DetectiveReportOn;
+            var areReportsEnabled = CustomGameOptions.MysticReportOn;
 
             if (!isDetectiveAlive || !areReportsEnabled)
                 return;

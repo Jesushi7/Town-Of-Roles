@@ -13,7 +13,7 @@ namespace TownOfUs.Roles
         {
             Name = "Jester";
             ImpostorText = () => "Get Voted Out";
-            TaskText = () => "Get voted out!\nFake Tasks:";
+            TaskText = () => "Trick everyone to vote you\nFake Tasks:";
             Color = Patches.Colors.Jester;
             RoleType = RoleEnum.Jester;
             AddToRoleHistory(RoleType);

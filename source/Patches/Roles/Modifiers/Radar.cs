@@ -8,8 +8,8 @@ namespace TownOfUs.Roles.Modifiers
         public PlayerControl ClosestPlayer;
         public Radar(PlayerControl player) : base(player)
         {
-            Name = "Radar";
-            TaskText = () => "Be on high alert";
+            Name = "Paranoiac";
+            TaskText = () => "Know if someone's near you";
             Color = Patches.Colors.Radar;
             ModifierType = ModifierEnum.Radar;
         }

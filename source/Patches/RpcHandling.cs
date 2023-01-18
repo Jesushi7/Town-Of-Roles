@@ -28,6 +28,7 @@ using Object = UnityEngine.Object;
 using PerformKillButton = TownOfUs.NeutralRoles.AmnesiacMod.PerformKillButton;
 using Random = UnityEngine.Random; //using Il2CppSystem;
 using Reactor.Networking.Extensions;
+//using TownOfUs.Roles.NeutralRoles.VultureMod;
 
 namespace TownOfUs
 {
@@ -509,7 +510,9 @@ namespace TownOfUs
                         readByte = reader.ReadByte();
                         new Jester(Utils.PlayerById(readByte));
                         break;
-
+                   /* case CustomRPC.SetVulture:
+                        new Vulture(Utils.PlayerById(reader.ReadByte()));
+                        break;*/
                     case CustomRPC.SetSheriff:
                         readByte = reader.ReadByte();
                         new Sheriff(Utils.PlayerById(readByte));
@@ -548,6 +551,10 @@ namespace TownOfUs
                         readByte = reader.ReadByte();
                         new Torch(Utils.PlayerById(readByte));
                         break;
+                    case CustomRPC.SetDrunk:
+                        readByte = reader.ReadByte();
+                        new Drunk(Utils.PlayerById(readByte));
+                        break;                        
                     case CustomRPC.SetDiseased:
                         readByte = reader.ReadByte();
                         new Diseased(Utils.PlayerById(readByte));
@@ -832,9 +839,6 @@ namespace TownOfUs
                     case CustomRPC.SetTracker:
                         new Tracker(Utils.PlayerById(reader.ReadByte()));
                         break;
-                    case CustomRPC.SetDetective:
-                        new Detective(Utils.PlayerById(reader.ReadByte()));
-                        break;
                     case CustomRPC.SetSurvivor:
                         new Survivor(Utils.PlayerById(reader.ReadByte()));
                         break;
@@ -996,6 +1000,33 @@ namespace TownOfUs
                             if (role.RoleType == RoleEnum.Plaguebearer)
                                 ((Plaguebearer)role).Loses();
                         break;
+                    /*case CustomRPC.VultureEat:
+                        readByte1 = reader.ReadByte();
+                        var vulturePlayer = Utils.PlayerById(readByte1);
+                        var vulturerole = Role.GetRole<Vulture>(vulturePlayer);
+                        readByte = reader.ReadByte();
+                        var deads = Object.FindObjectsOfType<DeadBody>();
+
+                        foreach (var body in deads)
+                        {
+                            if (body.ParentId == readByte)
+                                Coroutines.Start(Eat.EatCoroutine(body, vulturerole));
+                        }
+
+                        vulturerole.LastEaten = DateTime.UtcNow;
+                        break;
+
+                    case CustomRPC.VultureWin:
+                        var thevulturerole = Role.AllRoles.FirstOrDefault(x => x.RoleType == RoleEnum.Vulture);
+                        ((Vulture)thevulturerole).Wins();
+                        break;
+
+                    case CustomRPC.VultureLose:
+                        foreach (var role in Role.AllRoles)
+                            if (role.RoleType == RoleEnum.Vulture)
+                                ((Vulture)role).Loses();
+
+                        break;         */               
                     case CustomRPC.Infect:
                         Role.GetRole<Plaguebearer>(Utils.PlayerById(reader.ReadByte())).InfectedPlayers.Add(reader.ReadByte());
                         break;
@@ -1346,13 +1377,13 @@ namespace TownOfUs
                     if (CustomGameOptions.TrapperOn > 0)
                         CrewmateRoles.Add((typeof(Trapper), CustomRPC.SetTrapper, CustomGameOptions.TrapperOn, false));
 
-                    if (CustomGameOptions.DetectiveOn > 0)
-                        CrewmateRoles.Add((typeof(Detective), CustomRPC.SetDetective, CustomGameOptions.DetectiveOn, false));
                     #endregion
                     #region Neutral Roles
                     if (CustomGameOptions.JesterOn > 0)
                         NeutralNonKillingRoles.Add((typeof(Jester), CustomRPC.SetJester, CustomGameOptions.JesterOn, false));
-
+                  /*   if (CustomGameOptions.VultureOn > 0)
+                        NeutralNonKillingRoles.Add((typeof(Vulture), CustomRPC.SetVulture, CustomGameOptions.VultureOn, false));
+*/
                     if (CustomGameOptions.AmnesiacOn > 0)
                         NeutralNonKillingRoles.Add((typeof(Amnesiac), CustomRPC.SetAmnesiac, CustomGameOptions.AmnesiacOn, false));
 

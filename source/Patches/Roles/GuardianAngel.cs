@@ -22,11 +22,11 @@ namespace TownOfUs.Roles
         {
             Name = "Guardian Angel";
             ImpostorText = () =>
-                target == null ? "You don't have a target for some reason... weird..." : $"Protect {target.name} With Your Life!";
+                target == null ? "You don't have a target for some reason... weird..." : $"Protect {target.name}";
             TaskText = () =>
                 target == null
                     ? "You don't have a target for some reason... weird..."
-                    : $"Protect {target.name}!";
+                    : $"Protect {target.name}";
             Color = Patches.Colors.GuardianAngel;
             LastProtected = DateTime.UtcNow;
             RoleType = RoleEnum.GuardianAngel;
@@ -79,6 +79,16 @@ namespace TownOfUs.Roles
             gaTeam.Add(PlayerControl.LocalPlayer);
             gaTeam.Add(target);
             __instance.teamToShow = gaTeam;
+        }
+                public void NeutralWin()
+        {
+            Player.Data.Role.TeamType = RoleTeamTypes.Impostor;
+            RoleManager.Instance.SetRole(Player, RoleTypes.Impostor);
+        }
+
+        public void NeutralLose()
+        {
+            LostByRPC = true;
         }
     }
 }

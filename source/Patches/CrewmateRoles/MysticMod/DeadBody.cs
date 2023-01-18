@@ -12,7 +12,7 @@ namespace TownOfUs.CrewmateRoles.DetectiveMod
 
         public static string ParseBodyReport(BodyReport br)
         {
-            if (br.KillAge > CustomGameOptions.DetectiveFactionDuration * 1000)
+            if (br.KillAge > CustomGameOptions.MysticFactionDuration * 1000)
                 return
                     $"Body Report: The corpse is too old to gain information from. (Killed {Math.Round(br.KillAge / 1000)}s ago)";
 
@@ -22,9 +22,9 @@ namespace TownOfUs.CrewmateRoles.DetectiveMod
 
             var role = Role.GetRole(br.Killer);
 
-            if (br.KillAge < CustomGameOptions.DetectiveRoleDuration * 1000)
+            if (br.KillAge < CustomGameOptions.MysticRoleDuration * 1000)
                 return
-                    $"Body Report: The killer appears to be a {role.Name}! (Killed {Math.Round(br.KillAge / 1000)}s ago)";
+                    $"Body Report: The killer seems to be a {role.Name}! (Killed {Math.Round(br.KillAge / 1000)}s ago)";
 
             if (br.Killer.Is(Faction.Crewmates))
                 return

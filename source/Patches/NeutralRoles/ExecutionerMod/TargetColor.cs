@@ -61,7 +61,7 @@ namespace TownOfUs.NeutralRoles.ExecutionerMod
                 var task = new GameObject("JesterTask").AddComponent<ImportantTextTask>();
                 task.transform.SetParent(player.transform, false);
                 task.Text =
-                    $"{jester.ColorString}Role: {jester.Name}\nYour target was killed. Now you get voted out!\nFake Tasks:";
+                    $"{jester.ColorString}Role: {jester.Name}\nYour target was killed. Trick everyone to vote you\nFake Tasks:";
                 player.myTasks.Insert(0, task);
             }
             else if (CustomGameOptions.OnTargetDead == OnTargetDead.Amnesiac)
@@ -70,7 +70,7 @@ namespace TownOfUs.NeutralRoles.ExecutionerMod
                 var task = new GameObject("AmnesiacTask").AddComponent<ImportantTextTask>();
                 task.transform.SetParent(player.transform, false);
                 task.Text =
-                    $"{amnesiac.ColorString}Role: {amnesiac.Name}\nYour target was killed. Now remember a new role!";
+                    $"{amnesiac.ColorString}Role: {amnesiac.Name}\nYour target was killed. Now get a new role";
                 player.myTasks.Insert(0, task);
             }
             else if (CustomGameOptions.OnTargetDead == OnTargetDead.Survivor)
@@ -79,7 +79,7 @@ namespace TownOfUs.NeutralRoles.ExecutionerMod
                 var task = new GameObject("SurvivorTask").AddComponent<ImportantTextTask>();
                 task.transform.SetParent(player.transform, false);
                 task.Text =
-                    $"{surv.ColorString}Role: {surv.Name}\nYour target was killed. Now you just need to live!";
+                    $"{surv.ColorString}Role: {surv.Name}\nYour target was killed. Now you just live";
                 player.myTasks.Insert(0, task);
             }
             else

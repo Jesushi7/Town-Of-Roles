@@ -31,6 +31,7 @@ namespace TownOfUs
         Mystic,
         Plaguebearer,
         Pestilence,
+        Vulture,
         Werewolf,
         Detective,
 
@@ -50,7 +51,7 @@ namespace TownOfUs
 
         Crewmate,
         Impostor,
-        None
+        None,
     }
 
     public enum ModifierEnum
@@ -58,6 +59,7 @@ namespace TownOfUs
         Lover,
         Torch,
         Diseased,
+        Drunk,
         Flash,
         Tiebreaker,
         Giant,

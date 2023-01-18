@@ -13,7 +13,7 @@ namespace TownOfUs.Roles
         public bool ButtonUsable => UsesLeft != 0;
         public TimeLord(PlayerControl player) : base(player)
         {
-            Name = "Time Lord";
+            Name = "Chronos";
             ImpostorText = () => "Rewind Time";
             TaskText = () => "Rewind Time!";
             Color = Patches.Colors.TimeLord;

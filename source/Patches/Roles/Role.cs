@@ -629,6 +629,11 @@ namespace TownOfUs.Roles
                     ((Amnesiac)role).BodyArrows.Values.DestroyAll();
                     ((Amnesiac)role).BodyArrows.Clear();
                 }
+             /*   foreach (var role in AllRoles.Where(x => x.RoleType == RoleEnum.Vulture))
+                {
+                    ((Vulture)role).BodyArrows.Values.DestroyAll();
+                    ((Vulture)role).BodyArrows.Clear();
+                }*/
                 foreach (var role in AllRoles.Where(x => x.RoleType == RoleEnum.Medium))
                 {
                     ((Medium)role).MediatedPlayers.Values.DestroyAll();

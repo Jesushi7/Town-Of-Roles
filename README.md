@@ -1,30 +1,32 @@
-## *Note: This repository is a continuation of Town of Us Reactivated.*
+## *Note: This repository is an unofficial continuation of Town of Us due to the original repository being discontinued.*
 
 ![LOGO](./Images/TOU-logo.png)
+![Roles](./Images/Roles.png)
 
 An Among Us mod that adds a bunch of roles, modifiers and game settings
 
-Join our [Discord](https://discord.gg/dPs2CvVtNc) if you have any problems or want to find people to play with!
+Join our [Discord](https://discord.gg/ugyc4EVUYZ) if you have any problems or want to find people to play with!
 
 **Crewmate Roles**
+- [Detective](#detective)
 - [Haunter](#haunter)
 - [Investigator](#investigator)
 - [Mystic](#mystic)
+- [Seer](#seer)
 - [Snitch](#snitch)
-- [Informant](#informant)
 - [Spy](#spy)
 - [Tracker](#tracker)
 - [Trapper](#trapper)
 - [Sheriff](#sheriff)
 - [Veteran](#veteran)
-- [Gambler](#gambler)
+- [Vigilante](#vigilante)
 - [Altruist](#altruist)
 - [Medic](#medic)
 - [Engineer](#engineer)
 - [Mayor](#mayor)
 - [Medium](#medium)
 - [Swapper](#swapper)
-- [Chronos](#chronos)
+- [Time Lord](#time-lord)
 - [Transporter](#transporter)
 
 **Neutral Roles**
@@ -36,7 +38,7 @@ Join our [Discord](https://discord.gg/dPs2CvVtNc) if you have any problems or wa
 - [Phantom](#phantom)
 - [Arsonist](#arsonist)
 - [Plaguebearer](#plaguebearer)
-- [Glitch](#glitch)
+- [The Glitch](#the-glitch)
 - [Werewolf](#werewolf)
 
 **Impostor Roles**
@@ -44,7 +46,7 @@ Join our [Discord](https://discord.gg/dPs2CvVtNc) if you have any problems or wa
 - [Grenadier](#grenadier)
 - [Morphling](#morphling)
 - [Swooper](#swooper)
-- [Vampire](#vampire)
+- [Poisoner](#poisoner)
 - [Traitor](#traitor)
 - [Blackmailer](#blackmailer)
 - [Janitor](#janitor)
@@ -59,9 +61,8 @@ Join our [Discord](https://discord.gg/dPs2CvVtNc) if you have any problems or wa
 - [Torch](#torch)
 - [Button Barry](#button-barry)
 - [Flash](#flash)
-- [Drunk](#drunk)
 - [Giant](#giant)
-- [Paranoiac](#radar)
+- [Radar](#radar)
 - [Lovers](#lovers)
 - [Sleuth](#sleuth)
 - [Tiebreaker](#tiebreaker)
@@ -648,6 +649,21 @@ If you have issues installing Town of Us, you can join our [Discord](https://dis
 -----------------------
 # Roles
 # Crewmate Roles
+## Detective
+### **Team: Crewmates**
+The Detective is a Crewmate that can examine other players for suspicious behaviour.\
+If the player the Detective examines has killed recently the Detective will be alerted about it.
+
+### Game Options
+| Name | Description | Type | Default |
+|----------|:-------------:|:------:|:------:|
+| Detective | The percentage probability of the Detective appearing | Percentage | 0% |
+| Initial Examine Cooldown | The initial cooldown of the Detective's Examine button | Time | 25s |
+| Examine Cooldown | The cooldown of the Detective's Examine button | Time | 10s |
+| Bloody Duration | How long players remain bloody after a kill | Time | 25s |
+| Show Detective Reports | Whether the Detective should get information when reporting a body | Toggle | True |
+| Time Where Detective Reports Will Have Role | If a body has been dead for shorter than this amount, the Detective's report will contain the killer's role | Time | 15s |
+| Time Where Detective Reports Will Have Faction | If a body has been dead for shorter than this amount, the Detective's report will contain the killer's faction | Time | 30s |
 
 -----------------------
 ## Haunter
@@ -691,26 +707,18 @@ On top of this, the Mystic briefly gets an arrow pointing in the direction of th
 |----------|:-------------:|:------:|:------:|
 | Mystic | The percentage probability of the Mystic appearing | Percentage | 0% |
 | Arrow Duration | The duration of the arrows pointing to the bodies | Time | 0.1s |
-The Detective is a Crewmate that can examine other players for suspicious behaviour.\
-If the player the Detective examines has killed recently the Detective will be alerted about it.
-| Initial Examine Cooldown | The initial cooldown of the Mystic's Examine button | Time | 25s |
-| Examine Cooldown | The cooldown of the Mystic's Examine button | Time | 10s |
-| Bloody Duration | How long players remain bloody after a kill | Time | 25s |
-| Show Mystic Reports | Whether the Detective should get information when reporting a body | Toggle | True |
-| Time Where Mystic Reports Will Have Role | If a body has been dead for shorter than this amount, the Mystic's report will contain the killer's role | Time | 15s |
-| Time Where Mystic Reports Will Have Faction | If a body has been dead for shorter than this amount, the Mystic's report will contain the killer's faction | Time | 30s |
 
 -----------------------
-## Snitch
+## Seer
 ### **Team: Crewmates**
-The Snitch is a Crewmate that can reveal the alliance of other players.\
-Based on settings, the Seer can find out whether a player is a Good or an Evil role.\
+The Seer is a Crewmate that can reveal the alliance of other players.\
+Based on settings, the Seer can find out whether a role is Good or Evil.\
 A player's name will change color to their team.
 ### Game Options
 | Name | Description | Type | Default |
 |----------|:-------------:|:------:|:------:|
-| Snitch | The percentage probability of the Seer appearing | Percentage | 0% |
-| Snitch Cooldown | The Cooldown of the Seer's Reveal button | Time | 25s |
+| Seer | The percentage probability of the Seer appearing | Percentage | 0% |
+| Seer Cooldown | The Cooldown of the Seer's Reveal button | Time | 25s |
 | Crewmate Killing show up as Evil | Crewmate Killing roles show up as Red | Toggle | False |
 | Neutral Benign show up as Evil | Neutral Benign roles show up as Red | Toggle | False |
 | Neutral Evil show up as Evil | Neutral Evil roles show up as Red | Toggle | False |
@@ -718,22 +726,22 @@ A player's name will change color to their team.
 | Traitor does not swap Colours | The Traitor remains their original colour | Toggle | False |
 
 -----------------------
-## Informant
+## Snitch
 ### **Team: Crewmates**
 
-The Informant is a Crewmate that can get arrows pointing towards the Impostors, once all their tasks are finished.\
+The Snitch is a Crewmate that can get arrows pointing towards the Impostors, once all their tasks are finished.\
 The names of the Impostors will also show up as red on their screen.\
-Based on the game settings, the Snitch may not know who they are until they have one task left.\
-However, when they only have a single task left, the Impostors get an arrow pointing towards the Informant.
+Based on game settings, the Snitch may not know who they are until they have one task left.\
+However, when they only have a single task left, the Impostors get an arrow pointing towards the Snitch.
 ### Game Options
 | Name | Description | Type | Default |
 |----------|:-------------:|:------:|:------:|
-| Informant | The percentage probability of the Snitch appearing | Percentage | 0% |
-| Informant knows who they are on Game Start | Whether the Snitch knows their role at the start of a game | Toggle | False |
-| Informant Sees Neutral Roles | Whether the Snitch also Reveals Neutral Roles | Toggle | False |
-| Tasks Remaining When Revealed | The number of tasks remaining when the Informant is revealed to Impostors | Number | 1 |
-| Informant Sees Impostors in Meetings | Whether the Snitch sees the Impostor's names red in Meetings | Toggle | True |
-| Informant Sees Traitor | Whether the Snitch sees the Traitor | Toggle | True |
+| Snitch | The percentage probability of the Snitch appearing | Percentage | 0% |
+| Snitch knows who they are on Game Start | Whether the Snitch knows their role at the start of a game | Toggle | False |
+| Snitch Sees Neutral Roles | Whether the Snitch also Reveals Neutral Roles | Toggle | False |
+| Tasks Remaining When Revealed | The number of tasks remaining when the Snitch is revealed to Impostors | Number | 1 |
+| Snitch Sees Impostors in Meetings | Whether the Snitch sees the Impostor's names red in Meetings | Toggle | True |
+| Snitch Sees Traitor | Whether the Snitch sees the Traitor | Toggle | True |
 
 -----------------------
 ## Spy
@@ -817,7 +825,7 @@ When the Veteran is on alert, anyone, whether crew, neutral or impostor, if they
 | Maximum Number of Alerts | The number of times the Veteran can alert throughout the game | Number | 3 |
 
 -----------------------
-## Gambler
+## Vigilante
 ### **Team: Crewmates**
 
 The Vigilante is a Crewmate that can kill during meetings.\
@@ -825,14 +833,14 @@ During meetings, the Vigilante can choose to kill someone by guessing their role
 ### Game Options
 | Name | Description | Type | Default |
 |----------|:-------------:|:------:|:------:|
-| Gambler | The percentage probability of the Gambler appearing | Percentage | 0% |
-| Gambler Kill | The number of kill the Gambler can do with his ability | Number | 1 |
-| Gambler Multiple Kill  | Whether the Gambler can kill more than once per meeting | Toggle | False |
-| Gambler Guess Neutral Benign  | Whether the Gambler can Guess Neutral Benign roles | Toggle | False |
-| Gambler Guess Neutral Evil  | Whether the Gambler can Guess Neutral Evil roles | Toggle | False |
-| Gambler Guess Neutral Killing  | Whether the Gambler can Guess Neutral Killing roles | Toggle | False |
-| Gambler Guess Some Modifiers  | Whether the Gambler can Guess Impostor Modifiers And Lovers | Toggle | False |
-| Gambler Guess After Voting  | Whether the Gambler can Guess after they have voted | Toggle | False |
+| Vigilante | The percentage probability of the Vigilante appearing | Percentage | 0% |
+| Vigilante Kill | The number of kill the Vigilante can do with his ability | Number | 1 |
+| Vigilante Multiple Kill  | Whether the Vigilante can kill more than once per meeting | Toggle | False |
+| Vigilante Guess Neutral Benign  | Whether the Vigilante can Guess Neutral Benign roles | Toggle | False |
+| Vigilante Guess Neutral Evil  | Whether the Vigilante can Guess Neutral Evil roles | Toggle | False |
+| Vigilante Guess Neutral Killing  | Whether the Vigilante can Guess Neutral Killing roles | Toggle | False |
+| Vigilante Guess Lovers  | Whether the Vigilante can Guess Lovers | Toggle | False |
+| Vigilante Guess After Voting  | Whether the Vigilante can Guess after they have voted | Toggle | False |
 
 -----------------------
 ## Altruist
@@ -840,7 +848,7 @@ During meetings, the Vigilante can choose to kill someone by guessing their role
 
 The Altruist is a Crewmate that is capable of reviving dead players.\
 Upon finding a dead body, the Altruist can hit their revive button, risking sacrificing themselves for the revival of another player.\
-If enabled, the dead body disappears, so only the Altruist's body remains at the scene.\
+If enabled, the dead body disappears, so only they Altruist's body remains at the scene.\
 After a set period of time, the player will be resurrected, if the revival isn't interrupted.
 ### Game Options
 | Name | Description | Type | Default |
@@ -885,32 +893,6 @@ A report can contain the name of the killer or the color type (Darker/Lighter)
 - Olive - Darker
 - Azure - Lighter
 - Rainbow - Lighter
-- Ice - Lighter
-- Darker - Wine
-- BlueBerry - Darker
-- Mint - Lighter
-- Light Purple- Lighter
-- Peach - Lighter- 
-- Sushi - Darker
-- Sylyveon - Lighter
-- Discussions - Lighter
-- Petrol - Darker
-- Hannah - Lighter
-- Stormy Blue - Darker
-- VantaBlack - Darker
-- Ambar - Lighter
-- Light Grape - Lighter
-- (M)aize Red - Lighter
-- Sloth - Lighter
-- AD - Darker
-- Lotty - Darker
-- Mom - Lighter
-- Kara - Darker
-- EurMom - Darker
-- Donald - Darker
-- Sen - Darker
-- Fizz - Lighter
-
 
 ### Game Options
 | Name | Description | Type | Default |
@@ -980,23 +962,22 @@ All the votes for the first player will instead be counted towards the second pl
 | Swapper Can Button | Whether the Swapper Can Press the Button | Toggle | True |
 
 -----------------------
-## Chronos
+## Time Lord
 ### **Team: Crewmates**
-The Chronos is a Crewmate that can rewind time and reverse the positions of all players.\
+The Time Lord is a Crewmate that can rewind time and reverse the positions of all players.\
 If enabled, any players killed during this time will be revived.\
 Nothing but movements and kills are affected.\
-If enabled, the Chronos can't use Vitals to make things more balanced.
+If enabled, the Time Lord can't use Vitals to make things more balanced.
 
 ### Game Options
 | Name | Description | Type | Default |
 |----------|:-------------:|:------:|:------:|
-| If enabled, the Chronos can't use Vitals to make things more balanced.
- | The percentage probability of the Chronos appearing | Percentage | 0% |
-| Revive During Rewind | Whether the Chronos revives dead players when rewinding | Toggle | False |
+| Time Lord | The percentage probability of the Time Lord appearing | Percentage | 0% |
+| Revive During Rewind | Whether the Time Lord revives dead players when rewinding | Toggle | False |
 | Rewind Duration | How far the rewind goes back in time | Time | 2s |
 | Rewind Cooldown | The cooldown of the Time Lord's Rewind button | Time | 25s |
 | Max Uses | The amount of times the Rewind ability can be used | Number | 5 |
-| Chronos can use Vitals | Whether the Chronos has the ability to use Vitals | Toggle | False |
+| Time Lord can use Vitals | Whether the Time Lord has the ability to use Vitals | Toggle | False |
 
 -----------------------
 ## Transporter
@@ -1047,12 +1028,11 @@ If their target loses, they lose.
 | Guardian Angel becomes on Target Dead | Which role the Guardian Angel becomes when their target dies | Crewmate / Amnesiac / Survivor / Jester | Crewmate |
 | Target Knows GA Exists | Whether the GA's Target knows they have a GA | Toggle | False |
 | GA Knows Targets Role | Whether the GA knows their target's role | Toggle | False |
-| GA Can Targets Neutrals | Choose If GA can target neutral roles or only crew and impostors | Toggle | False |
 
 -----------------------
 ## Survivor
 ### **Team: Neutral**
-The Survivor is a Neutral role which can win by simply surviving.\
+The Survivor is a Neutral role which can wins by simply surviving.\
 However, if Lovers, or a Neutral Evil role wins the game, the survivor loses.
 
 ### Game Options
@@ -1092,7 +1072,6 @@ However, the Jester does not win if the Crewmates, Impostors or another Neutral 
 | Jester Can Button | Whether the Jester Can Press the Button | Toggle | True |
 | Jester Can Vent | Whether the Jester Can Vent | Toggle | False |
 | Jester Has Impostor Vision | Whether the Jester Has Impostor Vision | Toggle | False |
-| Jester Can Switch Between Vents | Whether Jester Can Vent and this is On, They'll be able to switch vents| Toggle | False |
 
 -----------------------
 ## Phantom
@@ -1112,7 +1091,7 @@ They become half-invisible when they die and has to complete all their tasks wit
 
 The Arsonist is a Neutral role with its own win condition.\
 They have two abilities, one is to douse other players with gasoline.\
-The other is to ignite all doused players.\
+The other is to ingite all doused players.\
 The Arsonist needs to be the last killer alive to win the game.
 ### Game Options
 | Name | Description | Type | Default |
@@ -1122,7 +1101,6 @@ The Arsonist needs to be the last killer alive to win the game.
 | Maximum Alive Players Doused | The maximum amount of players that the Arsonist can have doused | Number | 5 |
 | Arsonist Has Impostor Vision | Whether the Arsonist Has Impostor Vision | Toggle | False |
 | Ignite Cooldown Removed When Arso Is Last Killer | Whether the Arsonist's Ignite Cooldown is removed when they're the final killer | Toggle | False |
-|Arsonist Can Vent | Whether the Arsonist Can Vent | Toggle | False |
 
 -----------------------
 ## Plaguebearer
@@ -1143,7 +1121,7 @@ The Plaguebearer or Pestilence needs to be the last killer alive to win the game
 | Pestilence can Vent | Whether the Pestilence can Vent | Toggle | False |
 
 -----------------------
-## Glitch
+## The Glitch
 ### **Team: Neutral**
 
 The Glitch is a Neutral role with its own win condition.\
@@ -1155,14 +1133,14 @@ The Glitch can Mimic someone, which results in them looking exactly like the oth
 ### Game Options
 | Name | Description | Type | Default |
 |----------|:-------------:|:------:|:------:|
-| Glitch | The percentage probability of Glitch appearing | Percentage | 0% |
-| Mimic Cooldown | The cooldown of Glitch's Mimic button | Time | 30s |
-| Mimic Duration | How long Glitch can Mimic a player | Time | 10s |
-| Hack Cooldown | The cooldown of Glitch's Hack button | Time | 30s |
-| Hack Duration | How long Glitch can Hack a player | Time | 10s |
+| The Glitch | The percentage probability of The Glitch appearing | Percentage | 0% |
+| Mimic Cooldown | The cooldown of The Glitch's Mimic button | Time | 30s |
+| Mimic Duration | How long The Glitch can Mimic a player | Time | 10s |
+| Hack Cooldown | The cooldown of The Glitch's Hack button | Time | 30s |
+| Hack Duration | How long The Glitch can Hack a player | Time | 10s |
 | Glitch Kill Cooldown | The cooldown of the Glitch's Kill button | Time | 30s |
-| Glitch Hack Distance | How far away Glitch can Hack someone from | Short / Normal / Long | Short |
-| Glitch can Vent | Whether Glitch can Vent | Toggle | False |
+| Glitch Hack Distance | How far away The Glitch can Hack someone from | Short / Normal / Long | Short |
+| Glitch can Vent | Whether the Glitch can Vent | Toggle | False |
 
 -----------------------
 ## Werewolf
@@ -1245,19 +1223,19 @@ The Swooper is an Impostor that can temporarily turn invisible.
 | Swooper can Vent | Whether the Swooper can Vent | Toggle | False |
 
 -----------------------
-## Vampire
+## Poisoner
 ### **Team: Impostors**
 
-The Vampire is an Impostor who has to bite another player instead of kill.\
-When they bite a player, the poisoned player dies either upon the start of the next meeting or after a set duration.
+The Poisoner is an Impostor who has to poison another play instead of kill.\
+When they poison a player, the poisoned player dies either upon the start of the next meeting or after a set duration.
 
 ### Game Options
 | Name | Description | Type | Default |
 |----------|:-------------:|:------:|:------:|
-| Vampire | The percentage probability of the Poisoner appearing | Percentage | 0% |
-| Vampire Cooldown | The cooldown of the Vampire's bite button | Time | 25s |
-| Vampire Kill Delay | The delay of the kill after being bitten | Time | 5s |
-| Vampire can Vent | Whether the Poisoner can Vent | Toggle | False |
+| Poisoner | The percentage probability of the Poisoner appearing | Percentage | 0% |
+| Poison Cooldown | The cooldown of the Poisoner's Poison button | Time | 25s |
+| Poison Kill Delay | The delay of the kill after being poisoned | Time | 5s |
+| Poisoner can Vent | Whether the Poisoner can Vent | Toggle | False |
 
 -----------------------
 ## Traitor
@@ -1367,7 +1345,6 @@ The Multitasker's tasks are transparent.
 |----------|:-------------:|:------:|:------:|
 | Multitasker | The percentage probability of the Multitasker appearing | Percentage | 0% |
 
-
 -----------------------
 ## Torch
 ### **Applied to: Crewmates**
@@ -1407,14 +1384,6 @@ The Giant is a gigantic Crewmate, that has a decreased walk speed.
 | Giant | The percentage probability of the Giant appearing | Percentage | 0% |
 | Speed | How fast the Giant moves in comparison to normal | Factor | 0.75x |
 
-## Drunk
-### **Applied to: All**
-The Drunk's Controls Are Inverted.
-### Game Options
-| Name | Description | Type | Default |
-|----------|:-------------:|:------:|:------:|
-| Drunk | The percentage probability of the Drunk appearing | Percentage | 0% |
-
 -----------------------
 ## Lovers
 ### **Applied to: All**
@@ -1422,7 +1391,7 @@ The Lovers are two players who are linked together.\
 These two players get picked randomly between Crewmates and Impostors.\
 They gain the primary objective to stay alive together.\
 If they are both among the last 3 players, they win.\
-In order to do so, they gain access to a private chat, only visible by them in between meetings.\
+In order to so, they gain access to a private chat, only visible by them in between meetings.\
 However, they can also win with their respective team, hence why the Lovers do not know the role of the other lover.
 
 ### Game Options
@@ -1434,7 +1403,7 @@ However, they can also win with their respective team, hence why the Lovers do n
 | Neutral Roles Can Be Lovers | Whether a Lover can be a Neutral Role | Toggle | True |
 
 -----------------------
-## Paranoiac
+## Radar
 ### **Applied to: All**
 The Radar is a crewmate who knows where the closest player is to them.
 ### Game Options
@@ -1479,7 +1448,7 @@ Does not appear on Airship or Submerged.
 ### **Applied to: Impostors**
 Double Shot is an Impostor who gets an extra life when assassinating.\
 Once they use their life they are indicated with a red flash\
-and can no longer guess the person who they guessed wrong for the remainder of that meeting.
+and can no longer geuss the person who they guessed wrong for the remainder of that meeting.
 ### Game Options
 | Name | Description | Type | Default |
 |----------|:-------------:|:------:|:------:|
@@ -1563,7 +1532,6 @@ When they are the only remaining Impostor, they will have their kill cooldown sh
 | Name | Description | Type | Default |
 |----------|:-------------:|:------:|:------:|
 | Camouflaged Comms | Whether everyone becomes camouflaged when Comms are sabotaged | Toggle | False |
-| Everyone Can Vent Mode | Whether everyone has a vent button that can be used | Toggle | False |
 | Impostors can see the roles of their team | Whether Impostors are able to see which Impostor roles their teammates have | Toggle | False |
 | Dead can see everyone's roles and Votes | Whether dead players are able to see the roles and votes of everyone else | Toggle | False |
 | Probability of a completely vanilla game | The percentage probability of a vanilla Among Us game happening | Percentage | 0% |
@@ -1605,7 +1573,7 @@ If they guess wrong, they die instead.
 | Assassin Guess Neutral Evil  | Whether the Assassin can Guess Neutral Evil roles | Toggle | False |
 | Assassin Guess Neutral Killing  | Whether the Assassin can Guess Neutral Killing roles | Toggle | False |
 | Assassin Guess Impostors  | Whether the Assassin can Guess Impostor roles | Toggle | False |
-| Assassin Guess Crewmate Modifiers  | Whether the Assassin can Guess Modifiers | Toggle | False |
+| Assassin Guess Crewmate Modifiers  | Whether the Assassin can Guess Crewmate Modifiers | Toggle | False |
 | Assassin Can Guess Lovers  | Whether the Assassin can Guess Lovers | Toggle | False |
 | Assassin Can Guess After Voting  | Whether the Assassin can Guess after voting | Toggle | False |
 
@@ -1616,7 +1584,7 @@ New colors are added for crewmates to pick from.
 ## Rainbow Color!
 A rainbow color has also been added. Anyone who equips this color will constantly switch between the colors of the rainbow.
 ## Custom Hats!
-Custom hats have been added, made by some very talented artists. These are mostly hats for streamers and Friends :)
+Custom hats have been added, made by some very talented artists. These are mostly hats for streamers.
 
 -----------------------
 # Bug / Suggestions
