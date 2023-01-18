@@ -24,7 +24,7 @@ namespace TownOfUs.Roles
 
         public Glitch(PlayerControl owner) : base(owner)
         {
-            Name = "The Glitch";
+            Name = "Glitch";
             Color = Patches.Colors.Glitch;
             LastHack = DateTime.UtcNow;
             LastMimic = DateTime.UtcNow;
@@ -37,7 +37,7 @@ namespace TownOfUs.Roles
             IsUsingMimic = false;
             RoleType = RoleEnum.Glitch;
             AddToRoleHistory(RoleType);
-            ImpostorText = () => "Murder, Mimic, Hack... Data Lost";
+            ImpostorText = () => "Murder, Mimic, Hack everyone";
             TaskText = () => "Murder everyone to win\nFake Tasks:";
             Faction = Faction.Neutral;
         }

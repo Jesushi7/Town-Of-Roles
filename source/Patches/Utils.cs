@@ -591,7 +591,7 @@ namespace TownOfUs
             {
                 role.LastTrapped = DateTime.UtcNow;
             }
-            foreach (Detective role in Role.GetRoles(RoleEnum.Detective))
+            foreach (Mystic role in Role.GetRoles(RoleEnum.Mystic))
             {
                 role.LastExamined = DateTime.UtcNow;
             }

@@ -15,10 +15,10 @@ namespace TownOfUs.NeutralRoles.PhantomMod
             if (PlayerControl.LocalPlayer.Data == null) return;
             if (PlayerControl.LocalPlayer != SetPhantom.WillBePhantom) return;
             if (PlayerControl.LocalPlayer.Data.IsDead) return;
-            var toChooseFrom = PlayerControl.AllPlayerControls.ToArray().Where(x => x.Is(Faction.Neutral) && !x.Is(ModifierEnum.Lover) && x.Data.IsDead && !x.Data.Disconnected).ToList();
-            if (!PlayerControl.LocalPlayer.Is(Faction.Neutral))
+            var toChooseFrom = PlayerControl.AllPlayerControls.ToArray().Where(x => x.Is(Faction.Crewmates) && !x.Is(ModifierEnum.Lover) && x.Data.IsDead && !x.Data.Disconnected).ToList();
+            if (!PlayerControl.LocalPlayer.Is(Faction.Crewmates))
             {
-                var toChooseFromAlive = PlayerControl.AllPlayerControls.ToArray().Where(x => x.Is(Faction.Neutral) && !x.Is(ModifierEnum.Lover) && !x.Data.Disconnected).ToList();
+                var toChooseFromAlive = PlayerControl.AllPlayerControls.ToArray().Where(x => x.Is(Faction.Crewmates) && !x.Is(ModifierEnum.Lover) && !x.Data.Disconnected).ToList();
                 if (toChooseFromAlive.Count == 0)
                 {
                     SetPhantom.WillBePhantom = null;

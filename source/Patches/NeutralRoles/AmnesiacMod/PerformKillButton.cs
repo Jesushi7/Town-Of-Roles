@@ -103,6 +103,7 @@ namespace TownOfUs.NeutralRoles.AmnesiacMod
 
 
                 case RoleEnum.Jester:
+                case RoleEnum.Vulture:
                 case RoleEnum.Executioner:
                 case RoleEnum.Arsonist:
                 case RoleEnum.Amnesiac:
@@ -236,7 +237,7 @@ namespace TownOfUs.NeutralRoles.AmnesiacMod
                 var medicRole = Role.GetRole<Medic>(amnesiac);
                 medicRole.UsedAbility = false;
             }
-
+            
             else if (role == RoleEnum.Mayor)
             {
                 var mayorRole = Role.GetRole<Mayor>(amnesiac);
@@ -265,12 +266,6 @@ namespace TownOfUs.NeutralRoles.AmnesiacMod
                 trackerRole.TrackerArrows.Clear();
                 trackerRole.UsesLeft = CustomGameOptions.MaxTracks;
                 trackerRole.LastTracked = DateTime.UtcNow;
-            }
-
-            else if (role == RoleEnum.Detective)
-            {
-                var detectiveRole = Role.GetRole<Detective>(amnesiac);
-                detectiveRole.LastExamined = DateTime.UtcNow;
             }
 
             else if (role == RoleEnum.Mystic)

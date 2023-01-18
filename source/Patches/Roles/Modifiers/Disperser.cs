@@ -17,7 +17,7 @@ namespace TownOfUs.Roles.Modifiers
         public Disperser(PlayerControl player) : base(player)
         {
             Name = "Disperser";
-            TaskText = () => "Separate the Crew";
+            TaskText = () => "Transport everyone to a random vent";
             Color = Patches.Colors.Impostor;
             ModifierType = ModifierEnum.Disperser;
         }

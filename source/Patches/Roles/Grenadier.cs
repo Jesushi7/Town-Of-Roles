@@ -22,7 +22,7 @@ namespace TownOfUs.Roles
         {
             Name = "Grenadier";
             ImpostorText = () => "Hinder The Crewmates' Vision";
-            TaskText = () => "Blind the crewmates to get sneaky kills";
+            TaskText = () => "Blind the crewmates";
             Color = Patches.Colors.Impostor;
             LastFlashed = DateTime.UtcNow;
             RoleType = RoleEnum.Grenadier;

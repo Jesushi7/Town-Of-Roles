@@ -16,13 +16,12 @@ namespace TownOfUs
             position.AdjustPosition();
 
             __instance.text.text =
-                "<color=#00FF00FF>TownOfUs v" + TownOfUs.VersionString + "</color>\n" +
+                "<color=#38b553>Town Of Roles v" + TownOfUs.VersionString + "</color>\n" +
                 $"Ping: {AmongUsClient.Instance.Ping}ms\n" +
                 (!MeetingHud.Instance
-                    ? "<color=#00FF00FF>Modded By: Donners, Term,</color>\n" +
-                    "<color=#00FF00FF>-H & MyDragonBreath</color>\n" : "") +
+                    ? "<color=#38b553>Modded By: Jesushi</color>\n"  : "") +
                 (AmongUsClient.Instance.GameState != InnerNet.InnerNetClient.GameStates.Started
-                    ? "<color=#00FF00FF>Formerly: Slushiegoose & Polus.gg</color>" : "");
+                    ? "<color=#38b553>Formerly From Town Of Us Reactivated \nHelped From: Det, Discussions, AlchlcDvl\nArtwork By Lotty</color>" : "");
         }
     }
 }

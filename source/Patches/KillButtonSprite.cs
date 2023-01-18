@@ -114,7 +114,7 @@ namespace TownOfUs
                 __instance.KillButton.graphic.sprite = Trap;
                 flag = true;
             }
-            else if (PlayerControl.LocalPlayer.Is(RoleEnum.Detective))
+            else if (PlayerControl.LocalPlayer.Is(RoleEnum.Mystic))
             {
                 __instance.KillButton.graphic.sprite = Examine;
                 flag = true;

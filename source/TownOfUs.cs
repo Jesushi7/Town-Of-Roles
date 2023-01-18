@@ -21,14 +21,16 @@ using TownOfUs.Extensions;
 
 namespace TownOfUs
 {
-    [BepInPlugin(Id, "Town Of Us", VersionString)]
+    [BepInPlugin(Id, "Town Of Roles", VersionString)]
     [BepInDependency(ReactorPlugin.Id)]
     [BepInDependency(SubmergedCompatibility.SUBMERGED_GUID, BepInDependency.DependencyFlags.SoftDependency)]
     public class TownOfUs : BasePlugin
     {
         public const string Id = "com.slushiegoose.townofus";
-        public const string VersionString = "3.4.0";
+        public const string VersionString = "1.0.0";
         public static System.Version Version = System.Version.Parse(VersionString);
+        public const int MaxPlayers = 127;
+        public const int MaxImpostors = 62;
         
         public static Sprite JanitorClean;
         public static Sprite EngineerFix;

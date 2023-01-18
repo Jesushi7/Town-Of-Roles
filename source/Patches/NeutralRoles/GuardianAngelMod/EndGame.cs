@@ -30,6 +30,25 @@ namespace TownOfUs.NeutralRoles.GuardianAngelMod
                             SendOption.Reliable, -1);
                         AmongUsClient.Instance.FinishRpcImmediately(writer);
                     }
+                if (role.RoleType == RoleEnum.GuardianAngel && ((GuardianAngel)role).target.Is(Faction.Neutral))
+                if (reason != GameOverReason.HumansByVote && reason != GameOverReason.HumansByTask)
+                    {
+                        ((GuardianAngel)role).NeutralWin();
+
+                        var writer = AmongUsClient.Instance.StartRpcImmediately(PlayerControl.LocalPlayer.NetId,
+                            (byte)CustomRPC.GANeutralWin,
+                            SendOption.Reliable, -1);
+                        AmongUsClient.Instance.FinishRpcImmediately(writer);
+                    }
+                     else
+                    {
+                        ((GuardianAngel)role).NeutralLose();
+
+                        var writer = AmongUsClient.Instance.StartRpcImmediately(PlayerControl.LocalPlayer.NetId,
+                            (byte)CustomRPC.GANeutralLose,
+                            SendOption.Reliable, -1);
+                        AmongUsClient.Instance.FinishRpcImmediately(writer);
+                    }
                     return true;
                 }
             return true;
