@@ -1,4 +1,4 @@
-## *Note: This repository is an unofficial continuation of Town of Us due to the original repository being discontinued.*
+## *Note: This repository is a continuation of Town of Us Reactivated.*
 
 ![LOGO](./Images/TOU-logo.png)
 ![Roles](./Images/Roles.png)
@@ -8,25 +8,24 @@ An Among Us mod that adds a bunch of roles, modifiers and game settings
 Join our [Discord](https://discord.gg/ugyc4EVUYZ) if you have any problems or want to find people to play with!
 
 **Crewmate Roles**
-- [Detective](#detective)
 - [Haunter](#haunter)
 - [Investigator](#investigator)
 - [Mystic](#mystic)
-- [Seer](#seer)
-- [Snitch](#snitch)
+- [Snitch](#seer)
+- [Informant](#snitch)
 - [Spy](#spy)
 - [Tracker](#tracker)
 - [Trapper](#trapper)
 - [Sheriff](#sheriff)
 - [Veteran](#veteran)
-- [Vigilante](#vigilante)
+- [Gambler](#vigilante)
 - [Altruist](#altruist)
 - [Medic](#medic)
 - [Engineer](#engineer)
 - [Mayor](#mayor)
 - [Medium](#medium)
 - [Swapper](#swapper)
-- [Time Lord](#time-lord)
+- [Chronos](#time-lord)
 - [Transporter](#transporter)
 
 **Neutral Roles**
@@ -38,7 +37,7 @@ Join our [Discord](https://discord.gg/ugyc4EVUYZ) if you have any problems or wa
 - [Phantom](#phantom)
 - [Arsonist](#arsonist)
 - [Plaguebearer](#plaguebearer)
-- [The Glitch](#the-glitch)
+- [Glitch](#the-glitch)
 - [Werewolf](#werewolf)
 
 **Impostor Roles**
@@ -46,7 +45,7 @@ Join our [Discord](https://discord.gg/ugyc4EVUYZ) if you have any problems or wa
 - [Grenadier](#grenadier)
 - [Morphling](#morphling)
 - [Swooper](#swooper)
-- [Poisoner](#poisoner)
+- [Vampire](#poisoner)
 - [Traitor](#traitor)
 - [Blackmailer](#blackmailer)
 - [Janitor](#janitor)
@@ -61,8 +60,9 @@ Join our [Discord](https://discord.gg/ugyc4EVUYZ) if you have any problems or wa
 - [Torch](#torch)
 - [Button Barry](#button-barry)
 - [Flash](#flash)
+- [Drunk](#drunk)
 - [Giant](#giant)
-- [Radar](#radar)
+- [Paranoiac](#radar)
 - [Lovers](#lovers)
 - [Sleuth](#sleuth)
 - [Tiebreaker](#tiebreaker)
