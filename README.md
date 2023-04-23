@@ -1,14 +1,12 @@
 ## *Note: This repository is an unofficial continuation of Town of Us reactivated*
 
 ![LOGO](./Images/TOU-logo.png)
-![Roles](./Images/Roles.png)
 
 An Among Us mod that adds a bunch of roles, modifiers and game settings
 
 Join our [Discord](https://discord.gg/dPs2CvVtNc) if you have any problems or want to find people to play with!
 
 **Crewmate Roles**
-- [Detective](#detective)
 - [Haunter](#haunter)
 - [Investigator](#investigator)
 - [Mystic](#mystic)
