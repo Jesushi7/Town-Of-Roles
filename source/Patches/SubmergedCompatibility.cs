@@ -10,15 +10,15 @@ using Il2CppInterop.Runtime;
 using Il2CppInterop.Runtime.Injection;
 using UnityEngine;
 using Reactor.Utilities;
-using TownOfUs.Roles;
+using TownOfRoles.Roles;
 using Hazel;
 
-namespace TownOfUs.Patches
+namespace TownOfRoles.Patches
 {
-    [HarmonyPatch(typeof(IntroCutscene._ShowRole_d__24), nameof(IntroCutscene._ShowRole_d__24.MoveNext))]
+    [HarmonyPatch(typeof(IntroCutscene._ShowRole_d__39), nameof(IntroCutscene._ShowRole_d__39.MoveNext))]
     public static class SubmergedStartPatch
     {
-        public static void Postfix(IntroCutscene._ShowRole_d__24 __instance)
+        public static void Postfix(IntroCutscene._ShowRole_d__39 __instance)
         {
             if (SubmergedCompatibility.isSubmerged())
             {
@@ -35,9 +35,9 @@ namespace TownOfUs.Patches
         {
             if (SubmergedCompatibility.isSubmerged())
             {
-                if (PlayerControl.LocalPlayer.Data.IsDead && PlayerControl.LocalPlayer.Is(RoleEnum.Haunter))
+                if (PlayerControl.LocalPlayer.Data.IsDead && PlayerControl.LocalPlayer.Is(RoleEnum.Avenger))
                 {
-                    if (!Role.GetRole<Haunter>(PlayerControl.LocalPlayer).Caught) __instance.MapButton.transform.parent.Find(__instance.MapButton.name + "(Clone)").gameObject.SetActive(false);
+                    if (!Role.GetRole<Avenger>(PlayerControl.LocalPlayer).Caught) __instance.MapButton.transform.parent.Find(__instance.MapButton.name + "(Clone)").gameObject.SetActive(false);
                     else __instance.MapButton.transform.parent.Find(__instance.MapButton.name + "(Clone)").gameObject.SetActive(true);
                 }
                 if (PlayerControl.LocalPlayer.Data.IsDead && PlayerControl.LocalPlayer.Is(RoleEnum.Phantom))
@@ -265,13 +265,8 @@ namespace TownOfUs.Patches
 
         public static void ExileRoleChangePostfix()
         {
-            NeutralRoles.PhantomMod.SetPhantom.ExileControllerPostfix(ExileController.Instance);
-            ImpostorRoles.TraitorMod.SetTraitor.ExileControllerPostfix(ExileController.Instance);
-            CrewmateRoles.HaunterMod.SetHaunter.ExileControllerPostfix(ExileController.Instance);
-
             Coroutines.Start(waitMeeting(resetTimers));
             Coroutines.Start(waitMeeting(GhostRoleBegin));
-            
         }
 
         public static IEnumerator waitStart(Action next)
@@ -311,9 +306,9 @@ namespace TownOfUs.Patches
         public static void GhostRoleBegin()
         {
             if (!PlayerControl.LocalPlayer.Data.IsDead) return;
-            if (PlayerControl.LocalPlayer.Is(RoleEnum.Haunter))
+            if (PlayerControl.LocalPlayer.Is(RoleEnum.Avenger))
             {
-                if (!Role.GetRole<Haunter>(PlayerControl.LocalPlayer).Caught)
+                if (!Role.GetRole<Avenger>(PlayerControl.LocalPlayer).Caught)
                 {
                     var startingVent =
                         ShipStatus.Instance.AllVents[UnityEngine.Random.RandomRangeInt(0, ShipStatus.Instance.AllVents.Count)];
@@ -382,9 +377,9 @@ namespace TownOfUs.Patches
                         __instance.myPlayer.gameObject.layer = 8;
                     }
                 }
-                if (player.Is(RoleEnum.Haunter))
+                if (player.Is(RoleEnum.Avenger))
                 {
-                    if (!Role.GetRole<Haunter>(player).Caught)
+                    if (!Role.GetRole<Avenger>(player).Caught)
                     {
 
                         if (player.AmOwner) MoveDeadPlayerElevator(player);

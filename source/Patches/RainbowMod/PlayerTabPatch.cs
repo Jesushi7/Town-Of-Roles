@@ -2,7 +2,7 @@
 using HarmonyLib;
 using UnityEngine;
 
-namespace TownOfUs.RainbowMod
+namespace TownOfRoles.RainbowMod
 {
     [HarmonyPatch(typeof(PlayerTab))]
     public static class PlayerTabPatch
@@ -14,10 +14,10 @@ namespace TownOfUs.RainbowMod
             for (int i = 0; i < __instance.ColorChips.Count; i++)
             {
                 var colorChip = __instance.ColorChips[i];
-                colorChip.transform.localScale *= 0.5f;
-                var x = __instance.XRange.Lerp((i % 5) / 5f) + 0.40f;
-                var y = __instance.YStart - (i / 5) * 0.26f;
-                colorChip.transform.localPosition = new Vector3(x, y, 2f);
+                colorChip.transform.localScale *= 0.8f;
+                var x = __instance.XRange.Lerp((i % 6) / 5.6f) + 0.25f;
+                var y = __instance.YStart - (i / 6) * 0.42f;
+                colorChip.transform.localPosition = new Vector3(x, y, -1f);
             }
         }
 

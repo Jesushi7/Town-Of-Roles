@@ -1,7 +1,7 @@
 ﻿using HarmonyLib;
 using Il2CppInterop.Runtime.InteropTypes.Arrays;
 
-namespace TownOfUs.RainbowMod
+namespace TownOfRoles.RainbowMod
 {
     [HarmonyPatch(typeof(TranslationController), nameof(TranslationController.GetString),
         new[] { typeof(StringNames), typeof(Il2CppReferenceArray<Il2CppSystem.Object>) })]
@@ -11,43 +11,36 @@ namespace TownOfUs.RainbowMod
         {
             var newResult = (int)name switch
             {
-                999990 => "Watermelon",
-                999991 => "Chocolate",
-                999992 => "Sky Blue",
-                999993 => "Beige",
-                999994 => "Hot Pink",
-                999995 => "Turquoise",
-                999996 => "Liliac",
-                999997 => "Olive",
-                999998 => "Azure",
+                999983 => "Watermelon",
+                999984 => "Chocolate",
+                999985 => "Sky Blue",
+                999986 => "Beige",
+                999987 => "Magenta",
+                999988 => "Turquoise",
+                999989 => "Lilac",
+                999990 => "Olive",
+                999991 => "Azure",
+                999992 => "Plum",
+                999993 => "Jungle",
+                999994 => "Mint",
+                999995 => "Chartreuse",
+                999996 => "Macau",
+                999997 => "Tawny",
+                999998 => "Gold",
                 999999 => "Rainbow",
-                999910 => "Ice",
-                999911 => "Wine",
-                999912 => "BlueBerry",
-                999913 => "Mint",
-                999914 => "Light Purple",
-                999915 => "Peach",
-                999916 => "Sushi",
-                999917 => "Sylveon",
-                999918 => "Discussions",
-                999919 => "Petrol",
-                999920 => "Hannah",
-                999921 => "Stormy Blue",
-                999922 => "VantaBlack",
-                999923 => "Ambar",                                
-                999924 => "Light Grape",    
-                999925 => "(M)aize Red",  
-                999926 => "Sloth",
-                999927 => "AD",
-                999928 => "Lotty",  
-                999929 => "Mom",
-                999930 => "Kara",
-                999931 => "EurMom",
-                999932 => "Donald",
-                999933 => "Sen",   
-                999934 => "Fizz",
-
-
+                //TOR Colors
+                000001 => "Sloth",     
+                000002 => "Northie :)",     
+                000003 => "Darkness",   
+                000004 => "Juggernaut",    
+                000005 => "RaLu",   
+                000006 => "Diddly",         
+                000007 => "Hannah",     
+                000008 => "Poop Color",    
+                000009 => "BURNISHED BRONZE",              
+                000010 => "Lotty",      
+                000011 => "Snax",        
+                000012=> "GGamer",                                                                                                                                           
                 _ => null
             };
             if (newResult != null)

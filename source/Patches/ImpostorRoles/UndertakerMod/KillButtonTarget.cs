@@ -1,8 +1,8 @@
 using HarmonyLib;
-using TownOfUs.Roles;
+using TownOfRoles.Roles;
 using UnityEngine;
 
-namespace TownOfUs.ImpostorRoles.UndertakerMod
+namespace TownOfRoles.ImpostorRoles.UndertakerMod
 {
     [HarmonyPatch(typeof(KillButton), nameof(KillButton.SetTarget))]
     public class KillButtonTarget
@@ -16,12 +16,15 @@ namespace TownOfUs.ImpostorRoles.UndertakerMod
         public static void SetTarget(KillButton __instance, DeadBody target, Undertaker role)
         {
             if (role.CurrentTarget && role.CurrentTarget != target)
-                role.CurrentTarget.bodyRenderer.material.SetFloat("_Outline", 0f);
+            {
+                foreach (var body in role.CurrentTarget.bodyRenderers) body.material.SetFloat("_Outline", 0f);
+            }
 
             role.CurrentTarget = target;
             if (role.CurrentTarget && __instance.enabled)
             {
-                var component = role.CurrentTarget.bodyRenderer;
+                SpriteRenderer component = null;
+                foreach (var body in role.CurrentTarget.bodyRenderers) component = body;
                 component.material.SetFloat("_Outline", 1f);
                 component.material.SetColor("_OutlineColor", Color.yellow);
                 __instance.graphic.color = Palette.EnabledColor;

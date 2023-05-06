@@ -1,4 +1,4 @@
-namespace TownOfUs
+namespace TownOfRoles
 {
     public enum Faction
     {

@@ -1,15 +1,15 @@
 using HarmonyLib;
-using TownOfUs.Roles;
+using TownOfRoles.Roles;
 using UnityEngine;
-using TownOfUs.Extensions;
+using TownOfRoles.Extensions;
 using System;
 
-namespace TownOfUs.CrewmateRoles.TrackerMod
+namespace TownOfRoles.CrewmateRoles.TrackerMod
 {
     [HarmonyPatch(typeof(PlayerControl), nameof(PlayerControl.FixedUpdate))]
     public class UpdateTrackerArrows
     {
-        public static Sprite Sprite => TownOfUs.Arrow;
+        public static Sprite Sprite => TownOfRoles.Arrow;
         private static DateTime _time = DateTime.UnixEpoch;
         private static float Interval => CustomGameOptions.UpdateInterval;
         public static bool CamoedLastTick = false;

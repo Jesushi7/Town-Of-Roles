@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Linq;
 using HarmonyLib;
-using TownOfUs.Roles;
+using TownOfRoles.Roles;
 using Object = UnityEngine.Object;
 
-namespace TownOfUs.NeutralRoles.GlitchMod
+namespace TownOfRoles.NeutralRoles.GlitchMod
 {
     [HarmonyPatch(typeof(Object), nameof(Object.Destroy), typeof(Object))]
     internal class MeetingExiledEnd

@@ -1,9 +1,9 @@
 using System;
 using HarmonyLib;
-using TownOfUs.Roles;
+using TownOfRoles.Roles;
 using Object = UnityEngine.Object;
 
-namespace TownOfUs.CrewmateRoles.SheriffMod
+namespace TownOfRoles.CrewmateRoles.SheriffMod
 {
     [HarmonyPatch(typeof(Object), nameof(Object.Destroy), typeof(Object))]
     public static class HUDClose
@@ -15,7 +15,6 @@ namespace TownOfUs.CrewmateRoles.SheriffMod
             {
                 var sheriff = (Sheriff) role;
                 sheriff.LastKilled = DateTime.UtcNow;
-                sheriff.FirstRound = true;
             }
         }
     }

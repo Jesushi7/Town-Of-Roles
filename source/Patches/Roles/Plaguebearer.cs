@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using Hazel;
 using Reactor.Utilities;
-using TownOfUs.Extensions;
+using TownOfRoles.Extensions;
 using UnityEngine;
 
-namespace TownOfUs.Roles
+namespace TownOfRoles.Roles
 {
     public class Plaguebearer : Role
     {
@@ -21,16 +21,17 @@ namespace TownOfUs.Roles
         public Plaguebearer(PlayerControl player) : base(player)
         {
             Name = "Plaguebearer";
-            ImpostorText = () => "Infect Everyone To Become Pestilence";
+            StartText = () => "<color=#E6FFB3FF>Infect Everyone To Become Pestilence</color>";
             TaskText = () => "Infect everyone to become Pestilence\nFake Tasks:";
             Color = Patches.Colors.Plaguebearer;
             RoleType = RoleEnum.Plaguebearer;
             AddToRoleHistory(RoleType);
+            FactionName = "<color=#5c5e5d>Neutral</color>";                  
             Faction = Faction.Neutral;
             InfectedPlayers.Add(player.PlayerId);
         }
 
-        internal override bool EABBNOODFGL(ShipStatus __instance)
+        internal override bool EABBNOODFGL(LogicGameFlowNormal __instance)
         {
             if (Player.Data.IsDead || Player.Data.Disconnected) return true;
 
@@ -65,7 +66,7 @@ namespace TownOfUs.Roles
             LostByRPC = true;
         }
 
-        protected override void IntroPrefix(IntroCutscene._ShowTeam_d__21 __instance)
+        protected override void IntroPrefix(IntroCutscene._ShowTeam_d__36 __instance)
         {
             var plaguebearerTeam = new Il2CppSystem.Collections.Generic.List<PlayerControl>();
             plaguebearerTeam.Add(PlayerControl.LocalPlayer);

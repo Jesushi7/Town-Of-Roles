@@ -1,15 +1,15 @@
 using HarmonyLib;
-using TownOfUs.Roles;
+using TownOfRoles.Roles;
 using UnityEngine;
 using System.Linq;
-using TownOfUs.Extensions;
+using TownOfRoles.Extensions;
 
-namespace TownOfUs.ImpostorRoles.GrenadierMod
+namespace TownOfRoles.ImpostorRoles.GrenadierMod
 {
     [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]
     public class HudManagerUpdate
     {
-        public static Sprite FlashSprite => TownOfUs.FlashSprite;
+        public static Sprite FlashSprite => TownOfRoles.FlashSprite;
 
         public static void Postfix(HudManager __instance)
         {
@@ -22,7 +22,6 @@ namespace TownOfUs.ImpostorRoles.GrenadierMod
             {
                 role.FlashButton = Object.Instantiate(__instance.KillButton, __instance.KillButton.transform.parent);
                 role.FlashButton.graphic.enabled = true;
-                role.FlashButton.GetComponent<AspectPosition>().DistanceFromEdge = TownOfUs.ButtonPosition;
                 role.FlashButton.gameObject.SetActive(false);
             }
 
@@ -45,9 +44,10 @@ namespace TownOfUs.ImpostorRoles.GrenadierMod
                 }
             }
 
-            role.FlashButton.GetComponent<AspectPosition>().Update();
             role.FlashButton.graphic.sprite = FlashSprite;
-            role.FlashButton.gameObject.SetActive(!PlayerControl.LocalPlayer.Data.IsDead && !MeetingHud.Instance);
+            role.FlashButton.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
+                    && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
+                    && AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started);
 
             if (role.Flashed)
             {

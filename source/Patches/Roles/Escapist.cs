@@ -1,9 +1,9 @@
 using Reactor.Utilities;
 using System;
-using TownOfUs.Patches;
+using TownOfRoles.Patches;
 using UnityEngine;
 
-namespace TownOfUs.Roles
+namespace TownOfRoles.Roles
 {
     public class Escapist : Role
     {
@@ -14,11 +14,14 @@ namespace TownOfUs.Roles
         public Escapist(PlayerControl player) : base(player)
         {
             Name = "Escapist";
-            ImpostorText = () => "Get Away From Kills With Ease";
+            StartText = () => "<color=#5834cf>Get Away From Kills With Ease</color>";
             TaskText = () => "Teleport to get away from bodies";
-            Color = Patches.Colors.Impostor;
+            Color = Patches.Colors.Escapist;
             RoleType = RoleEnum.Escapist;
             AddToRoleHistory(RoleType);
+            FactionName = "<color=#5834cf>Impostor</color>";  
+                  
+            Faction = Faction.Impostors;              
             Faction = Faction.Impostors;
         }
 

@@ -1,7 +1,7 @@
 using HarmonyLib;
 using UnityEngine;
 
-namespace TownOfUs
+namespace TownOfRoles
 {
     [HarmonyPatch(typeof(MeetingHud), nameof(MeetingHud.BloopAVoteIcon))]
     public static class DeadSeeVoteColorsPatch
@@ -10,7 +10,7 @@ namespace TownOfUs
             [HarmonyArgument(1)] int index, [HarmonyArgument(2)] Transform parent)
         {
             SpriteRenderer spriteRenderer = Object.Instantiate<SpriteRenderer>(__instance.PlayerVotePrefab);
-            if (PlayerControl.GameOptions.AnonymousVotes && (!CustomGameOptions.DeadSeeRoles || !PlayerControl.LocalPlayer.Data.IsDead))
+            if (GameOptionsManager.Instance.currentNormalGameOptions.AnonymousVotes && (!CustomGameOptions.DeadSnitcholes || !PlayerControl.LocalPlayer.Data.IsDead))
             {
                 //PlayerControl.SetPlayerMaterialColors(Palette.DisabledGrey, spriteRenderer);
                 PlayerMaterial.SetColors(Palette.DisabledGrey, spriteRenderer);

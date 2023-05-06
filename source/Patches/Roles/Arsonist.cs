@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using Hazel;
-using TownOfUs.Extensions;
+using TownOfRoles.Extensions;
+using UnityEngine;
 
-namespace TownOfUs.Roles
+namespace TownOfRoles.Roles
 {
     public class Arsonist : Role
     {
@@ -22,13 +23,14 @@ namespace TownOfUs.Roles
         public Arsonist(PlayerControl player) : base(player)
         {
             Name = "Arsonist";
-            ImpostorText = () => "Douse Players And Ignite The Light";
+            StartText = () => "<color=#FF4D00FF>Douse Players And Ignite The Light</color>";
             TaskText = () => "Douse players and ignite to kill all douses\nFake Tasks:";
             Color = Patches.Colors.Arsonist;
             LastDoused = DateTime.UtcNow;
             RoleType = RoleEnum.Arsonist;
+            FactionName = "<color=#5c5e5d>Neutral</color>";    
+            Faction = Faction.Neutral;               
             AddToRoleHistory(RoleType);
-            Faction = Faction.Neutral;
         }
 
         public KillButton IgniteButton
@@ -41,8 +43,7 @@ namespace TownOfUs.Roles
                 ExtraButtons.Add(value);
             }
         }
-
-        internal override bool EABBNOODFGL(ShipStatus __instance)
+        internal override bool EABBNOODFGL(LogicGameFlowNormal __instance)
         {
             if (Player.Data.IsDead || Player.Data.Disconnected) return true;
 
@@ -78,7 +79,7 @@ namespace TownOfUs.Roles
             LostByRPC = true;
         }
 
-        protected override void IntroPrefix(IntroCutscene._ShowTeam_d__21 __instance)
+        protected override void IntroPrefix(IntroCutscene._ShowTeam_d__36 __instance)
         {
             var arsonistTeam = new Il2CppSystem.Collections.Generic.List<PlayerControl>();
             arsonistTeam.Add(PlayerControl.LocalPlayer);

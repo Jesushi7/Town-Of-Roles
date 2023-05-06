@@ -1,7 +1,7 @@
 using HarmonyLib;
-using TownOfUs.Roles;
+using TownOfRoles.Roles;
 
-namespace TownOfUs.NeutralRoles.GlitchMod
+namespace TownOfRoles.NeutralRoles.GlitchMod
 {
     [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]
     public class MimicUnmimic

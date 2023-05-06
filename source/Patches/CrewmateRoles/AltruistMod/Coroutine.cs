@@ -2,22 +2,22 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using InnerNet;
 using Reactor.Utilities.Extensions;
-using TownOfUs.CrewmateRoles.MedicMod;
-using TownOfUs.Extensions;
-using TownOfUs.Roles;
+using TownOfRoles.CrewmateRoles.MedicMod;
+using TownOfRoles.Extensions;
+using TownOfRoles.Roles;
 using UnityEngine;
 using Object = UnityEngine.Object;
-using TownOfUs.Roles.Modifiers;
+using TownOfRoles.Roles.Modifiers;
+using AmongUs.GameOptions;
 
-namespace TownOfUs.CrewmateRoles.AltruistMod
+namespace TownOfRoles.CrewmateRoles.AltruistMod
 {
     public class Coroutine
     {
         public static ArrowBehaviour Arrow;
         public static PlayerControl Target;
-        public static Sprite Sprite => TownOfUs.Arrow;
+        public static Sprite Sprite => TownOfRoles.Arrow;
 
         public static IEnumerator AltruistRevive(DeadBody target, Altruist role)
         {
@@ -56,13 +56,9 @@ namespace TownOfUs.CrewmateRoles.AltruistMod
 
             var player = Utils.PlayerById(parentId);
 
-            foreach (var poisoner in Role.GetRoles(RoleEnum.Poisoner))
-            {
-                var poisonerRole = (Poisoner)poisoner;
-                if (poisonerRole.PoisonedPlayer == player) poisonerRole.PoisonedPlayer = poisonerRole.Player;
-            }
-
             player.Revive();
+            if (player.Is(Faction.Impostors)) RoleManager.Instance.SetRole(player, RoleTypes.Impostor);
+            else RoleManager.Instance.SetRole(player, RoleTypes.Crewmate);
             Murder.KilledPlayers.Remove(
                 Murder.KilledPlayers.FirstOrDefault(x => x.PlayerId == player.PlayerId));
             revived.Add(player);

@@ -1,7 +1,7 @@
 ﻿using HarmonyLib;
 using UnityEngine;
 
-namespace TownOfUs.Patches {
+namespace TownOfRoles.Patches {
     [HarmonyPatch(typeof(LobbyBehaviour), nameof(LobbyBehaviour.Start))]
     static class LobbyBehaviourPatch {
         [HarmonyPostfix]

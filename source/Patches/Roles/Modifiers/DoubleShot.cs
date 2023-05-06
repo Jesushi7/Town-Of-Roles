@@ -1,4 +1,4 @@
-namespace TownOfUs.Roles.Modifiers
+namespace TownOfRoles.Roles.Modifiers
 {
     public class DoubleShot : Modifier
     {
@@ -7,7 +7,7 @@ namespace TownOfUs.Roles.Modifiers
         {
             Name = "Double Shot";
             TaskText = () => "You have an extra life when assassinating";
-            Color = Patches.Colors.Impostor;
+            Color = Patches.Colors.Modifiers;
             ModifierType = ModifierEnum.DoubleShot;
             LifeUsed = false;
         }

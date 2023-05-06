@@ -1,13 +1,13 @@
 using HarmonyLib;
 using Hazel;
-using TownOfUs.Roles;
+using TownOfRoles.Roles;
 
-namespace TownOfUs.NeutralRoles.GuardianAngelMod
+namespace TownOfRoles.NeutralRoles.GuardianAngelMod
 {
-    [HarmonyPatch(typeof(ShipStatus), nameof(ShipStatus.RpcEndGame))]
+    [HarmonyPatch(typeof(GameManager), nameof(GameManager.RpcEndGame))]
     public class EndGame
     {
-        public static bool Prefix(ShipStatus __instance, [HarmonyArgument(0)] GameOverReason reason)
+        public static bool Prefix(GameManager __instance, [HarmonyArgument(0)] GameOverReason reason)
         {
             foreach (var role in Role.AllRoles)
                 if (role.RoleType == RoleEnum.GuardianAngel && ((GuardianAngel)role).target.Is(Faction.Impostors))
@@ -27,25 +27,6 @@ namespace TownOfUs.NeutralRoles.GuardianAngelMod
 
                         var writer = AmongUsClient.Instance.StartRpcImmediately(PlayerControl.LocalPlayer.NetId,
                             (byte)CustomRPC.GAImpLose,
-                            SendOption.Reliable, -1);
-                        AmongUsClient.Instance.FinishRpcImmediately(writer);
-                    }
-                if (role.RoleType == RoleEnum.GuardianAngel && ((GuardianAngel)role).target.Is(Faction.Neutral))
-                if (reason != GameOverReason.HumansByVote && reason != GameOverReason.HumansByTask)
-                    {
-                        ((GuardianAngel)role).NeutralWin();
-
-                        var writer = AmongUsClient.Instance.StartRpcImmediately(PlayerControl.LocalPlayer.NetId,
-                            (byte)CustomRPC.GANeutralWin,
-                            SendOption.Reliable, -1);
-                        AmongUsClient.Instance.FinishRpcImmediately(writer);
-                    }
-                     else
-                    {
-                        ((GuardianAngel)role).NeutralLose();
-
-                        var writer = AmongUsClient.Instance.StartRpcImmediately(PlayerControl.LocalPlayer.NetId,
-                            (byte)CustomRPC.GANeutralLose,
                             SendOption.Reliable, -1);
                         AmongUsClient.Instance.FinishRpcImmediately(writer);
                     }

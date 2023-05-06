@@ -1,9 +1,9 @@
 using System.Linq;
 using HarmonyLib;
 using Hazel;
-using TownOfUs.Roles;
+using TownOfRoles.Roles;
 
-namespace TownOfUs.NeutralRoles.PhantomMod
+namespace TownOfRoles.NeutralRoles.PhantomMod
 {
     [HarmonyPatch(typeof(PlayerControl), nameof(PlayerControl.CompleteTask))]
     public class CompleteTask

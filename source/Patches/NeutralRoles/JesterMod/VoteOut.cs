@@ -1,7 +1,7 @@
 using HarmonyLib;
-using TownOfUs.Roles;
+using TownOfRoles.Roles;
 
-namespace TownOfUs.NeutralRoles.JesterMod
+namespace TownOfRoles.NeutralRoles.JesterMod
 {
     [HarmonyPatch(typeof(ExileController), nameof(ExileController.Begin))]
     internal class MeetingExiledEnd

@@ -5,14 +5,14 @@ using HarmonyLib;
 using Hazel;
 using InnerNet;
 using Reactor.Utilities;
-using TownOfUs.Extensions;
-using TownOfUs.Roles;
-using TownOfUs.Roles.Modifiers;
+using TownOfRoles.Extensions;
+using TownOfRoles.Roles;
+using TownOfRoles.Roles.Modifiers;
 using Il2CppInterop.Runtime.InteropTypes.Arrays;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace TownOfUs.CrewmateRoles.MayorMod
+namespace TownOfRoles.CrewmateRoles.MayorMod
 {
     [HarmonyPatch(typeof(MeetingHud))]
     public class RegisterExtraVotes
@@ -24,7 +24,7 @@ namespace TownOfUs.CrewmateRoles.MayorMod
             if (PlayerControl.LocalPlayer.Data.IsDead) return;
             if (__instance.TimerText.text.Contains("Can Vote")) return;
             var role = Role.GetRole<Mayor>(PlayerControl.LocalPlayer);
-            __instance.TimerText.text = "Can Vote: " + role.VoteBank + " time(s) | " + __instance.TimerText.text;
+            __instance.TimerText.text = "Amount of Votes: " + role.VoteBank + " | " + __instance.TimerText.text;
         }
 
         public static Dictionary<byte, int> CalculateAllVotes(MeetingHud __instance)
@@ -159,7 +159,7 @@ namespace TownOfUs.CrewmateRoles.MayorMod
                 if (playerVoteArea.AmDead)
                     return false;
 
-                if (PlayerControl.LocalPlayer.PlayerId == srcPlayerId || AmongUsClient.Instance.GameMode != GameModes.LocalGame)
+                if (PlayerControl.LocalPlayer.PlayerId == srcPlayerId || AmongUsClient.Instance.NetworkMode != NetworkModes.LocalGame)
                 {
                     SoundManager.Instance.PlaySound(__instance.VoteLockinSound, false, 1f);
                 }
@@ -192,8 +192,8 @@ namespace TownOfUs.CrewmateRoles.MayorMod
             {
                 // __instance.exiledPlayer = __instance.wasTie ? null : __instance.exiledPlayer;
                 var exiledString = exiled == null ? "null" : exiled.PlayerName;
-                PluginSingleton<TownOfUs>.Instance.Log.LogMessage($"Exiled PlayerName = {exiledString}");
-                PluginSingleton<TownOfUs>.Instance.Log.LogMessage($"Was a tie = {tie}");
+                PluginSingleton<TownOfRoles>.Instance.Log.LogMessage($"Exiled PlayerName = {exiledString}");
+                PluginSingleton<TownOfRoles>.Instance.Log.LogMessage($"Was a tie = {tie}");
             }
         }
 
@@ -248,8 +248,8 @@ namespace TownOfUs.CrewmateRoles.MayorMod
                     var mayor = (Mayor)role;
                     var playerInfo = GameData.Instance.GetPlayerById(role.Player.PlayerId);
 
-                    var anonVotesOption = PlayerControl.GameOptions.AnonymousVotes;
-                    PlayerControl.GameOptions.AnonymousVotes = true;
+                    var anonVotesOption = GameOptionsManager.Instance.currentNormalGameOptions.AnonymousVotes;
+                    GameOptionsManager.Instance.currentNormalGameOptions.AnonymousVotes = true;
 
                     foreach (var extraVote in mayor.ExtraVotes)
                     {
@@ -277,7 +277,7 @@ namespace TownOfUs.CrewmateRoles.MayorMod
                         }
                     }
 
-                    PlayerControl.GameOptions.AnonymousVotes = anonVotesOption;
+                    GameOptionsManager.Instance.currentNormalGameOptions.AnonymousVotes = anonVotesOption;
                 }
 
                 return false;

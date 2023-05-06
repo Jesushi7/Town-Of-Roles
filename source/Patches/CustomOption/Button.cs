@@ -1,6 +1,6 @@
 using System;
 
-namespace TownOfUs.CustomOption
+namespace TownOfRoles.CustomOption
 {
     public class CustomButtonOption : CustomOption
     {

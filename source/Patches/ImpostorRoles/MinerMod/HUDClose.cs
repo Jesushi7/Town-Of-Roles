@@ -1,9 +1,9 @@
 using System;
 using HarmonyLib;
-using TownOfUs.Roles;
+using TownOfRoles.Roles;
 using Object = UnityEngine.Object;
 
-namespace TownOfUs.ImpostorRoles.MinerMod
+namespace TownOfRoles.ImpostorRoles.MinerMod
 {
     [HarmonyPatch(typeof(Object), nameof(Object.Destroy), typeof(Object))]
     public static class HUDClose

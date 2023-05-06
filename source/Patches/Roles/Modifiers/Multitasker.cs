@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace TownOfUs.Roles.Modifiers
+namespace TownOfRoles.Roles.Modifiers
 {
     public class Multitasker : Modifier
     {
@@ -8,7 +8,7 @@ namespace TownOfUs.Roles.Modifiers
         {
             Name = "Multitasker";
             TaskText = () => "Your task windows are transparent";
-            Color = Patches.Colors.Multitasker;
+            Color = Patches.Colors.Modifiers;
             ModifierType = ModifierEnum.Multitasker;
         }
     }

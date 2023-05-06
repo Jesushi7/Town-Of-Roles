@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace TownOfUs.CustomOption
+namespace TownOfRoles.CustomOption
 {
     public class CustomStringOption : CustomOption
     {

@@ -7,12 +7,12 @@ using TMPro;
 using Reactor.Utilities;
 using Reactor.Utilities.Extensions;
 using System.Collections.Generic;
-using TownOfUs.Patches;
+using TownOfRoles.Patches;
 using System.Collections;
-using TownOfUs.Extensions;
-using TownOfUs.CrewmateRoles.MedicMod;
+using TownOfRoles.Extensions;
+using TownOfRoles.CrewmateRoles.MedicMod;
 
-namespace TownOfUs.Roles
+namespace TownOfRoles.Roles
 {
     public class Transporter : Role
     {
@@ -35,11 +35,13 @@ namespace TownOfUs.Roles
         public Transporter(PlayerControl player) : base(player)
         {
             Name = "Transporter";
-            ImpostorText = () => "Choose Two Players To Swap Locations";
+            StartText = () => "<color=#00EEFFFF>Choose Two Players To Swap Locations</color>";
             TaskText = () => "Choose two players to swap locations";
             Color = Patches.Colors.Transporter;
             LastTransported = DateTime.UtcNow;
             RoleType = RoleEnum.Transporter;
+            FactionName = "<color=#00EEFFFF>Crewmate</color>";    
+            Faction = Faction.Crewmates;               
             AddToRoleHistory(RoleType);
             Scale = 1.4f;
             PressedButton = false;

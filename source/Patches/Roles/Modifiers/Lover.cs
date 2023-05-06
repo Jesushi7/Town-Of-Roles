@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Hazel;
-using TownOfUs.Patches;
-using TownOfUs.Roles.Modifiers;
+using TownOfRoles.Patches;
+using TownOfRoles.Roles.Modifiers;
 using UnityEngine;
 
-namespace TownOfUs.Roles.Modifiers
+namespace TownOfRoles.Roles.Modifiers
 {
     public class Lover : Modifier
     {
@@ -14,7 +14,7 @@ namespace TownOfUs.Roles.Modifiers
             Name = "Lover";
             SymbolName = "♥";
             TaskText = () =>
-                "You are in Love with " + OtherLover.Player.name;
+                "♥ You are in love with" + OtherLover.Player.name + "♥";
             Color = Colors.Lovers;
             ModifierType = ModifierEnum.Lover;
         }
@@ -86,7 +86,7 @@ namespace TownOfUs.Roles.Modifiers
             AmongUsClient.Instance.FinishRpcImmediately(writer);
         }
 
-        internal override bool EABBNOODFGL(ShipStatus __instance)
+        internal override bool EABBNOODFGL(LogicGameFlowNormal __instance)
         {
             if (FourPeopleLeft()) return false;
 

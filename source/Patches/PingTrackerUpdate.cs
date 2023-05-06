@@ -1,12 +1,24 @@
 using HarmonyLib;
 using UnityEngine;
 
-namespace TownOfUs
+namespace TownOfRoles
 {
     //[HarmonyPriority(Priority.VeryHigh)] // to show this message first, or be overrided if any plugins do
     [HarmonyPatch(typeof(PingTracker), nameof(PingTracker.Update))]
     public static class PingTracker_Update
     {
+        [HarmonyPrefix]
+        public static void Prefix(PingTracker __instance)
+        {
+            if (!__instance.GetComponentInChildren<SpriteRenderer>())
+            {
+                var spriteObject = new GameObject("Logo");
+                spriteObject.AddComponent<SpriteRenderer>().sprite = TownOfRoles.Logo;
+                spriteObject.transform.parent = __instance.transform;
+                spriteObject.transform.localPosition = new Vector3(-1f, -0.3f, -1);
+                spriteObject.transform.localScale *= 0.72f;
+            }
+        }        
 
         [HarmonyPostfix]
         public static void Postfix(PingTracker __instance)
@@ -16,12 +28,11 @@ namespace TownOfUs
             position.AdjustPosition();
 
             __instance.text.text =
-                "<color=#38b553>Town Of Roles v" + TownOfUs.VersionString + "</color>\n" +
+                "<color=#9fcc90>TownOfRoles v" + TownOfRoles.VersionString + "</color>\n" +
                 $"Ping: {AmongUsClient.Instance.Ping}ms\n" +
-                (!MeetingHud.Instance
-                    ? "<color=#38b553>Modded By: Jesushi</color>\n"  : "") +
+                "Modded By: <color=#9fcc90>Jsushi</color>\n" +                
                 (AmongUsClient.Instance.GameState != InnerNet.InnerNetClient.GameStates.Started
-                    ? "<color=#38b553>Formerly From Town Of Us Reactivated \nHelped From: Det, Discussions, AlchlcDvl\nArtwork By Lotty</color>" : "");
+                    ? "Formerly From <color=#9fcc90>Town Of Us Reactivated</color>\nHelped From: <color=#9fcc90>AlchlcDvl</color>\nArtwork By <color=#9fcc90>Lotty</color>" : "");
         }
     }
 }

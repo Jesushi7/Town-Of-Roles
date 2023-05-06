@@ -1,33 +1,36 @@
 ﻿using System.Linq;
 using Hazel;
-using TownOfUs.Roles;
+using TownOfRoles.Roles;
 using UnityEngine;
 using UnityEngine.UI;
 using Il2CppInterop.Runtime.InteropTypes.Arrays;
-using TownOfUs.CrewmateRoles.MedicMod;
-using TownOfUs.CrewmateRoles.SwapperMod;
-using TownOfUs.CrewmateRoles.VigilanteMod;
-using TownOfUs.ImpostorRoles.BlackmailerMod;
-using TownOfUs.Roles.Modifiers;
-using TownOfUs.Extensions;
+using TownOfRoles.CrewmateRoles.MedicMod;
+using TownOfRoles.CrewmateRoles.SwapperMod;
+using TownOfRoles.CrewmateRoles.GamblerMod;
+using TownOfRoles.ImpostorRoles.SilencerMod;
+using TownOfRoles.Roles.Modifiers;
+using TownOfRoles.Extensions;
+using TownOfRoles.CrewmateRoles.ImitatorMod;
 
-namespace TownOfUs.Modifiers.AssassinMod
+namespace TownOfRoles.Modifiers.AssassinMod
 {
     public class AssassinKill
     {
-        public static void RpcMurderPlayer(PlayerControl player)
+        public static void RpcMurderPlayer(PlayerControl player, PlayerControl assassin)
         {
             PlayerVoteArea voteArea = MeetingHud.Instance.playerStates.First(
                 x => x.TargetPlayerId == player.PlayerId
             );
-            RpcMurderPlayer(voteArea, player);
+            RpcMurderPlayer(voteArea, player, assassin);
         }
-        public static void RpcMurderPlayer(PlayerVoteArea voteArea, PlayerControl player)
+        public static void RpcMurderPlayer(PlayerVoteArea voteArea, PlayerControl player, PlayerControl assassin)
         {
             MurderPlayer(voteArea, player);
+            AssassinKillCount(player, assassin);
             MessageWriter writer = AmongUsClient.Instance.StartRpcImmediately(PlayerControl.LocalPlayer.NetId,
                 (byte)CustomRPC.AssassinKill, SendOption.Reliable, -1);
             writer.Write(player.PlayerId);
+            writer.Write(assassin.PlayerId);
             AmongUsClient.Instance.FinishRpcImmediately(writer);
         }
 
@@ -37,6 +40,12 @@ namespace TownOfUs.Modifiers.AssassinMod
                 x => x.TargetPlayerId == player.PlayerId
             );
             MurderPlayer(voteArea, player, checkLover);
+        }
+        public static void AssassinKillCount(PlayerControl player, PlayerControl assassin)
+        {
+            var assassinPlayer = Role.GetRole(assassin);
+            if (player == assassin) assassinPlayer.IncorrectAssassinKills += 1;
+            else assassinPlayer.CorrectAssassinKills += 1;
         }
         public static void MurderPlayer(
             PlayerVoteArea voteArea,
@@ -59,7 +68,7 @@ namespace TownOfUs.Modifiers.AssassinMod
                 player.RpcSetScanner(false);
                 ImportantTextTask importantTextTask = new GameObject("_Player").AddComponent<ImportantTextTask>();
                 importantTextTask.transform.SetParent(AmongUsClient.Instance.transform, false);
-                if (!PlayerControl.GameOptions.GhostsDoTasks)
+                if (!GameOptionsManager.Instance.currentNormalGameOptions.GhostsDoTasks)
                 {
                     for (int i = 0;i < player.myTasks.Count;i++)
                     {
@@ -98,10 +107,24 @@ namespace TownOfUs.Modifiers.AssassinMod
                     }
                 }
 
-                if (player.Is(RoleEnum.Vigilante))
+                if (player.Is(RoleEnum.Imitator))
                 {
-                    var retributionist = Role.GetRole<Vigilante>(PlayerControl.LocalPlayer);
-                    ShowHideButtonsVigi.HideButtonsVigi(retributionist);
+                    var imitator = Role.GetRole<Imitator>(PlayerControl.LocalPlayer);
+                    imitator.ListOfActives.Clear();
+                    imitator.Buttons.Clear();
+                    SetImitate.Imitate = null;
+                    var buttons = Role.GetRole<Imitator>(player).Buttons;
+                    foreach (var button in buttons)
+                    {
+                        button.SetActive(false);
+                        button.GetComponent<PassiveButton>().OnClick = new Button.ButtonClickedEvent();
+                    }
+                }
+
+                if (player.Is(RoleEnum.Gambler))
+                {
+                    var retributionist = Role.GetRole<Gambler>(PlayerControl.LocalPlayer);
+                    ShowHideButtonsGambler.HideButtonsGambler(retributionist);
                 }
 
                 if (player.Is(AbilityEnum.Assassin))
@@ -110,7 +133,7 @@ namespace TownOfUs.Modifiers.AssassinMod
                     ShowHideButtons.HideButtons(assassin);
                 }
             }
-            player.Die(DeathReason.Kill);
+            player.Die(DeathReason.Kill, false);
             if (checkLover && player.IsLover() && CustomGameOptions.BothLoversDie)
             {
                 var otherLover = Modifier.GetModifier<Lover>(player).OtherLover.Player;
@@ -138,18 +161,18 @@ namespace TownOfUs.Modifiers.AssassinMod
             voteArea.XMark.gameObject.SetActive(true);
             voteArea.XMark.transform.localScale = Vector3.one;
 
-            var blackmailers = Role.AllRoles.Where(x => x.RoleType == RoleEnum.Blackmailer && x.Player != null).Cast<Blackmailer>();
-            foreach (var role in blackmailers)
+            var Silencers = Role.AllRoles.Where(x => x.RoleType == RoleEnum.Silencer && x.Player != null).Cast<Silencer>();
+            foreach (var role in Silencers)
             {
-                if (role.Blackmailed != null && voteArea.TargetPlayerId == role.Blackmailed.PlayerId)
+                if (role.Silenced != null && voteArea.TargetPlayerId == role.Silenced.PlayerId)
                 {
-                    if (BlackmailMeetingUpdate.PrevXMark != null && BlackmailMeetingUpdate.PrevOverlay != null)
+                    if (SilenceMeetingUpdate.PrevXMark != null && SilenceMeetingUpdate.PrevOverlay != null)
                     {
-                        voteArea.XMark.sprite = BlackmailMeetingUpdate.PrevXMark;
-                        voteArea.Overlay.sprite = BlackmailMeetingUpdate.PrevOverlay;
+                        voteArea.XMark.sprite = SilenceMeetingUpdate.PrevXMark;
+                        voteArea.Overlay.sprite = SilenceMeetingUpdate.PrevOverlay;
                         voteArea.XMark.transform.localPosition = new Vector3(
-                            voteArea.XMark.transform.localPosition.x - BlackmailMeetingUpdate.LetterXOffset,
-                            voteArea.XMark.transform.localPosition.y - BlackmailMeetingUpdate.LetterYOffset,
+                            voteArea.XMark.transform.localPosition.x - SilenceMeetingUpdate.LetterXOffset,
+                            voteArea.XMark.transform.localPosition.y - SilenceMeetingUpdate.LetterYOffset,
                             voteArea.XMark.transform.localPosition.z);
                     }
                 }
@@ -189,6 +212,8 @@ namespace TownOfUs.Modifiers.AssassinMod
                 if (!voteAreaPlayer.AmOwner) continue;
                 meetingHud.ClearVote();
             }
+
+            player.Exiled();
 
             if (AmongUsClient.Instance.AmHost)
             {

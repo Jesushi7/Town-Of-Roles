@@ -1,6 +1,6 @@
 using HarmonyLib;
 
-namespace TownOfUs.CrewmateRoles.SwapperMod
+namespace TownOfRoles.CrewmateRoles.SwapperMod
 {
     [HarmonyPatch(typeof(PlayerControl), nameof(PlayerControl.SetRole))]
     public class NoButtons

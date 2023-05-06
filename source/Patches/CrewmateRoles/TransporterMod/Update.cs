@@ -1,10 +1,10 @@
 ﻿using System.Linq;
 using HarmonyLib;
 using InnerNet;
-using TownOfUs.Roles;
+using TownOfRoles.Roles;
 using UnityEngine;
 
-namespace TownOfUs.CrewmateRoles.TransporterMod
+namespace TownOfRoles.CrewmateRoles.TransporterMod
 {
     [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]
     public class Update

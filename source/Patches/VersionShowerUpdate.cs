@@ -1,6 +1,6 @@
 using HarmonyLib;
 
-namespace TownOfUs
+namespace TownOfRoles
 {
     [HarmonyPriority(Priority.VeryHigh)] // to show this message first, or be overrided if any plugins do
     [HarmonyPatch(typeof(VersionShower), nameof(VersionShower.Start))]
@@ -9,8 +9,7 @@ namespace TownOfUs
         public static void Postfix(VersionShower __instance)
         {
             var text = __instance.text;
-            //text.text += "\nloaded <color=#FFBFCCFF>T[FF80D5FF]o[FFCC00FF]w[704FA8FF]n[FF0000FF] of[CC4D00FF] Us [FFFFFFFF]by [00FF00FF]slushiegoose[FFFFFFFF] </color>;
-            text.text += " - <color=#38b553>Town Of Roles 1.0.0</color>";
+            text.text += "- Modded By <color=#9fcc90>Jsushi v" + TownOfRoles.VersionString + "</color>";
         }
     }
 }

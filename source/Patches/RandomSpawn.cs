@@ -2,10 +2,8 @@ using HarmonyLib;
 using System;
 using UnityEngine;
 using System.Collections.Generic;
-using TownOfUs.CustomOption;
-using TownOfUs;
-//Thanks to AD And Town of Us Reworked for this code
-namespace TownOfUs.Patches
+
+namespace TownOfRoles.Patches
 {
     [HarmonyPatch(typeof(IntroCutscene), nameof(IntroCutscene.OnDestroy))]
     class IntroCutsceneOnDestroyPatch
@@ -58,7 +56,8 @@ namespace TownOfUs.Patches
                     new Vector3(-6.5f, -4.5f, 0f) //medbay bottom
                 };
 
-                List<Vector3> miraSpawn = new List<Vector3>() {
+                List<Vector3> miraSpawn = new List<Vector3>()
+                {
                     new Vector3(-4.5f, 3.5f, 0f), //launchpad top
                     new Vector3(-4.5f, -1.4f, 0f), //launchpad bottom
                     new Vector3(8.5f, -1f, 0f), //launchpad- med hall
@@ -82,7 +81,8 @@ namespace TownOfUs.Patches
                     new Vector3(22f, -2f, 0f), //balcony
                 };
 
-                List<Vector3> polusSpawn = new List<Vector3>() {
+                List<Vector3> polusSpawn = new List<Vector3>()
+                {
                     new Vector3(16.6f, -1f, 0f), //dropship top
                     new Vector3(16.6f, -5f, 0f), //dropship bottom
                     new Vector3(20f, -9f, 0f), //above storrage
@@ -129,7 +129,8 @@ namespace TownOfUs.Patches
                     new Vector3(17.5f, -25.7f, 0f), //snowman under office
                 };
 
-                List<Vector3> dleksSpawn = new List<Vector3>() {
+                List<Vector3> dleksSpawn = new List<Vector3>()
+                {
                     new Vector3(2.2f, 2.2f, 0f), //cafeteria. botton. top left.
                     new Vector3(-0.7f, 2.2f, 0f), //caffeteria. button. top right.
                     new Vector3(2.2f, -0.2f, 0f), //caffeteria. button. bottom left.
@@ -177,7 +178,7 @@ namespace TownOfUs.Patches
                     if (player.Data.Disconnected || player.Data.IsDead)
                         continue;
                         
-                    var map = PlayerControl.GameOptions.MapId;
+                    var map = GameOptionsManager.Instance.currentNormalGameOptions.MapId;
 
                     switch (map)
                     {
@@ -199,9 +200,6 @@ namespace TownOfUs.Patches
 
                         case 4:
                             player.transform.position = airshipSpawn[rnd.Next(airshipSpawn.Count)];
-                            break;
-                        
-                        default:
                             break;
                     }
                 }
@@ -278,7 +276,8 @@ namespace TownOfUs.Patches
                     new Vector3(-6.5f, -4.5f, 0f) //medbay bottom
                 };
 
-                List<Vector3> miraSpawn = new List<Vector3>() {
+                List<Vector3> miraSpawn = new List<Vector3>()
+                {
                     new Vector3(-4.5f, 3.5f, 0f), //launchpad top
                     new Vector3(-4.5f, -1.4f, 0f), //launchpad bottom
                     new Vector3(8.5f, -1f, 0f), //launchpad- med hall
@@ -302,7 +301,8 @@ namespace TownOfUs.Patches
                     new Vector3(22f, -2f, 0f), //balcony
                 };
 
-                List<Vector3> polusSpawn = new List<Vector3>() {
+                List<Vector3> polusSpawn = new List<Vector3>()
+                {
                     new Vector3(16.6f, -1f, 0f), //dropship top
                     new Vector3(16.6f, -5f, 0f), //dropship bottom
                     new Vector3(20f, -9f, 0f), //above storrage
@@ -349,7 +349,8 @@ namespace TownOfUs.Patches
                     new Vector3(17.5f, -25.7f, 0f), //snowman under office
                 };
 
-                List<Vector3> dleksSpawn = new List<Vector3>() {
+                List<Vector3> dleksSpawn = new List<Vector3>()
+                {
                     new Vector3(2.2f, 2.2f, 0f), //cafeteria. botton. top left.
                     new Vector3(-0.7f, 2.2f, 0f), //caffeteria. button. top right.
                     new Vector3(2.2f, -0.2f, 0f), //caffeteria. button. bottom left.
@@ -397,7 +398,7 @@ namespace TownOfUs.Patches
                     if (player.Data.Disconnected || player.Data.IsDead)
                         continue;
 
-                    var map = PlayerControl.GameOptions.MapId;
+                    var map = GameOptionsManager.Instance.currentNormalGameOptions.MapId;
 
                     switch (map)
                     {
@@ -419,9 +420,6 @@ namespace TownOfUs.Patches
 
                         case 4:
                             player.transform.position = airshipSpawn[rnd.Next(airshipSpawn.Count)];
-                            break;
-                        
-                        default:
                             break;
                     }
                 }

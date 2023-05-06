@@ -1,12 +1,12 @@
 using System.Linq;
 using HarmonyLib;
 using TMPro;
-using TownOfUs.Extensions;
-using TownOfUs.Roles;
-using TownOfUs.Roles.Modifiers;
+using TownOfRoles.Extensions;
+using TownOfRoles.Roles;
+using TownOfRoles.Roles.Modifiers;
 using UnityEngine;
 
-namespace TownOfUs.Modifiers.LoversMod
+namespace TownOfRoles.Modifiers.LoversMod
 {
     [HarmonyPatch(typeof(EndGameManager), nameof(EndGameManager.Start))]
     internal class Outro
@@ -21,10 +21,11 @@ namespace TownOfUs.Modifiers.LoversMod
                 var color = __instance.WinText.color;
                 color.a = 1f;
                 text.color = color;
-                text.text = "Only Neutral Roles Were Left";
+                text.text = "Everyone Lost!";
                 pos = __instance.WinText.transform.localPosition;
                 pos.y = 1.5f;
                 text.transform.position = pos;
+                SoundManager.Instance.PlaySound(__instance.DisconnectStinger, false);                
 //				text.scale = 0.5f;
                 return;
             }
@@ -54,7 +55,7 @@ namespace TownOfUs.Modifiers.LoversMod
             __instance.BackgroundBar.material.color = new Color(1f, 0.4f, 0.8f, 1f);
 
             text = Object.Instantiate(__instance.WinText);
-            text.text = "Love Couple Wins!";
+            text.text = "Lovers Win!";
             text.color = new Color(1f, 0.4f, 0.8f, 1f);
             pos = __instance.WinText.transform.localPosition;
             pos.y = 1.5f;

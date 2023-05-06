@@ -1,7 +1,7 @@
 using HarmonyLib;
-using TownOfUs.Roles;
+using TownOfRoles.Roles;
 
-namespace TownOfUs.NeutralRoles.PhantomMod
+namespace TownOfRoles.NeutralRoles.PhantomMod
 {
     [HarmonyPatch(typeof(PlayerPhysics), nameof(PlayerPhysics.ResetMoveState))]
     public class ResetMoveState

@@ -1,6 +1,6 @@
 using HarmonyLib;
 
-namespace TownOfUs
+namespace TownOfRoles
 {
     [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]
     public class CamouflageUnCamouflage
@@ -14,7 +14,7 @@ namespace TownOfUs
             if (CustomGameOptions.ColourblindComms)
             {
                 if (ShipStatus.Instance != null)
-                    switch (PlayerControl.GameOptions.MapId)
+                    switch (GameOptionsManager.Instance.currentNormalGameOptions.MapId)
                     {
                         case 0:
                         case 2:

@@ -1,7 +1,7 @@
 using HarmonyLib;
 using UnityEngine;
 
-namespace TownOfUs.Modifiers
+namespace TownOfRoles.Modifiers
 {
     [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]
     public static class Multitasker

@@ -1,13 +1,13 @@
 using System;
 using HarmonyLib;
-using TownOfUs.Roles;
+using TownOfRoles.Roles;
 
-namespace TownOfUs.ImpostorRoles.GrenadierMod
+namespace TownOfRoles.ImpostorRoles.GrenadierMod
 {
-    [HarmonyPatch(typeof(IntroCutscene._CoBegin_d__19), nameof(IntroCutscene._CoBegin_d__19.MoveNext))]
+    [HarmonyPatch(typeof(IntroCutscene._CoBegin_d__33), nameof(IntroCutscene._CoBegin_d__33.MoveNext))]
     public static class Start
     {
-        public static void Postfix(IntroCutscene._CoBegin_d__19 __instance)
+        public static void Postfix(IntroCutscene._CoBegin_d__33 __instance)
         {
             foreach (var role in Role.GetRoles(RoleEnum.Grenadier))
             {

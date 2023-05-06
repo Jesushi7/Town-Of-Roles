@@ -10,16 +10,16 @@ using Reactor.Utilities.Extensions;
 using UnityEngine;
 using System.Linq;
 
-namespace TownOfUs.Patches.CustomHats
+namespace TownOfRoles.Patches.CustomHats
 {
     internal static class HatLoader
     {
-        private const string HAT_RESOURCE_NAMESPACE = "TownOfUs.Resources.Hats";
+        private const string HAT_RESOURCE_NAMESPACE = "TownOfRoles.Resources.Hats";
         private const string HAT_METADATA_JSON = "metadata.json";
         private const int HAT_ORDER_BASELINE = 99;
 
-        private static ManualLogSource Log => PluginSingleton<TownOfUs>.Instance.Log;
-        private static Assembly Assembly => typeof(TownOfUs).Assembly;
+        private static ManualLogSource Log => PluginSingleton<TownOfRoles>.Instance.Log;
+        private static Assembly Assembly => typeof(TownOfRoles).Assembly;
 
         private static bool LoadedHats = false;
 
@@ -84,6 +84,10 @@ namespace TownOfUs.Patches.CustomHats
                         hatBehaviour.ProductId = hatCredit.Id;
                         hatBehaviour.name = hatCredit.Name;
                         hatBehaviour.Free = true;
+                        if (hatCredit.Adaptive)
+{
+hatBehaviour.hatViewData.viewData.AltShader = new Material(Shader.Find("Unlit/PlayerShader"));
+}                        
                         hatBehaviours.Add(hatBehaviour);
                     }
                 }
@@ -103,7 +107,7 @@ namespace TownOfUs.Patches.CustomHats
             
             //TODO: Move to Graphics Utils class
             var tex2D = new Texture2D(1, 1, TextureFormat.ARGB32, false);
-            TownOfUs.LoadImage(tex2D, mainImg, false);
+            TownOfRoles.LoadImage(tex2D, mainImg, false);
             var sprite = Sprite.Create(tex2D, new Rect(0.0f, 0.0f, tex2D.width, tex2D.height), new Vector2(0.5f, 0.5f), 100);
 
 

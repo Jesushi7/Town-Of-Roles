@@ -1,30 +1,27 @@
 ﻿using HarmonyLib;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using TownOfRoles.CustomOption;
 
-namespace TownOfUs.Patches
+namespace TownOfRoles.Patches
 {
     [HarmonyPatch(typeof(OverlayKillAnimation), nameof(OverlayKillAnimation.Initialize))]
     static class OverlayKillAnimationPatch
     {
-        static int currentOutfitTypeCache = 0;
+        static int currentOutfitTypeCache;
 
-        [HarmonyPrefix]
-        public static void Prefix(GameData.PlayerInfo kInfo, GameData.PlayerInfo vInfo)
+        public static void Prefix(GameData.PlayerInfo kInfo)
         {
-            PlayerControl playerControl = PlayerControl.AllPlayerControls.ToArray().FirstOrDefault(p => p.PlayerId == kInfo.PlayerId);
+            var playerControl = PlayerControl.AllPlayerControls.ToArray().FirstOrDefault(p => p.PlayerId == kInfo.PlayerId);
             currentOutfitTypeCache = (int)playerControl.CurrentOutfitType;
-            playerControl.CurrentOutfitType = PlayerOutfitType.Default;
 
+            if (!CustomGameOptions.AppearanceAnimation)
+                playerControl.CurrentOutfitType = PlayerOutfitType.Default;
         }
-        [HarmonyPostfix]
-        public static void Postfix(GameData.PlayerInfo kInfo, GameData.PlayerInfo vInfo)
+
+        public static void Postfix(GameData.PlayerInfo kInfo)
         {
-            PlayerControl playerControl = PlayerControl.AllPlayerControls.ToArray().FirstOrDefault(p => p.PlayerId == kInfo.PlayerId);
+            var playerControl = PlayerControl.AllPlayerControls.ToArray().FirstOrDefault(p => p.PlayerId == kInfo.PlayerId);
             playerControl.CurrentOutfitType = (PlayerOutfitType)currentOutfitTypeCache;
         }
-
     }
 }

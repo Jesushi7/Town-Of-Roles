@@ -3,7 +3,7 @@ using UnityEngine;
 using Reactor.Utilities;
 using System.Collections.Generic;
 
-namespace TownOfUs.Roles
+namespace TownOfRoles.Roles
 {
     public class Medium : Role
     {
@@ -11,16 +11,18 @@ namespace TownOfUs.Roles
 
         public Dictionary<byte, ArrowBehaviour> MediatedPlayers = new Dictionary<byte, ArrowBehaviour>();
         
-        public static Sprite Arrow => TownOfUs.Arrow;
+        public static Sprite Arrow => TownOfRoles.Arrow;
         
         public Medium(PlayerControl player) : base(player)
         {
             Name = "Medium";
-            ImpostorText = () => "Watch The Spooky Ghosts";
-            TaskText = () => "Follow ghosts to get clues from them";
+            StartText = () => "<color=#A680FFFF>Watch The Spooky Ghosts</color>";
+            TaskText = () => "Follow ghosts";
             Color = Patches.Colors.Medium;
             LastMediated = DateTime.UtcNow;
             RoleType = RoleEnum.Medium;
+            FactionName = "<color=#A680FFFF>Crewmate</color>";    
+            Faction = Faction.Crewmates;               
             AddToRoleHistory(RoleType);
             Scale = 1.4f;
             MediatedPlayers = new Dictionary<byte, ArrowBehaviour>();

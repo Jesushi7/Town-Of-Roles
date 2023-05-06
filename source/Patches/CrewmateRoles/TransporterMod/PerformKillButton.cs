@@ -1,7 +1,7 @@
 using HarmonyLib;
-using TownOfUs.Roles;
+using TownOfRoles.Roles;
 
-namespace TownOfUs.CrewmateRoles.TransporterMod
+namespace TownOfRoles.CrewmateRoles.TransporterMod
 {
     [HarmonyPatch(typeof(KillButton), nameof(KillButton.DoClick))]
     public class PerformKillButton

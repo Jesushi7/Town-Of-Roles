@@ -1,10 +1,10 @@
 using HarmonyLib;
 using Il2CppSystem.Collections.Generic;
 using System.Linq;
-using TownOfUs.Roles;
-using TownOfUs.Roles.Modifiers;
+using TownOfRoles.Roles;
+using TownOfRoles.Roles.Modifiers;
 
-namespace TownOfUs
+namespace TownOfRoles
 {
     [HarmonyPatch(typeof(AmongUsClient), nameof(AmongUsClient.OnGameEnd))]
     public class AmongUsClient_OnGameEnd
@@ -80,26 +80,6 @@ namespace TownOfUs
                         return;
                     }
                 }
-                /*else if (type == RoleEnum.Vulture)
-                {
-                    var vulture = (Vulture)role;
-
-                    if (vulture.EatNeed == 0)
-                    {
-                        var winners = Utils.potentialWinners.Where(x => x.PlayerName == vulture.PlayerName).ToList();
-                        foreach (var role2 in Role.GetRoles(RoleEnum.Survivor))
-                        {
-                            var surv = (Survivor)role2;
-                            if (!surv.Player.Data.IsDead && !surv.Player.Data.Disconnected)
-                            {
-                                winners.Add(Utils.potentialWinners.Where(x => x.PlayerName == surv.PlayerName).ToList()[0]);
-                            }
-                        }
-                        TempData.winners = new List<WinningPlayerData>();
-                        foreach (var win in winners) TempData.winners.Add(win);
-                        return;
-                    }
-                }*/
             }
             foreach (var role in Role.AllRoles)
             {

@@ -1,7 +1,7 @@
 using HarmonyLib;
-using TownOfUs.Roles.Modifiers;
+using TownOfRoles.Roles.Modifiers;
 
-namespace TownOfUs.Modifiers.DisperserMod
+namespace TownOfRoles.Modifiers.DisperserMod
 {
     [HarmonyPatch(typeof(KillButton), nameof(KillButton.DoClick))]
     public class PerformKill
@@ -15,6 +15,7 @@ namespace TownOfUs.Modifiers.DisperserMod
             if (!PlayerControl.LocalPlayer.CanMove) return false;
             if (PlayerControl.LocalPlayer.Data.IsDead) return false;
             if (role.ButtonUsed) return false;
+            if (role.StartTimer() > 0) return false;
             if (!__instance.enabled) return false;
 
             role.ButtonUsed = true;

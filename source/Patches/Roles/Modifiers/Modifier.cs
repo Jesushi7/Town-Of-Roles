@@ -2,10 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Reactor.Utilities.Extensions;
-using TownOfUs.Extensions;
+using TownOfRoles.Extensions;
 using UnityEngine;
 
-namespace TownOfUs.Roles.Modifiers
+namespace TownOfRoles.Roles.Modifiers
 {
     public abstract class Modifier
     {
@@ -25,11 +25,9 @@ namespace TownOfUs.Roles.Modifiers
         protected internal string GetColoredSymbol()
         {
             if (SymbolName == null) return null;
-            if (Color == null) return SymbolName;
 
             return $"{ColorString}{SymbolName}</color>";
         }
-
         public string PlayerName { get; set; }
         private PlayerControl _player { get; set; }
         public PlayerControl Player
@@ -52,7 +50,7 @@ namespace TownOfUs.Roles.Modifiers
             return Equals(Player, other.Player) && ModifierType == other.ModifierType;
         }
 
-        internal virtual bool EABBNOODFGL(ShipStatus __instance)
+        internal virtual bool EABBNOODFGL(LogicGameFlowNormal __instance)
         {
             return true;
         }

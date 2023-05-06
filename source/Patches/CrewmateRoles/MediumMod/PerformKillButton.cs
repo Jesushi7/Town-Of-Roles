@@ -1,15 +1,15 @@
 using HarmonyLib;
-using TownOfUs.Roles;
+using TownOfRoles.Roles;
 using UnityEngine;
 using Object = UnityEngine.Object;
 using System.Collections.Generic;
 using System.Linq;
-using TownOfUs.CrewmateRoles.MedicMod;
+using TownOfRoles.CrewmateRoles.MedicMod;
 using Reactor;
 using System;
 using Hazel;
 
-namespace TownOfUs.CrewmateRoles.MediumMod
+namespace TownOfRoles.CrewmateRoles.MediumMod
 {
     [HarmonyPatch(typeof(KillButton), nameof(KillButton.DoClick))]
     public class PerformKill

@@ -2,9 +2,9 @@
 using System.Linq;
 using Hazel;
 using UnityEngine;
-using TownOfUs.Extensions;
+using TownOfRoles.Extensions;
 
-namespace TownOfUs.Roles
+namespace TownOfRoles.Roles
 {
     public class Werewolf : Role
     {
@@ -20,10 +20,11 @@ namespace TownOfUs.Roles
         public Werewolf(PlayerControl player) : base(player)
         {
             Name = "Werewolf";
-            ImpostorText = () => "Rampage To Kill Everyone";
+            StartText = () => "<color=#A86629FF>Rampage To Kill Everyone</color>";
             TaskText = () => "Rampage to kill everyone\nFake Tasks:";
             Color = Patches.Colors.Werewolf;
             LastRampaged = DateTime.UtcNow;
+            FactionName = "<color=#5c5e5d>Neutral</color>";            
             LastKilled = DateTime.UtcNow;
             RoleType = RoleEnum.Werewolf;
             AddToRoleHistory(RoleType);
@@ -41,7 +42,7 @@ namespace TownOfUs.Roles
             }
         }
 
-        internal override bool EABBNOODFGL(ShipStatus __instance)
+        internal override bool EABBNOODFGL(LogicGameFlowNormal __instance)
         {
             if (Player.Data.IsDead || Player.Data.Disconnected) return true;
 
@@ -77,7 +78,7 @@ namespace TownOfUs.Roles
             LostByRPC = true;
         }
 
-        protected override void IntroPrefix(IntroCutscene._ShowTeam_d__21 __instance)
+        protected override void IntroPrefix(IntroCutscene._ShowTeam_d__36 __instance)
         {
             var werewolfTeam = new Il2CppSystem.Collections.Generic.List<PlayerControl>();
             werewolfTeam.Add(PlayerControl.LocalPlayer);

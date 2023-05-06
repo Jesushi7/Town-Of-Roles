@@ -1,9 +1,9 @@
 using Hazel;
 using System;
 using System.Linq;
-using TownOfUs.Extensions;
+using TownOfRoles.Extensions;
 
-namespace TownOfUs.Roles
+namespace TownOfRoles.Roles
 {
     public class Pestilence : Role
     {
@@ -14,7 +14,7 @@ namespace TownOfUs.Roles
             LastKill = DateTime.UtcNow;
             RoleType = RoleEnum.Pestilence;
             AddToRoleHistory(RoleType);
-            ImpostorText = () => "";
+            StartText = () => "";
             TaskText = () => "Kill everyone with your unstoppable abilities!\nFake Tasks:";
             Faction = Faction.Neutral;
         }
@@ -23,7 +23,7 @@ namespace TownOfUs.Roles
         public DateTime LastKill { get; set; }
         public bool PestilenceWins { get; set; }
 
-        internal override bool EABBNOODFGL(ShipStatus __instance)
+        internal override bool EABBNOODFGL(LogicGameFlowNormal __instance)
         {
             if (Player.Data.IsDead || Player.Data.Disconnected) return true;
 

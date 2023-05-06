@@ -1,4 +1,4 @@
-namespace TownOfUs.Roles
+namespace TownOfRoles.Roles
 {
     public class Janitor : Role
     {
@@ -7,11 +7,12 @@ namespace TownOfUs.Roles
         public Janitor(PlayerControl player) : base(player)
         {
             Name = "Janitor";
-            ImpostorText = () => "Clean Up Bodies";
-            TaskText = () => "Clean bodies";
-            Color = Patches.Colors.Impostor;
+            StartText = () => "<color=#d68185>Clean Up Bodies</color>";
+            TaskText = () => "Clean and hide bodies";
+            Color = Patches.Colors.Janitor;
             RoleType = RoleEnum.Janitor;
             AddToRoleHistory(RoleType);
+            FactionName = "Impostor";               
             Faction = Faction.Impostors;
         }
 

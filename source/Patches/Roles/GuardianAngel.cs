@@ -1,9 +1,10 @@
 using System;
 using UnityEngine;
 using TMPro;
-using TownOfUs.Extensions;
+using AmongUs.GameOptions;
+using TownOfRoles.Extensions;
 
-namespace TownOfUs.Roles
+namespace TownOfRoles.Roles
 {
     public class GuardianAngel : Role
     {
@@ -21,14 +22,15 @@ namespace TownOfUs.Roles
         public GuardianAngel(PlayerControl player) : base(player)
         {
             Name = "Guardian Angel";
-            ImpostorText = () =>
-                target == null ? "You don't have a target for some reason... weird..." : $"Protect {target.name}";
+            StartText = () =>
+                target == null ? "<color=#B3FFFFFF>You don't have a target for some reason... weird...</color>" : $"<color=#B3FFFFFF>Protect {target.name} With Your Life!</color>";
             TaskText = () =>
                 target == null
                     ? "You don't have a target for some reason... weird..."
-                    : $"Protect {target.name}";
+                    : $"Protect {target.name}!";
             Color = Patches.Colors.GuardianAngel;
             LastProtected = DateTime.UtcNow;
+            FactionName = "<color=#5c5e5d>Neutral</color>";                
             RoleType = RoleEnum.GuardianAngel;
             AddToRoleHistory(RoleType);
             Faction = Faction.Neutral;
@@ -58,6 +60,12 @@ namespace TownOfUs.Roles
 
         public void UnProtect()
         {
+            var ga = GetRole<GuardianAngel>(Player);
+            if (!ga.target.IsShielded())
+            {
+                ga.target.myRend().material.SetColor("_VisorColor", Palette.VisorColor);
+                ga.target.myRend().material.SetFloat("_Outline", 0f);
+            }
             Enabled = false;
             LastProtected = DateTime.UtcNow;
         }
@@ -65,7 +73,8 @@ namespace TownOfUs.Roles
         public void ImpTargetWin()
         {
             Player.Data.Role.TeamType = RoleTeamTypes.Impostor;
-            RoleManager.Instance.SetRole(Player, RoleTypes.Impostor);
+            if (Player.Data.IsDead) RoleManager.Instance.SetRole(Player, RoleTypes.ImpostorGhost);
+            else RoleManager.Instance.SetRole(Player, RoleTypes.Impostor);
         }
 
         public void ImpTargetLose()
@@ -73,22 +82,12 @@ namespace TownOfUs.Roles
             LostByRPC = true;
         }
 
-        protected override void IntroPrefix(IntroCutscene._ShowTeam_d__21 __instance)
+        protected override void IntroPrefix(IntroCutscene._ShowTeam_d__36 __instance)
         {
             var gaTeam = new Il2CppSystem.Collections.Generic.List<PlayerControl>();
             gaTeam.Add(PlayerControl.LocalPlayer);
             gaTeam.Add(target);
             __instance.teamToShow = gaTeam;
-        }
-                public void NeutralWin()
-        {
-            Player.Data.Role.TeamType = RoleTeamTypes.Impostor;
-            RoleManager.Instance.SetRole(Player, RoleTypes.Impostor);
-        }
-
-        public void NeutralLose()
-        {
-            LostByRPC = true;
         }
     }
 }

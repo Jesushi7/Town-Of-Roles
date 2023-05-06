@@ -1,9 +1,9 @@
 using System;
 using HarmonyLib;
-using TownOfUs.Roles;
+using TownOfRoles.Roles;
 using Object = UnityEngine.Object;
 
-namespace TownOfUs.CrewmateRoles.VeteranMod
+namespace TownOfRoles.CrewmateRoles.VeteranMod
 {
     [HarmonyPatch(typeof(Object), nameof(Object.Destroy), typeof(Object))]
     public static class HUDClose

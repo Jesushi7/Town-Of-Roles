@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using HarmonyLib;
 
-namespace TownOfUs.CrewmateRoles.MedicMod
+namespace TownOfRoles.CrewmateRoles.MedicMod
 {
     [HarmonyPatch(typeof(PlayerControl), nameof(PlayerControl.MurderPlayer))]
     public class Murder

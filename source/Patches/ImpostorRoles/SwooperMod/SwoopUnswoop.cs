@@ -1,7 +1,7 @@
 using HarmonyLib;
-using TownOfUs.Roles;
+using TownOfRoles.Roles;
 
-namespace TownOfUs.ImpostorRoles.SwooperMod
+namespace TownOfRoles.ImpostorRoles.SwooperMod
 {
     [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]
     [HarmonyPriority(Priority.Last)]
@@ -12,10 +12,10 @@ namespace TownOfUs.ImpostorRoles.SwooperMod
         {
             foreach (var role in Role.GetRoles(RoleEnum.Swooper))
             {
-                var swooper = (Swooper) role;
-                if (swooper.IsSwooped)
-                    swooper.Swoop();
-                else if (swooper.Enabled) swooper.UnSwoop();
+                var Swooper = (Swooper) role;
+                if (Swooper.IsSwooped)
+                    Swooper.Swoop();
+                else if (Swooper.Enabled) Swooper.UnSwoop();
             }
         }
     }

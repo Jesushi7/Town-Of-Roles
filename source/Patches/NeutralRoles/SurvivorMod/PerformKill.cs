@@ -1,8 +1,8 @@
 using HarmonyLib;
 using Hazel;
-using TownOfUs.Roles;
+using TownOfRoles.Roles;
 
-namespace TownOfUs.NeutralRoles.SurvivorMod
+namespace TownOfRoles.NeutralRoles.SurvivorMod
 {
     [HarmonyPatch(typeof(KillButton), nameof(KillButton.DoClick))]
     public class Vest

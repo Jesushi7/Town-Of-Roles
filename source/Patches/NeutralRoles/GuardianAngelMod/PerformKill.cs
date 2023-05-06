@@ -1,8 +1,8 @@
 using HarmonyLib;
 using Hazel;
-using TownOfUs.Roles;
+using TownOfRoles.Roles;
 
-namespace TownOfUs.NeutralRoles.GuardianAngelMod
+namespace TownOfRoles.NeutralRoles.GuardianAngelMod
 {
     [HarmonyPatch(typeof(KillButton), nameof(KillButton.DoClick))]
     public class Protect

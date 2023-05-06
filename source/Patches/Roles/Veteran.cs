@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using TMPro;
 
-namespace TownOfUs.Roles
+namespace TownOfRoles.Roles
 {
     public class Veteran : Role
     {
@@ -18,10 +18,12 @@ namespace TownOfUs.Roles
         public Veteran(PlayerControl player) : base(player)
         {
             Name = "Veteran";
-            ImpostorText = () => "Alert To Kill Anyone Who Interacts With You";
+            StartText = () => "<color=#998040FF>Alert To Kill Anyone Who Interacts With You</color>";
             TaskText = () => "Alert to kill whoever interacts with you";
             Color = Patches.Colors.Veteran;
             LastAlerted = DateTime.UtcNow;
+            FactionName = "<color=#998040FF>Crewmate</color>";    
+            Faction = Faction.Crewmates;               
             RoleType = RoleEnum.Veteran;
             AddToRoleHistory(RoleType);
 

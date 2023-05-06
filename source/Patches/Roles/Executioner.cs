@@ -1,8 +1,8 @@
 using Il2CppSystem.Collections.Generic;
-using TownOfUs.Extensions;
+using TownOfRoles.Extensions;
 using UnityEngine;
 
-namespace TownOfUs.Roles
+namespace TownOfRoles.Roles
 {
     public class Executioner : Role
     {
@@ -12,27 +12,28 @@ namespace TownOfUs.Roles
         public Executioner(PlayerControl player) : base(player)
         {
             Name = "Executioner";
-            ImpostorText = () =>
-                target == null ? "You don't have a target for some reason... weird..." : $"Vote {target.name} Out";
+            StartText = () =>
+                target == null ? "<color=#2d4222>Vote... uh..Nevermind</color>" : $"<color=#2d4222>Vote {target.name} Out</color>";
             TaskText = () =>
                 target == null
-                    ? "You don't have a target for some reason... weird..."
+                    ? "Vote... uh..Nevermind."
                     : $"Vote {target.name} out!\nFake Tasks:";
             Color = Patches.Colors.Executioner;
             RoleType = RoleEnum.Executioner;
+            FactionName = "<color=#5c5e5d>Neutral</color>";              
             AddToRoleHistory(RoleType);
             Faction = Faction.Neutral;
             Scale = 1.4f;
         }
 
-        protected override void IntroPrefix(IntroCutscene._ShowTeam_d__21 __instance)
+        protected override void IntroPrefix(IntroCutscene._ShowTeam_d__36 __instance)
         {
             var exeTeam = new List<PlayerControl>();
             exeTeam.Add(PlayerControl.LocalPlayer);
             __instance.teamToShow = exeTeam;
         }
 
-        internal override bool EABBNOODFGL(ShipStatus __instance)
+        internal override bool EABBNOODFGL(LogicGameFlowNormal __instance)
         {
             if (Player.Data.IsDead) return true;
             if (!TargetVotedOut || !target.Data.IsDead) return true;

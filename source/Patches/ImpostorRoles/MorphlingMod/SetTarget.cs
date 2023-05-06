@@ -1,9 +1,9 @@
 using HarmonyLib;
-using TownOfUs.Extensions;
-using TownOfUs.Roles;
+using TownOfRoles.Extensions;
+using TownOfRoles.Roles;
 using UnityEngine;
 
-namespace TownOfUs.ImpostorRoles.MorphlingMod
+namespace TownOfRoles.ImpostorRoles.MorphlingMod
 {
     [HarmonyPatch(typeof(KillButton), nameof(KillButton.SetTarget))]
     public class SetTarget

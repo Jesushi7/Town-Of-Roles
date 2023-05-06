@@ -1,14 +1,14 @@
 using System.Linq;
 using HarmonyLib;
-using TownOfUs.Roles;
+using TownOfRoles.Roles;
 using UnityEngine;
 
-namespace TownOfUs.ImpostorRoles.MinerMod
+namespace TownOfRoles.ImpostorRoles.MinerMod
 {
     [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]
     public class HudManagerUpdate
     {
-        public static Sprite MineSprite => TownOfUs.MineSprite;
+        public static Sprite MineSprite => TownOfRoles.MineSprite;
 
         public static void Postfix(HudManager __instance)
         {
@@ -21,13 +21,13 @@ namespace TownOfUs.ImpostorRoles.MinerMod
             {
                 role.MineButton = Object.Instantiate(__instance.KillButton, __instance.KillButton.transform.parent);
                 role.MineButton.graphic.enabled = true;
-                role.MineButton.GetComponent<AspectPosition>().DistanceFromEdge = TownOfUs.ButtonPosition;
                 role.MineButton.gameObject.SetActive(false);
             }
 
-            role.MineButton.GetComponent<AspectPosition>().Update();
             role.MineButton.graphic.sprite = MineSprite;
-            role.MineButton.gameObject.SetActive(!PlayerControl.LocalPlayer.Data.IsDead && !MeetingHud.Instance);
+            role.MineButton.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
+                    && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
+                    && AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started);
 
             role.MineButton.SetCoolDown(role.MineTimer(), CustomGameOptions.MineCd);
             var hits = Physics2D.OverlapBoxAll(PlayerControl.LocalPlayer.transform.position, role.VentSize, 0);

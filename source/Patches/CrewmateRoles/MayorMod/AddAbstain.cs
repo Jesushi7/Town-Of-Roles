@@ -1,9 +1,9 @@
 using HarmonyLib;
 using TMPro;
-using TownOfUs.Roles;
+using TownOfRoles.Roles;
 using UnityEngine;
 
-namespace TownOfUs.CrewmateRoles.MayorMod
+namespace TownOfRoles.CrewmateRoles.MayorMod
 {
     public class AddAbstain
     {
@@ -97,7 +97,7 @@ namespace TownOfUs.CrewmateRoles.MayorMod
                 switch (__instance.state)
                 {
                     case MeetingHud.VoteStates.Discussion:
-                        if (__instance.discussionTimer < PlayerControl.GameOptions.DiscussionTime)
+                        if (__instance.discussionTimer < GameOptionsManager.Instance.currentNormalGameOptions.DiscussionTime)
                         {
                             mayorRole.Abstain.SetDisabled();
                             break;

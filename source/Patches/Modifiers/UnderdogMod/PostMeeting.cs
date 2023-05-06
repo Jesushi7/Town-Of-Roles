@@ -1,7 +1,7 @@
 ﻿using HarmonyLib;
-using TownOfUs.Roles.Modifiers;
+using TownOfRoles.Roles.Modifiers;
 
-namespace TownOfUs.Modifiers.UnderdogMod
+namespace TownOfRoles.Modifiers.UnderdogMod
 {
     [HarmonyPatch(typeof(ExileController), nameof(ExileController.WrapUp))]
     public static class HUDClose

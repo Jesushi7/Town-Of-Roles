@@ -1,0 +1,26 @@
+using TownOfRoles.Roles;
+using TownOfRoles.Roles.Modifiers;
+using HarmonyLib;
+using AmongUs.GameOptions;
+
+namespace TownOfRoles
+{
+    [HarmonyPatch]
+
+    internal sealed class Hauntpatch
+    {
+        [HarmonyPatch(typeof(HauntMenuMinigame), nameof(HauntMenuMinigame.SetFilterText))]
+        [HarmonyPrefix]
+
+        public static bool Prefix(HauntMenuMinigame __instance)
+        {
+            if (GameOptionsManager.Instance.CurrentGameOptions.GameMode == GameModes.HideNSeek) return true;
+            var role = Role.GetRole(__instance.HauntTarget);
+            var modifier = Modifier.GetModifier(__instance.HauntTarget);
+
+            __instance.FilterText.text = modifier != null ? $"{modifier.Name} - {role.Name}"
+                                                          : $"{role.Name}";
+            return false;
+        }
+    }
+}

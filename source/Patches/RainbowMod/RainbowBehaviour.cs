@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace TownOfUs.RainbowMod
+namespace TownOfRoles.RainbowMod
 {
     public class RainbowBehaviour : MonoBehaviour
     {

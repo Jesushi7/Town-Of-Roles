@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace TownOfUs.Roles
+namespace TownOfRoles.Roles
 {
     public class Mayor : Role
     {
@@ -9,10 +9,12 @@ namespace TownOfUs.Roles
         public Mayor(PlayerControl player) : base(player)
         {
             Name = "Mayor";
-            ImpostorText = () => "Save Your Votes To Mayor Dump Someone";
-            TaskText = () => "Save your votes to vote multiple times";
+            StartText = () => "<color=#704FA8FF>Save Your Votes To Vote Multiple Times</color>";
+            TaskText = () => "Save your votes to Mayor dump someone";
             Color = Patches.Colors.Mayor;
             RoleType = RoleEnum.Mayor;
+            FactionName = "<color=#704FA8FF>Crewmate</color>";    
+            Faction = Faction.Crewmates;               
             AddToRoleHistory(RoleType);
             VoteBank = CustomGameOptions.MayorVoteBank;
         }

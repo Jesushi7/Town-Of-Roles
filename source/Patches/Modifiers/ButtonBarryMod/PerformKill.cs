@@ -1,8 +1,8 @@
 using HarmonyLib;
 using Hazel;
-using TownOfUs.Roles.Modifiers;
+using TownOfRoles.Roles.Modifiers;
 
-namespace TownOfUs.Modifiers.ButtonBarryMod
+namespace TownOfRoles.Modifiers.ButtonBarryMod
 {
     [HarmonyPatch(typeof(KillButton), nameof(KillButton.DoClick))]
     public class PerformKill
@@ -17,10 +17,9 @@ namespace TownOfUs.Modifiers.ButtonBarryMod
             if (!PlayerControl.LocalPlayer.CanMove) return false;
             if (PlayerControl.LocalPlayer.Data.IsDead) return false;
             if (role.ButtonUsed) return false;
+            if (role.StartTimer() > 0) return false;
             if (PlayerControl.LocalPlayer.RemainingEmergencies <= 0) return false;
             if (!__instance.enabled) return false;
-
-            System.Console.WriteLine("Reached here!");
 
             role.ButtonUsed = true;
 
@@ -35,12 +34,12 @@ namespace TownOfUs.Modifiers.ButtonBarryMod
                 MeetingRoomManager.Instance.target = null;
                 AmongUsClient.Instance.DisconnectHandlers.AddUnique(
                     MeetingRoomManager.Instance.Cast<IDisconnectHandler>());
-                if (ShipStatus.Instance.CheckTaskCompletion()) return false;
+                if (GameManager.Instance.CheckTaskCompletion()) return false;
                 DestroyableSingleton<HudManager>.Instance.OpenMeetingRoom(PlayerControl.LocalPlayer);
                 PlayerControl.LocalPlayer.RpcStartMeeting(null);
             }
 
-                return false;
+            return false;
         }
     }
 }

@@ -1,9 +1,9 @@
 using System;
 using HarmonyLib;
-using TownOfUs.Roles;
+using TownOfRoles.Roles;
 using Object = UnityEngine.Object;
 
-namespace TownOfUs.CrewmateRoles.MysticMod
+namespace TownOfRoles.CrewmateRoles.MysticMod
 {
     [HarmonyPatch(typeof(Object), nameof(Object.Destroy), typeof(Object))]
     public static class HUDClose
@@ -11,11 +11,11 @@ namespace TownOfUs.CrewmateRoles.MysticMod
         public static void Postfix(Object obj)
         {
             if (ExileController.Instance == null || obj != ExileController.Instance.gameObject) return;
-            foreach (var role in Role.GetRoles(RoleEnum.Detective))
+            foreach (var role in Role.GetRoles(RoleEnum.Mystic))
             {
-                var detective = (Mystic) role;
-                detective.LastExamined = DateTime.UtcNow;
-                detective.LastExamined = detective.LastExamined.AddSeconds(CustomGameOptions.InitialExamineCd - CustomGameOptions.ExamineCd);
+                var Mystic = (Mystic) role;
+                Mystic.LastExamined = DateTime.UtcNow;
+                Mystic.LastExamined = Mystic.LastExamined.AddSeconds(CustomGameOptions.InitialExamineCd - CustomGameOptions.ExamineCd);
             }
         }
     }

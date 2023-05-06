@@ -4,20 +4,28 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Reactor.Utilities;
 using Reactor.Utilities.Extensions;
-using TownOfUs.CrewmateRoles.MedicMod;
-using TownOfUs.Extensions;
-using TownOfUs.Roles;
-using TownOfUs.Roles.Modifiers;
+using TownOfRoles.CrewmateRoles.MedicMod;
+using TownOfRoles.Extensions;
+using TownOfRoles.Patches;
+using TownOfRoles.Roles;
+using TownOfRoles.Roles.Cultist;
+using TownOfRoles.Roles.Modifiers;
 using Il2CppInterop.Runtime.InteropTypes;
 using Il2CppInterop.Runtime.InteropTypes.Arrays;
 using UnityEngine;
 using Object = UnityEngine.Object;
-using PerformKill = TownOfUs.Modifiers.UnderdogMod.PerformKill;
+using PerformKill = TownOfRoles.Modifiers.UnderdogMod.PerformKill;
 using Random = UnityEngine.Random;
+using AmongUs.GameOptions;
+using Murder = TownOfRoles.CrewmateRoles.MedicMod.Murder;
+using System.Reflection;
+using Il2CppInterop.Runtime;
+using System.IO;
+using InnerNet;
+using Reactor.Utilities;
 
-namespace TownOfUs
+namespace TownOfRoles
 {
     [HarmonyPatch]
     public static class Utils
@@ -26,7 +34,7 @@ namespace TownOfUs
         private static GameData.PlayerInfo voteTarget = null;
 
         public static Dictionary<PlayerControl, Color> oldColors = new Dictionary<PlayerControl, Color>();
-
+        private static DLoadImage _iCallLoadImage;
         public static List<WinningPlayerData> potentialWinners = new List<WinningPlayerData>();
 
         public static void Morph(PlayerControl player, PlayerControl MorphedPlayer, bool resetAnim = false)
@@ -35,7 +43,15 @@ namespace TownOfUs
             if (player.GetCustomOutfitType() != CustomPlayerOutfitType.Morph)
                 player.SetOutfit(CustomPlayerOutfitType.Morph, MorphedPlayer.Data.DefaultOutfit);
         }
-
+        public static void MurderPlayer(PlayerControl killer, PlayerControl target, bool lunge)
+        {        
+                var deadBody = new DeadPlayer
+                {
+                    PlayerId = target.PlayerId,
+                    KillerId = killer.PlayerId,
+                    KillTime = DateTime.UtcNow
+                };
+        }
         public static void Unmorph(PlayerControl player)
         {
            player.SetOutfit(CustomPlayerOutfitType.Default);
@@ -45,9 +61,9 @@ namespace TownOfUs
         {
             foreach (var player in PlayerControl.AllPlayerControls)
             {
-                if (player.GetCustomOutfitType() != CustomPlayerOutfitType.Camouflage &&
-                    player.GetCustomOutfitType() != CustomPlayerOutfitType.Swooper &&
-                    player.GetCustomOutfitType() != CustomPlayerOutfitType.PlayerNameOnly)
+                if (player.GetCustomOutfitType() != CustomPlayerOutfitType.Camouflage && 
+                player.GetCustomOutfitType() != CustomPlayerOutfitType.Swooper &&
+                player.GetCustomOutfitType() != CustomPlayerOutfitType.PlayerNameOnly)
                 {
                     player.SetOutfit(CustomPlayerOutfitType.Camouflage, new GameData.PlayerOutfit()
                     {
@@ -57,14 +73,21 @@ namespace TownOfUs
                         VisorId = "",
                         PlayerName = " "
                     });
+
                     PlayerMaterial.SetColors(Color.grey, player.myRend());
                     player.nameText().color = Color.clear;
                     player.cosmetics.colorBlindText.color = Color.clear;
-                  
+
+                    if (CustomGameOptions.CamoHideSize)
+                        player.GetAppearance().SizeFactor.Set(1f, 1f, 1f);
+
+                    if (CustomGameOptions.CamouflageHideSpeed)
+                        player.MyPhysics.body.velocity.Set(GameOptionsManager.Instance.currentNormalGameOptions.PlayerSpeedMod, GameOptionsManager.Instance.currentNormalGameOptions.PlayerSpeedMod);
                 }
             }
         }
-
+ 
+                
         public static void UnCamouflage()
         {
             foreach (var player in PlayerControl.AllPlayerControls) Unmorph(player);
@@ -137,7 +160,19 @@ namespace TownOfUs
 
             return null;
         }
-
+        public static void DefaultOutfit(PlayerControl player)
+        {
+            player.myRend().color = new Color32(255, 255, 255, 255);
+            player.SetOutfit(CustomPlayerOutfitType.Default);
+        }        
+        public static void DefaultOutfitAll()
+        {
+            foreach (var player in PlayerControl.AllPlayerControls)
+            {
+                DefaultOutfit(player);
+                player.myRend().color = new Color32(255, 255, 255, 255);
+            }
+        }
         public static bool IsShielded(this PlayerControl player)
         {
             return Role.GetRoles(RoleEnum.Medic).Any(role =>
@@ -155,7 +190,7 @@ namespace TownOfUs
                 return shieldedPlayer != null && player.PlayerId == shieldedPlayer.PlayerId;
             }) as Medic;
         }
-
+       
         public static bool IsOnAlert(this PlayerControl player)
         {
             return Role.GetRoles(RoleEnum.Veteran).Any(role =>
@@ -193,6 +228,220 @@ namespace TownOfUs
             });
         }
 
+        public static List<bool> Interact(PlayerControl player, PlayerControl target, bool toKill = false)
+        {
+            bool fullCooldownReset = false;
+            bool gaReset = false;
+            bool survReset = false;
+            bool zeroSecReset = false;
+            bool abilityUsed = false;
+            if (target.IsInfected() || player.IsInfected())
+            {
+                foreach (var pb in Role.GetRoles(RoleEnum.Plaguebearer)) ((Plaguebearer)pb).RpcSpreadInfection(target, player);
+            }
+            if (target.Is(RoleEnum.Pestilence))
+            {
+                if (player.IsShielded())
+                {
+                    var medic = player.GetMedic().Player.PlayerId;
+                    var writer = AmongUsClient.Instance.StartRpcImmediately(PlayerControl.LocalPlayer.NetId,
+                        (byte)CustomRPC.AttemptSound, SendOption.Reliable, -1);
+                    writer.Write(medic);
+                    writer.Write(player.PlayerId);
+                    AmongUsClient.Instance.FinishRpcImmediately(writer);
+
+                    if (CustomGameOptions.ShieldBreaks) fullCooldownReset = true;
+                    else zeroSecReset = true;
+
+                    StopKill.BreakShield(medic, player.PlayerId, CustomGameOptions.ShieldBreaks);
+                }
+                else if (player.IsProtected()) gaReset = true;
+                else RpcMurderPlayer(target, player);
+            }
+            else if (target.IsOnAlert())
+            {
+                if (player.Is(RoleEnum.Pestilence)) zeroSecReset = true;
+                else if (player.IsShielded())
+                {
+                    var medic = player.GetMedic().Player.PlayerId;
+                    var writer = AmongUsClient.Instance.StartRpcImmediately(PlayerControl.LocalPlayer.NetId,
+                        (byte)CustomRPC.AttemptSound, SendOption.Reliable, -1);
+                    writer.Write(medic);
+                    writer.Write(player.PlayerId);
+                    AmongUsClient.Instance.FinishRpcImmediately(writer);
+
+                    if (CustomGameOptions.ShieldBreaks) fullCooldownReset = true;
+                    else zeroSecReset = true;
+
+                    StopKill.BreakShield(medic, player.PlayerId, CustomGameOptions.ShieldBreaks);
+                }
+                else if (player.IsProtected()) gaReset = true;
+                else RpcMurderPlayer(target, player);
+                if (toKill && CustomGameOptions.KilledOnAlert)
+                {
+                    if (target.IsShielded())
+                    {
+                        var medic = target.GetMedic().Player.PlayerId;
+                        var writer = AmongUsClient.Instance.StartRpcImmediately(PlayerControl.LocalPlayer.NetId,
+                            (byte)CustomRPC.AttemptSound, SendOption.Reliable, -1);
+                        writer.Write(medic);
+                        writer.Write(target.PlayerId);
+                        AmongUsClient.Instance.FinishRpcImmediately(writer);
+
+                        if (CustomGameOptions.ShieldBreaks) fullCooldownReset = true;
+                        else zeroSecReset = true;
+
+                        StopKill.BreakShield(medic, target.PlayerId, CustomGameOptions.ShieldBreaks);
+                    }
+                    else if (target.IsProtected()) gaReset = true;
+                    else
+                    {
+                        if (player.Is(RoleEnum.Glitch))
+                        {
+                            var glitch = Role.GetRole<Glitch>(player);
+                            glitch.LastKill = DateTime.UtcNow;
+                        }
+                        else if (player.Is(RoleEnum.Juggernaut))
+                        {
+                            var jugg = Role.GetRole<Juggernaut>(player);
+                            jugg.JuggKills += 1;
+                            jugg.LastKill = DateTime.UtcNow;
+                        }
+                        else if (player.Is(RoleEnum.Pestilence))
+                        {
+                            var pest = Role.GetRole<Pestilence>(player);
+                            pest.LastKill = DateTime.UtcNow;
+                        }
+                        else if (player.Is(RoleEnum.Werewolf))
+                        {
+                            var ww = Role.GetRole<Werewolf>(player);
+                            ww.LastKilled = DateTime.UtcNow;
+                        }
+                        RpcMurderPlayer(player, target);
+                        abilityUsed = true;
+                        fullCooldownReset = true;
+                        gaReset = false;
+                        zeroSecReset = false;
+                    }
+                }
+            }
+            else if (target.IsShielded() && toKill)
+            {
+                var writer = AmongUsClient.Instance.StartRpcImmediately(PlayerControl.LocalPlayer.NetId,
+                    (byte)CustomRPC.AttemptSound, SendOption.Reliable, -1);
+                writer.Write(target.GetMedic().Player.PlayerId);
+                writer.Write(target.PlayerId);
+                AmongUsClient.Instance.FinishRpcImmediately(writer);
+
+                System.Console.WriteLine(CustomGameOptions.ShieldBreaks + "- shield break");
+                if (CustomGameOptions.ShieldBreaks) fullCooldownReset = true;
+                else zeroSecReset = true;
+                StopKill.BreakShield(target.GetMedic().Player.PlayerId, target.PlayerId, CustomGameOptions.ShieldBreaks);
+            }
+            else if (target.IsVesting() && toKill)
+            {
+                survReset = true;
+            }
+            else if (target.IsProtected() && toKill)
+            {
+                gaReset = true;
+            }
+            else if (toKill)
+            {
+                if (player.Is(RoleEnum.Glitch))
+                {
+                    var glitch = Role.GetRole<Glitch>(player);
+                    glitch.LastKill = DateTime.UtcNow;
+                }
+                else if (player.Is(RoleEnum.Juggernaut))
+                {
+                    var jugg = Role.GetRole<Juggernaut>(player);
+                    jugg.JuggKills += 1;
+                    jugg.LastKill = DateTime.UtcNow;
+                }
+                else if (player.Is(RoleEnum.Pestilence))
+                {
+                    var pest = Role.GetRole<Pestilence>(player);
+                    pest.LastKill = DateTime.UtcNow;
+                }
+                else if (player.Is(RoleEnum.Werewolf))
+                {
+                    var ww = Role.GetRole<Werewolf>(player);
+                    ww.LastKilled = DateTime.UtcNow;
+                }
+                RpcMurderPlayer(player, target);
+                abilityUsed = true;
+                fullCooldownReset = true;
+            }
+            else
+            {
+                abilityUsed = true;
+                fullCooldownReset = true;
+            }
+            var reset = new List<bool>();
+            reset.Add(fullCooldownReset);
+            reset.Add(gaReset);
+            reset.Add(survReset);
+            reset.Add(zeroSecReset);
+            reset.Add(abilityUsed);
+            return reset;
+        }
+
+        public static Il2CppSystem.Collections.Generic.List<PlayerControl> GetClosestPlayers(Vector2 truePosition, float radius, bool includeDead)
+        {
+            Il2CppSystem.Collections.Generic.List<PlayerControl> playerControlList = new Il2CppSystem.Collections.Generic.List<PlayerControl>();
+            float lightRadius = radius * ShipStatus.Instance.MaxLightRadius;
+            Il2CppSystem.Collections.Generic.List<GameData.PlayerInfo> allPlayers = GameData.Instance.AllPlayers;
+            for (int index = 0; index < allPlayers.Count; ++index)
+            {
+                GameData.PlayerInfo playerInfo = allPlayers[index];
+                if (!playerInfo.Disconnected && (!playerInfo.Object.Data.IsDead || includeDead))
+                {
+                    Vector2 vector2 = new Vector2(playerInfo.Object.GetTruePosition().x - truePosition.x, playerInfo.Object.GetTruePosition().y - truePosition.y);
+                    float magnitude = ((Vector2)vector2).magnitude;
+                    if (magnitude <= lightRadius)
+                    {
+                        PlayerControl playerControl = playerInfo.Object;
+                        playerControlList.Add(playerControl);
+                    }
+                }
+            }
+            return playerControlList;
+        }
+ public static IEnumerator FlashCoro(Color color, string message = "", float duration = 1f, float size = 100f)
+        {
+            if (!HudManager.Instance || HudManager.Instance.FullScreen == null)
+                yield break;
+
+            HudManager.Instance.FullScreen.gameObject.SetActive(true);
+            HudManager.Instance.FullScreen.enabled = true;
+
+            // Message Text
+            var messageText = Object.Instantiate(HudManager.Instance.KillButton.cooldownTimerText, HudManager.Instance.transform);
+            messageText.text = $"<size={size}%>{message}</size>";
+            messageText.enableWordWrapping = false;
+            messageText.transform.localScale = Vector3.one * 0.5f;
+            messageText.transform.localPosition = new Vector3(0f, 0f, 0f);
+            messageText.gameObject.SetActive(true);
+            HudManager.Instance.StartCoroutine(Effects.Lerp(duration, new Action<float>((p) =>
+            {
+                var fullscreen = HudManager.Instance.FullScreen;
+
+                if (p < 0.5)
+                {
+                    if (fullscreen != null)
+                        fullscreen.color = new Color(color.r, color.g, color.b, Mathf.Clamp01(p * 1.5f));
+                }
+                else if (fullscreen != null)
+                    fullscreen.color = new Color(color.r, color.g, color.b, Mathf.Clamp01((1 - p) * 1.5f));
+
+                if (p == 1f && fullscreen != null)
+                    fullscreen.enabled = false;
+
+                if (p == 1f)
+                    messageText.gameObject.Destroy();
+            })));
+        }
         public static PlayerControl GetClosestPlayer(PlayerControl refPlayer, List<PlayerControl> AllPlayers)
         {
             var num = double.MaxValue;
@@ -200,7 +449,7 @@ namespace TownOfUs
             PlayerControl result = null;
             foreach (var player in AllPlayers)
             {
-                if (player.Data.IsDead || player.PlayerId == refPlayer.PlayerId || !player.Collider.enabled) continue;
+                if (player.Data.IsDead || player.PlayerId == refPlayer.PlayerId || !player.Collider.enabled || (player.inVent)) continue;
                 var playerPosition = player.GetTruePosition();
                 var distBetweenPlayers = Vector2.Distance(refPosition, playerPosition);
                 var isClosest = distBetweenPlayers < num;
@@ -215,10 +464,40 @@ namespace TownOfUs
             
             return result;
         }
-
-        public static PlayerControl GetClosestPlayer(PlayerControl refplayer)
+        
+        public static List<object> AllPlayerInfo(this PlayerControl player)
         {
-            return GetClosestPlayer(refplayer, PlayerControl.AllPlayerControls.ToArray().ToList());
+            var role = Role.GetRole(player);
+            var modifier = Modifier.GetModifier(player);
+            var ability = Ability.GetAbility(player);
+
+            var info = new List<object>();
+
+            info.Add(role); //0
+            info.Add(modifier); //1
+            info.Add(ability); 
+
+            return info;
+        }
+
+        public static bool LastImp() => PlayerControl.AllPlayerControls.ToArray().Count(x => x.Is(Faction.Impostors) && !(x.Data.IsDead || x.Data.Disconnected)) == 1;
+
+
+        public static float GetUnderdogChange(PlayerControl player)
+        {
+            if (!player.Is(ModifierEnum.Underdog))
+                return 0f;
+
+            var last = player.Is(Faction.Impostors) ? LastImp() : LastImp();
+            var lowerKC = -CustomGameOptions.UnderdogKillBonus;
+            var upperKC = CustomGameOptions.UnderdogKillBonus;
+
+            if (CustomGameOptions.UnderdogIncreasedKC && !last)
+                return upperKC;
+            else if (last)
+                return lowerKC;
+            else
+                return 0f;
         }
         public static void SetTarget(
             ref PlayerControl closestPlayer,
@@ -241,7 +520,7 @@ namespace TownOfUs
         )
         {
             if (float.IsNaN(maxDistance))
-                maxDistance = GameOptionsData.KillDistances[PlayerControl.GameOptions.KillDistance];
+                maxDistance = GameOptionsData.KillDistances[GameOptionsManager.Instance.currentNormalGameOptions.KillDistance];
             var player = GetClosestPlayer(
                 PlayerControl.LocalPlayer,
                 targets ?? PlayerControl.AllPlayerControls.ToArray().ToList()
@@ -268,7 +547,28 @@ namespace TownOfUs
             writer.Write(target.PlayerId);
             AmongUsClient.Instance.FinishRpcImmediately(writer);
         }
-
+        public static Texture2D CreateEmptyTexture(int width = 0, int height = 0) => new Texture2D(width, height, TextureFormat.RGBA32, Texture.GenerateAllMips, false, IntPtr.Zero);
+        public static Sprite CreateSprite(string name)
+        {
+            var pixelsPerUnit = 100f;
+            var pivot = new Vector2(0.5f, 0.5f);
+            var assembly = Assembly.GetExecutingAssembly();
+            var tex = Utils.CreateEmptyTexture();
+            var imageStream = assembly.GetManifestResourceStream(name);
+            var img = imageStream.ReadFully();
+            LoadImage(tex, img, true);
+            tex.DontDestroy();
+            var sprite = Sprite.Create(tex, new Rect(0.0f, 0.0f, tex.width, tex.height), pivot, pixelsPerUnit);
+            sprite.DontDestroy();
+            return sprite;
+        }
+        public static void LoadImage(Texture2D tex, byte[] data, bool markNonReadable)
+        {
+            _iCallLoadImage ??= IL2CPP.ResolveICall<DLoadImage>("UnityEngine.ImageConversion::LoadImage");
+            var il2CPPArray = (Il2CppStructArray<byte>) data;
+            _iCallLoadImage.Invoke(tex.Pointer, il2CPPArray.Pointer, markNonReadable);
+        }   
+        private delegate bool DLoadImage(IntPtr tex, IntPtr data, bool markNonReadable);             
         public static void MurderPlayer(PlayerControl killer, PlayerControl target)
         {
             var data = target.Data;
@@ -276,6 +576,35 @@ namespace TownOfUs
             {
                 if (killer == PlayerControl.LocalPlayer)
                     SoundManager.Instance.PlaySound(PlayerControl.LocalPlayer.KillSfx, false, 0.8f);
+
+                if (!killer.Is(Faction.Crewmates) && killer != target
+                    && GameOptionsManager.Instance.CurrentGameOptions.GameMode == GameModes.Normal) Role.GetRole(killer).Kills += 1;
+
+                if (killer.Is(RoleEnum.Sheriff))
+                {
+                    var sheriff = Role.GetRole<Sheriff>(killer);
+                    if (target.Is(Faction.Impostors) ||
+                        target.Is(RoleEnum.Glitch) && CustomGameOptions.SheriffKillsGlitch ||
+                        target.Is(RoleEnum.Arsonist) && CustomGameOptions.SheriffKillsArsonist ||
+                        target.Is(RoleEnum.Plaguebearer) && CustomGameOptions.SheriffKillsPlaguebearer ||
+                        target.Is(RoleEnum.Pestilence) && CustomGameOptions.SheriffKillsPlaguebearer ||
+                        target.Is(RoleEnum.Werewolf) && CustomGameOptions.SheriffKillsWerewolf ||
+                        target.Is(RoleEnum.Juggernaut) && CustomGameOptions.SheriffKillsJuggernaut ||
+                        target.Is(RoleEnum.Executioner) && CustomGameOptions.SheriffKillsExecutioner ||
+                        target.Is(RoleEnum.Jester) && CustomGameOptions.SheriffKillsJester) sheriff.CorrectKills += 1;
+                    else if (killer == target) sheriff.IncorrectKills += 1;
+                }
+            
+            var playerName = PlayerControl.LocalPlayer.name;
+            var blank = "";                
+            if (CamouflageUnCamouflage.IsCamoed)
+                PlayerControl.LocalPlayer.nameText().text = blank;
+                if (killer.Is(RoleEnum.Veteran))
+                {
+                    var veteran = Role.GetRole<Veteran>(killer);
+                    if (target.Is(Faction.Impostors) || target.Is(Faction.Neutral)) veteran.CorrectKills += 1;
+                    else if (killer != target) veteran.IncorrectKills += 1;
+                }
 
                 target.gameObject.layer = LayerMask.NameToLayer("Ghost");
                 target.Visible = false;
@@ -311,7 +640,7 @@ namespace TownOfUs
                     target.RpcSetScanner(false);
                     var importantTextTask = new GameObject("_Player").AddComponent<ImportantTextTask>();
                     importantTextTask.transform.SetParent(AmongUsClient.Instance.transform, false);
-                    if (!PlayerControl.GameOptions.GhostsDoTasks)
+                    if (!GameOptionsManager.Instance.currentNormalGameOptions.GhostsDoTasks)
                     {
                         for (var i = 0; i < target.myTasks.Count; i++)
                         {
@@ -335,7 +664,7 @@ namespace TownOfUs
                     target.myTasks.Insert(0, importantTextTask);
                 }
 
-                if (!killer.Is(RoleEnum.Poisoner) && !killer.Is(RoleEnum.Arsonist))
+                if (!killer.Is(RoleEnum.Arsonist))
                 {
                     killer.MyPhysics.StartCoroutine(killer.KillAnimations.Random().CoPerformKill(killer, target));
                 }
@@ -352,8 +681,27 @@ namespace TownOfUs
 
                 Murder.KilledPlayers.Add(deadBody);
 
+                if (MeetingHud.Instance) target.Exiled();
+
                 if (!killer.AmOwner) return;
 
+                if (killer.Data.IsImpostor() && GameOptionsManager.Instance.CurrentGameOptions.GameMode == GameModes.HideNSeek)
+                {
+                    killer.SetKillTimer(GameOptionsManager.Instance.currentHideNSeekGameOptions.KillCooldown);
+                    return;
+                }
+
+                Murder.KilledPlayers.Add(deadBody);
+                
+                if (!killer.AmOwner) return;
+
+                if (target.Is(ModifierEnum.Diseased) && killer.Is(RoleEnum.Glitch))
+                {
+                    var glitch = Role.GetRole<Glitch>(killer);
+                    glitch.LastKill = DateTime.UtcNow.AddSeconds((CustomGameOptions.DiseasedMultiplier - 1f) * CustomGameOptions.GlitchKillCooldown);
+                    glitch.Player.SetKillTimer(CustomGameOptions.GlitchKillCooldown * CustomGameOptions.DiseasedMultiplier);
+                    return;
+                }
                 if (target.Is(ModifierEnum.Diseased) && killer.Is(RoleEnum.Werewolf))
                 {
                     var werewolf = Role.GetRole<Werewolf>(killer);
@@ -373,44 +721,43 @@ namespace TownOfUs
                 if (target.Is(ModifierEnum.Diseased) && killer.Is(RoleEnum.Juggernaut))
                 {
                     var juggernaut = Role.GetRole<Juggernaut>(killer);
-                    juggernaut.LastKill = DateTime.UtcNow.AddSeconds((CustomGameOptions.DiseasedMultiplier - 1f) * (CustomGameOptions.GlitchKillCooldown + 5.0f - 5.0f * juggernaut.JuggKills));
-                    juggernaut.Player.SetKillTimer((CustomGameOptions.GlitchKillCooldown + 5.0f - 5.0f * juggernaut.JuggKills) * CustomGameOptions.DiseasedMultiplier);
+                    juggernaut.LastKill = DateTime.UtcNow.AddSeconds((CustomGameOptions.DiseasedMultiplier - 1f) * (CustomGameOptions.JuggKCd - CustomGameOptions.ReducedKCdPerKill * juggernaut.JuggKills));
+                    juggernaut.Player.SetKillTimer((CustomGameOptions.JuggKCd - CustomGameOptions.ReducedKCdPerKill * juggernaut.JuggKills) * CustomGameOptions.DiseasedMultiplier);
                     return;
                 }
 
                 if (target.Is(ModifierEnum.Diseased) && killer.Is(ModifierEnum.Underdog))
                 {
-                    var lowerKC = (PlayerControl.GameOptions.KillCooldown - CustomGameOptions.UnderdogKillBonus) * CustomGameOptions.DiseasedMultiplier;
-                    var normalKC = PlayerControl.GameOptions.KillCooldown * CustomGameOptions.DiseasedMultiplier;
-                    var upperKC = (PlayerControl.GameOptions.KillCooldown + CustomGameOptions.UnderdogKillBonus) * CustomGameOptions.DiseasedMultiplier;
+                    var lowerKC = (GameOptionsManager.Instance.currentNormalGameOptions.KillCooldown - CustomGameOptions.UnderdogKillBonus) * CustomGameOptions.DiseasedMultiplier;
+                    var normalKC = GameOptionsManager.Instance.currentNormalGameOptions.KillCooldown * CustomGameOptions.DiseasedMultiplier;
+                    var upperKC = (GameOptionsManager.Instance.currentNormalGameOptions.KillCooldown + CustomGameOptions.UnderdogKillBonus) * CustomGameOptions.DiseasedMultiplier;
                     killer.SetKillTimer(PerformKill.LastImp() ? lowerKC : (PerformKill.IncreasedKC() ? normalKC : upperKC));
                     return;
                 }
 
                 if (target.Is(ModifierEnum.Diseased) && killer.Data.IsImpostor())
                 {
-                    killer.SetKillTimer(PlayerControl.GameOptions.KillCooldown * CustomGameOptions.DiseasedMultiplier);
+                    killer.SetKillTimer(GameOptionsManager.Instance.currentNormalGameOptions.KillCooldown * CustomGameOptions.DiseasedMultiplier);
                     return;
                 }
 
                 if (target.Is(ModifierEnum.Bait))
                 {
                     BaitReport(killer, target);
-                    return;
                 }
 
                 if (killer.Is(ModifierEnum.Underdog))
                 {
-                    var lowerKC = PlayerControl.GameOptions.KillCooldown - CustomGameOptions.UnderdogKillBonus;
-                    var normalKC = PlayerControl.GameOptions.KillCooldown;
-                    var upperKC = PlayerControl.GameOptions.KillCooldown + CustomGameOptions.UnderdogKillBonus;
+                    var lowerKC = GameOptionsManager.Instance.currentNormalGameOptions.KillCooldown - CustomGameOptions.UnderdogKillBonus;
+                    var normalKC = GameOptionsManager.Instance.currentNormalGameOptions.KillCooldown;
+                    var upperKC = GameOptionsManager.Instance.currentNormalGameOptions.KillCooldown + CustomGameOptions.UnderdogKillBonus;
                     killer.SetKillTimer(PerformKill.LastImp() ? lowerKC : (PerformKill.IncreasedKC() ? normalKC : upperKC));
                     return;
                 }
 
                 if (killer.Data.IsImpostor())
                 {
-                    killer.SetKillTimer(PlayerControl.GameOptions.KillCooldown);
+                    killer.SetKillTimer(GameOptionsManager.Instance.currentNormalGameOptions.KillCooldown);
                     return;
                 }
             }
@@ -420,7 +767,36 @@ namespace TownOfUs
         {
             Coroutines.Start(BaitReportDelay(killer, target));
         }
+    public static bool CanVent(PlayerControl player, GameData.PlayerInfo playerInfo)
+        {              
+            if (GameOptionsManager.Instance.CurrentGameOptions.GameMode == GameModes.HideNSeek)
+                return false;
 
+            if (player.inVent)
+                return true;
+
+            if (playerInfo.IsDead)
+                return false;
+
+            if (CustomGameOptions.GameMode == GameMode.Cultist && !player.Is(RoleEnum.Engineer)) return false;
+            else if (CustomGameOptions.GameMode == GameMode.Cultist && player.Is(RoleEnum.Engineer)) return true;
+
+            if (player.Is(RoleEnum.Morphling) && !CustomGameOptions.MorphlingVent
+                || player.Is(RoleEnum.Swooper) && GameOptionsManager.Instance.currentNormalGameOptions.MapId == 2 && !CustomGameOptions.SwooperPolusVent
+                || player.Is(RoleEnum.Grenadier) && !CustomGameOptions.GrenadierVent
+                || player.Is(RoleEnum.Escapist) && !CustomGameOptions.EscapistVent
+                || player.Is(RoleEnum.Bomber) && !CustomGameOptions.BomberVent)
+                return false;
+            if (player.Is(RoleEnum.Undertaker))
+                return true;
+
+            if (player.Is(RoleEnum.Engineer) ||
+                (player.Is(RoleEnum.Glitch) && CustomGameOptions.GlitchVent) || (player.Is(RoleEnum.Plaguebearer) && CustomGameOptions.PlaguebearerVent) ||  (player.Is(RoleEnum.Arsonist) && CustomGameOptions.ArsoVent)||(player.Is(RoleEnum.Juggernaut) && CustomGameOptions.JuggVent) ||(player.Is(RoleEnum.Werewolf) && CustomGameOptions.WerewolfVent)||
+                (player.Is(RoleEnum.Survivor) && CustomGameOptions.SurvVent) || CustomGameOptions.EveryoneVent||
+                (player.Is(RoleEnum.Pestilence) && CustomGameOptions.PestVent) || (player.Is(RoleEnum.Jester) && CustomGameOptions.JesterVent))
+                return true;
+            return false;
+        }
         public static IEnumerator BaitReportDelay(PlayerControl killer, PlayerControl target)
         {
             var extraDelay = Random.RandomRangeInt(0, (int) (100 * (CustomGameOptions.BaitMaxDelay - CustomGameOptions.BaitMinDelay) + 1));
@@ -441,7 +817,6 @@ namespace TownOfUs
                     {
                     }
                 }
-                
             }
             else
             {
@@ -463,9 +838,106 @@ namespace TownOfUs
                     {
                     }
                 }
-                
+            }
+        }
+
+        public static void Convert(PlayerControl player)
+        {
+            if (PlayerControl.LocalPlayer == player) Coroutines.Start(FlashCoroutine(Patches.Colors.Impostor));
+            if (PlayerControl.LocalPlayer != player && PlayerControl.LocalPlayer.Is(RoleEnum.CultistMystic)
+                && !PlayerControl.LocalPlayer.Data.IsDead) Coroutines.Start(FlashCoroutine(Patches.Colors.Impostor));
+
+            if (PlayerControl.LocalPlayer.Is(RoleEnum.Transporter) && PlayerControl.LocalPlayer == player)
+            {
+                var transporterRole = Role.GetRole<Transporter>(PlayerControl.LocalPlayer);
+                Object.Destroy(transporterRole.UsesText);
+                if (transporterRole.TransportList != null)
+                {
+                    transporterRole.TransportList.Toggle();
+                    transporterRole.TransportList.SetVisible(false);
+                    transporterRole.TransportList = null;
+                    transporterRole.PressedButton = false;
+                    transporterRole.TransportPlayer1 = null;
+                }
             }
 
+            if (player.Is(RoleEnum.Chameleon))
+            {
+                var chameleonRole = Role.GetRole<Chameleon>(player);
+                if (chameleonRole.IsSwooped) chameleonRole.UnSwoop();
+                Role.RoleDictionary.Remove(player.PlayerId);
+                var Swooper = new Swooper(player);
+                Swooper.LastSwooped = DateTime.UtcNow;
+                Swooper.RegenTask();
+            }
+
+            if (player.Is(RoleEnum.Engineer))
+            {
+                var engineer = Role.GetRole<Engineer>(player);
+                engineer.Name = "Demolitionist";
+                engineer.Color = Patches.Colors.Engineer;
+                engineer.Faction = Faction.Impostors;
+                engineer.RegenTask();
+            }
+
+
+            if (player.Is(RoleEnum.CultistMystic))
+            {
+                var mystic = Role.GetRole<CultistMystic>(player);
+                mystic.Name = "Clairvoyant";
+                mystic.Color = Patches.Colors.Mystic;
+                mystic.Faction = Faction.Impostors;
+                mystic.RegenTask();
+            }
+
+
+            if (player.Is(RoleEnum.Transporter))
+            {
+                Role.RoleDictionary.Remove(player.PlayerId);
+                var escapist = new Escapist(player);
+                escapist.LastEscape = DateTime.UtcNow;
+                escapist.RegenTask();
+            }
+
+            if (player.Is(RoleEnum.Gambler))
+            {
+                var vigi = Role.GetRole<Gambler>(player);
+                vigi.Name = "Assassin";
+                vigi.TaskText = () => "Guess and Shoot";
+                vigi.Color = Patches.Colors.Gambler;
+                vigi.Faction = Faction.Impostors;
+                vigi.RegenTask();
+                var colorMapping = new Dictionary<string, Color>();
+                if (CustomGameOptions.MayorCultistOn > 0) colorMapping.Add("Mayor", Colors.Mayor);
+                if (CustomGameOptions.SnitchCultistOn > 0) colorMapping.Add("Snitch", Colors.Snitch);
+                if (CustomGameOptions.SheriffCultistOn > 0) colorMapping.Add("Sheriff", Colors.Sheriff);
+                if (CustomGameOptions.SurvivorCultistOn > 0) colorMapping.Add("Survivor", Colors.Survivor);
+                if (CustomGameOptions.MaxChameleons > 0) colorMapping.Add("Chameleon", Colors.Chameleon);
+                if (CustomGameOptions.MaxEngineers > 0) colorMapping.Add("Engineer", Colors.Engineer);
+                if (CustomGameOptions.MaxMystics > 0) colorMapping.Add("Mystic", Colors.Mystic);
+                if (CustomGameOptions.MaxTransporters > 0) colorMapping.Add("Transporter", Colors.Transporter);
+                if (CustomGameOptions.MaxGamblers > 1) colorMapping.Add("Gambler", Colors.Gambler);
+                colorMapping.Add("Crewmate", Colors.Crewmate);
+                vigi.SortedColorMapping = colorMapping.OrderBy(x => x.Key).ToDictionary(x => x.Key, x => x.Value);
+            }
+
+            if (player.Is(RoleEnum.Crewmate))
+            {
+                Role.RoleDictionary.Remove(player.PlayerId);
+                new Impostor(player);
+            }
+
+            player.Data.Role.TeamType = RoleTeamTypes.Impostor;
+            RoleManager.Instance.SetRole(player, RoleTypes.Impostor);
+            player.SetKillTimer(GameOptionsManager.Instance.currentNormalGameOptions.KillCooldown);
+
+            foreach (var player2 in PlayerControl.AllPlayerControls)
+            {
+                if (player2.Data.IsImpostor() && PlayerControl.LocalPlayer.Data.IsImpostor())
+                {
+                    player2.nameText().color = Patches.Colors.Impostor;
+                }
+            }
         }
 
         public static IEnumerator FlashCoroutine(Color color, float waitfor = 1f, float alpha = 0.3f)
@@ -507,10 +979,12 @@ namespace TownOfUs
                 Object.Destroy(item.gameObject);
             }
         }
+        public static PlayerControl PlayerByVoteArea(PlayerVoteArea state) => PlayerById(state.TargetPlayerId);        
+public static bool IsImpostor(this PlayerVoteArea playerinfo) => PlayerByVoteArea(playerinfo).Data?.Role?.TeamType == RoleTeamTypes.Impostor;        
 
         public static void EndGame(GameOverReason reason = GameOverReason.ImpostorByVote, bool showAds = false)
         {
-            ShipStatus.RpcEndGame(reason, showAds);
+            GameManager.Instance.RpcEndGame(reason, showAds);
         }
 
         [HarmonyPatch(typeof(MedScanMinigame), nameof(MedScanMinigame.FixedUpdate))]
@@ -562,19 +1036,18 @@ namespace TownOfUs
             {
                 role.LastMediated = DateTime.UtcNow;
             }
-            foreach (Seer role in Role.GetRoles(RoleEnum.Seer))
+            foreach (Snitch role in Role.GetRoles(RoleEnum.Snitch))
+            {
+                role.LastInvestigated = DateTime.UtcNow;
+            }
+            foreach (CultistSnitch role in Role.GetRoles(RoleEnum.CultistSnitch))
             {
                 role.LastInvestigated = DateTime.UtcNow;
             }
             foreach (Sheriff role in Role.GetRoles(RoleEnum.Sheriff))
             {
                 role.LastKilled = DateTime.UtcNow;
-            }
-            foreach (TimeLord role in Role.GetRoles(RoleEnum.TimeLord))
-            {
-                role.StartRewind = DateTime.UtcNow.AddSeconds(-10.0f);
-                role.FinishRewind = DateTime.UtcNow;
-            }
+            }       
             foreach (Tracker role in Role.GetRoles(RoleEnum.Tracker))
             {
                 role.LastTracked = DateTime.UtcNow;
@@ -595,6 +1068,14 @@ namespace TownOfUs
             {
                 role.LastExamined = DateTime.UtcNow;
             }
+            foreach (Chameleon role in Role.GetRoles(RoleEnum.Chameleon))
+            {
+                role.LastSwooped = DateTime.UtcNow;
+            }
+            foreach (Camouflager role in Role.GetRoles(RoleEnum.Camouflager))
+            {
+                role.LastSwooped = DateTime.UtcNow;
+            }            
             #endregion
             #region NeutralRoles
             foreach (Survivor role in Role.GetRoles(RoleEnum.Survivor))
@@ -638,9 +1119,9 @@ namespace TownOfUs
             {
                 role.LastEscape = DateTime.UtcNow;
             }
-            foreach (Blackmailer role in Role.GetRoles(RoleEnum.Blackmailer))
+            foreach (Silencer role in Role.GetRoles(RoleEnum.Silencer))
             {
-                role.LastBlackmailed = DateTime.UtcNow;
+                role.LastSilenced = DateTime.UtcNow;
             }
             foreach (Grenadier role in Role.GetRoles(RoleEnum.Grenadier))
             {
@@ -654,17 +1135,21 @@ namespace TownOfUs
             {
                 role.LastMorphed = DateTime.UtcNow;
             }
-            foreach (Poisoner role in Role.GetRoles(RoleEnum.Poisoner))
-            {
-                role.LastPoisoned = DateTime.UtcNow;
-            }
             foreach (Swooper role in Role.GetRoles(RoleEnum.Swooper))
             {
                 role.LastSwooped = DateTime.UtcNow;
-            }
+            }     
             foreach (Undertaker role in Role.GetRoles(RoleEnum.Undertaker))
             {
                 role.LastDragged = DateTime.UtcNow;
+            }
+            foreach (Necromancer role in Role.GetRoles(RoleEnum.Necromancer))
+            {
+                role.LastRevived = DateTime.UtcNow;
+            }
+            foreach (Whisperer role in Role.GetRoles(RoleEnum.Whisperer))
+            {
+                role.LastWhispered = DateTime.UtcNow;
             }
             #endregion
         }

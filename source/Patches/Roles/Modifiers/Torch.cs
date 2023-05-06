@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace TownOfUs.Roles.Modifiers
+namespace TownOfRoles.Roles.Modifiers
 {
     public class Torch : Modifier
     {
@@ -8,7 +8,7 @@ namespace TownOfUs.Roles.Modifiers
         {
             Name = "Torch";
             TaskText = () => "You can see in the dark";
-            Color = Patches.Colors.Torch;
+            Color = Patches.Colors.Modifiers;
             ModifierType = ModifierEnum.Torch;
         }
     }

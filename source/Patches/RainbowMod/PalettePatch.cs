@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace TownOfUs.RainbowMod
+namespace TownOfRoles.RainbowMod
 {
     public static class PalettePatch
     {
@@ -26,43 +26,37 @@ namespace TownOfUs.RainbowMod
                 StringNames.ColorGray,
                 StringNames.ColorTan,
                 StringNames.ColorCoral,
-                // Town Of Us Colors 
-                (StringNames)999990,//"Watermelon",
-                (StringNames)999991,//"Chocolate",
-                (StringNames)999992,//"Sky Blue",
-                (StringNames)999993,//"Beige",
-                (StringNames)999994,//"Hot Pink",
-                (StringNames)999995,//"Turquoise",
-                (StringNames)999996,//"Lilac",
-                (StringNames)999997,//"Olive",
-                (StringNames)999998,//"Azure",
+                // New colours
+                (StringNames)999983,//"Watermelon",
+                (StringNames)999984,//"Chocolate",
+                (StringNames)999985,//"Sky Blue",
+                (StringNames)999986,//"Beige",
+                (StringNames)999987,//"Magenta",
+                (StringNames)999988,//"Turquoise",
+                (StringNames)999989,//"Lilac",
+                (StringNames)999990,//"Olive",
+                (StringNames)999991,//"Azure",
+                (StringNames)999992,//"Plum",
+                (StringNames)999993,//"Jungle",
+                (StringNames)999994,//"Mint",
+                (StringNames)999995,//"Chartreuse",
+                (StringNames)999996,//"Macau",
+                (StringNames)999997,//"Gold",
+                (StringNames)999998,//"Tawny",
                 (StringNames)999999,//"Rainbow",
-                //Town Of Roles Colors
-                (StringNames)999910,//"Ice",
-                (StringNames)999911,//"Wine",
-                (StringNames)999912,//"BlueBerry",
-                (StringNames)999913,//"Mint",
-                (StringNames)999914,//"Light Purple",
-                (StringNames)999915,//"Peach",
-                (StringNames)999916,//"Sushi",
-                (StringNames)999917,//"Sylveon"
-                (StringNames)999918,//"Discussions",
-                (StringNames)999919,//"Petrol",
-                (StringNames)999920,//"Hannah",
-                (StringNames)999921,//"Stormy Blue",
-                (StringNames)999922,//"VantaBlack",
-                (StringNames)999923,//"Ambar",
-                (StringNames)999924,//"Light Grape",
-                (StringNames)999925,//"(M)aize Red",
-                (StringNames)999926,//"Sloth",
-                (StringNames)999927,//"AD",
-                (StringNames)999928,//"Lotty",
-                (StringNames)999929,//"Mom",    
-                (StringNames)999930,//"Kara",   
-                (StringNames)999931,//"EurMom",   
-                (StringNames)999932,//"Donald",
-                (StringNames)999933,//"Sen",
-                (StringNames)999934,//"Fizz",
+                //TOR Colors
+                (StringNames)000001,//"Sloth",              
+                (StringNames)000002,//"Northie :)",   
+                (StringNames)000003,//"Darkness",     
+                (StringNames)000004,//"Juggernaut", 
+                (StringNames)000005,//"RaLu",     
+                (StringNames)000006,//"Diddly",      
+                (StringNames)000007,//"Hannah",   
+                (StringNames)000008,//"RufusZeno",           
+                (StringNames)000009,//"Veteran",             
+                (StringNames)000010,//"Lotty",  
+                (StringNames)000011,//"Snax", 
+                (StringNames)000012,//"GGamer",                                                                                                                                             
             };
             Palette.PlayerColors = new[]
             {
@@ -84,43 +78,37 @@ namespace TownOfUs.RainbowMod
                 Palette.FromHex(7701907),
                 Palette.FromHex(9537655),
                 Palette.FromHex(14115940),
-                // Town Of Us Colors 
+                // New colours
                 new Color32(168, 50, 62, byte.MaxValue),
                 new Color32(60, 48, 44, byte.MaxValue),
                 new Color32(61, 129, 255, byte.MaxValue),
                 new Color32(240, 211, 165, byte.MaxValue),
-                new Color32(236, 61, 255, byte.MaxValue),
+                new Color32(255, 0, 127, byte.MaxValue),
                 new Color32(61, 255, 181, byte.MaxValue),
                 new Color32(186, 161, 255, byte.MaxValue),
                 new Color32(97, 114, 24, byte.MaxValue),
                 new Color32(1, 166, 255, byte.MaxValue),
+                new Color32(79, 0, 127, byte.MaxValue),
+                new Color32(0, 47, 0, byte.MaxValue),
+                new Color32(151, 255, 151, byte.MaxValue),
+                new Color32(207, 255, 0, byte.MaxValue),
+                new Color32(0, 97, 93, byte.MaxValue),
+                new Color32(205, 63, 0, byte.MaxValue),
+                new Color32(255, 207, 0, byte.MaxValue),
                 new Color32(0, 0, 0, byte.MaxValue),
-                //New Colors Of Town Of Roles
-                new Color32(0xA8, 0xDF, 0xFF, byte.MaxValue),//ice
-                new Color32(109, 7, 26, byte.MaxValue), //Wine
-                new Color32(0x59, 0x3C, 0xD6, byte.MaxValue), //BlueBerry
-                new Color32(111, 192, 156, byte.MaxValue),//Mint
-                new Color32(173, 126, 201, byte.MaxValue), //Light Purple
-                new Color32(255, 164, 119, byte.MaxValue),// peach
-                new Color32(160, 101, 56, byte.MaxValue),//Sushi
-                new Color32(238, 154, 172, byte.MaxValue),//Sylveon
-                new Color32(115, 250, 115, byte.MaxValue),//Discussions
-                new Color32(17, 74, 67, byte.MaxValue),//Petrol   
-                new Color32(255, 0, 102, byte.MaxValue),//Hannah     
-                new Color32(39, 53, 74, byte.MaxValue),//Stormy Blue        
-                new Color32(0, 0, 0, byte.MaxValue),//VantaBlack      
-                new Color32(255, 191, 0, byte.MaxValue),//Ambar
-                new Color32(93, 86, 199, byte.MaxValue),//Light Grape
-                new Color32(201, 169, 166, byte.MaxValue),//(M)aize Red
-                new Color32(120, 82, 169, byte.MaxValue),//Sloth   
-                new Color32(69, 69, 169, byte.MaxValue),//AD  
-                new Color32(105, 151, 89, byte.MaxValue),//Lotty    
-                new Color32(166, 196, 67, byte.MaxValue),//Mom    
-                new Color32(146, 0, 0, byte.MaxValue),//Kara
-                new Color32(102, 0, 0, byte.MaxValue),//EurMom
-                new Color32(193, 20, 26, byte.MaxValue),//Donald
-                new Color32(170, 32, 30, byte.MaxValue),//Sen    
-                new Color32(178, 38, 180, byte.MaxValue),//Fizz            
+                //TOR Colors
+                new Color32(120, 82, 169, byte.MaxValue),      
+                new Color32(50, 125, 105, byte.MaxValue),    
+                new Color32(40, 4, 66, byte.MaxValue),              
+                new Color32(133, 30, 82, byte.MaxValue),         
+                new Color32(235, 192, 192, byte.MaxValue),      
+                new Color32(119, 40, 247, byte.MaxValue),       
+                new Color32(255, 0, 62, byte.MaxValue),     
+                new Color32(123, 92, 0, byte.MaxValue),             
+                new Color32(153, 128, 64, byte.MaxValue),          
+                new Color32(63, 77, 60, byte.MaxValue),  
+                new Color32(221, 87, 28, byte.MaxValue),        
+                new Color32(0, 49, 83, byte.MaxValue),                                                                                                                              
             };
             Palette.ShadowColors = new[]
             {
@@ -142,43 +130,37 @@ namespace TownOfUs.RainbowMod
                 Palette.FromHex(4609636),
                 Palette.FromHex(5325118),
                 Palette.FromHex(11813730),
-                // Modded Shadow Colors 
+                // New colours
                 new Color32(101, 30, 37, byte.MaxValue),
                 new Color32(30, 24, 22, byte.MaxValue),
                 new Color32(31, 65, 128, byte.MaxValue),
                 new Color32(120, 106, 83, byte.MaxValue),
-                new Color32(118, 31, 128, byte.MaxValue),
+                new Color32(191, 0, 95, byte.MaxValue),
                 new Color32(31, 128, 91, byte.MaxValue),
                 new Color32(93, 81, 128, byte.MaxValue),
                 new Color32(66, 91, 15, byte.MaxValue),
                 new Color32(17, 104, 151, byte.MaxValue),
+                new Color32(55, 0, 95, byte.MaxValue),
+                new Color32(0, 23, 0, byte.MaxValue),
+                new Color32(109, 191, 109, byte.MaxValue),
+                new Color32(143, 191, 61, byte.MaxValue),
+                new Color32(0, 65, 61, byte.MaxValue),
+                new Color32(141, 31, 0, byte.MaxValue),
+                new Color32(191, 143, 0, byte.MaxValue),
                 new Color32(0, 0, 0, byte.MaxValue),
-                //new Color Shadows Of Town Of Roles
-                new Color32(0x59, 0x9F, 0xC8, byte.MaxValue),//ice
-                new Color32(54, 2, 11, byte.MaxValue),//wine
-                new Color32(0x29, 0x17, 0x96, byte.MaxValue),//blueberry
-                new Color32(65, 148, 111, byte.MaxValue),//Mint
-                new Color32(131, 58, 203, byte.MaxValue),//Light Purple
-                new Color32(238, 128, 100, byte.MaxValue),//Peach
-                new Color32(115, 15, 78, byte.MaxValue),//Sushi
-                new Color32(191, 122, 137, byte.MaxValue),//Sylveon 
-                new Color32(94, 204, 94, byte.MaxValue),//Discussions
-                new Color32(11, 46, 42, byte.MaxValue),//Petrol     
-                new Color32(153, 2, 62, byte.MaxValue),//Hannah       
-                new Color32(23, 31, 43, byte.MaxValue),//Stormy Blue   
-                new Color32(0, 0, 0, byte.MaxValue),//VantaBlack     
-                new Color32(196, 147, 0, byte.MaxValue),//Ambar     
-                new Color32(64, 59, 138, byte.MaxValue),//Light Grape   
-                new Color32(143, 119, 117, byte.MaxValue),//(M)aize Red   
-                new Color32(94, 64, 133, byte.MaxValue),//Sloth                                                                                       
-                new Color32(48, 48, 117, byte.MaxValue),//AD    
-                new Color32(77, 110, 66, byte.MaxValue),//Lotty      
-                new Color32(132, 156, 53, byte.MaxValue),//Mom   
-                new Color32(102, 0, 0, byte.MaxValue),//Kara   
-                new Color32(74, 1, 1, byte.MaxValue),//EurMom    
-                new Color32(156, 16, 20, byte.MaxValue),//Donald   
-                new Color32(122, 22, 21, byte.MaxValue),//Sen      
-                new Color32(134, 28, 135, byte.MaxValue),//Fizz                                                                                                      
+                //TROS Colors
+                new Color32(93, 64, 130, byte.MaxValue),      
+                new Color32(37, 94, 79, byte.MaxValue),     
+                new Color32(26, 3, 43, byte.MaxValue),                
+                new Color32(99, 22, 61, byte.MaxValue),            
+                new Color32(186, 149, 149, byte.MaxValue),   
+                new Color32(96, 32, 199, byte.MaxValue),    
+                new Color32(184, 0, 45, byte.MaxValue),             
+                new Color32(92, 69, 1, byte.MaxValue),  
+                new Color32(117, 98, 48, byte.MaxValue), 
+                new Color32(46, 56, 44, byte.MaxValue),     
+                new Color32(186, 71, 20, byte.MaxValue),   
+                new Color32(1, 38, 64, byte.MaxValue),                                                                                                                                                  
             };
         }
     }

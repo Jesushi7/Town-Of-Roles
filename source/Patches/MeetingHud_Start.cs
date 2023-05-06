@@ -3,7 +3,7 @@ using Object = UnityEngine.Object;
 using Hazel;
 using Reactor.Utilities.Extensions;
 
-namespace TownOfUs
+namespace TownOfRoles
 {
     [HarmonyPatch(typeof(MeetingHud), nameof(MeetingHud.Start))]
     public class MeetingHud_Start

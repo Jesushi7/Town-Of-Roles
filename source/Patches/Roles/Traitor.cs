@@ -1,6 +1,4 @@
-using System.Linq;
-
-namespace TownOfUs.Roles
+namespace TownOfRoles.Roles
 {
     public class Traitor : Role
     {
@@ -8,7 +6,7 @@ namespace TownOfUs.Roles
         public Traitor(PlayerControl player) : base(player)
         {
             Name = "Traitor";
-            ImpostorText = () => "";
+            StartText = () => "";
             TaskText = () => "Betray the Crewmates!";
             Color = Patches.Colors.Impostor;
             RoleType = RoleEnum.Traitor;

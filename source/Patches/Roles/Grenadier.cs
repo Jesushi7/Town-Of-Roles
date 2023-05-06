@@ -1,9 +1,9 @@
 using System;
 using UnityEngine;
 using System.Linq;
-using TownOfUs.Extensions;
+using TownOfRoles.Extensions;
 
-namespace TownOfUs.Roles
+namespace TownOfRoles.Roles
 {
     public class Grenadier : Role
     {
@@ -21,10 +21,13 @@ namespace TownOfUs.Roles
         public Grenadier(PlayerControl player) : base(player)
         {
             Name = "Grenadier";
-            ImpostorText = () => "Hinder The Crewmates' Vision";
-            TaskText = () => "Blind the crewmates";
-            Color = Patches.Colors.Impostor;
+            StartText = () => "<color=#cfc4ba>Hinder The Crewmates' Vision</color>";
+            TaskText = () => "Blind the crewmates to get sneaky kills";
+            Color = Patches.Colors.Grenadier;
             LastFlashed = DateTime.UtcNow;
+            FactionName = "<color=#cfc4ba>Impostor</color>";   
+                 
+            Faction = Faction.Impostors;              
             RoleType = RoleEnum.Grenadier;
             AddToRoleHistory(RoleType);
             Faction = Faction.Impostors;
@@ -58,7 +61,7 @@ namespace TownOfUs.Roles
         {
             if (Enabled != true)
             {
-                closestPlayers = FindClosestPlayers(Player);
+                closestPlayers = Utils.GetClosestPlayers(Player.GetTruePosition(), CustomGameOptions.FlashRadius, true);
                 flashedPlayers = closestPlayers;
             }
             Enabled = true;
@@ -185,29 +188,6 @@ namespace TownOfUs.Roles
             ((Renderer)DestroyableSingleton<HudManager>.Instance.FullScreen).enabled = true;
             DestroyableSingleton<HudManager>.Instance.FullScreen.color = normalVision;
             flashedPlayers.Clear();
-        }
-
-        public static Il2CppSystem.Collections.Generic.List<PlayerControl> FindClosestPlayers(PlayerControl player)
-        {
-            Il2CppSystem.Collections.Generic.List<PlayerControl> playerControlList = new Il2CppSystem.Collections.Generic.List<PlayerControl>();
-            float flashRadius = CustomGameOptions.FlashRadius * 5;
-            Vector2 truePosition = player.GetTruePosition();
-            Il2CppSystem.Collections.Generic.List<GameData.PlayerInfo> allPlayers = GameData.Instance.AllPlayers;
-            for (int index = 0; index < allPlayers.Count; ++index)
-            {
-                GameData.PlayerInfo playerInfo = allPlayers[index];
-                if (!playerInfo.Disconnected)
-                {
-                    Vector2 vector2 = new Vector2(playerInfo.Object.GetTruePosition().x - truePosition.x, playerInfo.Object.GetTruePosition().y - truePosition.y);
-                    float magnitude = ((Vector2) vector2).magnitude;
-                    if (magnitude <= flashRadius)
-                    {
-                        PlayerControl playerControl = playerInfo.Object;
-                        playerControlList.Add(playerControl);
-                    }
-                }
-            }
-            return playerControlList;
         }
     }
 }

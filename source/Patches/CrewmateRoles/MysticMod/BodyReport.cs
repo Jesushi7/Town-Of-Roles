@@ -1,9 +1,9 @@
 using System;
 using System.Linq;
 using HarmonyLib;
-using TownOfUs.CrewmateRoles.MedicMod;
+using TownOfRoles.CrewmateRoles.MedicMod;
 
-namespace TownOfUs.CrewmateRoles.DetectiveMod
+namespace TownOfRoles.CrewmateRoles.MysticMod
 {
     [HarmonyPatch(typeof(PlayerControl), nameof(PlayerControl.CmdReportDeadBody))]
     internal class BodyReportPatch
@@ -20,14 +20,14 @@ namespace TownOfUs.CrewmateRoles.DetectiveMod
             if (killer == null)
                 return;
 
-            var isDetectiveAlive = __instance.Is(RoleEnum.Detective);
+            var isMysticAlive = __instance.Is(RoleEnum.Mystic);
             var areReportsEnabled = CustomGameOptions.MysticReportOn;
 
-            if (!isDetectiveAlive || !areReportsEnabled)
+            if (!isMysticAlive || !areReportsEnabled)
                 return;
 
-            var isUserDetective = PlayerControl.LocalPlayer.Is(RoleEnum.Detective);
-            if (!isUserDetective)
+            var isUserMystic = PlayerControl.LocalPlayer.Is(RoleEnum.Mystic);
+            if (!isUserMystic)
                 return;
             var br = new BodyReport
             {

@@ -1,9 +1,9 @@
 using HarmonyLib;
-using TownOfUs.Extensions;
-using TownOfUs.Roles;
+using TownOfRoles.Extensions;
+using TownOfRoles.Roles;
 using UnityEngine;
 
-namespace TownOfUs.NeutralRoles.PhantomMod
+namespace TownOfRoles.NeutralRoles.PhantomMod
 {
     [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]
     [HarmonyPriority(Priority.Last)]

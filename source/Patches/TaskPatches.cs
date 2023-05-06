@@ -1,8 +1,7 @@
 using HarmonyLib;
-using TownOfUs.Extensions;
-using UnityEngine;
+using TownOfRoles.Extensions;
 
-namespace TownOfUs
+namespace TownOfRoles
 {
     internal static class TaskPatches
     {
@@ -17,15 +16,15 @@ namespace TownOfUs
                 {
                     var playerInfo = __instance.AllPlayers.ToArray()[i];
                     if (!playerInfo.Disconnected && playerInfo.Tasks != null && playerInfo.Object &&
-                        (PlayerControl.GameOptions.GhostsDoTasks || !playerInfo.IsDead) && !playerInfo.IsImpostor() &&
+                        (GameOptionsManager.Instance.currentNormalGameOptions.GhostsDoTasks || !playerInfo.IsDead) && !playerInfo.IsImpostor() &&
                         !(
                             playerInfo._object.Is(RoleEnum.Jester) || playerInfo._object.Is(RoleEnum.Amnesiac) ||
-                             playerInfo._object.Is(RoleEnum.Vulture) || playerInfo._object.Is(RoleEnum.Survivor) || playerInfo._object.Is(RoleEnum.GuardianAngel) ||
+                            playerInfo._object.Is(RoleEnum.Survivor) || playerInfo._object.Is(RoleEnum.GuardianAngel) ||
                             playerInfo._object.Is(RoleEnum.Glitch) || playerInfo._object.Is(RoleEnum.Executioner) ||
                             playerInfo._object.Is(RoleEnum.Arsonist) || playerInfo._object.Is(RoleEnum.Juggernaut) ||
                             playerInfo._object.Is(RoleEnum.Plaguebearer) || playerInfo._object.Is(RoleEnum.Pestilence) ||
                             playerInfo._object.Is(RoleEnum.Werewolf) ||
-                            playerInfo._object.Is(RoleEnum.Phantom) || playerInfo._object.Is(RoleEnum.Haunter)
+                            playerInfo._object.Is(RoleEnum.Phantom) || playerInfo._object.Is(RoleEnum.Avenger)
                         ))
                         for (var j = 0; j < playerInfo.Tasks.Count; j++)
                         {
@@ -52,8 +51,8 @@ namespace TownOfUs
                            || playerControl.Is(RoleEnum.Arsonist)
                            || playerControl.Is(RoleEnum.Plaguebearer)
                            || playerControl.Is(RoleEnum.Pestilence)
-                           || playerControl.Is(RoleEnum.Werewolf)
-                           || playerControl.Is(RoleEnum.Vulture);
+                           || playerControl.Is(RoleEnum.Werewolf);
+
                 // If the console is not a sabotage repair console
                 if (flag && !__instance.AllowImpostor)
                 {

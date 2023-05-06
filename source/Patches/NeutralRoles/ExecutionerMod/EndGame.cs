@@ -1,13 +1,13 @@
 using HarmonyLib;
 using Hazel;
-using TownOfUs.Roles;
+using TownOfRoles.Roles;
 
-namespace TownOfUs.NeutralRoles.ExecutionerMod
+namespace TownOfRoles.NeutralRoles.ExecutionerMod
 {
-    [HarmonyPatch(typeof(ShipStatus), nameof(ShipStatus.RpcEndGame))]
+    [HarmonyPatch(typeof(GameManager), nameof(GameManager.RpcEndGame))]
     public class EndGame
     {
-        public static bool Prefix(ShipStatus __instance, [HarmonyArgument(0)] GameOverReason reason)
+        public static bool Prefix(GameManager __instance, [HarmonyArgument(0)] GameOverReason reason)
         {
             if (reason != GameOverReason.HumansByVote && reason != GameOverReason.HumansByTask) return true;
 

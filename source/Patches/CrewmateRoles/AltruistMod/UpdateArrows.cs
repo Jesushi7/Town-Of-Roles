@@ -1,8 +1,8 @@
 using HarmonyLib;
 using Reactor.Utilities.Extensions;
-using TownOfUs.Extensions;
+using TownOfRoles.Extensions;
 
-namespace TownOfUs.CrewmateRoles.AltruistMod
+namespace TownOfRoles.CrewmateRoles.AltruistMod
 {
     [HarmonyPatch(typeof(PlayerControl), nameof(PlayerControl.FixedUpdate))]
     public class UpdateArrows

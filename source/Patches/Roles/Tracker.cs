@@ -4,7 +4,7 @@ using System.Linq;
 using Object = UnityEngine.Object;
 using TMPro;
 
-namespace TownOfUs.Roles
+namespace TownOfRoles.Roles
 {
     public class Tracker : Role
     {
@@ -20,10 +20,12 @@ namespace TownOfUs.Roles
         public Tracker(PlayerControl player) : base(player)
         {
             Name = "Tracker";
-            ImpostorText = () => "Track Everyone's Movement";
+            StartText = () => "<color=#009900FF>Track Everyone's Movement</color>";
             TaskText = () => "Track suspicious players";
             Color = Patches.Colors.Tracker;
             LastTracked = DateTime.UtcNow;
+            FactionName = "<color=#009900FF>Crewmate</color>";    
+            Faction = Faction.Crewmates;               
             RoleType = RoleEnum.Tracker;
             AddToRoleHistory(RoleType);
 

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace TownOfUs
+namespace TownOfRoles
 {
     public class VisualAppearance
     {

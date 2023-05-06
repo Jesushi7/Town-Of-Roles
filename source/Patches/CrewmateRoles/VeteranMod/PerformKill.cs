@@ -1,8 +1,8 @@
 using HarmonyLib;
 using Hazel;
-using TownOfUs.Roles;
+using TownOfRoles.Roles;
 
-namespace TownOfUs.CrewmateRoles.VeteranMod
+namespace TownOfRoles.CrewmateRoles.VeteranMod
 {
     [HarmonyPatch(typeof(KillButton), nameof(KillButton.DoClick))]
     public class Alert

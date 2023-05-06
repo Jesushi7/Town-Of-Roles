@@ -10,7 +10,7 @@ using Il2CppInterop.Runtime.InteropTypes.Arrays;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace TownOfUs.CustomOption
+namespace TownOfRoles.CustomOption
 {
     public class Export : CustomButtonOption
     {
@@ -30,9 +30,6 @@ namespace TownOfUs.CustomOption
             var options = new List<OptionBehaviour>();
 
             var togglePrefab = Object.FindObjectOfType<ToggleOption>();
-            var numberPrefab = Object.FindObjectOfType<NumberOption>();
-            var stringPrefab = Object.FindObjectOfType<StringOption>();
-
 
             foreach (var button in SlotButtons)
                 if (button.Setting != null)

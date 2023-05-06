@@ -1,7 +1,7 @@
 using HarmonyLib;
 using UnityEngine;
 
-namespace TownOfUs
+namespace TownOfRoles
 {
     public static class NameplatePatch
     {

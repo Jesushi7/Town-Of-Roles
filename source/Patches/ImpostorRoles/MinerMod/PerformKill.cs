@@ -2,13 +2,13 @@ using System;
 using System.Linq;
 using HarmonyLib;
 using Hazel;
-using TownOfUs.Patches;
-using TownOfUs.Roles;
+using TownOfRoles.Patches;
+using TownOfRoles.Roles;
 using UnityEngine;
 using Object = UnityEngine.Object;
 using Reactor.Networking.Extensions;
 
-namespace TownOfUs.ImpostorRoles.MinerMod
+namespace TownOfRoles.ImpostorRoles.MinerMod
 {
     [HarmonyPatch(typeof(KillButton), nameof(KillButton.DoClick))]
     public class PerformKill
@@ -34,19 +34,17 @@ namespace TownOfUs.ImpostorRoles.MinerMod
                 writer.Write(id);
                 writer.Write(PlayerControl.LocalPlayer.PlayerId);
                 writer.Write(position);
-                writer.Write(0.01f);
+                writer.Write(position.z + 0.001f);
                 AmongUsClient.Instance.FinishRpcImmediately(writer);
-                SpawnVent(id, role, position, 0.01f);
+                SpawnVent(id, role, position, position.z + 0.001f);
                 return false;
             }
 
             return true;
         }
 
-
         public static void SpawnVent(int ventId, Miner role, Vector2 position, float zAxis)
         {
-            
             var ventPrefab = Object.FindObjectOfType<Vent>();
             var vent = Object.Instantiate(ventPrefab, ventPrefab.transform.parent);
             

@@ -1,10 +1,10 @@
 using System.Linq;
 using HarmonyLib;
-using TownOfUs.Extensions;
-using TownOfUs.Roles;
+using TownOfRoles.Extensions;
+using TownOfRoles.Roles;
 using UnityEngine;
 
-namespace TownOfUs.NeutralRoles.ExecutionerMod
+namespace TownOfRoles.NeutralRoles.ExecutionerMod
 {
     [HarmonyPatch(typeof(EndGameManager), nameof(EndGameManager.Start))]
     public static class Outro
@@ -18,7 +18,7 @@ namespace TownOfUs.NeutralRoles.ExecutionerMod
             array[0].NameText().text = role.ColorString + array[0].NameText().text + "</color>";
             __instance.BackgroundBar.material.color = role.Color;
             var text = Object.Instantiate(__instance.WinText);
-            text.text = "Executioner's target was voted";
+            text.text = "Executioner Wins!";
             text.color = role.Color;
             var pos = __instance.WinText.transform.localPosition;
             pos.y = 1.5f;

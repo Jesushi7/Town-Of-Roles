@@ -1,10 +1,10 @@
 using System.Linq;
 using HarmonyLib;
-using TownOfUs.Extensions;
-using TownOfUs.Roles;
+using TownOfRoles.Extensions;
+using TownOfRoles.Roles;
 using UnityEngine;
 
-namespace TownOfUs.NeutralRoles.JesterMod
+namespace TownOfRoles.NeutralRoles.JesterMod
 {
     [HarmonyPatch(typeof(EndGameManager), nameof(EndGameManager.Start))]
     public static class Outro
@@ -17,7 +17,7 @@ namespace TownOfUs.NeutralRoles.JesterMod
             array[0].NameText().text = role.ColorString + array[0].NameText().text + "</color>";
             __instance.BackgroundBar.material.color = role.Color;
             var text = Object.Instantiate(__instance.WinText);
-            text.text = "The Jester was voted out!";
+            text.text = "The Jester was voted!\n Jester Wins!";
             text.color = role.Color;
             var pos = __instance.WinText.transform.localPosition;
             pos.y = 1.5f;

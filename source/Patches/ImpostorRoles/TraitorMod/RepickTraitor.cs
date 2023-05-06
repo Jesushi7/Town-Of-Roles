@@ -2,9 +2,9 @@ using HarmonyLib;
 using System.Linq;
 using Hazel;
 using UnityEngine;
-using TownOfUs.Roles;
+using TownOfRoles.Roles;
 
-namespace TownOfUs.ImpostorRoles.TraitorMod
+namespace TownOfRoles.ImpostorRoles.TraitorMod
 {
     [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]
     public class RepickTraitor

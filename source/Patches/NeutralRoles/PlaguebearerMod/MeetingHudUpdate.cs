@@ -1,9 +1,9 @@
 using System.Linq;
 using HarmonyLib;
-using TownOfUs.Roles;
+using TownOfRoles.Roles;
 using UnityEngine;
 
-namespace TownOfUs.NeutralRoles.PlaguebearerMod
+namespace TownOfRoles.NeutralRoles.PlaguebearerMod
 {
     [HarmonyPatch(typeof(MeetingHud), nameof(MeetingHud.Update))]
     public static class MeetingHudUpdate

@@ -1,15 +1,15 @@
 ﻿using System.Linq;
 using HarmonyLib;
-using TownOfUs.Extensions;
-using TownOfUs.Roles;
+using TownOfRoles.Extensions;
+using TownOfRoles.Roles;
 using UnityEngine;
 
-namespace TownOfUs.NeutralRoles.ArsonistMod
+namespace TownOfRoles.NeutralRoles.ArsonistMod
 {
     [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]
     public static class HudManagerUpdate
     {
-        public static Sprite IgniteSprite => TownOfUs.IgniteSprite;
+        public static Sprite IgniteSprite => TownOfRoles.IgniteSprite;
         
         public static void Postfix(HudManager __instance)
         {
@@ -34,14 +34,18 @@ namespace TownOfUs.NeutralRoles.ArsonistMod
             {
                 role.IgniteButton = Object.Instantiate(__instance.KillButton, __instance.KillButton.transform.parent);
                 role.IgniteButton.graphic.enabled = true;
-                role.IgniteButton.GetComponent<AspectPosition>().DistanceFromEdge = TownOfUs.ButtonPosition;
                 role.IgniteButton.gameObject.SetActive(false);
             }
-            role.IgniteButton.GetComponent<AspectPosition>().Update();
-            role.IgniteButton.graphic.sprite = IgniteSprite;
 
-            role.IgniteButton.gameObject.SetActive(!PlayerControl.LocalPlayer.Data.IsDead && !MeetingHud.Instance);
-            __instance.KillButton.gameObject.SetActive(!PlayerControl.LocalPlayer.Data.IsDead && !MeetingHud.Instance);
+            role.IgniteButton.graphic.sprite = IgniteSprite;
+            role.IgniteButton.transform.localPosition = new Vector3(-1f, 1f, 0f);
+
+            __instance.KillButton.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
+                    && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
+                    && AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started);
+            role.IgniteButton.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
+                    && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
+                    && AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started);
             if (!role.LastKiller || !CustomGameOptions.IgniteCdRemoved) role.IgniteButton.SetCoolDown(role.DouseTimer(), CustomGameOptions.DouseCd);
             else role.IgniteButton.SetCoolDown(0f, CustomGameOptions.DouseCd);
             if (role.DousedAlive < CustomGameOptions.MaxDoused)

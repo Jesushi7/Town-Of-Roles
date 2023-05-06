@@ -1,14 +1,14 @@
 ﻿using HarmonyLib;
-using TownOfUs.Roles;
+using TownOfRoles.Roles;
 using UnityEngine;
 
-namespace TownOfUs.ImpostorRoles.MorphlingMod
+namespace TownOfRoles.ImpostorRoles.MorphlingMod
 {
     [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]
     public class HudManagerUpdate
     {
-        public static Sprite SampleSprite => TownOfUs.SampleSprite;
-        public static Sprite MorphSprite => TownOfUs.MorphSprite;
+        public static Sprite SampleSprite => TownOfRoles.SampleSprite;
+        public static Sprite MorphSprite => TownOfRoles.MorphSprite;
 
 
         public static void Postfix(HudManager __instance)
@@ -23,16 +23,16 @@ namespace TownOfUs.ImpostorRoles.MorphlingMod
                 role.MorphButton = Object.Instantiate(__instance.KillButton, __instance.KillButton.transform.parent);
                 role.MorphButton.graphic.enabled = true;
                 role.MorphButton.graphic.sprite = SampleSprite;
-                role.MorphButton.GetComponent<AspectPosition>().DistanceFromEdge = TownOfUs.ButtonPosition;
                 role.MorphButton.gameObject.SetActive(false);
 
             }
-            role.MorphButton.GetComponent<AspectPosition>().Update();
 
             if (role.MorphButton.graphic.sprite != SampleSprite && role.MorphButton.graphic.sprite != MorphSprite)
                 role.MorphButton.graphic.sprite = SampleSprite;
 
-            role.MorphButton.gameObject.SetActive(!PlayerControl.LocalPlayer.Data.IsDead && !MeetingHud.Instance);
+            role.MorphButton.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
+                    && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
+                    && AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started);
             if (role.MorphButton.graphic.sprite == SampleSprite)
             {
                 role.MorphButton.SetCoolDown(0f, 1f);

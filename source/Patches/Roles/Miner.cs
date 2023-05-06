@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace TownOfUs.Roles
+namespace TownOfRoles.Roles
 {
     public class Miner : Role
     {
@@ -15,11 +15,14 @@ namespace TownOfUs.Roles
         public Miner(PlayerControl player) : base(player)
         {
             Name = "Miner";
-            ImpostorText = () => "Make your own Network of Vents";
+            StartText = () => "<color=#565c33>From The Top, Make It Drop, That's A Vent</color>";
             TaskText = () => "Create Vents";
-            Color = Patches.Colors.Impostor;
+            Color = Patches.Colors.Miner;
             LastMined = DateTime.UtcNow;
             RoleType = RoleEnum.Miner;
+            FactionName = "<color=#565c33>Impostor</color>";   
+                 
+            Faction = Faction.Impostors;               
             AddToRoleHistory(RoleType);
             Faction = Faction.Impostors;
         }

@@ -1,6 +1,6 @@
 using HarmonyLib;
 
-namespace TownOfUs.Modifiers
+namespace TownOfRoles.Modifiers
 {
     public class Blind
     {

@@ -1,13 +1,13 @@
 using HarmonyLib;
-using TownOfUs.Roles;
+using TownOfRoles.Roles;
 using UnityEngine;
 
-namespace TownOfUs.ImpostorRoles.SwooperMod
+namespace TownOfRoles.ImpostorRoles.SwooperMod
 {
     [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]
     public class HudManagerUpdate
     {
-        public static Sprite SwoopSprite => TownOfUs.SwoopSprite;
+        public static Sprite SwoopSprite => TownOfRoles.SwoopSprite;
 
         public static void Postfix(HudManager __instance)
         {
@@ -20,12 +20,12 @@ namespace TownOfUs.ImpostorRoles.SwooperMod
             {
                 role.SwoopButton = Object.Instantiate(__instance.KillButton, __instance.KillButton.transform.parent);
                 role.SwoopButton.graphic.enabled = true;
-                role.SwoopButton.GetComponent<AspectPosition>().DistanceFromEdge = TownOfUs.ButtonPosition;
                 role.SwoopButton.gameObject.SetActive(false);
             }
-            role.SwoopButton.GetComponent<AspectPosition>().Update();
             role.SwoopButton.graphic.sprite = SwoopSprite;
-            role.SwoopButton.gameObject.SetActive(!PlayerControl.LocalPlayer.Data.IsDead && !MeetingHud.Instance);
+            role.SwoopButton.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
+                    && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
+                    && AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started);
 
             if (role.IsSwooped)
             {

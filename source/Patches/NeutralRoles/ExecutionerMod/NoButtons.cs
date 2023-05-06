@@ -1,6 +1,6 @@
 using HarmonyLib;
 
-namespace TownOfUs.NeutralRoles.ExecutionerMod
+namespace TownOfRoles.NeutralRoles.ExecutionerMod
 {
     [HarmonyPatch(typeof(PlayerControl), nameof(PlayerControl.SetRole))]
     public class NoButtons

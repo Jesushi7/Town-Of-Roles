@@ -1,7 +1,7 @@
 using HarmonyLib;
-using TownOfUs.Roles;
+using TownOfRoles.Roles;
 
-namespace TownOfUs.NeutralRoles.PlaguebearerMod
+namespace TownOfRoles.NeutralRoles.PlaguebearerMod
 {
     [HarmonyPatch(typeof(PlayerControl), nameof(PlayerControl.CmdReportDeadBody))]
     public class BodyReport
@@ -14,7 +14,7 @@ namespace TownOfUs.NeutralRoles.PlaguebearerMod
 
             foreach (var player in PlayerControl.AllPlayerControls)
             {
-                if (player.PlayerId == info.PlayerId)
+                if (!info.Disconnected && player.PlayerId == info.PlayerId)
                 {
                     if (PlayerControl.LocalPlayer.IsInfected() || player.IsInfected())
                     {

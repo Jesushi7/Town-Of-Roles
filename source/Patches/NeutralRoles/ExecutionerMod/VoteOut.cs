@@ -1,7 +1,7 @@
 using HarmonyLib;
-using TownOfUs.Roles;
+using TownOfRoles.Roles;
 
-namespace TownOfUs.NeutralRoles.ExecutionerMod
+namespace TownOfRoles.NeutralRoles.ExecutionerMod
 {
     [HarmonyPatch(typeof(ExileController), nameof(ExileController.Begin))]
     internal class MeetingExiledEnd

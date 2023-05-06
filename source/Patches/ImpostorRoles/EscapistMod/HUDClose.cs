@@ -1,9 +1,9 @@
 using System;
 using HarmonyLib;
-using TownOfUs.Roles;
+using TownOfRoles.Roles;
 using Object = UnityEngine.Object;
 
-namespace TownOfUs.ImpostorRoles.EscapistMod
+namespace TownOfRoles.ImpostorRoles.EscapistMod
 {
     [HarmonyPatch(typeof(Object), nameof(Object.Destroy), typeof(Object))]
     public static class HUDClose
@@ -14,7 +14,7 @@ namespace TownOfUs.ImpostorRoles.EscapistMod
             if (PlayerControl.LocalPlayer.Is(RoleEnum.Escapist))
             {
                 var role = Role.GetRole<Escapist>(PlayerControl.LocalPlayer);
-                role.EscapeButton.graphic.sprite = TownOfUs.MarkSprite;
+                role.EscapeButton.graphic.sprite = TownOfRoles.MarkSprite;
                 role.LastEscape = DateTime.UtcNow;
             }
         }

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace TownOfUs.Roles
+namespace TownOfRoles.Roles
 {
     public class Swapper : Role
     {
@@ -13,9 +13,10 @@ namespace TownOfUs.Roles
         public Swapper(PlayerControl player) : base(player)
         {
             Name = "Swapper";
-            ImpostorText = () => "Swap The Votes Of Two People";
+            StartText = () => "<color=#863756>Swap The Votes Of Two People</color>";
             TaskText = () => "Swap two people's votes to save the Crew!";
             Color = Patches.Colors.Swapper;
+            FactionName = "<color=#863756>Crewmate</color>";               
             RoleType = RoleEnum.Swapper;
             AddToRoleHistory(RoleType);
         }

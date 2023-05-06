@@ -1,6 +1,6 @@
 using HarmonyLib;
 
-namespace TownOfUs.Patches.CustomHats.Patches
+namespace TownOfRoles.Patches.CustomHats.Patches
 {
     [HarmonyPatch(typeof(InventoryManager), nameof(InventoryManager.CheckUnlockedItems))]
     public class InventoryManager_Patches
@@ -10,4 +10,5 @@ namespace TownOfUs.Patches.CustomHats.Patches
             HatLoader.LoadHatsRoutine();
         }
     }
+
 }   

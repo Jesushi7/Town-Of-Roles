@@ -1,7 +1,7 @@
 using HarmonyLib;
-using TownOfUs.Roles;
+using TownOfRoles.Roles;
 
-namespace TownOfUs.ImpostorRoles.UndertakerMod
+namespace TownOfRoles.ImpostorRoles.UndertakerMod
 {
     [HarmonyPatch(typeof(PlayerPhysics), nameof(PlayerPhysics.FixedUpdate))]
     public static class PlayerPhysics_FixedUpdate
@@ -13,7 +13,7 @@ namespace TownOfUs.ImpostorRoles.UndertakerMod
                 var role = Role.GetRole<Undertaker>(__instance.myPlayer);
                 if (role.CurrentlyDragging != null)
                     if (__instance.AmOwner && GameData.Instance && __instance.myPlayer.CanMove)
-                        __instance.body.velocity /= 2;
+                        __instance.body.velocity *= CustomGameOptions.UndertakerDragSpeed;
             }
         }
     }

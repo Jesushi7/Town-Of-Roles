@@ -1,9 +1,9 @@
 using HarmonyLib;
-using TownOfUs.Extensions;
-using TownOfUs.Roles;
+using TownOfRoles.Extensions;
+using TownOfRoles.Roles;
 using UnityEngine;
 
-namespace TownOfUs.CrewmateRoles.MedicMod
+namespace TownOfRoles.CrewmateRoles.MedicMod
 {
     public enum ShieldOptions
     {
@@ -51,7 +51,6 @@ namespace TownOfUs.CrewmateRoles.MedicMod
                     continue;
                 }
 
-
                 var showShielded = CustomGameOptions.ShowShielded;
                 if (showShielded == ShieldOptions.Everyone)
                 {
@@ -62,7 +61,6 @@ namespace TownOfUs.CrewmateRoles.MedicMod
                 else if (PlayerControl.LocalPlayer.PlayerId == player.PlayerId && (showShielded == ShieldOptions.Self ||
                     showShielded == ShieldOptions.SelfAndMedic))
                 {
-                    //System.Console.WriteLine("Setting " + PlayerControl.LocalPlayer.name + "'s shield");
                     player.myRend().material.SetColor("_VisorColor", ProtectedColor);
                     player.myRend().material.SetFloat("_Outline", 1f);
                     player.myRend().material.SetColor("_OutlineColor", ProtectedColor);

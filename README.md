@@ -1,30 +1,30 @@
-## *Note: This repository is an unofficial continuation of Town of Us reactivated*
+## *Note: This repository is an unofficial continuation of Town of Us due to the original repository being discontinued.*
 
 ![LOGO](./Images/TOU-logo.png)
+![Roles](./Images/Roles.png)
 
 An Among Us mod that adds a bunch of roles, modifiers and game settings
 
-Join our [Discord](https://discord.gg/dPs2CvVtNc) if you have any problems or want to find people to play with!
+Join our [Discord](https://discord.gg/ugyc4EVUYZ) if you have any problems or want to find people to play with!
 
 **Crewmate Roles**
-- [Haunter](#haunter)
-- [Investigator](#investigator)
+- [Mystic](#Mystic)
+- [Avenger](#Avenger)
 - [Mystic](#mystic)
-- [Seer](#seer)
-- [Snitch](#snitch)
-- [Spy](#spy)
+- [Snitch](#Snitch)
+- [Informant](#Informant)
 - [Tracker](#tracker)
 - [Trapper](#trapper)
 - [Sheriff](#sheriff)
 - [Veteran](#veteran)
-- [Vigilante](#vigilante)
+- [Gambler](#Gambler)
 - [Altruist](#altruist)
 - [Medic](#medic)
 - [Engineer](#engineer)
+- [Imitator](#imitator)
 - [Mayor](#mayor)
 - [Medium](#medium)
 - [Swapper](#swapper)
-- [Time Lord](#time-lord)
 - [Transporter](#transporter)
 
 **Neutral Roles**
@@ -35,18 +35,19 @@ Join our [Discord](https://discord.gg/dPs2CvVtNc) if you have any problems or wa
 - [Jester](#jester)
 - [Phantom](#phantom)
 - [Arsonist](#arsonist)
+- [Juggernaut](#juggernaut)
 - [Plaguebearer](#plaguebearer)
-- [The Glitch](#the-glitch)
+- [Glitch](#the-glitch)
 - [Werewolf](#werewolf)
 
 **Impostor Roles**
 - [Escapist](#escapist)
 - [Grenadier](#grenadier)
 - [Morphling](#morphling)
-- [Swooper](#swooper)
-- [Poisoner](#poisoner)
+- [Swooper](#Swooper)
+- [Bomber](#bomber)
 - [Traitor](#traitor)
-- [Blackmailer](#blackmailer)
+- [Silencer](#Silencer)
 - [Janitor](#janitor)
 - [Miner](#miner)
 - [Undertaker](#undertaker)
@@ -60,7 +61,7 @@ Join our [Discord](https://discord.gg/dPs2CvVtNc) if you have any problems or wa
 - [Button Barry](#button-barry)
 - [Flash](#flash)
 - [Giant](#giant)
-- [Radar](#radar)
+- [Paranoiac](#paranoiac)
 - [Lovers](#lovers)
 - [Sleuth](#sleuth)
 - [Tiebreaker](#tiebreaker)
@@ -72,6 +73,9 @@ Join our [Discord](https://discord.gg/dPs2CvVtNc) if you have any problems or wa
 # Releases
 | Among Us - Version| Mod Version | Link |
 |----------|-------------|-----------------|
+| 2022.12.14s & 2022.12.14e | v4.0.2 | [Download](https://github.com/eDonnes124/Town-Of-Us/releases/download/v4.0.2/ToU.v4.0.2.zip) |
+| 2022.12.14s & 2022.12.14e | v4.0.1 | [Download](https://github.com/eDonnes124/Town-Of-Us/releases/download/v4.0.1/ToU.v4.0.1.zip) |
+| 2022.12.14s & 2022.12.14e | v4.0.0 | [Download](https://github.com/eDonnes124/Town-Of-Us/releases/download/v4.0.0/ToU.v4.0.0.zip) |
 | 2022.10.25s & 2022.10.25e | v3.4.0 | [Download](https://github.com/eDonnes124/Town-Of-Us/releases/download/v3.4.0/ToU.v3.4.0.zip) |
 | 2022.8.24s & 2022.8.24e & 2022.9.20s & 2022.9.20e | v3.3.2 | [Download](https://github.com/eDonnes124/Town-Of-Us/releases/download/v3.3.2/ToU.v3.3.2.zip) |
 | 2022.8.24s & 2022.8.24e & 2022.9.20s & 2022.9.20e | v3.3.1 | [Download](https://github.com/eDonnes124/Town-Of-Us/releases/download/v3.3.1/ToU.v3.3.1.zip) |
@@ -105,28 +109,64 @@ Join our [Discord](https://discord.gg/dPs2CvVtNc) if you have any problems or wa
 | 2021.6.30s & 2021.6.30e & 2021.7.20e | v2.2.1 | [Download](https://github.com/polusgg/Town-Of-Us/releases/download/v2.2.1/TOU_221.zip) |
 | 2021.6.30s & 2021.6.30e & 2021.7.20e | v2.2.0 | [Download](https://github.com/polusgg/Town-Of-Us/releases/download/v2.2.0/TOU_220.zip) |
 | 2021.6.15s & 2021.6.15e | v2.1.4 | [Download](https://github.com/polusgg/Town-Of-Us/releases/download/v2.1.4/TOU_214.zip) |
-| 2021.6.15s & 2021.6.15e | v2.1.3 | [Download](https://github.com/polusgg/Town-Of-Us/releases/download/v2.1.3/TownOfUs213_1.zip) |
-| 2021.6.15s & 2021.6.15e | v2.1.2 | [Download](https://github.com/polusgg/Town-Of-Us/releases/download/v2.1.2/TownOfUs212_1.zip) |
-| 2021.6.15s & 2021.6.15e | v2.1.1 | [Download](https://github.com/polusgg/Town-Of-Us/releases/download/v2.1.1/TownOfUs211_1.zip) |
-| 2021.5.10s | v2.0.4 | [Download](https://github.com/polusgg/Town-Of-Us/releases/download/v2.0.4/TownOfUs-v2.0.4.zip) |
-| 2021.5.10s | v2.0.3 | [Download](https://github.com/polusgg/Town-Of-Us/releases/download/v2.0.3/TownOfUs-v2.0.3.zip) |
-| 2021.4.12s & 2021.4.14s | v2.0.2 | [Download](https://github.com/polusgg/Town-Of-Us/releases/download/v2.0.2/TownOfUs-v2.0.2.zip) |
-| 2021.4.12s | v2.0.1 | [Download](https://github.com/polusgg/Town-Of-Us/releases/download/v2.0.1/TownOfUs-v2.0.1.zip) |
-| 2021.3.31.3s | v2.0.0 | [Download](https://github.com/polusgg/Town-Of-Us/releases/download/v2.0.0/TownOfUs-v2.0.0.zip) |
-| 2021.3.5s | v1.2.0 | [Download](https://github.com/polusgg/Town-Of-Us/releases/download/v1.2.0/TownOfUs-v1.2.0.zip) |
-| 2021.3.5s | v1.1.0 | [Download](https://github.com/polusgg/Town-Of-Us/releases/download/v1.1.0/TownOfUs-v1.1.0-2021.3.5s.zip) |
-| 2020.12.19s | v1.1.0 | [Download](https://github.com/polusgg/Town-Of-Us/releases/download/v1.1.0/TownOfUs-v1.1.0-2020.12.9s.zip) |
-| 2020.12.19s | v1.0.3 | [Download](https://github.com/polusgg/Town-Of-Us/releases/download/v1.0.3/TownOfUs-v1.0.3.zip) |
-| 2020.12.19s | v1.0.2 | [Download](https://github.com/polusgg/Town-Of-Us/releases/download/v1.0.2/TownOfUs-v1.0.2.zip) |
-| 2020.12.19s | v1.0.1 | [Download](https://github.com/polusgg/Town-Of-Us/releases/download/v1.0.1/TownOfUs-v1.0.1.zip) |
-| 2020.12.19s | v1.0.0 | [Download](https://github.com/polusgg/Town-Of-Us/releases/download/v1.0.0/TownOfUs-v1.0.0.zip) |
+| 2021.6.15s & 2021.6.15e | v2.1.3 | [Download](https://github.com/polusgg/Town-Of-Us/releases/download/v2.1.3/TownOfRoles213_1.zip) |
+| 2021.6.15s & 2021.6.15e | v2.1.2 | [Download](https://github.com/polusgg/Town-Of-Us/releases/download/v2.1.2/TownOfRoles212_1.zip) |
+| 2021.6.15s & 2021.6.15e | v2.1.1 | [Download](https://github.com/polusgg/Town-Of-Us/releases/download/v2.1.1/TownOfRoles211_1.zip) |
+| 2021.5.10s | v2.0.4 | [Download](https://github.com/polusgg/Town-Of-Us/releases/download/v2.0.4/TownOfRoles-v2.0.4.zip) |
+| 2021.5.10s | v2.0.3 | [Download](https://github.com/polusgg/Town-Of-Us/releases/download/v2.0.3/TownOfRoles-v2.0.3.zip) |
+| 2021.4.12s & 2021.4.14s | v2.0.2 | [Download](https://github.com/polusgg/Town-Of-Us/releases/download/v2.0.2/TownOfRoles-v2.0.2.zip) |
+| 2021.4.12s | v2.0.1 | [Download](https://github.com/polusgg/Town-Of-Us/releases/download/v2.0.1/TownOfRoles-v2.0.1.zip) |
+| 2021.3.31.3s | v2.0.0 | [Download](https://github.com/polusgg/Town-Of-Us/releases/download/v2.0.0/TownOfRoles-v2.0.0.zip) |
+| 2021.3.5s | v1.2.0 | [Download](https://github.com/polusgg/Town-Of-Us/releases/download/v1.2.0/TownOfRoles-v1.2.0.zip) |
+| 2021.3.5s | v1.1.0 | [Download](https://github.com/polusgg/Town-Of-Us/releases/download/v1.1.0/TownOfRoles-v1.1.0-2021.3.5s.zip) |
+| 2020.12.19s | v1.1.0 | [Download](https://github.com/polusgg/Town-Of-Us/releases/download/v1.1.0/TownOfRoles-v1.1.0-2020.12.9s.zip) |
+| 2020.12.19s | v1.0.3 | [Download](https://github.com/polusgg/Town-Of-Us/releases/download/v1.0.3/TownOfRoles-v1.0.3.zip) |
+| 2020.12.19s | v1.0.2 | [Download](https://github.com/polusgg/Town-Of-Us/releases/download/v1.0.2/TownOfRoles-v1.0.2.zip) |
+| 2020.12.19s | v1.0.1 | [Download](https://github.com/polusgg/Town-Of-Us/releases/download/v1.0.1/TownOfRoles-v1.0.1.zip) |
+| 2020.12.19s | v1.0.0 | [Download](https://github.com/polusgg/Town-Of-Us/releases/download/v1.0.0/TownOfRoles-v1.0.0.zip) |
 
 <details>
   <summary> Changelog </summary>
   <details>
+  <summary> v4.0.2 </summary>
+  <ul> <li>Bug Fix: Cultist no longer doesn't automatically set the Impostors to 1 for the game mode</li> </ul>
+  <ul> <li>Bug Fix: Dead people no longer interfere with how many people die to a bomb</li> </ul>
+  <ul> <li>Added a new Examine Report to Mystic</li> </ul>
+  <ul> <li>Engineer Fix Per Round/Game changed to Uses throughout the game</li> </ul>
+  <ul> <li>Made Medic & Trapper imitatable for the Imitator</li> </ul>
+  <ul> <li>Added indications so the dead can see who the Guardian Angel and Executioner targets are</li> </ul>
+  <ul> <li>Removed option for Informant to be hidden on Game Start</li> </ul>
+  </details>
+  <details>
+  <summary> v4.0.1 </summary>
+  <ul> <li>Fixed the Kill Button not working in Hide & Seek</li> </ul>
+  </details>
+  <details>
+  <summary> v4.0.0 </summary>
+  <ul> <li>Compatibility with the new Among Us version v2022.12.14</li> </ul>
+  <ul> <li>New Role: Imitator (Replacing Time Lord)</li> </ul>
+  <ul> <li>New Role: Bomber (Poisoner rework)</li> </ul>
+  <ul> <li>New Game Mode: Cultist</li> </ul>
+  <ul> <li>New Game Mode Roles: Necromancer & Whisperer as well as Crewmate/Impostor variants of already existing roles</li> </ul>
+  <ul> <li>New Setting: Enable Hidden Roles</li> </ul>
+  <ul> <li>New Settings for hidden roles</li> </ul>
+  <ul> <li>New Setting: Undertaker Drag Speed</li> </ul>
+  <ul> <li>Bug Fix: Executioner/Guardian Angel turned Amnesiac/Jester/Survivor no longer have red text after changing role</li> </ul>
+  <ul> <li>Amnesiac remembering a role no longer makes their task list swap with the player they remembered</li> </ul>
+  <ul> <li>Bug Fix: Amnesiac no longer sees themself with the remembered players' modifier</li> </ul>
+  <ul> <li>Bug Fix: Amnesiac no longer loses tasks if the person they remembered from disconnects or vice versa</li> </ul>
+  <ul> <li>Bug Fix: Underdog kill timer is now in sync with normal kill cooldowns</li> </ul>
+  <ul> <li>Bug Fix: Underdog now has the correct kill cooldown on game start</li> </ul>
+  <ul> <li>Bug Fix: Underdog now can have a kill cooldown below 10secs</li> </ul>
+  <ul> <li>Bug Fix: Miner's mines are no longer invisible in certain places</li> </ul>
+  <ul> <li>Bug Fix: Undertaker no longer can make a body become invisible in certain places</li> </ul>
+  <ul> <li>Bug Fix: Neutral Killers now get correct cooldowns when attacking a vesting Survivor or a Guardian Angel shield</li> </ul>
+  <ul> <li>Adjusted the Trapper's trap & Grenadier's flash radius so they scale correctly</li> </ul>
+  </details>
+  <details>
   <summary> v3.4.0 </summary>
   <ul> <li>New Role: Escapist</li> </ul>
-  <ul> <li>New Modifier: Radar</li> </ul>
+  <ul> <li>New Modifier: Paranoiac</li> </ul>
   <ul> <li>New Modifier: Disperser</li> </ul>
   <ul> <li>New Modifier: Multitasker</li> </ul>
   <ul> <li>New Modifier: Double Shot</li> </ul>
@@ -138,9 +178,9 @@ Join our [Discord](https://discord.gg/dPs2CvVtNc) if you have any problems or wa
   </details>
   <details>
   <summary> v3.3.2 </summary>
-  <ul> <li>New Setting: Snitch doesn't see Traitor</li> </ul>
+  <ul> <li>New Setting: Informant doesn't see Traitor</li> </ul>
   <ul> <li>New Settings: Neutral Killing Roles can assassinate</li> </ul>
-  <ul> <li>Bug Fix: People no longer show as Phantom/Haunter when they're not</li> </ul>
+  <ul> <li>Bug Fix: People no longer show as Phantom/Avenger when they're not</li> </ul>
   </details>
   <details>
   <summary> v3.3.1 </summary>
@@ -169,11 +209,11 @@ Join our [Discord](https://discord.gg/dPs2CvVtNc) if you have any problems or wa
   <ul> <li>New Role: Plaguebearer/Pestilence</li> </ul>
   <ul> <li>New Role: Werewolf</li> </ul>
   <ul> <li>New Role: Trapper</li> </ul>
-  <ul> <li>New Role: Detective</li> </ul>
+  <ul> <li>New Role: Mystic</li> </ul>
   <ul> <li>New Modifier: Blind (replacing Drunk)</li> </ul>
   <ul> <li>Arsonist Rework: Douse and Ignite are on the same cooldown, however to ignite they must be standing next to one of their douses</li> </ul>
-  <ul> <li>New Settings: Vigilante/Assassin can guess lovers</li> </ul>
-  <ul> <li>New Setting: Traitor does not swap colours for Seer</li> </ul>
+  <ul> <li>New Settings: Gambler/Assassin can guess lovers</li> </ul>
+  <ul> <li>New Setting: Traitor does not swap colours for Snitch</li> </ul>
   <ul> <li>New Settings: Sheriff can shoot Werewolf/Plaguebearer</li> </ul>
   <ul> <li>New Settings: Min and Max Neutral Killing/Non-Killing Roles</li> </ul>
   <ul> <li>Setting Change: Traitor does not spawn if Glitch is alive to Traitor does not spawn if Neutral Killing is alive</li> </ul>
@@ -184,15 +224,15 @@ Join our [Discord](https://discord.gg/dPs2CvVtNc) if you have any problems or wa
   <ul> <li>Bug Fix: Poisoned players now die before a meeting and not during a meeting</li> </ul>
   <ul> <li>Bug Fix: Glitch and Poisoner can no longer kill/poison in vents</li> </ul>
   <ul> <li>Bug Fix: Underdog now gets the correct cooldown when killing a diseased player</li> </ul>
-  <ul> <li>Bug Fix: Phantom/Haunter now appear in the correct places</li> </ul>
-  <ul> <li>Bug Fix: The Blackmailer now sees the correct colour name of their teammates depending on if they are blackmailed or not</li> </ul>
+  <ul> <li>Bug Fix: Phantom/Avenger now appear in the correct places</li> </ul>
+  <ul> <li>Bug Fix: The Silencer now sees the correct colour name of their teammates depending on if they are Silenced or not</li> </ul>
   <ul> <li>Bug Fix: Lag is no longer caused when attempting to repick the Traitor</li> </ul>
   </details>
   <details>
   <summary> v3.1.0 </summary>
   <ul> <li>Submerged Compatibility mostly thanks to MyDragonBreath</li> </ul>
   <ul> <li>New Setting: Assassins can guess Crewmate Modifiers</li> </ul>
-  <ul> <li>New Setting: Assassins and Vigilante can guess after voting</li> </ul>
+  <ul> <li>New Setting: Assassins and Gambler can guess after voting</li> </ul>
   <ul> <li>New Settings: Guardian Angel knows their target's role and Guardian Angel's target knows they have a Guardian Angel</li> </ul>
   <ul> <li>New Settings: Bait minimum and maximum delay</li> </ul>
   <ul> <li>New Setting: Diseased Kill Multiplier</li> </ul>
@@ -208,24 +248,24 @@ Join our [Discord](https://discord.gg/dPs2CvVtNc) if you have any problems or wa
   <ul> <li>Bug Fix: All the flashes on screen now work again</li> </ul>
   <ul> <li>Bug Fix: Amnesiac turned Sheriff/Glitch/Impostor now has a kill button again</li> </ul>
   <ul> <li>Bug Fix: The kill button now has the word 'Kill' on it again</li> </ul>
-  <ul> <li>Bug Fix: The Blackmailer's blackmail button will now not always show active even when not near someone</li> </ul>
-  <ul> <li>Blackmailer now only has an initial cooldown, meaning the cooldown doesn't reset after a use now</li> </ul>
+  <ul> <li>Bug Fix: The Silencer's Silence button will now not always show active even when not near someone</li> </ul>
+  <ul> <li>Silencer now only has an initial cooldown, meaning the cooldown doesn't reset after a use now</li> </ul>
   </details>
   <details>
   <summary> v3.0.0 </summary>
   <ul> <li>New Role: Medium</li> </ul>
   <ul> <li>New Role: Survivor</li> </ul>
   <ul> <li>New Role: Guardian Angel</li> </ul>
-  <ul> <li>New Role: Blackmailer</li> </ul>
+  <ul> <li>New Role: Silencer</li> </ul>
   <ul> <li>New Role: Mystic</li> </ul>
   <ul> <li>Camouflager removed</li> </ul>
-  <ul> <li>New Settings for Vigilante to kill each type of Neutral role</li> </ul>
+  <ul> <li>New Settings for Gambler to kill each type of Neutral role</li> </ul>
   <ul> <li>New Settings for Assassins to kill each type of Neutral role</li> </ul>
   <ul> <li>Bug Fix: Executioner will always get a target unless there is no feasible target</li> </ul>
   <ul> <li>Bug Fix: Executioner will always win when their target is voted out</li> </ul>
-  <ul> <li>The future Phantom, Haunter and Traitor will change depending on the current circumstances</li> </ul>
+  <ul> <li>The future Phantom, Avenger and Traitor will change depending on the current circumstances</li> </ul>
   <ul> <li>Bug Fix: Abilities can no longer be used while loading into a game</li> </ul>
-  <ul> <li>Added an option to cycle backwards for Assassins and Vigilante</li> </ul>
+  <ul> <li>Added an option to cycle backwards for Assassins and Gambler</li> </ul>
   </details>
   <details>
   <summary> v2.6.5 </summary>
@@ -260,7 +300,7 @@ Join our [Discord](https://discord.gg/dPs2CvVtNc) if you have any problems or wa
   <details>
   <summary> v2.6.2 </summary>
   <ul> <li>Fixed End Game Tracker Bug</li> </ul>
-  <ul> <li>Fixed Snitch Arrows</li> </ul>
+  <ul> <li>Fixed Informant Arrows</li> </ul>
   <ul> <li>Added Olive Colour</li> </ul>
   <ul> <li>Dead bodies are now removed after meetings</li> </ul>
   <ul> <li>Added an option for Amnesiac Arrows</li> </ul>
@@ -269,7 +309,7 @@ Join our [Discord](https://discord.gg/dPs2CvVtNc) if you have any problems or wa
   <details>
   <summary> v2.6.1 </summary>
   <ul> <li>Fixed Poisoner killing Bait after another report resulting in a duplicated meeting</li> </ul>
-  <ul> <li>Fixed the issue where the Snitch spawning as Crewmate would see their name gold</li> </ul>
+  <ul> <li>Fixed the issue where the Informant spawning as Crewmate would see their name gold</li> </ul>
   <ul> <li>Fixed Amnesiac remembering Transporter becoming an Impostor</li> </ul>
   <ul> <li>Fixed Tracker Arrows</li> </ul>
   </details>
@@ -277,14 +317,14 @@ Join our [Discord](https://discord.gg/dPs2CvVtNc) if you have any problems or wa
   <summary> v2.6.0 </summary>
   <ul> <li>Fixed killing the Bait instantly banning everyone</li> </ul>
   <ul> <li>Fixed Tracker lag</li> </ul>
-  <ul> <li>Seer adjustments</li> </ul>
+  <ul> <li>Snitch adjustments</li> </ul>
   <ul> <li>Settings for task tracking</li> </ul>
   <ul> <li>Added a flash radius setting for Grenadier</li> </ul>
   <ul> <li>New Role: Traitor</li> </ul>
   <ul> <li>New Role: Transporter</li> </ul>
   <ul> <li>New Modifier: Sleuth</li> </ul>
-  <ul> <li>Fixed Snitch/Haunter meetings when someone disconnects</li> </ul>
-  <ul> <li>Fixed Amnesiac/Snitch and Amnesiac/Mayor interactions</li> </ul>
+  <ul> <li>Fixed Informant/Avenger meetings when someone disconnects</li> </ul>
+  <ul> <li>Fixed Amnesiac/Informant and Amnesiac/Mayor interactions</li> </ul>
   <ul> <li>Jester can vent Setting</li> </ul>
   <ul> <li>Made Modifiers disable upon death</li> </ul>
   <ul> <li>Made anything that affects the colour of names disable upon death</li> </ul>
@@ -304,7 +344,7 @@ Join our [Discord](https://discord.gg/dPs2CvVtNc) if you have any problems or wa
   <ul> <li>New Role: Poisoner</li> </ul>
   <ul> <li>New Role: Tracker</li> </ul>
   <ul> <li>New Modifier: Bait</li> </ul>
-  <ul> <li>Renamed Retributionist to Vigilante</li> </ul>
+  <ul> <li>Renamed Retributionist to Gambler</li> </ul>
   <ul> <li>End Game Summary Added</li> </ul>
   <ul> <li>In Game Task Tracking Added</li> </ul>
   </details>
@@ -346,12 +386,12 @@ Join our [Discord](https://discord.gg/dPs2CvVtNc) if you have any problems or wa
   <ul> <li>Bug Fix: Retributionist/Mayor interaction</li> </ul>
   <ul> <li>Bug Fix: Executioner always gets a target now</li> </ul>
   <ul> <li>Executioner can not have Lovers, Swapper, Mayor or Retributionist as their target</li> </ul>
-  <ul> <li>Made it so dead Impostors don’t see Haunter arrows</li> </ul>
-  <ul> <li>Made it so if Haunter reveals Neutral roles, all Neutral roles are alerted when Haunter is nearly finished tasks</li> </ul>
+  <ul> <li>Made it so dead Impostors don’t see Avenger arrows</li> </ul>
+  <ul> <li>Made it so if Avenger reveals Neutral roles, all Neutral roles are alerted when Avenger is nearly finished tasks</li> </ul>
   <ul> <li>Removed alert for Phantom</li> </ul>
   <ul> <li>All hats with credits from v2.2.1-t have been added</li> </ul>
-  <ul> <li>Removed the settings about when Phantom/Haunter can be clicked and replaced them with ‘tasks remaining when they can be clicked’</li> </ul>
-  <ul> <li>Removed the settings for Phantom/Haunter to have less tasks</li> </ul>
+  <ul> <li>Removed the settings about when Phantom/Avenger can be clicked and replaced them with ‘tasks remaining when they can be clicked’</li> </ul>
+  <ul> <li>Removed the settings for Phantom/Avenger to have less tasks</li> </ul>
   <ul> <li>Changed kill cooldown bonus for Underdog from 2.5-10secs to 2.5-30secs</li> </ul>
   </details>
   <details>
@@ -362,7 +402,7 @@ Join our [Discord](https://discord.gg/dPs2CvVtNc) if you have any problems or wa
   <details>
   <summary> v2.3.0 </summary>
   <ul> <li>New Role: Retributionist (Assassin Crewmate)</li> </ul>
-  <ul> <li>New Role: Haunter (basically the Phantom but a Crewmate, once tasks are finished Impostors are revealed)</li> </ul>
+  <ul> <li>New Role: Avenger (basically the Phantom but a Crewmate, once tasks are finished Impostors are revealed)</li> </ul>
   <ul> <li>New Role: Grenadier (blinds Crewmates with flashbangs)</li> </ul>
   <ul> <li>Added the remaining missing hats from v2.0.4 and prior</li> </ul>
   <ul> <li>Glitch cooldowns adjusted to be the same as other roles</li> </ul>
@@ -370,11 +410,11 @@ Join our [Discord](https://discord.gg/dPs2CvVtNc) if you have any problems or wa
   <ul> <li>Button Barry vision no longer reduced after Button Barry ability was used</li> </ul>
   <ul> <li>Standardised starting cooldowns to not be decreased (for round start only) for all roles</li> </ul>
   <ul> <li>Added alert for when Phantom is nearly finished</li> </ul>
-  <ul> <li>Glitch does not get notification for Snitch unless Snitch sees neutral roles</li> </ul>
-  <ul> <li>Made it so Impostors know when Snitch is done all tasks</li> </ul>
-  <ul> <li>Reworked how Phantom is set because of Haunter addition</li> </ul>
+  <ul> <li>Glitch does not get notification for Informant unless Informant sees neutral roles</li> </ul>
+  <ul> <li>Made it so Impostors know when Informant is done all tasks</li> </ul>
+  <ul> <li>Reworked how Phantom is set because of Avenger addition</li> </ul>
   <ul> <li>Gray colour changed to ‘Darker’ for Medic reports</li> </ul>
-  <ul> <li>Made the Seer unable to see through the disguises of Morphling and Glitch</li> </ul>
+  <ul> <li>Made the Snitch unable to see through the disguises of Morphling and Glitch</li> </ul>
   <ul> <li>Split shifter into two settings, who can Shifter shift on and what shifted becomes</li> </ul>
   <ul> <li>Setting for Sheriff can kill Executioner</li> </ul>
   <ul> <li>Setting for Morphling, Swooper, Undertaker and Glitch to vent</li> </ul>
@@ -382,15 +422,15 @@ Join our [Discord](https://discord.gg/dPs2CvVtNc) if you have any problems or wa
   <ul> <li>Setting for Mayor, Swapper, Jester, Executioner and Arsonist to not be able to button</li> </ul>
   <ul> <li>Setting for Executioner becomes Shifter on target death</li> </ul>
   <ul> <li>Setting for Phantom to do less tasks</li> </ul>
-  <ul> <li>Setting for Assassin to assassinate Snitch via ‘Crewmate’ guess</li> </ul>
+  <ul> <li>Setting for Assassin to assassinate Informant via ‘Crewmate’ guess</li> </ul>
   <ul> <li>Underdog changes: Setting to choose kill cooldown bonus</li> </ul>
   <ul> <li>Setting for Underdog to not have increased kill cooldown when 2+ imps</li> </ul>
   <ul> <li>Settings for the Phantom to not be clickable before and after alert</li> </ul>
   <ul> <li>Setting for Shifter to win with Crewmates</li> </ul>
   <ul> <li>Setting for starting cooldowns on game start for all roles (a general setting)</li> </ul>
-  <ul> <li>Setting for when Snitch is revealed</li> </ul>
+  <ul> <li>Setting for when Informant is revealed</li> </ul>
   <ul> <li>Settings for clicking Phantom, one for before alert and the other for after alert</li> </ul>
-  <ul> <li>Setting for Snitch to not see Impostor names mid-meeting</li> </ul>
+  <ul> <li>Setting for Informant to not see Impostor names mid-meeting</li> </ul>
   <ul> <li>Time Lord rewind time decreased from 3-15secs to 2-5secs</li> </ul>
   <ul> <li>Time Lord cooldown increased from 10-40secs to 10-60secs</li> </ul>
   <ul> <li>The maximum number of kills an Assassin can do during a meeting increased from 1-5 to 1-15</li> </ul>
@@ -462,7 +502,7 @@ Join our [Discord](https://discord.gg/dPs2CvVtNc) if you have any problems or wa
  <details>
   <summary> v2.1.3 </summary>
   <ul> <li> Fix the launch issue </li> </ul>
-  <ul> <li> Fix for the swooper role </li> </ul>
+  <ul> <li> Fix for the Swooper role </li> </ul>
   <ul> <li> Fix for the janitor role </li> </ul>
   <ul> <li> Minor enhancements and bug fixes </li> </ul>
  </details>
@@ -647,37 +687,48 @@ If you have issues installing Town of Us, you can join our [Discord](https://dis
 -----------------------
 # Roles
 # Crewmate Roles
-## Detective
+## Mystic
 ### **Team: Crewmates**
-The Detective is a Crewmate that can examine other players for suspicious behaviour.\
-If the player the Detective examines has killed recently the Detective will be alerted about it.
+The Mystic is a Crewmate that can examine other players for suspicious behaviour.\
+If the player the Mystic examines has killed recently the Mystic will be alerted about it.
+### Role Info
+- Your target has an unusual obsession with dead bodies (Altruist/Amnesiac/Janitor/Medium/Undertaker)
+- Your target tries to protect themselves or others by any means necessary (Grenadier/Guardian Angel/Medic/Survivor/Veteran)
+- Your target is a causer of chaos (Bomber/Executioner/Jester/Swapper/Transporter)
+- Your target is concealing information (Silencer/Mayor/Informant/Swooper/Trapper)
+- Your target started innocent but gained the capability to kill (Juggernaut/Sheriff/Traitor/Gambler/Werewolf)
+- Your target likes to interact with others (Arsonist/Mystic/Plaguebearer/Snitch/Tracker)
+- Your target likes exploring (Engineer/Escapist/Investigator/Miner/Mystic)
+- Your target views the world through a different lens (Glitch/Imitator/Morphling/Spy)
+- Your target appears to be roleless (Crewmate/Impostor)
 
 ### Game Options
 | Name | Description | Type | Default |
 |----------|:-------------:|:------:|:------:|
-| Detective | The percentage probability of the Detective appearing | Percentage | 0% |
-| Initial Examine Cooldown | The initial cooldown of the Detective's Examine button | Time | 25s |
-| Examine Cooldown | The cooldown of the Detective's Examine button | Time | 10s |
+| Mystic | The percentage probability of the Mystic appearing | Percentage | 0% |
+| Initial Examine Cooldown | The initial cooldown of the Mystic's Examine button | Time | 25s |
+| Examine Cooldown | The cooldown of the Mystic's Examine button | Time | 10s |
 | Bloody Duration | How long players remain bloody after a kill | Time | 25s |
-| Show Detective Reports | Whether the Detective should get information when reporting a body | Toggle | True |
-| Time Where Detective Reports Will Have Role | If a body has been dead for shorter than this amount, the Detective's report will contain the killer's role | Time | 15s |
-| Time Where Detective Reports Will Have Faction | If a body has been dead for shorter than this amount, the Detective's report will contain the killer's faction | Time | 30s |
+| Show Mystic Reports | Whether the Mystic should get information when reporting a body | Toggle | True |
+| Time Where Mystic Reports Will Have Role | If a body has been dead for shorter than this amount, the Mystic's report will contain the killer's role | Time | 15s |
+| Time Where Mystic Reports Will Have Faction | If a body has been dead for shorter than this amount, the Mystic's report will contain the killer's faction | Time | 30s |
+| Show Examine Reports | Whether the Mystic should get information about their last exmaine target | Toggle | True |
 
 -----------------------
-## Haunter
+## Avenger
 ### **Team: Crewmates**
 
-The Haunter is a dead Crewmate that can reveal Impostors if they finish all their tasks.\
+The Avenger is a dead Crewmate that can reveal Impostors if they finish all their tasks.\
 Upon finishing all of their tasks, Impostors are revealed to alive crewmates after a meeting is called.\
-However, if the Haunter is clicked they lose their ability to reveal Impostors and are once again a normal ghost.
+However, if the Avenger is clicked they lose their ability to reveal Impostors and are once again a normal ghost.
 ### Game Options
 | Name | Description | Type | Default |
 |----------|:-------------:|:------:|:------:|
-| Haunter | The percentage probability of the Haunter appearing | Percentage | 0% |
-| When Haunter Can Be Clicked | The amount of tasks remaining when the Haunter Can Be Clicked | Number | 5 |
-| Haunter Alert | The amount of tasks remaining when the Impostors are alreted that the Haunter is nearly finished | Number | 1 |
-| Haunter Reveals Neutral Roles | Whether the Haunter also Reveals Neutral Roles | Toggle | False |
-| Who can Click Haunter | Whether even other Crewmates can click the Haunter | All / Non-Crew / Imps Only | All |
+| Avenger | The percentage probability of the Avenger appearing | Percentage | 0% |
+| When Avenger Can Be Clicked | The amount of tasks remaining when the Avenger Can Be Clicked | Number | 5 |
+| Avenger Alert | The amount of tasks remaining when the Impostors are alreted that the Avenger is nearly finished | Number | 1 |
+| Avenger Reveals Neutral Roles | Whether the Avenger also Reveals Neutral Roles | Toggle | False |
+| Who can Click Avenger | Whether even other Crewmates can click the Avenger | All / Non-Crew / Imps Only | All |
 
 -----------------------
 ## Investigator
@@ -707,16 +758,16 @@ On top of this, the Mystic briefly gets an arrow pointing in the direction of th
 | Arrow Duration | The duration of the arrows pointing to the bodies | Time | 0.1s |
 
 -----------------------
-## Seer
+## Snitch
 ### **Team: Crewmates**
-The Seer is a Crewmate that can reveal the alliance of other players.\
-Based on settings, the Seer can find out whether a role is Good or Evil.\
+The Snitch is a Crewmate that can reveal the alliance of other players.\
+Based on settings, the Snitch can find out whether a player is a Good or an Evil role.\
 A player's name will change color to their team.
 ### Game Options
 | Name | Description | Type | Default |
 |----------|:-------------:|:------:|:------:|
-| Seer | The percentage probability of the Seer appearing | Percentage | 0% |
-| Seer Cooldown | The Cooldown of the Seer's Reveal button | Time | 25s |
+| Snitch | The percentage probability of the Snitch appearing | Percentage | 0% |
+| Snitch Cooldown | The Cooldown of the Snitch's Reveal button | Time | 25s |
 | Crewmate Killing show up as Evil | Crewmate Killing roles show up as Red | Toggle | False |
 | Neutral Benign show up as Evil | Neutral Benign roles show up as Red | Toggle | False |
 | Neutral Evil show up as Evil | Neutral Evil roles show up as Red | Toggle | False |
@@ -724,34 +775,20 @@ A player's name will change color to their team.
 | Traitor does not swap Colours | The Traitor remains their original colour | Toggle | False |
 
 -----------------------
-## Snitch
+## Informant
 ### **Team: Crewmates**
 
-The Snitch is a Crewmate that can get arrows pointing towards the Impostors, once all their tasks are finished.\
+The Informant is a Crewmate that can get arrows pointing towards the Impostors, once all their tasks are finished.\
 The names of the Impostors will also show up as red on their screen.\
-Based on game settings, the Snitch may not know who they are until they have one task left.\
-However, when they only have a single task left, the Impostors get an arrow pointing towards the Snitch.
+However, when they only have a single task left, the Impostors get an arrow pointing towards the Informant.
 ### Game Options
 | Name | Description | Type | Default |
 |----------|:-------------:|:------:|:------:|
-| Snitch | The percentage probability of the Snitch appearing | Percentage | 0% |
-| Snitch knows who they are on Game Start | Whether the Snitch knows their role at the start of a game | Toggle | False |
-| Snitch Sees Neutral Roles | Whether the Snitch also Reveals Neutral Roles | Toggle | False |
-| Tasks Remaining When Revealed | The number of tasks remaining when the Snitch is revealed to Impostors | Number | 1 |
-| Snitch Sees Impostors in Meetings | Whether the Snitch sees the Impostor's names red in Meetings | Toggle | True |
-| Snitch Sees Traitor | Whether the Snitch sees the Traitor | Toggle | True |
-
------------------------
-## Spy
-### **Team: Crewmates**
-
-The Spy is a Crewmate that gains more information when on Admin Table and Vitals.\
-On Admin Table, the Spy can see the colors of every person on the map.\
-On Vitals, the Spy can see how long killed bodies have been dead for.
-### Game Options
-| Name | Description | Type | Default |
-|----------|:-------------:|:------:|:------:|
-| Spy | The percentage probability of the Spy appearing | Percentage | 0% |
+| Informant | The percentage probability of the Informant appearing | Percentage | 0% |
+| Informant Sees Neutral Roles | Whether the Informant also Reveals Neutral Roles | Toggle | False |
+| Tasks Remaining When Revealed | The number of tasks remaining when the Informant is revealed to Impostors | Number | 1 |
+| Informant Sees Impostors in Meetings | Whether the Informant sees the Impostor's names red in Meetings | Toggle | True |
+| Informant Sees Traitor | Whether the Informant sees the Traitor | Toggle | True |
 
 -----------------------
 ## Tracker
@@ -784,7 +821,7 @@ However, this is done so in a random order, not stating who entered the trap, no
 | Trap Cooldown | The cooldown on the Trapper's trap button | Time | 25s |
 | Traps Removed Each Round | Whether the Trapper's traps are removed after each meeting | Toggle | True |
 | Maximum Number of Traps Per Game | The number of traps they can place in a game | Number | 5 |
-| Trap Size | The size of each trap | Factor | 1x |
+| Trap Size | The size of each trap | Factor | 0.25x |
 | Minimum Number of Roles required to Trigger Trap | The number of players that must enter the trap for it to be triggered | Number | 3 |
 
 -----------------------
@@ -799,7 +836,7 @@ However, if they kill a Crewmate or a Neutral player they can't kill, they inste
 | Sheriff | The percentage probability of the Sheriff appearing | Percentage | 0% |
 | Sheriff Miskill Kills Crewmate | Whether the other player is killed if the Sheriff Misfires | Toggle | False |
 | Sheriff Kills Jester | Whether the Sheriff is able to kill the Jester | Toggle | False |
-| Sheriff Kills The Glitch | Whether the Sheriff is able to kill The Glitch | Toggle | False |
+| Sheriff Kills Glitch | Whether the Sheriff is able to kill Glitch | Toggle | False |
 | Sheriff Kills Executioner | Whether the Sheriff is able to kill the Executioner | Toggle | False |
 | Sheriff Kills Arsonist | Whether the Sheriff is able to kill the Arsonist | Toggle | False |
 | Sheriff Kills Werewolf | Whether the Sheriff is able to kill the Werewolf | Toggle | False |
@@ -823,22 +860,22 @@ When the Veteran is on alert, anyone, whether crew, neutral or impostor, if they
 | Maximum Number of Alerts | The number of times the Veteran can alert throughout the game | Number | 3 |
 
 -----------------------
-## Vigilante
+## Gambler
 ### **Team: Crewmates**
 
-The Vigilante is a Crewmate that can kill during meetings.\
-During meetings, the Vigilante can choose to kill someone by guessing their role, however, if they guess incorrectly, they die instead.
+The Gambler is a Crewmate that can kill during meetings.\
+During meetings, the Gambler can choose to kill someone by guessing their role, however, if they guess incorrectly, they die instead.
 ### Game Options
 | Name | Description | Type | Default |
 |----------|:-------------:|:------:|:------:|
-| Vigilante | The percentage probability of the Vigilante appearing | Percentage | 0% |
-| Vigilante Kill | The number of kill the Vigilante can do with his ability | Number | 1 |
-| Vigilante Multiple Kill  | Whether the Vigilante can kill more than once per meeting | Toggle | False |
-| Vigilante Guess Neutral Benign  | Whether the Vigilante can Guess Neutral Benign roles | Toggle | False |
-| Vigilante Guess Neutral Evil  | Whether the Vigilante can Guess Neutral Evil roles | Toggle | False |
-| Vigilante Guess Neutral Killing  | Whether the Vigilante can Guess Neutral Killing roles | Toggle | False |
-| Vigilante Guess Lovers  | Whether the Vigilante can Guess Lovers | Toggle | False |
-| Vigilante Guess After Voting  | Whether the Vigilante can Guess after they have voted | Toggle | False |
+| Gambler | The percentage probability of the Gambler appearing | Percentage | 0% |
+| Gambler Kill | The number of kill the Gambler can do with his ability | Number | 1 |
+| Gambler Multiple Kill  | Whether the Gambler can kill more than once per meeting | Toggle | False |
+| Gambler Guess Neutral Benign  | Whether the Gambler can Guess Neutral Benign roles | Toggle | False |
+| Gambler Guess Neutral Evil  | Whether the Gambler can Guess Neutral Evil roles | Toggle | False |
+| Gambler Guess Neutral Killing  | Whether the Gambler can Guess Neutral Killing roles | Toggle | False |
+| Gambler Guess Lovers  | Whether the Gambler can Guess Lovers | Toggle | False |
+| Gambler Guess After Voting  | Whether the Gambler can Guess after they have voted | Toggle | False |
 
 -----------------------
 ## Altruist
@@ -846,7 +883,7 @@ During meetings, the Vigilante can choose to kill someone by guessing their role
 
 The Altruist is a Crewmate that is capable of reviving dead players.\
 Upon finding a dead body, the Altruist can hit their revive button, risking sacrificing themselves for the revival of another player.\
-If enabled, the dead body disappears, so only they Altruist's body remains at the scene.\
+If enabled, the dead body disappears, so only the Altruist's body remains at the scene.\
 After a set period of time, the player will be resurrected, if the revival isn't interrupted.
 ### Game Options
 | Name | Description | Type | Default |
@@ -884,12 +921,19 @@ A report can contain the name of the killer or the color type (Darker/Lighter)
 - Watermelon - Darker
 - Chocolate - Darker
 - Sky Blue - Lighter
-- Beige - Darker
-- Hot Pink - Lighter
+- Beige - Lighter
+- Magenta - Darker
 - Turquoise - Lighter
 - Lilac - Lighter
 - Olive - Darker
 - Azure - Lighter
+- Plum - Darker
+- Jungle - Darker
+- Mint - Lighter
+- Chartreuse - Lighter
+- Macau - Darker
+- Tawny - Darker
+- Gold - Lighter
 - Rainbow - Lighter
 
 ### Game Options
@@ -913,7 +957,20 @@ They can use vents to get across the map easily.
 | Name | Description | Type | Default |
 |----------|:-------------:|:------:|:------:|
 | Engineer | The percentage probability of the Engineer appearing | Percentage | 0% |
-| Engineer Fix Per | Whether the Engineer can fix 1 sabotage per round or per game | Round / Game | Round |
+| Maximum Fixes | The number of times the Engineer can fix a sabotage | Number | 5 |
+
+-----------------------
+## Imitator
+### **Team: Crewmates**
+The Imitator is a Crewmate that can mimic dead crewamtes.\
+During meetings the Imitator can select who they are going to imitate the following round from the dead.\
+They can choose to use each dead players as many times as they wish.\
+It should be noted the Imitator can not imitate all crew roles.
+
+### Game Options
+| Name | Description | Type | Default |
+|----------|:-------------:|:------:|:------:|
+| Imitator | The percentage probability of the Imitator appearing | Percentage | 0% |
 
 -----------------------
 ## Mayor
@@ -958,24 +1015,6 @@ All the votes for the first player will instead be counted towards the second pl
 |----------|:-------------:|:------:|:------:|
 | Swapper | The percentage probability of the Swapper appearing | Percentage | 0% |
 | Swapper Can Button | Whether the Swapper Can Press the Button | Toggle | True |
-
------------------------
-## Time Lord
-### **Team: Crewmates**
-The Time Lord is a Crewmate that can rewind time and reverse the positions of all players.\
-If enabled, any players killed during this time will be revived.\
-Nothing but movements and kills are affected.\
-If enabled, the Time Lord can't use Vitals to make things more balanced.
-
-### Game Options
-| Name | Description | Type | Default |
-|----------|:-------------:|:------:|:------:|
-| Time Lord | The percentage probability of the Time Lord appearing | Percentage | 0% |
-| Revive During Rewind | Whether the Time Lord revives dead players when rewinding | Toggle | False |
-| Rewind Duration | How far the rewind goes back in time | Time | 2s |
-| Rewind Cooldown | The cooldown of the Time Lord's Rewind button | Time | 25s |
-| Max Uses | The amount of times the Rewind ability can be used | Number | 5 |
-| Time Lord can use Vitals | Whether the Time Lord has the ability to use Vitals | Toggle | False |
 
 -----------------------
 ## Transporter
@@ -1030,7 +1069,7 @@ If their target loses, they lose.
 -----------------------
 ## Survivor
 ### **Team: Neutral**
-The Survivor is a Neutral role which can wins by simply surviving.\
+The Survivor is a Neutral role which can win by simply surviving.\
 However, if Lovers, or a Neutral Evil role wins the game, the survivor loses.
 
 ### Game Options
@@ -1089,7 +1128,7 @@ They become half-invisible when they die and has to complete all their tasks wit
 
 The Arsonist is a Neutral role with its own win condition.\
 They have two abilities, one is to douse other players with gasoline.\
-The other is to ingite all doused players.\
+The other is to ignite all doused players.\
 The Arsonist needs to be the last killer alive to win the game.
 ### Game Options
 | Name | Description | Type | Default |
@@ -1099,6 +1138,22 @@ The Arsonist needs to be the last killer alive to win the game.
 | Maximum Alive Players Doused | The maximum amount of players that the Arsonist can have doused | Number | 5 |
 | Arsonist Has Impostor Vision | Whether the Arsonist Has Impostor Vision | Toggle | False |
 | Ignite Cooldown Removed When Arso Is Last Killer | Whether the Arsonist's Ignite Cooldown is removed when they're the final killer | Toggle | False |
+
+-----------------------
+## Juggernaut
+### **Team: Neutral**
+
+The Juggernaut is a Neutral role with its own win condition.\
+The Juggernaut's special ability is that their kill cooldown reduces with each kill.\
+This means in theory the Juggernaut can have a 0 second kill cooldown!\
+The Juggernaut is also a hidden role, meaning it will show up randomly and can not be toggled by percentages like other roles.\
+The Juggernaut needs to be the last killer alive to win the game.
+### Game Options
+| Name | Description | Type | Default |
+|----------|:-------------:|:------:|:------:|
+| Juggernaut Kill Cooldown | The initial cooldown of the Juggernaut's Kill button | Time | 25s |
+| Reduced Kill Cooldown Per Kill | The amount of time removed from the Juggernaut's Kill Cooldown Per Kill | Time | 5s |
+| Juggernaut can Vent | Whether the Juggernaut can Vent | Toggle | False |
 
 -----------------------
 ## Plaguebearer
@@ -1119,26 +1174,26 @@ The Plaguebearer or Pestilence needs to be the last killer alive to win the game
 | Pestilence can Vent | Whether the Pestilence can Vent | Toggle | False |
 
 -----------------------
-## The Glitch
+## Glitch
 ### **Team: Neutral**
 
-The Glitch is a Neutral role with its own win condition.\
-The Glitch's aim is to kill everyone and be the last person standing.\
-The Glitch can Hack players, resulting in them being unable to report bodies and do tasks.\
+Glitch is a Neutral role with its own win condition.\
+Glitch's aim is to kill everyone and be the last person standing.\
+Glitch can Hack players, resulting in them being unable to report bodies and do tasks.\
 Hacking prevents the hacked player from doing anything but walk around the map.\
-The Glitch can Mimic someone, which results in them looking exactly like the other person.
+Glitch can Mimic someone, which results in them looking exactly like the other person.
 
 ### Game Options
 | Name | Description | Type | Default |
 |----------|:-------------:|:------:|:------:|
-| The Glitch | The percentage probability of The Glitch appearing | Percentage | 0% |
-| Mimic Cooldown | The cooldown of The Glitch's Mimic button | Time | 30s |
-| Mimic Duration | How long The Glitch can Mimic a player | Time | 10s |
-| Hack Cooldown | The cooldown of The Glitch's Hack button | Time | 30s |
-| Hack Duration | How long The Glitch can Hack a player | Time | 10s |
-| Glitch Kill Cooldown | The cooldown of the Glitch's Kill button | Time | 30s |
-| Glitch Hack Distance | How far away The Glitch can Hack someone from | Short / Normal / Long | Short |
-| Glitch can Vent | Whether the Glitch can Vent | Toggle | False |
+| Glitch | The percentage probability of Glitch appearing | Percentage | 0% |
+| Mimic Cooldown | The cooldown of Glitch's Mimic button | Time | 25s |
+| Mimic Duration | How long Glitch can Mimic a player | Time | 10s |
+| Hack Cooldown | The cooldown of Glitch's Hack button | Time | 25s |
+| Hack Duration | How long Glitch can Hack a player | Time | 10s |
+| Glitch Kill Cooldown | The cooldown of Glitch's Kill button | Time | 25s |
+| Glitch Hack Distance | How far away Glitch can Hack someone from | Short / Normal / Long | Short |
+| Glitch can Vent | Whether Glitch can Vent | Toggle | False |
 
 -----------------------
 ## Werewolf
@@ -1187,7 +1242,7 @@ However, a sabotage and a smoke grenade can not be active at the same time.
 | Grenadier | The percentage probability of the Grenadier appearing | Percentage | 0% |
 | Flash Grenade Cooldown | The cooldown of the Grenadier's Flash button | Time | 25s |
 | Flash Grenade Duration | How long the Flash Grenade lasts for | Time | 10s |
-| Flash Radius | How wide the flash radius is | Factor | 1x |
+| Flash Radius | How wide the flash radius is | Multiplier | 1x |
 | Indicate Flashed Crewmates | Whether the Grenadier can see who has been flashed | Toggle | False |
 | Grenadier can Vent | Whether the Grenadier can Vent | Toggle | False |
 -----------------------
@@ -1221,19 +1276,21 @@ The Swooper is an Impostor that can temporarily turn invisible.
 | Swooper can Vent | Whether the Swooper can Vent | Toggle | False |
 
 -----------------------
-## Poisoner
+## Bomber
 ### **Team: Impostors**
 
-The Poisoner is an Impostor who has to poison another play instead of kill.\
-When they poison a player, the poisoned player dies either upon the start of the next meeting or after a set duration.
+The Bomber is an Impostor who has the ability to plant bombs instead of kill.\
+After a bomb is planted, the bomb will detonate a fixed time period as per settings.\
+Once the bomb detonates it will kill all crewmates (and Impostors!) inside the radius.
 
 ### Game Options
 | Name | Description | Type | Default |
 |----------|:-------------:|:------:|:------:|
-| Poisoner | The percentage probability of the Poisoner appearing | Percentage | 0% |
-| Poison Cooldown | The cooldown of the Poisoner's Poison button | Time | 25s |
-| Poison Kill Delay | The delay of the kill after being poisoned | Time | 5s |
-| Poisoner can Vent | Whether the Poisoner can Vent | Toggle | False |
+| Bomber | The percentage probability of the Bomber appearing | Percentage | 0% |
+| Detonate Delay | The delay of the detonation after bomb has been planted | Time | 5s |
+| Max Kills In Detonation | Maximum number of kills in the detonation | Time | 5s |
+| Detonate Radius | How wide the detonate radius is | Multiplier | 0.25x |
+| Bomber can Vent | Whether the Bomber can Vent | Toggle | False |
 
 -----------------------
 ## Traitor
@@ -1251,17 +1308,17 @@ Once this player has turned into the Traitor their alliance sits with the Impost
 | Traitor Won't Spawn if Neutral Killing are Alive | Whether the Traitor won't spawn if any Neutral Killing roles are alive | Toggle | False |
 
 -----------------------
-## Blackmailer
+## Silencer
 ### **Team: Impostors**
-The Blackmailer is an Impostor that can silence people in meetings.\
-During each round, the Blackmailer can go up to someone and blackmail them.\
-This prevents the blackmailed person from speaking during the next meeting.
+The Silencer is an Impostor that can silence people in meetings.\
+During each round, the Silencer can go up to someone and Silence them.\
+This prevents the Silenced person from speaking during the next meeting.
 
 ### Game Options
 | Name | Description | Type | Default |
 |----------|:-------------:|:------:|:------:|
-| Blackmailer | The percentage probability of the Blackmailer appearing | Percentage | 0% |
-| Initial Blackmail Cooldown | The initial cooldown of the Blackmailer's Blackmail button | Time | 10s |
+| Silencer | The percentage probability of the Silencer appearing | Percentage | 0% |
+| Initial Silence Cooldown | The initial cooldown of the Silencer's Silence button | Time | 10s |
 
 -----------------------
 ## Janitor
@@ -1298,6 +1355,7 @@ The Undertaker is an Impostor that can drag and drop bodies.
 |----------|:-------------:|:------:|:------:|
 | Undertaker | The percentage probability of the Undertaker appearing | Percentage | 0% |
 | Undertaker Drag Cooldown | The cooldown of the Undertaker Drag ability | Time | 25s |
+| Undertaker Speed While Dragging | How fast the Undertaker moves while dragging a body in comparison to normal | Multiplier | 0.75x |
 | Undertaker can Vent | Whether the Undertaker can Vent | Toggle | False |
 | Undertaker can Vent while Dragging | Whether the Undertaker can Vent when they are Dragging a Body | Toggle | False |
 
@@ -1332,7 +1390,7 @@ Killing the Diseased triples the killer's Kill cooldown.
 | Name | Description | Type | Default |
 |----------|:-------------:|:------:|:------:|
 | Diseased | The percentage probability of the Diseased appearing | Percentage | 0% |
-| Kill Multiplier | How much the Kill Cooldown of the Impostor is increased by | Factor | 3x |
+| Kill Multiplier | How much the Kill Cooldown of the Impostor is increased by | Multiplier | 3x |
 
 -----------------------
 ## Multitasker
@@ -1370,7 +1428,7 @@ The Flash travels at twice the speed of a normal player.
 | Name | Description | Type | Default |
 |----------|:-------------:|:------:|:------:|
 | Flash | The percentage probability of the Flash appearing | Percentage | 0% |
-| Speed | How fast the Flash moves in comparison to normal | Factor | 1.25x |
+| Speed | How fast the Flash moves in comparison to normal | Multiplier | 1.25x |
 
 -----------------------
 ## Giant
@@ -1380,7 +1438,7 @@ The Giant is a gigantic Crewmate, that has a decreased walk speed.
 | Name | Description | Type | Default |
 |----------|:-------------:|:------:|:------:|
 | Giant | The percentage probability of the Giant appearing | Percentage | 0% |
-| Speed | How fast the Giant moves in comparison to normal | Factor | 0.75x |
+| Speed | How fast the Giant moves in comparison to normal | Multiplier | 0.75x |
 
 -----------------------
 ## Lovers
@@ -1389,7 +1447,7 @@ The Lovers are two players who are linked together.\
 These two players get picked randomly between Crewmates and Impostors.\
 They gain the primary objective to stay alive together.\
 If they are both among the last 3 players, they win.\
-In order to so, they gain access to a private chat, only visible by them in between meetings.\
+In order to do so, they gain access to a private chat, only visible by them in between meetings.\
 However, they can also win with their respective team, hence why the Lovers do not know the role of the other lover.
 
 ### Game Options
@@ -1401,13 +1459,13 @@ However, they can also win with their respective team, hence why the Lovers do n
 | Neutral Roles Can Be Lovers | Whether a Lover can be a Neutral Role | Toggle | True |
 
 -----------------------
-## Radar
+## Paranoiac
 ### **Applied to: All**
-The Radar is a crewmate who knows where the closest player is to them.
+The Paranoiac is a crewmate who knows where the closest player is to them.
 ### Game Options
 | Name | Description | Type | Default |
 |----------|:-------------:|:------:|:------:|
-| Radar | The percentage probability of the Radar appearing | Percentage | 0% |
+| Paranoiac | The percentage probability of the Paranoiac appearing | Percentage | 0% |
 
 -----------------------
 ## Sleuth
@@ -1446,7 +1504,7 @@ Does not appear on Airship or Submerged.
 ### **Applied to: Impostors**
 Double Shot is an Impostor who gets an extra life when assassinating.\
 Once they use their life they are indicated with a red flash\
-and can no longer geuss the person who they guessed wrong for the remainder of that meeting.
+and can no longer guess the person who they guessed wrong for the remainder of that meeting.
 ### Game Options
 | Name | Description | Type | Default |
 |----------|:-------------:|:------:|:------:|
@@ -1470,7 +1528,7 @@ When they are the only remaining Impostor, they will have their kill cooldown sh
 # Game Mode Settings
 | Name | Description | Type | Default |
 |----------|:-------------:|:------:|:------:|
-| Game Mode | What game mode the next game will be | Classic / All Any / Killing Only | Classic |
+| Game Mode | What game mode the next game will be | Classic / All Any / Killing Only / Cultist | Classic |
 
 -----------------------
 # Classic Game Mode Settings
@@ -1493,9 +1551,34 @@ When they are the only remaining Impostor, they will have their kill cooldown sh
 |----------|:-------------:|:------:|:------:|
 | Neutral Roles | How many neutrals roles will spawn | Number | 1 |
 | Veteran Count | How many Veterans will spawn | Number | 1 |
-| Vigilante Count | How many Vigilantes will spawn | Number | 1 |
+| Gambler Count | How many Gamblers will spawn | Number | 1 |
 | Add Arsonist | Whether Arsonist will be added to the role list | Toggle | True |
 | Add Plaguebearer | Whether Plaguebearer will be added to the role list | Toggle | True |
+
+-----------------------
+# Cultist Settings
+| Name | Description | Type | Default |
+|----------|:-------------:|:------:|:------:|
+| Mayor | The percentage probability of the Mayor appearing | Percentage | 0% |
+| Snitch | The percentage probability of the Snitch appearing | Percentage | 0% |
+| Sheriff | The percentage probability of the Sheriff appearing | Percentage | 0% |
+| Survivor | The percentage probability of the Survivor appearing | Percentage | 0% |
+| Number Of Special Roles | How many special roles will spawn | Number | 4 |
+| Max Chameleons | The maximum number of Chameleons that can spawn | Number | 3 |
+| Max Engineers | The maximum number of Engineers that can spawn | Number | 3 |
+| Max Investigators | The maximum number of Investigators that can spawn | Number | 3 |
+| Max Mystics | The maximum number of Mystics that can spawn | Number | 3 |
+| Max Spies | The maximum number of Spies that can spawn | Number | 3 |
+| Max Transporters | The maximum number of Transporters that can spawn | Number | 3 |
+| Max Gamblers | The maximum number of Gamblers that can spawn | Number | 3 |
+| Initial Whisper Cooldown | The initial cooldown of the Whisperer's Whisper button | Time | 25s |
+| Increased Cooldown Per Whisper | The amount of time the Whisperer's whisper cooldown increases by per Whisper | Time | 5s |
+| Whisper Radius | How wide the whisper radius is | Multiplier | 0.25x |
+| Conversion Percentage | The percentage someone is leant towards being converted (addition not chance) | Percentage | 25% |
+| Decreased Conversion Percentage Per Conversion | The percentage decrease of the conversion percentage with each conversion | Percentage | 5% |
+| Initial Revive Cooldown | The initial cooldown of the Necromancer's Revive button | Time | 25s |
+| Increased Cooldown Per Revive | The amount of time the Necromancer's revive cooldown increases by per Revive | Time | 25s |
+| Maximum Number Of Reveals | The maximum number of times the Snitch can reveal someone | Number | 5 |
 
 -----------------------
 # Map Settings
@@ -1538,6 +1621,7 @@ When they are the only remaining Impostor, they will have their kill cooldown sh
 | Disable Meeting Skip Button | Whether the meeting button is disabled | No / Emergency / Always | No |
 | Disable Level Icons | Whether all level icons are removed in meetings | Toggle | False |
 | Disable Player Nameplates | Whether all decorative nameplates are disabled in meetings | Toggle | False |
+| Enable Hidden Roles | Whether hidden roles are added to the role selections | Toggle | True |
 
 -----------------------
 # Task Tracking Settings
@@ -1566,7 +1650,6 @@ If they guess wrong, they die instead.
 | Assassin Kill | The number of kill the Assassin can do with his ability | Number | 1 |
 | Assassin Guess Crewmate | Whether the Assassin can Guess "Crewmate" | Toggle | False |
 | Assassin Multiple Kill  | Whether the Assassin can kill more than once per meeting | Toggle | False |
-| Assassinate Snitch via Crewmate Guess  | Whether the Assassin can kill the Snitch by Guessing Crewmate | Toggle | False |
 | Assassin Guess Neutral Benign  | Whether the Assassin can Guess Neutral Benign roles | Toggle | False |
 | Assassin Guess Neutral Evil  | Whether the Assassin can Guess Neutral Evil roles | Toggle | False |
 | Assassin Guess Neutral Killing  | Whether the Assassin can Guess Neutral Killing roles | Toggle | False |
@@ -1599,13 +1682,13 @@ If you have any bugs or any need to contact me, join the [Discord Server](https:
 [TorchMod](https://github.com/tomozbot/TorchMod) - For the inspiration of the Torch modifier.\
 [XtraCube](https://github.com/XtraCube) - For the RainbowMod.\
 [PhasmoFireGod](https://twitch.tv/PhasmoFireGod) and [Ophidian](https://www.instagram.com/ixean.studio) - Button Art.\
-[TheOtherRoles](https://github.com/Eisbison/TheOtherRoles) - For the inspiration of the Vigilante, Tracker and Spy roles, as well as the Bait modifier.\
+[TheOtherRoles](https://github.com/Eisbison/TheOtherRoles) - For the inspiration of the Gambler, Tracker and Spy roles, as well as the Bait modifier.\
 [5up](https://www.twitch.tv/5uppp) and the Submarine Team - For the inspiration of the Grenadier role.\
 [Guus](https://github.com/OhMyGuus) - For support for the old Among Us versions (v2021.11.9.5 and v2021.12.15).\
 [MyDragonBreath](https://github.com/MyDragonBreath) - For Submerged Compatibility, the Trapper role and support for the new Among Us version (v2022.6.21).\
 [ItsTheNumberH](https://github.com/itsTheNumberH/Town-Of-H) - For the code used for Blind, Bait, Poisoner and partially for Tracker, as well as other bug fixes.\
 [Ruiner](https://github.com/ruiner189/Town-Of-Us-Redux) - For lovers changed into a modifier and Task Tracking.\
-[Term](https://www.twitch.tv/termboii) - For creating Transporter, Medium, Blackmailer, Plaguebearer, Sleuth, Multitasker and porting v2.5.0 to the new Among Us version (v2021.12.15).\
+[Term](https://www.twitch.tv/termboii) - For creating Transporter, Medium, Silencer, Plaguebearer, Sleuth, Multitasker and porting v2.5.0 to the new Among Us version (v2021.12.15).\
 [BryBry16](https://github.com/Brybry16/BetterPolus) - For the code used for Better Polus.\
 [Alexejhero](https://github.com/SubmergedAmongUs/Submerged) - For the Submerged map.
 

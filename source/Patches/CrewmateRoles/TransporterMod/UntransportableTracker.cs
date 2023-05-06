@@ -1,10 +1,10 @@
 using HarmonyLib;
-using TownOfUs.Roles;
+using TownOfRoles.Roles;
 using System;
 using Hazel;
 using Reactor.Utilities.Extensions;
 
-namespace TownOfUs.CrewmateRoles.TransporterMod
+namespace TownOfRoles.CrewmateRoles.TransporterMod
 {
     [HarmonyPatch]
     public class UntransportableTracker

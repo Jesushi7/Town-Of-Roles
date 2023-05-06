@@ -6,20 +6,32 @@ using Reactor.Utilities;
 using Reactor.Utilities.Extensions;
 using Object = UnityEngine.Object;
 using Reactor.Networking.Extensions;
+using System;
 
-namespace TownOfUs.Roles.Modifiers
+namespace TownOfRoles.Roles.Modifiers
 {
     public class Disperser : Modifier
     {
         public KillButton DisperseButton;
 
         public bool ButtonUsed;
+        public DateTime StartingCooldown { get; set; }
         public Disperser(PlayerControl player) : base(player)
         {
             Name = "Disperser";
             TaskText = () => "Transport everyone to a random vent";
-            Color = Patches.Colors.Impostor;
+            Color = Patches.Colors.Modifiers;
+            StartingCooldown = DateTime.UtcNow;
             ModifierType = ModifierEnum.Disperser;
+        }
+        public float StartTimer()
+        {
+            var utcNow = DateTime.UtcNow;
+            var timeSpan = utcNow - StartingCooldown;
+            var num = 10000f;
+            var flag2 = num - (float)timeSpan.TotalMilliseconds < 0f;
+            if (flag2) return 0;
+            return (num - (float)timeSpan.TotalMilliseconds) / 1000f;
         }
 
         public void Disperse()

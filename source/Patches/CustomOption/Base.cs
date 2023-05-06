@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace TownOfUs.CustomOption
+namespace TownOfRoles.CustomOption
 {
     public class CustomOption
     {

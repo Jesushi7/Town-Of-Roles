@@ -1,7 +1,7 @@
-using TownOfUs.Extensions;
+using TownOfRoles.Extensions;
 using UnityEngine;
 
-namespace TownOfUs.Roles.Modifiers
+namespace TownOfRoles.Roles.Modifiers
 {
     public class Giant : Modifier, IVisualAlteration
     {
@@ -10,7 +10,7 @@ namespace TownOfUs.Roles.Modifiers
             var slowText = CustomGameOptions.GiantSlow != 1? " and slow!" : "!";
             Name = "Giant";
             TaskText = () => "You are ginormous" + slowText;
-            Color = Patches.Colors.Giant;
+            Color = Patches.Colors.Modifiers;
             ModifierType = ModifierEnum.Giant;
         }
 
@@ -18,7 +18,7 @@ namespace TownOfUs.Roles.Modifiers
         {
             appearance = Player.GetDefaultAppearance();
             appearance.SpeedFactor = CustomGameOptions.GiantSlow;
-            appearance.SizeFactor = new Vector3(1.0f, 1.0f, 1.0f);
+            appearance.SizeFactor = new Vector3(CustomGameOptions.GiantSize, CustomGameOptions.GiantSize, CustomGameOptions.GiantSize);
             return true;
         }
     }

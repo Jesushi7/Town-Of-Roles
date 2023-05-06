@@ -2,21 +2,23 @@ using System.Collections.Generic;
 using System.Linq;
 using Object = UnityEngine.Object;
 
-namespace TownOfUs.Roles
+namespace TownOfRoles.Roles
 {
     public class Amnesiac : Role
     {
         public Dictionary<byte, ArrowBehaviour> BodyArrows = new Dictionary<byte, ArrowBehaviour>();
+        public bool SpawnedAs = true;
 
         public Amnesiac(PlayerControl player) : base(player)
         {
             Name = "Amnesiac";
-            ImpostorText = () => "Remember A Role Of A Deceased Player";
-            TaskText = () => "Find a dead body to remember a role";
+            StartText = () => "<color=#80B2FFFF>Remember A Role Of A Deceased Player</color>";
+            TaskText = () => SpawnedAs ? "Find a dead body to remember a role" : "Your target was killed. Now remember a new role!";
             Color = Patches.Colors.Amnesiac;
             RoleType = RoleEnum.Amnesiac;
             AddToRoleHistory(RoleType);
-            Faction = Faction.Neutral;
+            FactionName = "<color=#5c5e5d>Neutral</color>";       
+            Faction = Faction.Neutral;                
         }
 
         public DeadBody CurrentTarget;
@@ -26,7 +28,7 @@ namespace TownOfUs.Roles
             LostByRPC = true;
         }
 
-        protected override void IntroPrefix(IntroCutscene._ShowTeam_d__21 __instance)
+        protected override void IntroPrefix(IntroCutscene._ShowTeam_d__36 __instance)
         {
             var amnesiacTeam = new Il2CppSystem.Collections.Generic.List<PlayerControl>();
             amnesiacTeam.Add(PlayerControl.LocalPlayer);

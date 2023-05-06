@@ -1,6 +1,6 @@
 using HarmonyLib;
 
-namespace TownOfUs.Modifiers.LoversMod
+namespace TownOfRoles.Modifiers.LoversMod
 {
     public static class Chat
     {

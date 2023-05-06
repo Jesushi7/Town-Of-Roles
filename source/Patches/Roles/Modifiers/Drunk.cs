@@ -1,14 +1,14 @@
 using UnityEngine;
 
-namespace TownOfUs.Roles.Modifiers
+namespace TownOfRoles.Roles.Modifiers
 {
     public class Drunk : Modifier
     {
         public Drunk(PlayerControl player) : base(player)
         {
             Name = "Drunk";
-            TaskText = () => "Inverrrrrted contrrrrols!";
-            Color = new Color(0.46f, 0.5f, 0f, 1f);
+            TaskText = () => "Your controls are inverted!";
+            Color = Patches.Colors.Modifiers;
             ModifierType = ModifierEnum.Drunk;
         }
     }

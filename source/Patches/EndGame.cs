@@ -1,6 +1,6 @@
 using HarmonyLib;
 
-namespace TownOfUs
+namespace TownOfRoles
 {
     [HarmonyPatch(typeof(AmongUsClient), nameof(AmongUsClient.ExitGame))]
     public static class EndGamePatch

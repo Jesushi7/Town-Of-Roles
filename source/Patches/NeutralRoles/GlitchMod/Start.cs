@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Linq;
 using HarmonyLib;
-using TownOfUs.Roles;
+using TownOfRoles.Roles;
 
-namespace TownOfUs.NeutralRoles.GlitchMod
+namespace TownOfRoles.NeutralRoles.GlitchMod
 {
-    [HarmonyPatch(typeof(IntroCutscene._CoBegin_d__19), nameof(IntroCutscene._CoBegin_d__19.MoveNext))]
+    [HarmonyPatch(typeof(IntroCutscene._CoBegin_d__33), nameof(IntroCutscene._CoBegin_d__33.MoveNext))]
     internal class Start
     {
-        private static void Postfix(IntroCutscene._CoBegin_d__19 __instance)
+        private static void Postfix(IntroCutscene._CoBegin_d__33 __instance)
         {
             var glitch = Role.AllRoles.FirstOrDefault(x => x.RoleType == RoleEnum.Glitch);
             if (glitch != null)

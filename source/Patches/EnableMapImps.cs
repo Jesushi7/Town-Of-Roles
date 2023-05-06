@@ -2,7 +2,7 @@ using HarmonyLib;
 using Il2CppInterop.Runtime.InteropTypes.Arrays;
 using UnityEngine;
 
-namespace TownOfUs
+namespace TownOfRoles
 {
     [HarmonyPatch(typeof(GameSettingMenu), nameof(GameSettingMenu.InitializeOptions))]
     public class EnableMapImps
@@ -11,5 +11,6 @@ namespace TownOfUs
         {
             __instance.HideForOnline = new Il2CppReferenceArray<Transform>(0);
         }
+        
     }
 }

@@ -1,14 +1,13 @@
 using HarmonyLib;
 using Hazel;
-using TownOfUs.Roles;
+using TownOfRoles.Roles;
 using System.Linq;
-using TownOfUs.CrewmateRoles.InvestigatorMod;
-using TownOfUs.CrewmateRoles.SnitchMod;
-using TownOfUs.Extensions;
+using TownOfRoles.CrewmateRoles.SnitchMod;
+using TownOfRoles.Extensions;
 using UnityEngine;
 using Reactor;
 
-namespace TownOfUs.NeutralRoles.ArsonistMod
+namespace TownOfRoles.NeutralRoles.ArsonistMod
 {
     [HarmonyPatch(typeof(AirshipExileController), nameof(AirshipExileController.WrapUpAndSpawn))]
     public static class AirshipExileController_WrapUpAndSpawn

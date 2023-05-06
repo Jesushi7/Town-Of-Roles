@@ -1,9 +1,9 @@
 using System;
-using TownOfUs.Extensions;
-using TownOfUs.Roles.Modifiers;
+using TownOfRoles.Extensions;
+using TownOfRoles.Roles.Modifiers;
 using UnityEngine;
 
-namespace TownOfUs.Roles
+namespace TownOfRoles.Roles
 {
     public class Morphling : Role, IVisualAlteration
 
@@ -19,11 +19,13 @@ namespace TownOfUs.Roles
         public Morphling(PlayerControl player) : base(player)
         {
             Name = "Morphling";
-            ImpostorText = () => "Transform Into Crewmates";
+            StartText = () => "<color=#82e673>Transform Into Crewmates</color>";
             TaskText = () => "Morph into crewmates to be disguised";
-            Color = Patches.Colors.Impostor;
+            Color = Patches.Colors.Morphling;
             LastMorphed = DateTime.UtcNow;
             RoleType = RoleEnum.Morphling;
+            FactionName = "<color=#82e673>Impostor</color>";        
+            Faction = Faction.Impostors;              
             AddToRoleHistory(RoleType);
             Faction = Faction.Impostors;
         }

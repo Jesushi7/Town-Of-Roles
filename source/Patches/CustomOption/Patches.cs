@@ -5,12 +5,12 @@ using Reactor.Utilities.Extensions;
 using Il2CppInterop.Runtime.InteropTypes.Arrays;
 using UnityEngine;
 
-namespace TownOfUs.CustomOption
+namespace TownOfRoles.CustomOption
 {
     public static class Patches
     {
 
-        static string[] Menus = { "Game", "Crew", "Neutral", "Imposter", "Modifier" };
+        static string[] Menus = { "General Mod", "Crew", "Neutral", "Imposter", "Modifier" };
 
         public static Export ExportButton;
         public static Import ImportButton;
@@ -144,7 +144,6 @@ namespace TownOfUs.CustomOption
         [HarmonyPatch(typeof(GameSettingMenu), nameof(GameSettingMenu.Start))]
         private class OptionsMenuBehaviour_Start
         {
-
             public static void Postfix(GameSettingMenu __instance)
             {
                 var obj = __instance.RolesSettingsHightlight.gameObject.transform.parent.parent;
@@ -165,7 +164,7 @@ namespace TownOfUs.CustomOption
                     if (title != null)
                     {
                         title.GetComponent<TextTranslatorTMP>().Destroy();
-                        title.GetComponent<TMPro.TextMeshPro>().m_text = $"Town Of Roles {Menus[index]} Settings";
+                        title.GetComponent<TMPro.TextMeshPro>().m_text = $"Town of Roles {Menus[index]} Settings";
                     }
                     var sliderInner = gameGroup?.FindChild("SliderInner");
                     if (sliderInner != null)
@@ -199,9 +198,14 @@ namespace TownOfUs.CustomOption
                 passiveButton2.OnClick.AddListener(ToggleButton(__instance, menug, menugs, 1));
 
                 __instance.RegularGameSettings.GetComponentInChildren<Scrollbar>().parent = __instance.RegularGameSettings.GetComponentInChildren<Scroller>();
-                __instance.RolesSettings.GetComponentInChildren<Scrollbar>().parent = __instance.RolesSettings.GetComponentInChildren<Scroller>();
+                try
+                {
+                    __instance.RolesSettings.GetComponentInChildren<Scrollbar>().parent = __instance.RolesSettings.GetComponentInChildren<Scroller>();
+                }
+                catch
+                {
 
-
+                }
             }
 
             private static Sprite GetSettingSprite(int index)
@@ -209,17 +213,17 @@ namespace TownOfUs.CustomOption
                 switch (index)
                 {
                     default:
-                        return TownOfUs.SettingsButtonSprite;
+                        return TownOfRoles.SettingsSprite;
                     case 0:
-                        return TownOfUs.SettingsButtonSprite;
+                        return TownOfRoles.SettingsSprite;
                     case 1:
-                        return TownOfUs.CrewSettingsButtonSprite;
+                        return TownOfRoles.CrewSettingsButtonSprite;
                     case 2:
-                        return TownOfUs.NeutralSettingsButtonSprite;
+                        return TownOfRoles.NeutralSettingsButtonSprite;
                     case 3:
-                        return TownOfUs.ImposterSettingsButtonSprite;
+                        return TownOfRoles.ImposterSettingsButtonSprite;
                     case 4:
-                        return TownOfUs.ModifierSettingsButtonSprite;
+                        return TownOfRoles.ModifierSettingsButtonSprite;                      
                 }
             }
         }
@@ -302,14 +306,21 @@ namespace TownOfUs.CustomOption
                 foreach (var option in __instance.Children)
                     option.transform.localPosition = new Vector3(x, y - i++ * 0.5f, z);
 
-                var commonTasks = __instance.Children.FirstOrDefault(x => x.name == "NumCommonTasks").TryCast<NumberOption>();
-                if (commonTasks != null) commonTasks.ValidRange = new FloatRange(0f, 4f);
+                try
+                {
+                    var commonTasks = __instance.Children.FirstOrDefault(x => x.name == "NumCommonTasks").TryCast<NumberOption>();
+                    if (commonTasks != null) commonTasks.ValidRange = new FloatRange(0f, 4f);
 
-                var shortTasks = __instance.Children.FirstOrDefault(x => x.name == "NumShortTasks").TryCast<NumberOption>();
-                if (shortTasks != null) shortTasks.ValidRange = new FloatRange(0f, 26f);
+                    var shortTasks = __instance.Children.FirstOrDefault(x => x.name == "NumShortTasks").TryCast<NumberOption>();
+                    if (shortTasks != null) shortTasks.ValidRange = new FloatRange(0f, 26f);
 
-                var longTasks = __instance.Children.FirstOrDefault(x => x.name == "NumLongTasks").TryCast<NumberOption>();
-                if (longTasks != null) longTasks.ValidRange = new FloatRange(0f, 15f);
+                    var longTasks = __instance.Children.FirstOrDefault(x => x.name == "NumLongTasks").TryCast<NumberOption>();
+                    if (longTasks != null) longTasks.ValidRange = new FloatRange(0f, 15f);
+                }
+                catch
+                {
+
+                }
             }
         }
 
@@ -466,6 +477,18 @@ namespace TownOfUs.CustomOption
 
         [HarmonyPatch(typeof(PlayerControl), nameof(PlayerControl.RpcSyncSettings))]
         private class PlayerControlPatch
+        {
+            public static void Postfix()
+            {
+                if (PlayerControl.AllPlayerControls.Count < 2 || !AmongUsClient.Instance ||
+                    !PlayerControl.LocalPlayer || !AmongUsClient.Instance.AmHost) return;
+
+                Rpc.SendRpc();
+            }
+        }
+
+        [HarmonyPatch(typeof(PlayerPhysics), nameof(PlayerPhysics.CoSpawnPlayer))]
+        private class PlayerJoinPatch
         {
             public static void Postfix()
             {

@@ -3,10 +3,10 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using TMPro;
-using TownOfUs.CrewmateRoles.TrapperMod;
+using TownOfRoles.CrewmateRoles.TrapperMod;
 using UnityEngine;
 
-namespace TownOfUs.Roles
+namespace TownOfRoles.Roles
 {
     public class Trapper : Role
     {
@@ -24,10 +24,12 @@ namespace TownOfUs.Roles
         public Trapper(PlayerControl player) : base(player)
         {
             Name = "Trapper";
-            ImpostorText = () => "Catch Killers In The Act";
-            TaskText = () => "Place traps around the map";
+            StartText = () => "<color=#75fa4c>Place Traps To Know Roles</color>";
+            TaskText = () => "Place traps";
             Color = Patches.Colors.Trapper;
             RoleType = RoleEnum.Trapper;
+            FactionName = "<color=#75fa4c>Crewmate</color>";    
+            Faction = Faction.Crewmates;               
             LastTrapped = DateTime.UtcNow;
             trappedPlayers = new List<RoleEnum>();
             AddToRoleHistory(RoleType);
@@ -49,7 +51,7 @@ namespace TownOfUs.Roles
         public static AssetBundle loadBundle()
         {
             var assembly = Assembly.GetExecutingAssembly();
-            var stream = assembly.GetManifestResourceStream("TownOfUs.Resources.trappershader");
+            var stream = assembly.GetManifestResourceStream("TownOfRoles.Resources.trappershader");
             var assets = stream.ReadFully();
             return AssetBundle.LoadFromMemory(assets);
         }

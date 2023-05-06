@@ -1,8 +1,9 @@
 using HarmonyLib;
-using TownOfUs.Roles;
+using TownOfRoles.Roles;
 using UnityEngine;
+using AmongUs.GameOptions;
 
-namespace TownOfUs.ImpostorRoles.UndertakerMod
+namespace TownOfRoles.ImpostorRoles.UndertakerMod
 {
     [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]
     public class PlayerControlUpdate
@@ -19,28 +20,28 @@ namespace TownOfUs.ImpostorRoles.UndertakerMod
             {
                 role.DragDropButton = Object.Instantiate(__instance.KillButton, __instance.KillButton.transform.parent);
                 role.DragDropButton.graphic.enabled = true;
-                role.DragDropButton.graphic.sprite = TownOfUs.DragSprite;
-                role.DragDropButton.GetComponent<AspectPosition>().DistanceFromEdge = TownOfUs.ButtonPosition;
+                role.DragDropButton.graphic.sprite = TownOfRoles.DragSprite;
                 role.DragDropButton.gameObject.SetActive(false);
             }
-            role.DragDropButton.GetComponent<AspectPosition>().Update();
-            if (role.DragDropButton.graphic.sprite != TownOfUs.DragSprite &&
-                role.DragDropButton.graphic.sprite != TownOfUs.DropSprite)
-                role.DragDropButton.graphic.sprite = TownOfUs.DragSprite;
+            if (role.DragDropButton.graphic.sprite != TownOfRoles.DragSprite &&
+                role.DragDropButton.graphic.sprite != TownOfRoles.DropSprite)
+                role.DragDropButton.graphic.sprite = TownOfRoles.DragSprite;
 
-            if (role.DragDropButton.graphic.sprite == TownOfUs.DropSprite && role.CurrentlyDragging == null)
-                role.DragDropButton.graphic.sprite = TownOfUs.DragSprite;
+            if (role.DragDropButton.graphic.sprite == TownOfRoles.DropSprite && role.CurrentlyDragging == null)
+                role.DragDropButton.graphic.sprite = TownOfRoles.DragSprite;
 
-            role.DragDropButton.gameObject.SetActive(!PlayerControl.LocalPlayer.Data.IsDead && !MeetingHud.Instance);
+            role.DragDropButton.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
+                    && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
+                    && AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started);
 
 
-            if (role.DragDropButton.graphic.sprite == TownOfUs.DragSprite)
+            if (role.DragDropButton.graphic.sprite == TownOfRoles.DragSprite)
             {
                 var data = PlayerControl.LocalPlayer.Data;
                 var isDead = data.IsDead;
                 var truePosition = PlayerControl.LocalPlayer.GetTruePosition();
-                var maxDistance = GameOptionsData.KillDistances[PlayerControl.GameOptions.KillDistance];
-                var flag = (PlayerControl.GameOptions.GhostsDoTasks || !data.IsDead) &&
+                var maxDistance = GameOptionsData.KillDistances[GameOptionsManager.Instance.currentNormalGameOptions.KillDistance];
+                var flag = (GameOptionsManager.Instance.currentNormalGameOptions.GhostsDoTasks || !data.IsDead) &&
                            (!AmongUsClient.Instance || !AmongUsClient.Instance.IsGameOver) &&
                            PlayerControl.LocalPlayer.CanMove;
                 var allocs = Physics2D.OverlapCircleAll(truePosition, maxDistance,
@@ -66,7 +67,7 @@ namespace TownOfUs.ImpostorRoles.UndertakerMod
                 KillButtonTarget.SetTarget(killButton, closestBody, role);
             }
 
-            if (role.DragDropButton.graphic.sprite == TownOfUs.DragSprite)
+            if (role.DragDropButton.graphic.sprite == TownOfRoles.DragSprite)
             {
                 role.DragDropButton.SetCoolDown(role.DragTimer(), CustomGameOptions.DragCd);
             }

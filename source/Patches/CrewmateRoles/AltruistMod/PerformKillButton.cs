@@ -1,10 +1,11 @@
 using HarmonyLib;
 using Hazel;
 using Reactor.Utilities;
-using TownOfUs.Roles;
+using TownOfRoles.Roles;
 using UnityEngine;
+using AmongUs.GameOptions;
 
-namespace TownOfUs.CrewmateRoles.AltruistMod
+namespace TownOfRoles.CrewmateRoles.AltruistMod
 {
     [HarmonyPatch(typeof(KillButton), nameof(KillButton.DoClick))]
     public class PerformKillButton
@@ -21,7 +22,7 @@ namespace TownOfUs.CrewmateRoles.AltruistMod
             var flag2 = __instance.isCoolingDown;
             if (flag2) return false;
             if (!__instance.enabled) return false;
-            var maxDistance = GameOptionsData.KillDistances[PlayerControl.GameOptions.KillDistance];
+            var maxDistance = GameOptionsData.KillDistances[GameOptionsManager.Instance.currentNormalGameOptions.KillDistance];
             if (role == null)
                 return false;
             if (role.CurrentTarget == null)
