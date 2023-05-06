@@ -1,16 +1,14 @@
 ## *Note: This repository is an unofficial continuation of Town of Us due to the original repository being discontinued.*
 
 ![LOGO](./Images/TOU-logo.png)
-![Roles](./Images/Roles.png)
 
 An Among Us mod that adds a bunch of roles, modifiers and game settings
 
 
 **Crewmate Roles**
-- [Mystic](#Mystic)
 - [Avenger](#Avenger)
 - [Mystic](#mystic)
-- [Snitch](#Snitch)
+- [Informant](#Informant)
 - [Informant](#Informant)
 - [Tracker](#tracker)
 - [Trapper](#trapper)
@@ -73,56 +71,6 @@ An Among Us mod that adds a bunch of roles, modifiers and game settings
 | Among Us - Version| Mod Version | Link |
 |----------|-------------|-----------------|
 | 2022.12.14s & 2022.12.14e | v4.0.2 | [Download](https://github.com/eDonnes124/Town-Of-Us/releases/download/v4.0.2/ToU.v4.0.2.zip) |
-| 2022.12.14s & 2022.12.14e | v4.0.1 | [Download](https://github.com/eDonnes124/Town-Of-Us/releases/download/v4.0.1/ToU.v4.0.1.zip) |
-| 2022.12.14s & 2022.12.14e | v4.0.0 | [Download](https://github.com/eDonnes124/Town-Of-Us/releases/download/v4.0.0/ToU.v4.0.0.zip) |
-| 2022.10.25s & 2022.10.25e | v3.4.0 | [Download](https://github.com/eDonnes124/Town-Of-Us/releases/download/v3.4.0/ToU.v3.4.0.zip) |
-| 2022.8.24s & 2022.8.24e & 2022.9.20s & 2022.9.20e | v3.3.2 | [Download](https://github.com/eDonnes124/Town-Of-Us/releases/download/v3.3.2/ToU.v3.3.2.zip) |
-| 2022.8.24s & 2022.8.24e & 2022.9.20s & 2022.9.20e | v3.3.1 | [Download](https://github.com/eDonnes124/Town-Of-Us/releases/download/v3.3.1/ToU.v3.3.1.zip) |
-| 2022.8.24s & 2022.8.24e & 2022.9.20s & 2022.9.20e | v3.3.0 | [Download](https://github.com/eDonnes124/Town-Of-Us/releases/download/v3.3.0/ToU.v3.3.0.zip) |
-| 2022.6.21s & 2022.6.21e & 2022.7.12s & 2022.7.12e | v3.2.0 | [Download](https://github.com/eDonnes124/Town-Of-Us/releases/download/v3.2.0/ToU.v3.2.0.zip) |
-| 2022.3.29s & 2022.3.29e & 2022.4.19e | v3.1.0 | [Download](https://github.com/eDonnes124/Town-Of-Us/releases/download/v3.1.0/ToU.v3.1.0.zip) |
-| 2022.3.29s & 2022.3.29e & 2022.4.19e | v3.0.1 | [Download](https://github.com/eDonnes124/Town-Of-Us/releases/download/v3.0.1/ToU.v3.0.1.zip) |
-| 2022.3.29s & 2022.3.29e & 2022.4.19e | v3.0.0 | [Download](https://github.com/eDonnes124/Town-Of-Us/releases/download/v3.0.0/ToU.v3.0.0.zip) |
-| 2021.12.15s & 2021.12.15e Until 2022.2.24s & 2022.2.24e | v2.6.5 | [Download](https://github.com/eDonnes124/Town-Of-Us/releases/download/v2.6.5/ToU.v2.6.5.zip) |
-| 2021.12.15s & 2021.12.15e Until 2022.2.24s & 2022.2.24e | v2.6.4 | [Download](https://github.com/eDonnes124/Town-Of-Us/releases/download/v2.6.4/ToU.v2.6.4.zip) |
-| 2021.6.30s & 2021.6.30e & 2021.7.20e | v2.6.4 | [Download](https://github.com/eDonnes124/Town-Of-Us/releases/download/v2.6.4/ToU.v2.6.4-2021.6.30.zip) |
-| 2021.12.15s & 2021.12.15e Until 2022.2.24s & 2022.2.24e | v2.6.3 | [Download](https://github.com/eDonnes124/Town-Of-Us/releases/download/v2.6.3/ToU.v2.6.3.zip) |
-| 2021.6.30s & 2021.6.30e & 2021.7.20e | v2.6.3 | [Download](https://github.com/eDonnes124/Town-Of-Us/releases/download/v2.6.3/ToU.v2.6.3-2021.6.30.zip) |
-| 2021.12.15s & 2021.12.15e Until 2022.2.24s & 2022.2.24e | v2.6.2 | [Download](https://github.com/eDonnes124/Town-Of-Us/releases/download/v2.6.2/ToU.v2.6.2.zip) |
-| 2021.6.30s & 2021.6.30e & 2021.7.20e | v2.6.2 | [Download](https://github.com/eDonnes124/Town-Of-Us/releases/download/v2.6.2/ToU.v2.6.2-2021.6.30.zip) |
-| 2021.12.15s & 2021.12.15e Until 2022.2.24s & 2022.2.24e | v2.6.1 | [Download](https://github.com/eDonnes124/Town-Of-Us/releases/download/v2.6.1/ToU.v2.6.1.zip) |
-| 2021.6.30s & 2021.6.30e & 2021.7.20e | v2.6.1 | [Download](https://github.com/eDonnes124/Town-Of-Us/releases/download/v2.6.1/ToU.v2.6.1.Old.zip) |
-| 2021.12.15s & 2021.12.15e Until 2022.2.24s & 2022.2.24e | v2.6.0 | [Download](https://github.com/eDonnes124/Town-Of-Us/releases/download/v2.6.0/ToU.v2.6.0.zip) |
-| 2021.6.30s & 2021.6.30e & 2021.7.20e | v2.6.0 | [Download](https://github.com/eDonnes124/Town-Of-Us/releases/download/v2.6.0/ToU.v2.6.0.Old.zip) |
-| 2021.12.15s & 2021.12.15e Until 2022.2.24s & 2022.2.24e | v2.5.1 | [Download](https://github.com/eDonnes124/Town-Of-Us/releases/download/v2.5.1/ToU.v2.5.1.zip) |
-| 2021.12.15s & 2021.12.15e Until 2022.2.24s & 2022.2.24e | v2.5.0 | [Download](https://github.com/eDonnes124/Town-Of-Us/releases/download/v2.5.0/ToU.v2.5.0.zip) |
-| 2021.6.30s & 2021.6.30e & 2021.7.20e | v2.5.0 | [Download](https://github.com/eDonnes124/Town-Of-Us/releases/download/v2.5.0/ToU.v2.5.0.Old.zip) |
-| 2021.12.15s & 2021.12.15e Until 2022.2.24s & 2022.2.24e | v2.4.2 | [Download](https://github.com/eDonnes124/Town-Of-Us/releases/download/v2.4.2/ToU.v2.4.2.zip) |
-| 2021.12.15s & 2021.12.15e Until 2022.2.24s & 2022.2.24e | v2.4.1 | [Download](https://github.com/eDonnes124/Town-Of-Us/releases/download/v2.4.1/ToU.v2.4.1.zip) |
-| 2021.11.9.5s & 2021.11.9.5e | v2.4.0 | [Download](https://github.com/eDonnes124/Town-Of-Us/releases/download/v2.4.0/ToU.v2.4.0.zip) |
-| 2021.6.30s & 2021.6.30e & 2021.7.20e | v2.3.4 | [Download](https://github.com/eDonnes124/Town-Of-Us/releases/download/v2.3.4/ToU.v2.3.4.zip) |
-| 2021.6.30s & 2021.6.30e & 2021.7.20e | v2.3.3 | [Download](https://github.com/eDonnes124/Town-Of-Us/releases/download/v2.3.3/ToU.v2.3.3.zip) |
-| 2021.6.30s & 2021.6.30e & 2021.7.20e | v2.3.2 | [Download](https://github.com/eDonnes124/Town-Of-Us/releases/download/v2.3.2/ToU.v2.3.2.zip) |
-| 2021.6.30s & 2021.6.30e & 2021.7.20e | v2.3.1 | [Download](https://github.com/eDonnes124/Town-Of-Us/releases/download/v2.3.1/ToU.v2.3.1.zip) |
-| 2021.6.30s & 2021.6.30e & 2021.7.20e | v2.3.0 | [Download](https://github.com/eDonnes124/Town-Of-Us/releases/download/v2.3.0/ToU.v2.3.0.zip) |
-| 2021.6.30s & 2021.6.30e & 2021.7.20e | v2.2.1 | [Download](https://github.com/polusgg/Town-Of-Us/releases/download/v2.2.1/TOU_221.zip) |
-| 2021.6.30s & 2021.6.30e & 2021.7.20e | v2.2.0 | [Download](https://github.com/polusgg/Town-Of-Us/releases/download/v2.2.0/TOU_220.zip) |
-| 2021.6.15s & 2021.6.15e | v2.1.4 | [Download](https://github.com/polusgg/Town-Of-Us/releases/download/v2.1.4/TOU_214.zip) |
-| 2021.6.15s & 2021.6.15e | v2.1.3 | [Download](https://github.com/polusgg/Town-Of-Us/releases/download/v2.1.3/TownOfRoles213_1.zip) |
-| 2021.6.15s & 2021.6.15e | v2.1.2 | [Download](https://github.com/polusgg/Town-Of-Us/releases/download/v2.1.2/TownOfRoles212_1.zip) |
-| 2021.6.15s & 2021.6.15e | v2.1.1 | [Download](https://github.com/polusgg/Town-Of-Us/releases/download/v2.1.1/TownOfRoles211_1.zip) |
-| 2021.5.10s | v2.0.4 | [Download](https://github.com/polusgg/Town-Of-Us/releases/download/v2.0.4/TownOfRoles-v2.0.4.zip) |
-| 2021.5.10s | v2.0.3 | [Download](https://github.com/polusgg/Town-Of-Us/releases/download/v2.0.3/TownOfRoles-v2.0.3.zip) |
-| 2021.4.12s & 2021.4.14s | v2.0.2 | [Download](https://github.com/polusgg/Town-Of-Us/releases/download/v2.0.2/TownOfRoles-v2.0.2.zip) |
-| 2021.4.12s | v2.0.1 | [Download](https://github.com/polusgg/Town-Of-Us/releases/download/v2.0.1/TownOfRoles-v2.0.1.zip) |
-| 2021.3.31.3s | v2.0.0 | [Download](https://github.com/polusgg/Town-Of-Us/releases/download/v2.0.0/TownOfRoles-v2.0.0.zip) |
-| 2021.3.5s | v1.2.0 | [Download](https://github.com/polusgg/Town-Of-Us/releases/download/v1.2.0/TownOfRoles-v1.2.0.zip) |
-| 2021.3.5s | v1.1.0 | [Download](https://github.com/polusgg/Town-Of-Us/releases/download/v1.1.0/TownOfRoles-v1.1.0-2021.3.5s.zip) |
-| 2020.12.19s | v1.1.0 | [Download](https://github.com/polusgg/Town-Of-Us/releases/download/v1.1.0/TownOfRoles-v1.1.0-2020.12.9s.zip) |
-| 2020.12.19s | v1.0.3 | [Download](https://github.com/polusgg/Town-Of-Us/releases/download/v1.0.3/TownOfRoles-v1.0.3.zip) |
-| 2020.12.19s | v1.0.2 | [Download](https://github.com/polusgg/Town-Of-Us/releases/download/v1.0.2/TownOfRoles-v1.0.2.zip) |
-| 2020.12.19s | v1.0.1 | [Download](https://github.com/polusgg/Town-Of-Us/releases/download/v1.0.1/TownOfRoles-v1.0.1.zip) |
-| 2020.12.19s | v1.0.0 | [Download](https://github.com/polusgg/Town-Of-Us/releases/download/v1.0.0/TownOfRoles-v1.0.0.zip) |
 
 <details>
   <summary> Changelog </summary>
