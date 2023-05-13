@@ -1,4 +1,4 @@
-## *Note: This repository is a continuation of [Town of Us Reactivated]([https://github.com/XtraCube](https://github.com/eDonnes124/Town-Of-Us-R)).*
+## *Note: This repository is a continuation of [Town of Us Reactivated]([https://github.com/eDonnes124/Town-Of-Us-R])).*
 
 ![LOGO](./Images/TOU-logo.png)
 
