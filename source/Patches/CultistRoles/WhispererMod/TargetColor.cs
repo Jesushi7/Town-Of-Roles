@@ -19,7 +19,7 @@ namespace TownOfRoles.CultistRoles.WhispererMod
                 {
                     if (player.PlayerId != state.TargetPlayerId) continue;
                     if (player.Is(RoleEnum.Sheriff) || player.Is(RoleEnum.Mayor) || player.Is(RoleEnum.CultistSnitch)
-                    || player.Is(RoleEnum.Survivor)) state.NameText.color = new Color(0f, 1f, 1f, 1f);
+                    ) state.NameText.color = new Color(0f, 1f, 1f, 1f);
                 }
             }
 
@@ -52,7 +52,7 @@ namespace TownOfRoles.CultistRoles.WhispererMod
             foreach (var player in PlayerControl.AllPlayerControls)
             {
                 if (player.Is(RoleEnum.Sheriff) || player.Is(RoleEnum.Mayor) || player.Is(RoleEnum.CultistSnitch)
-                    || player.Is(RoleEnum.Survivor)) player.nameText().color = new Color(0f, 1f, 1f, 1f);
+                    ) player.nameText().color = new Color(0f, 1f, 1f, 1f);
             }
 
             if (PlayerControl.LocalPlayer.Is(RoleEnum.Necromancer)) return;

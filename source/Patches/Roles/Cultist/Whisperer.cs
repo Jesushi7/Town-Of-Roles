@@ -54,7 +54,7 @@ namespace TownOfRoles.Roles.Cultist
             foreach (var player in PlayerControl.AllPlayerControls)
             {
                 if (!(player.Is(RoleEnum.Sheriff) || player.Is(RoleEnum.CultistSnitch) |
-                    player.Is(RoleEnum.Survivor) || player.Is(RoleEnum.Mayor) || player.Is(RoleEnum.Whisperer)))
+                    player.Is(RoleEnum.Mayor) || player.Is(RoleEnum.Whisperer)))
                 {
                     playerList.Add((player, 100));
                 }

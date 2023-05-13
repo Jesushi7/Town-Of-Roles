@@ -43,7 +43,6 @@ namespace TownOfRoles
         public static int AltruistOn => (int)Generate.AltruistOn.Get();
         public static int UndertakerOn => (int)Generate.UndertakerOn.Get();
         public static int PhantomOn => (int)Generate.PhantomOn.Get();
-        public static int GamblerOn => (int)Generate.GamblerOn.Get();
         public static int AvengerOn => (int)Generate.AvengerOn.Get();
         public static int GrenadierOn => (int)Generate.GrenadierOn.Get();
         public static int VeteranOn => (int)Generate.VeteranOn.Get();
@@ -52,7 +51,6 @@ namespace TownOfRoles
         public static int TraitorOn => (int)Generate.TraitorOn.Get();
         public static int TransporterOn => (int)Generate.TransporterOn.Get();
         public static int MediumOn => (int)Generate.MediumOn.Get();
-        public static int SurvivorOn => (int)Generate.SurvivorOn.Get();
         public static int GuardianAngelOn => (int)Generate.GuardianAngelOn.Get();
         public static int SilencerOn => (int)Generate.SilencerOn.Get();
         public static int PlaguebearerOn => (int)Generate.PlaguebearerOn.Get();
@@ -79,6 +77,7 @@ namespace TownOfRoles
         public static int DisperserOn => (int)Generate.DisperserOn.Get();
         public static int MultitaskerOn => (int)Generate.MultitaskerOn.Get();
         public static int DoubleShotOn => (int)Generate.DoubleShotOn.Get();
+        public static int ChameleonModifierOn => (int)Generate.ChameleonModifierOn.Get();        
         public static int UnderdogOn => (int)Generate.UnderdogOn.Get();
         public static int VanillaGame => (int)Generate.VanillaGame.Get();
         public static float InitialCooldowns => Generate.InitialCooldowns.Get();
@@ -145,8 +144,6 @@ namespace TownOfRoles
         public static bool SwooperVent => Generate.SwooperVent.Get();
         public static bool ImpostorSnitcholes => Generate.ImpostorSnitcholes.Get();
         public static bool DeadSnitcholes => Generate.DeadSnitcholes.Get();        
-        public static bool DisableLevels => Generate.DisableLevels.Get();
-        public static bool WhiteNameplates => Generate.WhiteNameplates.Get();
         public static bool SeeTasksDuringRound => Generate.SeeTasksDuringRound.Get();
         public static bool SeeTasksDuringMeeting => Generate.SeeTasksDuringMeeting.Get();
         public static bool SeeTasksWhenDead => Generate.SeeTasksWhenDead.Get();
@@ -161,8 +158,7 @@ namespace TownOfRoles
         public static int MaxNeutralKillingRoles => (int)Generate.MaxNeutralKillingRoles.Get();
         public static bool RandomNumberImps => Generate.RandomNumberImps.Get();
         public static int NeutralRoles => (int)Generate.NeutralRoles2.Get();
-        public static int VeteranCount => (int)Generate.VeteranCount.Get();
-        public static int GamblerCount => (int)Generate.GamblerCount.Get();                           
+        public static int VeteranCount => (int)Generate.VeteranCount.Get();                      
         public static bool AddArsonist => Generate.AddArsonist.Get();
         public static bool AddJuggernaut => Generate.AddJuggernaut.Get();        
         public static bool AddPlaguebearer => Generate.AddPlaguebearer.Get();
@@ -173,8 +169,7 @@ namespace TownOfRoles
         public static bool SheriffBodyReport => Generate.SheriffBodyReport.Get();     
         public static float DragCd => Generate.DragCooldown.Get();
         public static float UndertakerDragSpeed => Generate.UndertakerDragSpeed.Get();
-        public static bool AssassinGuessNeutrals => Generate.AssassinGuessNeutrals.Get();
-        public static bool AssassinGuessNeutralKilling => Generate.AssassinGuessNeutralKilling.Get();
+        public static bool AssassinGuessGlobalModifiers => Generate.AssassinGuessGlobalModifiers.Get();
         public static bool AssassinGuessImpostors => Generate.AssassinGuessImpostors.Get();
         public static bool AssassinGuessModifiers => Generate.AssassinGuessModifiers.Get();
         public static bool AssassinGuessLovers => Generate.AssassinGuessLovers.Get();
@@ -182,6 +177,7 @@ namespace TownOfRoles
         public static int AssassinKills => (int)Generate.AssassinKills.Get();
         public static int NumberOfImpostorAssassins => (int)Generate.NumberOfImpostorAssassins.Get();
         public static int NumberOfNeutralAssassins => (int)Generate.NumberOfNeutralAssassins.Get();
+         public static int NumberOfCrewAssassins => (int)Generate.NumberOfCrewAssassins.Get();       
         public static bool AmneTurnImpAssassin => Generate.AmneTurnImpAssassin.Get();
         public static bool AmneTurnNeutAssassin => Generate.AmneTurnNeutAssassin.Get();
         public static bool TraitorCanAssassin => Generate.TraitorCanAssassin.Get();
@@ -190,12 +186,6 @@ namespace TownOfRoles
         public static float UnderdogKillBonus => Generate.UnderdogKillBonus.Get();
         public static bool UnderdogIncreasedKC => Generate.UnderdogIncreasedKC.Get();
         public static int PhantomTasksRemaining => (int)Generate.PhantomTasksRemaining.Get();
-        public static bool GamblerGuessNeutrals => Generate.GamblerGuessNeutrals.Get();
-        public static bool GamblerGuessNeutralKilling => Generate.GamblerGuessNeutralKilling.Get();
-        public static bool GamblerGuessLovers => Generate.GamblerGuessLovers.Get();
-        public static int GamblerKills => (int)Generate.GamblerKills.Get();
-        public static bool GamblerMultiKill => Generate.GamblerMultiKill.Get();
-        public static bool GamblerAfterVoting => Generate.GamblerAfterVoting.Get();
                 public static int AvengerTasksRemainingClicked => (int)Generate.AvengerTasksRemainingClicked.Get();
         public static int AvengerTasksRemainingAlert => (int)Generate.AvengerTasksRemainingAlert.Get();
         public static bool AvengerRevealsNeutrals => Generate.AvengerRevealsNeutrals.Get();
@@ -225,13 +215,7 @@ namespace TownOfRoles
         public static float MediateCooldown => Generate.MediateCooldown.Get();
         public static bool ShowMediatePlayer => Generate.ShowMediatePlayer.Get();
         public static bool ShowMediumToDead => Generate.ShowMediumToDead.Get();
-        public static DeadRevealed DeadRevealed => (DeadRevealed)Generate.DeadRevealed.Get();
-        public static float VestCd => Generate.VestCd.Get();
-        public static bool SurvVent => Generate.SurvVent.Get();
-        public static bool SurvVentSwitch => Generate.SurvSwitchVent.Get();        
-        public static float VestDuration => Generate.VestDuration.Get();
-        public static float VestKCReset => Generate.VestKCReset.Get();
-        public static int MaxVests => (int)Generate.MaxVests.Get();     
+        public static DeadRevealed DeadRevealed => (DeadRevealed)Generate.DeadRevealed.Get();   
         public static float ProtectCd => Generate.ProtectCd.Get();
         public static float ProtectDuration => Generate.ProtectDuration.Get();
         public static float ProtectKCReset => Generate.ProtectKCReset.Get();
@@ -275,6 +259,7 @@ namespace TownOfRoles
         public static bool EscapistVent => Generate.EscapistVent.Get();
         public static bool SwooperPolusVent => Generate.SwooperPolusVent.Get();        
         public static float DetonateDelay => Generate.DetonateDelay.Get();
+        public static int NumberOfBaits => (int)Generate.NumberOfBaits.Get();        
         public static int MaxKillsInDetonation => (int) Generate.MaxKillsInDetonation.Get();
         public static float DetonateRadius => Generate.DetonateRadius.Get();
         public static bool BomberVent => Generate.BomberVent.Get();
@@ -309,14 +294,12 @@ namespace TownOfRoles
         public static int MayorCultistOn => (int)Generate.MayorCultistOn.Get();
         public static int SnitchCultistOn => (int)Generate.SnitchCultistOn.Get();
         public static int SheriffCultistOn => (int)Generate.SheriffCultistOn.Get();
-        public static int SurvivorCultistOn => (int)Generate.SurvivorCultistOn.Get();
         public static int SpecialRoleCount => (int)Generate.NumberOfSpecialRoles.Get();
         public static int MaxChameleons => (int)Generate.MaxChameleons.Get();
         public static int MaxEngineers => (int)Generate.MaxEngineers.Get();
         public static int MaxMystics => (int)Generate.MaxMystics.Get();
         public static int MaxSpies => (int)Generate.MaxSpies.Get();
         public static int MaxTransporters => (int)Generate.MaxTransporters.Get();
-        public static int MaxGamblers => (int)Generate.MaxGamblers.Get();
         public static float WhisperCooldown => Generate.WhisperCooldown.Get();
         public static float IncreasedCooldownPerWhisper => Generate.IncreasedCooldownPerWhisper.Get();
         public static float WhisperRadius => Generate.WhisperRadius.Get();

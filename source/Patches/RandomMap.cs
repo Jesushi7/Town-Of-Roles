@@ -122,7 +122,6 @@ namespace TownOfRoles
             Generate.AlertCooldown.Set((float)Generate.AlertCooldown.Value + change, false);
             Generate.TransportCooldown.Set((float)Generate.TransportCooldown.Value + change, false);
             Generate.ProtectCd.Set((float)Generate.ProtectCd.Value + change, false);
-            Generate.VestCd.Set((float)Generate.VestCd.Value + change, false);
             Generate.DouseCooldown.Set((float)Generate.DouseCooldown.Value + change, false);
             Generate.InfectCooldown.Set((float)Generate.InfectCooldown.Value + change, false);
             Generate.PestKillCooldown.Set((float)Generate.PestKillCooldown.Value + change, false);

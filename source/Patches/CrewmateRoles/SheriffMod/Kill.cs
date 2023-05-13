@@ -102,12 +102,6 @@ namespace TownOfRoles.CrewmateRoles.SheriffMod
 
                 return false;
             }
-            else if (role.ClosestPlayer.IsVesting())
-            {
-                Utils.RpcMurderPlayer(PlayerControl.LocalPlayer, PlayerControl.LocalPlayer);
-
-                return false;
-            }
             else if (role.ClosestPlayer.IsProtected())
             {
                 if (!flag4)

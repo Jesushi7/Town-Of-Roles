@@ -81,7 +81,6 @@ namespace TownOfRoles
         public static Sprite DetonateSprite;
         public static Sprite TransportSprite;
         public static Sprite MediateSprite;
-        public static Sprite VestSprite;
         public static Sprite ProtectSprite;
         public static Sprite SilenceSprite;
         public static Sprite SilenceLetterSprite;
@@ -182,7 +181,6 @@ namespace TownOfRoles
             DetonateSprite = CreateSprite("TownOfRoles.Resources.Detonate.png");
             TransportSprite = CreateSprite("TownOfRoles.Resources.Transport.png");
             MediateSprite = CreateSprite("TownOfRoles.Resources.Mediate.png");
-            VestSprite = CreateSprite("TownOfRoles.Resources.Vest.png");
             ProtectSprite = CreateSprite("TownOfRoles.Resources.Protect.png");
             SilenceSprite = CreateSprite("TownOfRoles.Resources.Silence.png");
             Rewind = CreateSprite("TownOfRoles.Resources.Rewind.png");            

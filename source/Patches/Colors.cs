@@ -35,7 +35,6 @@ namespace TownOfRoles.Patches
         public readonly static Color Phantom = new Color(0.4f, 0.16f, 0.38f, 1f);
         public readonly static Color Amnesiac = new Color(0.5f, 0.7f, 1f, 1f);
         public readonly static Color Juggernaut = new Color(0.55f, 0f, 0.3f, 1f);
-        public readonly static Color Survivor = new Color(1f, 0.9f, 0.3f, 1f);
         public readonly static Color GuardianAngel = new Color(0.7f, 1f, 1f, 1f);
         public readonly static Color Plaguebearer = new Color(0.9f, 1f, 0.7f, 1f);
         public readonly static Color Pestilence = new Color(0.3f, 0.3f, 0.3f, 1f);

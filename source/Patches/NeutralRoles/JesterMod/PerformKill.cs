@@ -94,7 +94,7 @@ namespace TownOfRoles.NeutralRoles.JesterMod
 													if (flag11)
 													{
 														role.LastKilled = DateTime.UtcNow;
-														role.LastKilled = role.LastKilled.AddSeconds((double)(CustomGameOptions.GlitchKillCooldown + CustomGameOptions.VestKCReset));
+														role.LastKilled = role.LastKilled.AddSeconds((double)(CustomGameOptions.GlitchKillCooldown + CustomGameOptions.ProtectKCReset));
 														result = false;
 													}
 													else

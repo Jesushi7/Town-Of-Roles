@@ -14,7 +14,7 @@ namespace TownOfRoles.Roles.Modifiers
             Name = "Lover";
             SymbolName = "♥";
             TaskText = () =>
-                "♥ You are in love with" + OtherLover.Player.name + "♥";
+                "♥ You are in love with " + OtherLover.Player.name + "♥";
             Color = Colors.Lovers;
             ModifierType = ModifierEnum.Lover;
         }

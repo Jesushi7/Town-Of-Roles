@@ -31,7 +31,6 @@ namespace TownOfRoles
         private static Sprite Transport => TownOfRoles.TransportSprite;
         private static Sprite Shoot => TownOfRoles.ShootSprite;        
         private static Sprite Mediate => TownOfRoles.MediateSprite;
-        private static Sprite Vest => TownOfRoles.VestSprite;
         private static Sprite Protect => TownOfRoles.ProtectSprite;
         private static Sprite Infect => TownOfRoles.InfectSprite;
         private static Sprite Trap => TownOfRoles.TrapSprite;
@@ -98,11 +97,6 @@ namespace TownOfRoles
                 __instance.KillButton.graphic.sprite = Mediate;
                 flag = true;
             }
-            else if (PlayerControl.LocalPlayer.Is(RoleEnum.Survivor))
-            {
-                __instance.KillButton.graphic.sprite = Vest;
-                flag = true;
-            }
             else if (PlayerControl.LocalPlayer.Is(RoleEnum.GuardianAngel))
             {
                 __instance.KillButton.graphic.sprite = Protect;
@@ -153,7 +147,7 @@ namespace TownOfRoles
                 __instance.KillButton.transform.localPosition = new Vector3(0f, 1f, 0f);
             }
             if (PlayerControl.LocalPlayer.Is(RoleEnum.Engineer) || PlayerControl.LocalPlayer.Is(RoleEnum.Glitch)
-                 || PlayerControl.LocalPlayer.Is(RoleEnum.Pestilence) || PlayerControl.LocalPlayer.Is(RoleEnum.Plaguebearer)|| PlayerControl.LocalPlayer.Is(RoleEnum.Survivor) || PlayerControl.LocalPlayer.Is(RoleEnum.Jester)   || PlayerControl.LocalPlayer.Is(RoleEnum.Juggernaut)|| PlayerControl.LocalPlayer.Is(RoleEnum.Arsonist))
+                 || PlayerControl.LocalPlayer.Is(RoleEnum.Pestilence) || PlayerControl.LocalPlayer.Is(RoleEnum.Plaguebearer)||  PlayerControl.LocalPlayer.Is(RoleEnum.Jester)   || PlayerControl.LocalPlayer.Is(RoleEnum.Juggernaut)|| PlayerControl.LocalPlayer.Is(RoleEnum.Arsonist))
             {
                 __instance.ImpostorVentButton.transform.localPosition = new Vector3(-2f, 0f, 0f);
             }

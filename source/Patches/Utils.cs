@@ -200,14 +200,6 @@ namespace TownOfRoles
             });
         }
 
-        public static bool IsVesting(this PlayerControl player)
-        {
-            return Role.GetRoles(RoleEnum.Survivor).Any(role =>
-            {
-                var surv = (Survivor)role;
-                return surv != null && surv.Vesting && player.PlayerId == surv.Player.PlayerId;
-            });
-        }
 
         public static bool IsProtected(this PlayerControl player)
         {
@@ -337,10 +329,6 @@ namespace TownOfRoles
                 if (CustomGameOptions.ShieldBreaks) fullCooldownReset = true;
                 else zeroSecReset = true;
                 StopKill.BreakShield(target.GetMedic().Player.PlayerId, target.PlayerId, CustomGameOptions.ShieldBreaks);
-            }
-            else if (target.IsVesting() && toKill)
-            {
-                survReset = true;
             }
             else if (target.IsProtected() && toKill)
             {
@@ -792,7 +780,7 @@ namespace TownOfRoles
 
             if (player.Is(RoleEnum.Engineer) ||
                 (player.Is(RoleEnum.Glitch) && CustomGameOptions.GlitchVent) || (player.Is(RoleEnum.Plaguebearer) && CustomGameOptions.PlaguebearerVent) ||  (player.Is(RoleEnum.Arsonist) && CustomGameOptions.ArsoVent)||(player.Is(RoleEnum.Juggernaut) && CustomGameOptions.JuggVent) ||(player.Is(RoleEnum.Werewolf) && CustomGameOptions.WerewolfVent)||
-                (player.Is(RoleEnum.Survivor) && CustomGameOptions.SurvVent) || CustomGameOptions.EveryoneVent||
+                 CustomGameOptions.EveryoneVent||
                 (player.Is(RoleEnum.Pestilence) && CustomGameOptions.PestVent) || (player.Is(RoleEnum.Jester) && CustomGameOptions.JesterVent))
                 return true;
             return false;
@@ -897,28 +885,6 @@ namespace TownOfRoles
                 var escapist = new Escapist(player);
                 escapist.LastEscape = DateTime.UtcNow;
                 escapist.RegenTask();
-            }
-
-            if (player.Is(RoleEnum.Gambler))
-            {
-                var vigi = Role.GetRole<Gambler>(player);
-                vigi.Name = "Assassin";
-                vigi.TaskText = () => "Guess and Shoot";
-                vigi.Color = Patches.Colors.Gambler;
-                vigi.Faction = Faction.Impostors;
-                vigi.RegenTask();
-                var colorMapping = new Dictionary<string, Color>();
-                if (CustomGameOptions.MayorCultistOn > 0) colorMapping.Add("Mayor", Colors.Mayor);
-                if (CustomGameOptions.SnitchCultistOn > 0) colorMapping.Add("Snitch", Colors.Snitch);
-                if (CustomGameOptions.SheriffCultistOn > 0) colorMapping.Add("Sheriff", Colors.Sheriff);
-                if (CustomGameOptions.SurvivorCultistOn > 0) colorMapping.Add("Survivor", Colors.Survivor);
-                if (CustomGameOptions.MaxChameleons > 0) colorMapping.Add("Chameleon", Colors.Chameleon);
-                if (CustomGameOptions.MaxEngineers > 0) colorMapping.Add("Engineer", Colors.Engineer);
-                if (CustomGameOptions.MaxMystics > 0) colorMapping.Add("Mystic", Colors.Mystic);
-                if (CustomGameOptions.MaxTransporters > 0) colorMapping.Add("Transporter", Colors.Transporter);
-                if (CustomGameOptions.MaxGamblers > 1) colorMapping.Add("Gambler", Colors.Gambler);
-                colorMapping.Add("Crewmate", Colors.Crewmate);
-                vigi.SortedColorMapping = colorMapping.OrderBy(x => x.Key).ToDictionary(x => x.Key, x => x.Value);
             }
 
             if (player.Is(RoleEnum.Crewmate))
@@ -1078,10 +1044,6 @@ public static bool IsImpostor(this PlayerVoteArea playerinfo) => PlayerByVoteAre
             }            
             #endregion
             #region NeutralRoles
-            foreach (Survivor role in Role.GetRoles(RoleEnum.Survivor))
-            {
-                role.LastVested = DateTime.UtcNow;
-            }
             foreach (GuardianAngel role in Role.GetRoles(RoleEnum.GuardianAngel))
             {
                 role.LastProtected = DateTime.UtcNow;

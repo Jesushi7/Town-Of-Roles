@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace TownOfRoles
 {
-    //[HarmonyPriority(Priority.VeryHigh)] // to show this message first, or be overrided if any plugins do
+
     [HarmonyPatch(typeof(PingTracker), nameof(PingTracker.Update))]
     public static class PingTracker_Update
     {

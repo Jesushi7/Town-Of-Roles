@@ -10,7 +10,6 @@ namespace TownOfRoles.NeutralRoles.GuardianAngelMod
     {
         Crew,
         Amnesiac,
-        Survivor,
         Jester
     }
 
@@ -68,12 +67,6 @@ namespace TownOfRoles.NeutralRoles.GuardianAngelMod
                 var amnesiac = new Amnesiac(player);
                 amnesiac.SpawnedAs = false;
                 amnesiac.RegenTask();
-            }
-            else if (CustomGameOptions.GaOnTargetDeath == BecomeOptions.Survivor)
-            {
-                var surv = new Survivor(player);
-                surv.SpawnedAs = false;
-                surv.RegenTask();
             }
             else
             {

@@ -47,7 +47,6 @@ namespace TownOfRoles.Patches {
                     else if (role.Value == RoleEnum.Swapper) { playerRole += "<color=#" + Patches.Colors.Swapper.ToHtmlStringRGBA() + ">Swapper</color> → "; }
                     else if (role.Value == RoleEnum.Snitch || role.Value == RoleEnum.CultistSnitch) { playerRole += "<color=#" + Patches.Colors.Snitch.ToHtmlStringRGBA() + ">Snitch</color> → "; }
                     else if (role.Value == RoleEnum.Informant) { playerRole += "<color=#" + Patches.Colors.Informant.ToHtmlStringRGBA() + ">Informant</color> → "; }
-                    else if (role.Value == RoleEnum.Gambler) { playerRole += "<color=#" + Patches.Colors.Gambler.ToHtmlStringRGBA() + ">Gambler</color> → "; }
                     else if (role.Value == RoleEnum.Arsonist) { playerRole += "<color=#" + Patches.Colors.Arsonist.ToHtmlStringRGBA() + ">Arsonist</color> → "; }
                     else if (role.Value == RoleEnum.Executioner) { playerRole += "<color=#" + Patches.Colors.Executioner.ToHtmlStringRGBA() + ">Executioner</color> → "; }
                     else if (role.Value == RoleEnum.Glitch) { playerRole += "<color=#" + Patches.Colors.Glitch.ToHtmlStringRGBA() + ">Glitch</color> → "; }
@@ -70,7 +69,6 @@ namespace TownOfRoles.Patches {
                     else if (role.Value == RoleEnum.Traitor) { playerRole += "<color=#" + Patches.Colors.Impostor.ToHtmlStringRGBA() + ">Traitor</color> → "; }
                     else if (role.Value == RoleEnum.Medium) { playerRole += "<color=#" + Patches.Colors.Medium.ToHtmlStringRGBA() + ">Medium</color> → "; }
                     else if (role.Value == RoleEnum.Trapper) { playerRole += "<color=#" + Patches.Colors.Trapper.ToHtmlStringRGBA() + ">Trapper</color> → "; }
-                    else if (role.Value == RoleEnum.Survivor) { playerRole += "<color=#" + Patches.Colors.Survivor.ToHtmlStringRGBA() + ">Survivor</color> → "; }
                     else if (role.Value == RoleEnum.GuardianAngel) { playerRole += "<color=#" + Patches.Colors.GuardianAngel.ToHtmlStringRGBA() + ">Guardian Angel</color> → "; }
                     else if (role.Value == RoleEnum.Mystic || role.Value == RoleEnum.CultistMystic) { playerRole += "<color=#" + Patches.Colors.Mystic.ToHtmlStringRGBA() + ">Mystic</color> → "; }
                     else if (role.Value == RoleEnum.Silencer) { playerRole += "<color=#" + Patches.Colors.Silencer.ToHtmlStringRGBA() + ">Silencer</color> → "; }
@@ -87,7 +85,6 @@ namespace TownOfRoles.Patches {
                     {
                         if (role.Value == RoleEnum.Engineer) { playerRole += "<color=#" + Patches.Colors.Engineer.ToHtmlStringRGBA() + ">Demolitionist</color> → "; }
                         else if (role.Value == RoleEnum.CultistMystic) { playerRole += "<color=#" + Patches.Colors.Mystic.ToHtmlStringRGBA() + ">Clairvoyant</color> → "; }
-                        else if (role.Value == RoleEnum.Gambler) { playerRole += "<color=#" + Patches.Colors.Gambler.ToHtmlStringRGBA() + ">Assassin</color> → "; }
                     }
                 }
                 playerRole = playerRole.Remove(playerRole.Length - 3);

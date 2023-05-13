@@ -505,12 +505,6 @@ namespace TownOfRoles.Roles
                         __gInstance.LastKill = __gInstance.LastKill.AddSeconds(CustomGameOptions.ProtectKCReset - CustomGameOptions.GlitchKillCooldown);
                         return;
                     }
-                    else if (interact[2] == true)
-                    {
-                        __gInstance.LastKill = DateTime.UtcNow;
-                        __gInstance.LastKill = __gInstance.LastKill.AddSeconds(CustomGameOptions.VestKCReset - CustomGameOptions.GlitchKillCooldown);
-                        return;
-                    }
                     else if (interact[3] == true) return;
                     return;
                 }

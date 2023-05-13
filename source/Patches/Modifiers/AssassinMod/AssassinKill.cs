@@ -6,7 +6,6 @@ using UnityEngine.UI;
 using Il2CppInterop.Runtime.InteropTypes.Arrays;
 using TownOfRoles.CrewmateRoles.MedicMod;
 using TownOfRoles.CrewmateRoles.SwapperMod;
-using TownOfRoles.CrewmateRoles.GamblerMod;
 using TownOfRoles.ImpostorRoles.SilencerMod;
 using TownOfRoles.Roles.Modifiers;
 using TownOfRoles.Extensions;
@@ -119,12 +118,6 @@ namespace TownOfRoles.Modifiers.AssassinMod
                         button.SetActive(false);
                         button.GetComponent<PassiveButton>().OnClick = new Button.ButtonClickedEvent();
                     }
-                }
-
-                if (player.Is(RoleEnum.Gambler))
-                {
-                    var retributionist = Role.GetRole<Gambler>(PlayerControl.LocalPlayer);
-                    ShowHideButtonsGambler.HideButtonsGambler(retributionist);
                 }
 
                 if (player.Is(AbilityEnum.Assassin))

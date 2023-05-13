@@ -15,7 +15,6 @@ namespace TownOfRoles.CustomOption
         public static CustomNumberOption MedicOn;
         public static CustomNumberOption SheriffOn;
         public static CustomNumberOption VeteranOn;
-        public static CustomNumberOption GamblerOn;
         public static CustomNumberOption EngineerOn;
         public static CustomNumberOption ImitatorOn;
    
@@ -28,7 +27,6 @@ namespace TownOfRoles.CustomOption
         public static CustomHeaderOption NeutralRoles;
         public static CustomNumberOption AmnesiacOn;
         public static CustomNumberOption GuardianAngelOn;
-        public static CustomNumberOption SurvivorOn;
         public static CustomNumberOption ExecutionerOn;
         public static CustomNumberOption JesterOn;
 
@@ -64,7 +62,8 @@ namespace TownOfRoles.CustomOption
 
         public static CustomHeaderOption GlobalModifiers;
         public static CustomNumberOption ButtonBarryOn;
-        public static CustomNumberOption DrunkOn;           
+        public static CustomNumberOption DrunkOn;         
+        public static CustomNumberOption ChameleonModifierOn;               
         public static CustomNumberOption FlashOn;
         public static CustomNumberOption GiantOn;
         public static CustomNumberOption LoversOn;
@@ -105,8 +104,6 @@ namespace TownOfRoles.CustomOption
         public static CustomToggleOption CamoHideSpeed;        
         public static CustomToggleOption ImpostorSnitcholes;
         public static CustomToggleOption DeadSnitcholes;
-        public static CustomToggleOption DisableLevels;
-        public static CustomToggleOption WhiteNameplates;
         public static CustomNumberOption VanillaGame;
    
         public static CustomNumberOption InitialCooldowns;
@@ -137,7 +134,6 @@ namespace TownOfRoles.CustomOption
         public static CustomHeaderOption KillingOnlySettings;
         public static CustomNumberOption NeutralRoles2;
         public static CustomNumberOption VeteranCount;
-        public static CustomNumberOption GamblerCount;
         public static CustomToggleOption AddArsonist;
         public static CustomToggleOption AddJuggernaut;        
         public static CustomToggleOption AddPlaguebearer;
@@ -146,14 +142,12 @@ namespace TownOfRoles.CustomOption
         public static CustomNumberOption MayorCultistOn;
         public static CustomNumberOption SnitchCultistOn;
         public static CustomNumberOption SheriffCultistOn;
-        public static CustomNumberOption SurvivorCultistOn;
         public static CustomNumberOption NumberOfSpecialRoles;
         public static CustomNumberOption MaxChameleons;
         public static CustomNumberOption MaxEngineers;
         public static CustomNumberOption MaxMystics;
         public static CustomNumberOption MaxSpies;
         public static CustomNumberOption MaxTransporters;
-        public static CustomNumberOption MaxGamblers;
         public static CustomNumberOption WhisperCooldown;
         public static CustomNumberOption IncreasedCooldownPerWhisper;
         public static CustomNumberOption WhisperRadius;
@@ -294,14 +288,14 @@ namespace TownOfRoles.CustomOption
         public static CustomToggleOption ImpostorsVent;        
         public static CustomNumberOption NumberOfImpostorAssassins;
         public static CustomNumberOption NumberOfNeutralAssassins;
+        public static CustomNumberOption NumberOfCrewAssassins;        
         public static CustomToggleOption AmneTurnImpAssassin;
         public static CustomToggleOption AmneTurnNeutAssassin;
         public static CustomToggleOption TraitorCanAssassin;
         public static CustomNumberOption AssassinKills;
         public static CustomToggleOption AssassinMultiKill;
         public static CustomToggleOption AssassinCrewmateGuess;
-        public static CustomToggleOption AssassinGuessNeutrals;
-        public static CustomToggleOption AssassinGuessNeutralKilling;
+        public static CustomToggleOption AssassinGuessGlobalModifiers;
         public static CustomToggleOption AssassinGuessImpostors;
         public static CustomToggleOption AssassinGuessModifiers;
         public static CustomToggleOption AssassinGuessLovers;
@@ -310,14 +304,6 @@ namespace TownOfRoles.CustomOption
         public static CustomHeaderOption Underdog;
         public static CustomNumberOption UnderdogKillBonus;
         public static CustomToggleOption UnderdogIncreasedKC;
-
-        public static CustomHeaderOption Gambler;
-        public static CustomNumberOption GamblerKills;
-        public static CustomToggleOption GamblerMultiKill;
-        public static CustomToggleOption GamblerGuessNeutrals;
-        public static CustomToggleOption GamblerGuessNeutralKilling;
-        public static CustomToggleOption GamblerGuessLovers;
-        public static CustomToggleOption GamblerAfterVoting;
 
 
         public static CustomHeaderOption Avenger;
@@ -367,13 +353,6 @@ namespace TownOfRoles.CustomOption
         public static CustomToggleOption ShowMediumToDead;
         public static CustomStringOption DeadRevealed;
 
-        public static CustomHeaderOption Survivor;
-        public static CustomNumberOption VestCd;        
-        public static CustomNumberOption VestDuration;
-        public static CustomNumberOption VestKCReset;
-        public static CustomNumberOption MaxVests;
-        public static CustomToggleOption SurvVent;
-        public static CustomToggleOption SurvSwitchVent;
 
         public static CustomHeaderOption GuardianAngel;
         public static CustomNumberOption ProtectCd;
@@ -435,6 +414,7 @@ namespace TownOfRoles.CustomOption
         public static CustomHeaderOption ButtonBarry;
      
         public static CustomHeaderOption Bait;
+        public static CustomNumberOption NumberOfBaits;        
         public static CustomNumberOption BaitMinDelay;
         public static CustomNumberOption BaitMaxDelay;
 
@@ -465,9 +445,7 @@ namespace TownOfRoles.CustomOption
             CamouflagerOn = new CustomNumberOption(num++, MultiMenu.crewmate, "<color=#708eef>Camouflager</color>", 0f, 0f, 100f, 10f,
                 PercentFormat);                  
             EngineerOn = new CustomNumberOption(num++, MultiMenu.crewmate, "<color=#FFA60AFF>Engineer</color>", 0f, 0f, 100f, 10f,
-                PercentFormat);   
-            GamblerOn = new CustomNumberOption(num++, MultiMenu.crewmate, "<color=#fce700>Gambler</color>", 0f, 0f, 100f, 10f,
-                PercentFormat);                
+                PercentFormat);                  
             ImitatorOn = new CustomNumberOption(num++, MultiMenu.crewmate, "<color=#B3D94DFF>Imitator</color>", 0f, 0f, 100f, 10f,
                 PercentFormat);                   
             InformantOn = new CustomNumberOption(num++, MultiMenu.crewmate, "<color=#D4AF37FF>Informant</color>", 0f, 0f, 100f, 10f,
@@ -508,8 +486,7 @@ namespace TownOfRoles.CustomOption
                 PercentFormat);                              
             PhantomOn = new CustomNumberOption(num++, MultiMenu.neutral, "<color=#662962FF>Phantom</color>", 0f, 0f, 100f, 10f,
                 PercentFormat);                                     
-            SurvivorOn = new CustomNumberOption(num++, MultiMenu.neutral, "<color=#FFE64DFF>Survivor</color>", 0f, 0f, 100f, 10f,
-                PercentFormat);
+
 
 
             NeutralKillingRoles = new CustomHeaderOption(num++, MultiMenu.neutral, "<color=#80797c>Neutral</color> <color=#FF0000FF>Killers</color>");
@@ -568,6 +545,8 @@ namespace TownOfRoles.CustomOption
             GlobalModifiers = new CustomHeaderOption(num++, MultiMenu.modifiers, "<color=#f590bc>Global Modifiers</color>");
             ButtonBarryOn = new CustomNumberOption(num++, MultiMenu.modifiers, "<color=#f590bc>Button Barry</color>", 0f, 0f, 100f, 10f,
                 PercentFormat);
+            ChameleonModifierOn = new CustomNumberOption(num++, MultiMenu.modifiers, "<color=#f590bc>Chameleon</color>", 0f, 0f, 100f, 10f,
+                PercentFormat);                
             DrunkOn = new CustomNumberOption(num++, MultiMenu.modifiers, "<color=#f590bc>Drunk</color>", 0f, 0f, 100f, 10f,
                 PercentFormat);                
             FlashOn = new CustomNumberOption(num++, MultiMenu.modifiers, "<color=#f590bc>Flash</color>", 0f, 0f, 100f, 10f,
@@ -610,8 +589,6 @@ namespace TownOfRoles.CustomOption
                 new CustomNumberOption(num++, MultiMenu.main, "Neutral Roles", 1, 0, 5, 1);
             VeteranCount =
                 new CustomNumberOption(num++, MultiMenu.main, "<color=#998040FF>Veteran</color> Count", 1, 0, 5, 1);
-            GamblerCount =
-                new CustomNumberOption(num++, MultiMenu.main, "<color=#fce700>Gambler</color> Count", 1, 0, 5, 1);
             AddArsonist = new CustomToggleOption(num++, MultiMenu.main, "Add <color=#FF4D00FF>Arsonist</color>", true);
             AddJuggernaut = new CustomToggleOption(num++, MultiMenu.main, "Add <color=#8C004DFF>Juggernaut</color>", true);            
             AddPlaguebearer = new CustomToggleOption(num++, MultiMenu.main, "Add <color=#E6FFB3FF>Plaguebearer</color>", true);
@@ -623,8 +600,6 @@ namespace TownOfRoles.CustomOption
             SnitchCultistOn = new CustomNumberOption(num++, MultiMenu.main, "<color=#61b26c>Snitch</color> (Cultist Mode)", 100f, 0f, 100f, 10f,
                 PercentFormat);
             SheriffCultistOn = new CustomNumberOption(num++, MultiMenu.main, "<color=#f8cd46>Sheriff</color> (Cultist Mode)", 100f, 0f, 100f, 10f,
-                PercentFormat);
-            SurvivorCultistOn = new CustomNumberOption(num++, MultiMenu.main, "<color=#FFE64DFF>Survivor</color> (Cultist Mode)", 100f, 0f, 100f, 10f,
                 PercentFormat);
             NumberOfSpecialRoles =
                 new CustomNumberOption(num++, MultiMenu.main, "Number Of Special Roles", 4, 0, 4, 1);
@@ -638,8 +613,6 @@ namespace TownOfRoles.CustomOption
                 new CustomNumberOption(num++, MultiMenu.main, "Max <color=#CCA3CCFF>Spies</color>", 3, 0, 5, 1);
             MaxTransporters =
                 new CustomNumberOption(num++, MultiMenu.main, "Max <color=#00EEFFFF>Transporters</color>", 3, 0, 5, 1);
-            MaxGamblers =
-                new CustomNumberOption(num++, MultiMenu.main, "Max <color=#fce700>Gamblers</color>", 3, 0, 5, 1);
             WhisperCooldown =
                 new CustomNumberOption(num++, MultiMenu.main, "Initial Whisper Cooldown", 25f, 10f, 60f, 2.5f, CooldownFormat);
             IncreasedCooldownPerWhisper =
@@ -678,8 +651,6 @@ namespace TownOfRoles.CustomOption
             AppearanceAnimation = new CustomToggleOption(num++, MultiMenu.main, "Kill Animations Show Morphed Player");                    
             ParallelMedScans = new CustomToggleOption(num++, MultiMenu.main, "Parallel Medbay Scans", false);
             SkipButtonDisable = new CustomStringOption(num++, MultiMenu.main, "Disable Meeting Skip Button", new[] { "No", "Emergency", "Always" });
-            DisableLevels = new CustomToggleOption(num++, MultiMenu.main, "Disable Level Icons", false);
-            WhiteNameplates = new CustomToggleOption(num++, MultiMenu.main, "Disable Player Nameplates", false);
             SeeTasksDuringRound = new CustomToggleOption(num++, MultiMenu.main, "See Tasks During Round", false);
             SeeTasksDuringMeeting = new CustomToggleOption(num++, MultiMenu.main, "See Tasks During Meetings", false);
             SeeTasksWhenDead = new CustomToggleOption(num++, MultiMenu.main, "See Tasks When Dead", true);
@@ -717,15 +688,15 @@ namespace TownOfRoles.CustomOption
                  new CustomNumberOption(num++, MultiMenu.main, "Airship/Submerged Decreased Long Tasks", 0, 0, 3, 1);
 
             Assassin = new CustomHeaderOption(num++, MultiMenu.imposter, "<color=#FF0000FF>Assassin Ability</color>");
-            NumberOfImpostorAssassins = new CustomNumberOption(num++, MultiMenu.imposter, "Number Of Impostor <color=#FF0000FF>Assassins</color>", 1, 0, 4, 1);
+            NumberOfImpostorAssassins = new CustomNumberOption(num++, MultiMenu.imposter, "Number Of <color=#FF0000FF>Impostor</color> <color=#FF0000FF>Assassins</color>", 1, 0, 4, 1);
             NumberOfNeutralAssassins = new CustomNumberOption(num++, MultiMenu.imposter, "Number Of Neutral <color=#FF0000FF>Assassins</color>", 1, 0, 5, 1);
+            NumberOfCrewAssassins = new CustomNumberOption(num++, MultiMenu.imposter, "Number Of <color=#00EEFFFF>Crewmate</color> <color=#FF0000FF>Assassins</color>", 1, 0, 5, 1);
             AmneTurnImpAssassin = new CustomToggleOption(num++, MultiMenu.imposter, "Amnesiac Turned Impostor Gets Ability", false);
             AmneTurnNeutAssassin = new CustomToggleOption(num++, MultiMenu.imposter, "Amnesiac Turned Neutral Killing Gets Ability", false);
             AssassinKills = new CustomNumberOption(num++, MultiMenu.imposter, "Number Of Assassin Kills", 1, 1, 15, 1);
             AssassinMultiKill = new CustomToggleOption(num++, MultiMenu.imposter, "<color=#FF0000FF>Assassins</color> Can Kill More Than Once Per Meeting", false);
             AssassinCrewmateGuess = new CustomToggleOption(num++, MultiMenu.imposter, "<color=#FF0000FF>Assassins</color> Can Guess \"Crewmate\"", false);
-            AssassinGuessNeutrals = new CustomToggleOption(num++, MultiMenu.imposter, "<color=#FF0000FF>Assassins</color> Can Guess Neutral Non-Killing Roles", false);
-            AssassinGuessNeutralKilling = new CustomToggleOption(num++, MultiMenu.imposter, "<color=#FF0000FF>Assassins</color> Can Guess Neutral Killing Roles", false);
+            AssassinGuessGlobalModifiers = new CustomToggleOption(num++, MultiMenu.imposter, "<color=#FF0000FF>Assassins</color> Can Guess <color=#f590bc>Button Barry</color>", false);
             AssassinGuessImpostors = new CustomToggleOption(num++, MultiMenu.imposter, "<color=#FF0000FF>Assassins</color> Can Guess Impostor Roles", false);
             AssassinGuessModifiers = new CustomToggleOption(num++, MultiMenu.imposter, "<color=#FF0000FF>Assassins</color> Can Guess Crewmate Modifiers & BB", false);
             AssassinateAfterVoting = new CustomToggleOption(num++, MultiMenu.imposter, "<color=#FF0000FF>Assassins</color> Can Guess After Voting", false);
@@ -756,13 +727,6 @@ namespace TownOfRoles.CustomOption
                 new CustomHeaderOption(num++, MultiMenu.crewmate, "<color=#FFA60AFF>Engineer</color>");
             MaxFixes =
                 new CustomNumberOption(num++, MultiMenu.crewmate, "Maximum Number Of Fixes", 5, 1, 15, 1);
-
-            Gambler = new CustomHeaderOption(num++, MultiMenu.crewmate, "<color=#fce700>Gambler</color>");
-            GamblerKills = new CustomNumberOption(num++, MultiMenu.crewmate, "Number Of <color=#fce700>Gambler</color> Kills", 1, 1, 15, 1);
-            GamblerMultiKill = new CustomToggleOption(num++, MultiMenu.crewmate, "<color=#fce700>Gambler</color> Can Kill More Than Once Per Meeting", false);
-            GamblerGuessNeutrals = new CustomToggleOption(num++, MultiMenu.crewmate, "<color=#fce700>Gambler</color> Can Guess Neutral Non-Killing Roles", false);
-            GamblerGuessNeutralKilling = new CustomToggleOption(num++, MultiMenu.crewmate, "<color=#fce700>Gambler</color> Can Guess Neutral Killing Roles", false);
-            GamblerAfterVoting = new CustomToggleOption(num++, MultiMenu.crewmate, "<color=#fce700>Gambler</color> Can Guess After Voting", false);
 
             Informant = new CustomHeaderOption(num++, MultiMenu.crewmate, "<color=#D4AF37FF>Informant</color>");
 
@@ -929,7 +893,7 @@ namespace TownOfRoles.CustomOption
             Executioner =
                 new CustomHeaderOption(num++, MultiMenu.neutral, "<color=#2d4222>Executioner</color>");
             OnTargetDead = new CustomStringOption(num++, MultiMenu.neutral, "<color=#2d4222>Executioner</color> Becomes On Target Dead",
-                new[] { "<color=#00EEFFFF>Crewmate</color>", "<color=#80B2FFFF>Amnesiac</color>", "<color=#FFE64DFF>Survivor</color>", "<color=#cb81c0>Jester</color>" });
+                new[] { "<color=#00EEFFFF>Crewmate</color>", "<color=#80B2FFFF>Amnesiac</color>", "<color=#cb81c0>Jester</color>" });
             ExecutionerButton =
                 new CustomToggleOption(num++, MultiMenu.neutral, "<color=#2d4222>Executioner</color> Can Button", true);
 
@@ -947,7 +911,7 @@ namespace TownOfRoles.CustomOption
                 new CustomStringOption(num++, MultiMenu.neutral, "Show Protected Player",
                     new[] { "Self", "<color=#B3FFFFFF>Guardian Angel</color>", "Self+<color=#B3FFFFFF>GA</color>", "Everyone" });
             GaOnTargetDeath = new CustomStringOption(num++, MultiMenu.neutral, "<color=#B3FFFFFF>GA</color> Becomes On Target Dead",
-                new[] { "<color=#00EEFFFF>Crewmate</color>", "<color=#80B2FFFF>Amnesiac</color>", "<color=#FFE64DFF>Survivor</color>", "<color=#cb81c0>Jester</color>" });
+                new[] { "<color=#00EEFFFF>Crewmate</color>", "<color=#80B2FFFF>Amnesiac</color>", "<color=#cb81c0>Jester</color>" });
             GATargetKnows =
                 new CustomToggleOption(num++, MultiMenu.neutral, "Target Knows <color=#B3FFFFFF>GA</color> Exists", false);
             GAKnowsTargetRole =
@@ -971,19 +935,6 @@ namespace TownOfRoles.CustomOption
                 new CustomHeaderOption(num++, MultiMenu.neutral, "<color=#662962FF>Phantom</color>");
             PhantomTasksRemaining =
                  new CustomNumberOption(num++, MultiMenu.neutral, "Tasks Remaining When <color=#662962FF>Phantom</color> Can Be Clicked", 5, 1, 15, 1);
-
-            Survivor =
-                new CustomHeaderOption(num++, MultiMenu.neutral, "<color=#FFE64DFF>Survivor</color>");
-            VestCd =
-                new CustomNumberOption(num++, MultiMenu.neutral, "Vest Cooldown", 25f, 10f, 60f, 2.5f, CooldownFormat);
-            VestDuration =
-                new CustomNumberOption(num++, MultiMenu.neutral, "Vest Duration", 10f, 5f, 15f, 1f, CooldownFormat);
-            VestKCReset =
-                new CustomNumberOption(num++, MultiMenu.neutral, "Kill Cooldown Reset On Attack", 2.5f, 0f, 15f, 0.5f, CooldownFormat);
-            MaxVests =
-                new CustomNumberOption(num++, MultiMenu.neutral, "Maximum Number Of Vests", 5, 1, 15, 1);
-            SurvVent = new CustomToggleOption(num++, MultiMenu.neutral,"<color=#FFE64DFF>Survivor</color> Can Hide In Vents", false);
-            SurvSwitchVent = new CustomToggleOption(num++, MultiMenu.neutral, "<color=#FFE64DFF>Survivor</color> Can Switch Between Vents", false);
 
             Arsonist = new CustomHeaderOption(num++, MultiMenu.neutral, "<color=#FF4D00FF>Arsonist</color>");
             DouseCooldown =
@@ -1112,6 +1063,7 @@ namespace TownOfRoles.CustomOption
             /*ButtonBarry = new CustomHeaderOption(num++, MultiMenu.modifiers, "General <color=#f590bc>Modifier</color> Settings");*/
 
             Bait = new CustomHeaderOption(num++, MultiMenu.modifiers, "<color=#f590bc>Bait</color>");
+             
             BaitMinDelay = new CustomNumberOption(num++, MultiMenu.modifiers, "Minimum Delay for the <color=#f590bc>Bait</color> Report", 0f, 0f, 15f, 0.5f, CooldownFormat);
             BaitMaxDelay = new CustomNumberOption(num++, MultiMenu.modifiers, "Maximum Delay for the <color=#f590bc>Bait</color> Report", 1f, 0f, 15f, 0.5f, CooldownFormat);
 
@@ -1135,7 +1087,6 @@ namespace TownOfRoles.CustomOption
             BothLoversDie = new CustomToggleOption(num++, MultiMenu.modifiers, "Both <color=#e839b9>Lovers</color> Die");
             LovingImpPercent = new CustomNumberOption(num++, MultiMenu.modifiers, "Loving Impostor Probability", 20f, 0f, 100f, 10f,
                 PercentFormat);
-            GamblerGuessLovers = new CustomToggleOption(num++, MultiMenu.modifiers, "<color=#fce700>Gambler</color> Can Guess <color=#e839b9>Lovers</color>", false);                
             AssassinGuessLovers = new CustomToggleOption(num++, MultiMenu.modifiers, "<color=#FF0000FF>Assassin</color> Can Guess <color=#e839b9>Lovers</color>", false);
             NeutralLovers = new CustomToggleOption(num++, MultiMenu.modifiers, "Neutral Roles Can Be <color=#e839b9>Lovers</color>");
             

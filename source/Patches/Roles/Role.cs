@@ -172,64 +172,7 @@ public static bool RoleWins => CrewWin || ImpWin;
             SurvOnlyWins = true;
         }
 
-        internal static bool NobodyEndCriteria(LogicGameFlowNormal __instance)
-        {
-            bool CheckNoImpsNoCrews()
-            {
-                var alives = PlayerControl.AllPlayerControls.ToArray()
-                    .Where(x => !x.Data.IsDead && !x.Data.Disconnected).ToList();
-                if (alives.Count == 0) return false;
-                var flag = alives.All(x =>
-                {
-                    var role = GetRole(x);
-                    if (role == null) return false;
-                    var flag2 = role.Faction == Faction.Neutral && !x.Is(RoleEnum.Juggernaut) && !x.Is(RoleEnum.Glitch)
-                    && !x.Is(RoleEnum.Arsonist) && !x.Is(RoleEnum.Plaguebearer) && !x.Is(RoleEnum.Pestilence) && !x.Is(RoleEnum.Werewolf);
-
-                    return flag2;
-                });
-
-                return flag;
-            }
-
-            bool SurvOnly()
-            {
-                var alives = PlayerControl.AllPlayerControls.ToArray()
-                    .Where(x => !x.Data.IsDead && !x.Data.Disconnected).ToList();
-                if (alives.Count == 0) return false;
-                var flag = false;
-                foreach (var player in alives)
-                {
-                    if (player.Is(RoleEnum.Survivor)) flag = true;
-                }
-                return flag;
-            }
-
-            if (CheckNoImpsNoCrews())
-            {
-                if (SurvOnly())
-                {
-                    var messageWriter = AmongUsClient.Instance.StartRpcImmediately(PlayerControl.LocalPlayer.NetId,
-                        (byte)CustomRPC.SurvivorOnlyWin, SendOption.Reliable, -1);
-                    AmongUsClient.Instance.FinishRpcImmediately(messageWriter);
-
-                    SurvOnlyWin();
-                    Utils.EndGame();
-                    return false;
-                }
-                else
-                {
-                    var messageWriter = AmongUsClient.Instance.StartRpcImmediately(PlayerControl.LocalPlayer.NetId,
-                        (byte)CustomRPC.NobodyWins, SendOption.Reliable, -1);
-                    AmongUsClient.Instance.FinishRpcImmediately(messageWriter);
-
-                    NobodyWinsFunc();
-                    Utils.EndGame();
-                    return false;
-                }
-            }
-            return true;
-        }
+    
 
         internal virtual bool EABBNOODFGL(LogicGameFlowNormal __instance)
         {
@@ -466,10 +409,6 @@ public static bool RoleWins => CrewWin || ImpWin;
                 {
                     __instance.__4__this.BackgroundBar.material.color = Patches.Colors.Crewmate;      
                 }
-                if (PlayerControl.LocalPlayer.Is(RoleEnum.Gambler))
-                {
-                    __instance.__4__this.BackgroundBar.material.color = Patches.Colors.Gambler;      
-                }
                 if (PlayerControl.LocalPlayer.Is(RoleEnum.Altruist))
                 {
                     __instance.__4__this.BackgroundBar.material.color = Patches.Colors.Altruist;      
@@ -686,6 +625,7 @@ public static bool RoleWins => CrewWin || ImpWin;
                 var player = __instance.__4__this;
                 var role = GetRole(player);
                 var modifier = Modifier.GetModifier(player);
+                var ability = Ability.GetAbility(player);
 
                 if (modifier != null)
                 {
@@ -693,6 +633,14 @@ public static bool RoleWins => CrewWin || ImpWin;
                     modTask.transform.SetParent(player.transform, false);
                     modTask.Text =
                         $"{modifier.ColorString}Modifier: {modifier.Name}\n{modifier.TaskText()}</color>";
+                    player.myTasks.Insert(0, modTask);
+                }
+                if (ability != null)
+                {
+                    var modTask = new GameObject(ability.Name + "Task").AddComponent<ImportantTextTask>();
+                    modTask.transform.SetParent(player.transform, false);
+                    modTask.Text =
+                        $"{ability.ColorString}Ability: {ability.Name}\n{ability.TaskText()}</color>";
                     player.myTasks.Insert(0, modTask);
                 }
 
@@ -754,7 +702,6 @@ public static bool RoleWins => CrewWin || ImpWin;
                     if (!roleIsEnd || !modifierIsEnd || !traitorIsEnd) result = false;
                 }
 
-                if (!NobodyEndCriteria(__instance)) result = false;
 
                 return result;
             }

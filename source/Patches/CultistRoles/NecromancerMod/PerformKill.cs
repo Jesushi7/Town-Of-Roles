@@ -42,7 +42,7 @@ namespace TownOfRoles.CultistRoles.NecromancerMod
                 var playerId = role.CurrentTarget.ParentId;
                 var player = Utils.PlayerById(playerId);
 
-                if (player.Is(RoleEnum.Sheriff) || player.Is(RoleEnum.CultistSnitch) || player.Is(RoleEnum.Survivor) || player.Is(RoleEnum.Mayor)) return false;
+                if (player.Is(RoleEnum.Sheriff) || player.Is(RoleEnum.CultistSnitch) || player.Is(RoleEnum.Mayor)) return false;
                 if (PlayerControl.LocalPlayer.killTimer > GameOptionsManager.Instance.currentNormalGameOptions.KillCooldown - 0.5f) return false;
 
                 role.ReviveCount += 1;

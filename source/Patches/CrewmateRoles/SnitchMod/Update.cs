@@ -20,9 +20,9 @@ namespace TownOfRoles.CrewmateRoles.SnitchMod
                     switch (roleType)
                     {
                         default:
-                            if ((player.Is(Faction.Crewmates) && !(player.Is(RoleEnum.Sheriff) || player.Is(RoleEnum.Veteran) || player.Is(RoleEnum.Gambler))) ||
-                            ((player.Is(RoleEnum.Sheriff) || player.Is(RoleEnum.Veteran) || player.Is(RoleEnum.Gambler)) && !CustomGameOptions.CrewKillingRed) ||
-                            ((player.Is(RoleEnum.Amnesiac) || player.Is(RoleEnum.Survivor) || player.Is(RoleEnum.GuardianAngel)) && !CustomGameOptions.NeutralNNK) ||
+                            if ((player.Is(Faction.Crewmates) && !(player.Is(RoleEnum.Sheriff) || player.Is(RoleEnum.Veteran))) ||
+                            ((player.Is(RoleEnum.Sheriff) || player.Is(RoleEnum.Veteran)) && !CustomGameOptions.CrewKillingRed) ||
+                            ((player.Is(RoleEnum.Amnesiac) || player.Is(RoleEnum.GuardianAngel)) && !CustomGameOptions.NeutralNNK) ||
                             ((player.Is(RoleEnum.Executioner) || player.Is(RoleEnum.Jester) || player.Is(RoleEnum.Phantom)) && !CustomGameOptions.NeutralNNK) ||
                             ((player.Is(RoleEnum.Arsonist) || player.Is(RoleEnum.Glitch) || player.Is(RoleEnum.Juggernaut) ||
                             player.Is(RoleEnum.Plaguebearer) || player.Is(RoleEnum.Pestilence) || player.Is(RoleEnum.Werewolf)) && !CustomGameOptions.NeutKillingRed))
@@ -34,7 +34,7 @@ namespace TownOfRoles.CrewmateRoles.SnitchMod
                                 foreach (var role in Role.GetRoles(RoleEnum.Traitor))
                                 {
                                     var traitor = (Traitor)role;
-                                    if (traitor.formerRole == RoleEnum.Sheriff || traitor.formerRole == RoleEnum.Gambler ||
+                                    if (traitor.formerRole == RoleEnum.Sheriff ||
                                         traitor.formerRole == RoleEnum.Veteran) state.NameText.color = Color.red;
                                     else state.NameText.color = Color.green;
                                 }
@@ -69,9 +69,9 @@ namespace TownOfRoles.CrewmateRoles.SnitchMod
                 switch (roleType)
                 {
                     default:
-                        if ((player.Is(Faction.Crewmates) && !(player.Is(RoleEnum.Sheriff) || player.Is(RoleEnum.Veteran) || player.Is(RoleEnum.Gambler))) ||
-                            ((player.Is(RoleEnum.Sheriff) || player.Is(RoleEnum.Veteran) || player.Is(RoleEnum.Gambler)) && !CustomGameOptions.CrewKillingRed) ||
-                            ((player.Is(RoleEnum.Amnesiac) || player.Is(RoleEnum.Survivor) || player.Is(RoleEnum.GuardianAngel)) && !CustomGameOptions.NeutralNNK) ||
+                        if ((player.Is(Faction.Crewmates) && !(player.Is(RoleEnum.Sheriff) || player.Is(RoleEnum.Veteran))) ||
+                            ((player.Is(RoleEnum.Sheriff) || player.Is(RoleEnum.Veteran)) && !CustomGameOptions.CrewKillingRed) ||
+                            ((player.Is(RoleEnum.Amnesiac) || player.Is(RoleEnum.GuardianAngel)) && !CustomGameOptions.NeutralNNK) ||
                             ((player.Is(RoleEnum.Executioner) || player.Is(RoleEnum.Jester) || player.Is(RoleEnum.Phantom)) && !CustomGameOptions.NeutralNNK) ||
                             ((player.Is(RoleEnum.Arsonist) || player.Is(RoleEnum.Glitch) || player.Is(RoleEnum.Juggernaut) ||
                             player.Is(RoleEnum.Plaguebearer) || player.Is(RoleEnum.Pestilence) || player.Is(RoleEnum.Werewolf)) && !CustomGameOptions.NeutKillingRed))
@@ -83,7 +83,7 @@ namespace TownOfRoles.CrewmateRoles.SnitchMod
                             foreach (var role in Role.GetRoles(RoleEnum.Traitor))
                             {
                                 var traitor = (Traitor)role;
-                                if (traitor.formerRole == RoleEnum.Sheriff || traitor.formerRole == RoleEnum.Gambler ||
+                                if (traitor.formerRole == RoleEnum.Sheriff||
                                     traitor.formerRole == RoleEnum.Veteran) player.nameText().color = Color.red;
                                 else player.nameText().color = Color.green;
                             }

@@ -17,7 +17,7 @@ namespace TownOfRoles.Roles
             Color = Patches.Colors.Medic;
             StartingCooldown = DateTime.UtcNow;
             RoleType = RoleEnum.Medic;
-            FactionName = "<color=#704FA8FF>Crewmate</color>";    
+            FactionName = "<color=#7efbc2>Crewmate</color>";    
             Faction = Faction.Crewmates;               
             AddToRoleHistory(RoleType);
             ShieldedPlayer = null;

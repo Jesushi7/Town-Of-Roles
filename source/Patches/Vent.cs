@@ -55,7 +55,7 @@ namespace TownOfRoles
                 (player.Is(RoleEnum.Arsonist) && CustomGameOptions.ArsoVent)||
                 (player.Is(RoleEnum.Juggernaut) && CustomGameOptions.JuggVent) ||
                 (player.Is(RoleEnum.Werewolf) && CustomGameOptions.WerewolfVent)||
-                (player.Is(RoleEnum.Survivor) && CustomGameOptions.SurvVent) || CustomGameOptions.EveryoneVent||
+                CustomGameOptions.EveryoneVent||
                 (player.Is(RoleEnum.Pestilence) && CustomGameOptions.PestVent) || (player.Is(RoleEnum.Jester) && CustomGameOptions.JesterVent))
                 return true;
 
@@ -130,8 +130,6 @@ namespace TownOfRoles
 
             if (player.Is(RoleEnum.Jester) && CustomGameOptions.JesterVent)
                 return CustomGameOptions.JesterVentSwitch;
-            else if (player.Is(RoleEnum.Survivor) && CustomGameOptions.SurvVent)
-                return CustomGameOptions.SurvVentSwitch;
             else
                 return true;
         }

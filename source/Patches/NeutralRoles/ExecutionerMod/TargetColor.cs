@@ -10,7 +10,6 @@ namespace TownOfRoles.NeutralRoles.ExecutionerMod
     {
         Crew,
         Amnesiac,
-        Survivor,
         Jester
     }
 
@@ -66,12 +65,6 @@ namespace TownOfRoles.NeutralRoles.ExecutionerMod
                 var amnesiac = new Amnesiac(player);
                 amnesiac.SpawnedAs = false;
                 amnesiac.RegenTask();
-            }
-            else if (CustomGameOptions.OnTargetDead == OnTargetDead.Survivor)
-            {
-                var surv = new Survivor(player);
-                surv.SpawnedAs = false;
-                surv.RegenTask();
             }
             else
             {

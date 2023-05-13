@@ -79,7 +79,7 @@ namespace TownOfRoles.CultistRoles.NecromancerMod
             }
             var player = Utils.PlayerById(role.CurrentTarget.ParentId);
             if (role.CurrentTarget && role.ReviveButton.enabled &&
-                !(player.Is(RoleEnum.Sheriff) || player.Is(RoleEnum.CultistSnitch) || player.Is(RoleEnum.Survivor) || player.Is(RoleEnum.Mayor)) &&
+                !(player.Is(RoleEnum.Sheriff) || player.Is(RoleEnum.CultistSnitch)  || player.Is(RoleEnum.Mayor)) &&
                 !(PlayerControl.LocalPlayer.killTimer > GameOptionsManager.Instance.currentNormalGameOptions.KillCooldown - 0.5f))
             {
                 SpriteRenderer component = null;

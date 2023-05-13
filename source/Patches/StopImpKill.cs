@@ -35,11 +35,6 @@ namespace TownOfRoles
                 PlayerControl.LocalPlayer.SetKillTimer(CustomGameOptions.ProtectKCReset + 0.01f);
                 return false;
             }
-            else if (interact[2] == true)
-            {
-                PlayerControl.LocalPlayer.SetKillTimer(CustomGameOptions.VestKCReset + 0.01f);
-                return false;
-            }
             else if (interact[3] == true)
             {
                 PlayerControl.LocalPlayer.SetKillTimer(0.01f);

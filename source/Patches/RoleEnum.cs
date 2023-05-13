@@ -16,7 +16,6 @@ namespace TownOfRoles
         Arsonist, // 13
         Altruist, // 14
         Phantom,
-        Gambler, // 15
         Avenger,
         Camouflager,
         Veteran, // 16
@@ -27,7 +26,6 @@ namespace TownOfRoles
         Transporter, // 20
         Medium, // 21
         Trapper, // 22
-        Survivor, // 23
         GuardianAngel, // 24
         Plaguebearer, // 26
         Pestilence,
@@ -55,7 +53,7 @@ namespace TownOfRoles
         CultistSnitch, // 102
         CultistMystic, // 103
         Chameleon, // 104
-
+        Cultist,
 
         None
     }
@@ -81,6 +79,7 @@ namespace TownOfRoles
         Underdog, // 14
         Drunk,
         Oblivious,
+        ChameleonModifier,
     }
 
     public enum AbilityEnum

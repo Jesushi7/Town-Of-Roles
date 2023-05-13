@@ -82,7 +82,6 @@ namespace TownOfRoles.NeutralRoles.AmnesiacMod
                 case RoleEnum.Camouflager:
                 case RoleEnum.Informant:
                 case RoleEnum.Altruist:
-                case RoleEnum.Gambler:
                 case RoleEnum.Veteran:
                 case RoleEnum.Crewmate:
                 case RoleEnum.Tracker:
@@ -104,7 +103,6 @@ namespace TownOfRoles.NeutralRoles.AmnesiacMod
                 case RoleEnum.Amnesiac:
                 case RoleEnum.Glitch:
                 case RoleEnum.Juggernaut:
-                case RoleEnum.Survivor:
                 case RoleEnum.GuardianAngel:
                 case RoleEnum.Plaguebearer:
                 case RoleEnum.Pestilence:
@@ -142,8 +140,8 @@ namespace TownOfRoles.NeutralRoles.AmnesiacMod
                 }
                 else
                 {
-                    var survivor = new Survivor(other);
-                    survivor.RegenTask();
+                    var jester = new Jester(other);
+                    jester.RegenTask();
                     if (role == RoleEnum.Arsonist || role == RoleEnum.Glitch || role == RoleEnum.Plaguebearer ||
                             role == RoleEnum.Pestilence || role == RoleEnum.Werewolf || role == RoleEnum.Juggernaut)
                     {
@@ -218,12 +216,6 @@ namespace TownOfRoles.NeutralRoles.AmnesiacMod
                 DestroyableSingleton<HudManager>.Instance.KillButton.gameObject.SetActive(false);
             }
 
-            else if (role == RoleEnum.Gambler)
-            {
-                var vigiRole = Role.GetRole<Gambler>(amnesiac);
-                vigiRole.RemainingKills = CustomGameOptions.GamblerKills;
-                DestroyableSingleton<HudManager>.Instance.KillButton.gameObject.SetActive(false);
-            }
 
             else if (role == RoleEnum.Veteran)
             {
@@ -296,12 +288,7 @@ namespace TownOfRoles.NeutralRoles.AmnesiacMod
                 arsoRole.LastDoused = DateTime.UtcNow;
             }
 
-            else if (role == RoleEnum.Survivor)
-            {
-                var survRole = Role.GetRole<Survivor>(amnesiac);
-                survRole.LastVested = DateTime.UtcNow;
-                survRole.UsesLeft = CustomGameOptions.MaxVests;
-            }
+
 
             else if (role == RoleEnum.GuardianAngel)
             {

@@ -216,12 +216,6 @@ namespace TownOfRoles.Patches
                 plaguebearer.LastInfected = plaguebearer.LastInfected.AddSeconds(CustomGameOptions.InitialCooldowns - CustomGameOptions.InfectCd);
             }
 
-            if (PlayerControl.LocalPlayer.Is(RoleEnum.Survivor))
-            {
-                var surv = Role.GetRole<Survivor>(PlayerControl.LocalPlayer);
-                surv.LastVested = DateTime.UtcNow;
-                surv.LastVested = surv.LastVested.AddSeconds(CustomGameOptions.InitialCooldowns - CustomGameOptions.VestCd);
-            }
 
             if (PlayerControl.LocalPlayer.Is(RoleEnum.Werewolf))
             {

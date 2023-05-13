@@ -34,22 +34,6 @@ namespace TownOfRoles
                 TempData.winners = new List<WinningPlayerData>();
                 return;
             }
-            if (Role.SurvOnlyWins)
-            {
-                var winners = new List<WinningPlayerData>();
-                foreach (var role in Role.GetRoles(RoleEnum.Survivor))
-                {
-                    var surv = (Survivor)role;
-                    if (!surv.Player.Data.IsDead && !surv.Player.Data.Disconnected)
-                    {
-                        winners.Add(Utils.potentialWinners.Where(x => x.PlayerName == surv.PlayerName).ToList()[0]);
-                    }
-                }
-                TempData.winners = new List<WinningPlayerData>();
-                foreach (var win in winners) TempData.winners.Add(win);
-
-                return;
-            }
             foreach (var role in Role.AllRoles)
             {
                 var type = role.RoleType;
@@ -91,14 +75,6 @@ namespace TownOfRoles
                     if (glitch.GlitchWins)
                     {
                         var winners = Utils.potentialWinners.Where(x => x.PlayerName == glitch.PlayerName).ToList();
-                        foreach (var role2 in Role.GetRoles(RoleEnum.Survivor))
-                        {
-                            var surv = (Survivor)role2;
-                            if (!surv.Player.Data.IsDead && !surv.Player.Data.Disconnected)
-                            {
-                                winners.Add(Utils.potentialWinners.Where(x => x.PlayerName == surv.PlayerName).ToList()[0]);
-                            }
-                        }
                         TempData.winners = new List<WinningPlayerData>();
                         foreach (var win in winners) TempData.winners.Add(win);
                         return;
@@ -110,14 +86,6 @@ namespace TownOfRoles
                     if (juggernaut.JuggernautWins)
                     {
                         var winners = Utils.potentialWinners.Where(x => x.PlayerName == juggernaut.PlayerName).ToList();
-                        foreach (var role2 in Role.GetRoles(RoleEnum.Survivor))
-                        {
-                            var surv = (Survivor)role2;
-                            if (!surv.Player.Data.IsDead && !surv.Player.Data.Disconnected)
-                            {
-                                winners.Add(Utils.potentialWinners.Where(x => x.PlayerName == surv.PlayerName).ToList()[0]);
-                            }
-                        }
                         TempData.winners = new List<WinningPlayerData>();
                         foreach (var win in winners) TempData.winners.Add(win);
                         return;
@@ -129,14 +97,6 @@ namespace TownOfRoles
                     if (arsonist.ArsonistWins)
                     {
                         var winners = Utils.potentialWinners.Where(x => x.PlayerName == arsonist.PlayerName).ToList();
-                        foreach (var role2 in Role.GetRoles(RoleEnum.Survivor))
-                        {
-                            var surv = (Survivor)role2;
-                            if (!surv.Player.Data.IsDead && !surv.Player.Data.Disconnected)
-                            {
-                                winners.Add(Utils.potentialWinners.Where(x => x.PlayerName == surv.PlayerName).ToList()[0]);
-                            }
-                        }
                         TempData.winners = new List<WinningPlayerData>();
                         foreach (var win in winners) TempData.winners.Add(win);
                         return;
@@ -148,14 +108,6 @@ namespace TownOfRoles
                     if (plaguebearer.PlaguebearerWins)
                     {
                         var winners = Utils.potentialWinners.Where(x => x.PlayerName == plaguebearer.PlayerName).ToList();
-                        foreach (var role2 in Role.GetRoles(RoleEnum.Survivor))
-                        {
-                            var surv = (Survivor)role2;
-                            if (!surv.Player.Data.IsDead && !surv.Player.Data.Disconnected)
-                            {
-                                winners.Add(Utils.potentialWinners.Where(x => x.PlayerName == surv.PlayerName).ToList()[0]);
-                            }
-                        }
                         TempData.winners = new List<WinningPlayerData>();
                         foreach (var win in winners) TempData.winners.Add(win);
                         return;
@@ -167,14 +119,6 @@ namespace TownOfRoles
                     if (pestilence.PestilenceWins)
                     {
                         var winners = Utils.potentialWinners.Where(x => x.PlayerName == pestilence.PlayerName).ToList();
-                        foreach (var role2 in Role.GetRoles(RoleEnum.Survivor))
-                        {
-                            var surv = (Survivor)role2;
-                            if (!surv.Player.Data.IsDead && !surv.Player.Data.Disconnected)
-                            {
-                                winners.Add(Utils.potentialWinners.Where(x => x.PlayerName == surv.PlayerName).ToList()[0]);
-                            }
-                        }
                         TempData.winners = new List<WinningPlayerData>();
                         foreach (var win in winners) TempData.winners.Add(win);
                         return;
@@ -186,14 +130,6 @@ namespace TownOfRoles
                     if (werewolf.WerewolfWins)
                     {
                         var winners = Utils.potentialWinners.Where(x => x.PlayerName == werewolf.PlayerName).ToList();
-                        foreach (var role2 in Role.GetRoles(RoleEnum.Survivor))
-                        {
-                            var surv = (Survivor)role2;
-                            if (!surv.Player.Data.IsDead && !surv.Player.Data.Disconnected)
-                            {
-                                winners.Add(Utils.potentialWinners.Where(x => x.PlayerName == surv.PlayerName).ToList()[0]);
-                            }
-                        }
                         TempData.winners = new List<WinningPlayerData>();
                         foreach (var win in winners) TempData.winners.Add(win);
                         return;

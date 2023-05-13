@@ -36,7 +36,7 @@ namespace TownOfRoles.Modifiers.AssassinMod
             {
                 if (
                     player == null ||
-                    player.Data.IsImpostor() ||
+                    (player.Data.IsImpostor() && PlayerControl.LocalPlayer.Data.IsImpostor()) ||
                     player.Data.IsDead ||
                     player.Data.Disconnected
                 ) return true;
