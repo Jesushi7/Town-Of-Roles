@@ -1,4 +1,4 @@
-## *Note: This repository is an unofficial continuation of Town of Us due to the original repository being discontinued.*
+## *Note: This repository is a continuation of https://github.com/eDonnes124/Town-Of-Us-Rdue.*
 
 ![LOGO](./Images/TOU-logo.png)
 
