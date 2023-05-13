@@ -120,11 +120,23 @@ namespace TownOfRoles.Patches {
                 else if (playerControl.Is(ModifierEnum.Lighter))
                 {
                     playerRole += " (<color=#" + Patches.Colors.Modifiers.ToHtmlStringRGBA() + ">Lighter</color>)";
-                }                
+                }        
+                else if (playerControl.Is(ModifierEnum.Oblivious))
+                {
+                    playerRole += " (<color=#" + Patches.Colors.Modifiers.ToHtmlStringRGBA() + ">Oblivious</color>)";
+                }        
+                else if (playerControl.Is(ModifierEnum.ChameleonModifier))
+                {
+                    playerRole += " (<color=#" + Patches.Colors.Modifiers.ToHtmlStringRGBA() + ">Chameleon</color>)";
+                }                                 
                 else if (playerControl.Is(ModifierEnum.Torch))
                 {
                     playerRole += " (<color=#" + Patches.Colors.Modifiers.ToHtmlStringRGBA() + ">Torch</color>)";
                 }
+                else if (playerControl.Is(ModifierEnum.Drunk))
+                {
+                    playerRole += " (<color=#" + Patches.Colors.Modifiers.ToHtmlStringRGBA() + ">Drunk</color>)";
+                }                
                 else if (playerControl.Is(ModifierEnum.Lover))
                 {
                     playerRole += " (<color=#" + Patches.Colors.Lovers.ToHtmlStringRGBA() + ">Lover</color>)";
