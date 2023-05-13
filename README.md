@@ -1,4 +1,4 @@
-## *Note: This repository is a continuation of https://github.com/eDonnes124/Town-Of-Us-Rdue.*
+## *Note: This repository is a continuation of https://github.com/eDonnes124/Town-Of-Us-R.*
 
 ![LOGO](./Images/TOU-logo.png)
 
