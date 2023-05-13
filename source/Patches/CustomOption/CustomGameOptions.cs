@@ -40,6 +40,7 @@ namespace TownOfRoles
         public static int SwooperOn => (int)Generate.SwooperOn.Get();        
         public static int CamouflagerOn => (int)Generate.CamouflagerOn.Get();     
         public static int ArsonistOn => (int)Generate.ArsonistOn.Get();
+    
         public static int AltruistOn => (int)Generate.AltruistOn.Get();
         public static int UndertakerOn => (int)Generate.UndertakerOn.Get();
         public static int PhantomOn => (int)Generate.PhantomOn.Get();
@@ -85,6 +86,7 @@ namespace TownOfRoles
         public static bool NeutralLovers => Generate.NeutralLovers.Get();   
         public static bool SheriffKillOther => Generate.SheriffKillOther.Get();      
         public static bool SheriffKillsExecutioner => Generate.SheriffKillsExecutioner.Get();
+        public static bool SheriffKillsLovers => Generate.SheriffKillsLovers.Get();        
         public static bool SheriffKillsJester => Generate.SheriffKillsJester.Get();
         public static bool SheriffKillsArsonist => Generate.SheriffKillsArsonist.Get();
         public static bool SheriffKillsJuggernaut => Generate.SheriffKillsJuggernaut.Get();
@@ -170,7 +172,6 @@ namespace TownOfRoles
         public static float DragCd => Generate.DragCooldown.Get();
         public static float UndertakerDragSpeed => Generate.UndertakerDragSpeed.Get();
         public static bool AssassinGuessGlobalModifiers => Generate.AssassinGuessGlobalModifiers.Get();
-        public static bool AssassinGuessImpostors => Generate.AssassinGuessImpostors.Get();
         public static bool AssassinGuessModifiers => Generate.AssassinGuessModifiers.Get();
         public static bool AssassinGuessLovers => Generate.AssassinGuessLovers.Get();
         public static bool AssassinCrewmateGuess => Generate.AssassinCrewmateGuess.Get();
@@ -298,7 +299,6 @@ namespace TownOfRoles
         public static int MaxChameleons => (int)Generate.MaxChameleons.Get();
         public static int MaxEngineers => (int)Generate.MaxEngineers.Get();
         public static int MaxMystics => (int)Generate.MaxMystics.Get();
-        public static int MaxSpies => (int)Generate.MaxSpies.Get();
         public static int MaxTransporters => (int)Generate.MaxTransporters.Get();
         public static float WhisperCooldown => Generate.WhisperCooldown.Get();
         public static float IncreasedCooldownPerWhisper => Generate.IncreasedCooldownPerWhisper.Get();

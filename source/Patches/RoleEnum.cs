@@ -32,7 +32,7 @@ namespace TownOfRoles
         Werewolf, // 27
         Mystic, // 28
         Imitator, // 40
-
+        Watcher,
         Miner, // 29
         Swooper, // 30
         Morphling, // 31

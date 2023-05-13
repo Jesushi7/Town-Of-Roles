@@ -247,7 +247,8 @@ namespace TownOfRoles
             canHaveModifier.Shuffle();
             canHaveAbility.RemoveAll(player => !player.Is(Faction.Impostors));
             canHaveAbility.Shuffle();     
-            canHaveAbility3.RemoveAll(player => !player.Is(Faction.Crewmates));    
+            canHaveAbility3.RemoveAll(player => !player.Is(Faction.Crewmates) || player.Is(RoleEnum.Swapper)
+            || player.Is(RoleEnum.Trapper) || player.Is(RoleEnum.Altruist));    
             canHaveAbility3.Shuffle();                         
             canHaveAbility2.RemoveAll(player => !player.Is(Faction.Neutral) || player.Is(RoleEnum.Amnesiac) || player.Is(RoleEnum.GuardianAngel)
             || player.Is(RoleEnum.Executioner) || player.Is(RoleEnum.Jester));
@@ -511,7 +512,6 @@ namespace TownOfRoles
                 var chameleons = CustomGameOptions.MaxChameleons;
                 var engineers = CustomGameOptions.MaxEngineers;
                 var mystics = CustomGameOptions.MaxMystics;
-                var spies = CustomGameOptions.MaxSpies;
                 var transporters = CustomGameOptions.MaxTransporters;
                 while (chameleons > 0)
                 {
@@ -693,7 +693,7 @@ namespace TownOfRoles
                                 break;
                             case 105:
                                 new Camouflager(player);
-                                break;                             
+                                break;                                                    
                         }
                         break;
                     case CustomRPC.SetModifier:
@@ -1435,7 +1435,7 @@ namespace TownOfRoles
                         CrewmateRoles.Add((typeof(Mystic), 28, CustomGameOptions.MysticOn, false));
 
                     if (CustomGameOptions.ImitatorOn > 0)
-                        CrewmateRoles.Add((typeof(Imitator), 40, CustomGameOptions.ImitatorOn, true));                     
+                        CrewmateRoles.Add((typeof(Imitator), 40, CustomGameOptions.ImitatorOn, true));      
  
                     #endregion
                     #region Neutral Roles

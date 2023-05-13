@@ -9,7 +9,7 @@ namespace TownOfRoles.Roles.Modifiers
         public Paranoiac(PlayerControl player) : base(player)
         {
             Name = "Paranoiac";
-            TaskText = () => "Be on high alert";
+            TaskText = () => "See when someone is close to you";
             Color = Patches.Colors.Modifiers;
             ModifierType = ModifierEnum.Paranoiac;
         }

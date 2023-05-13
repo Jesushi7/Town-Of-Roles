@@ -14,7 +14,7 @@ namespace TownOfRoles.Patches
         public readonly static Color32 Snitch = new Color32(97, 178, 108, 255);
         public readonly static Color Informant = new Color(0.83f, 0.69f, 0.22f, 1f);
         public readonly static Color32 Altruist = new Color32(45, 106, 165, 255); 
-        public readonly static Color32 Gambler = new Color32(252, 231, 0, 255); 
+        public readonly static Color32 Watcher = new Color32(25, 43, 82, 255); 
         public readonly static Color Veteran = new Color(0.6f, 0.5f, 0.25f, 1f);
         public readonly static Color Avenger = new Color(0.83f, 0.83f, 0.83f, 1f);
         public readonly static Color Tracker = new Color(0f, 0.6f, 0f, 1f);

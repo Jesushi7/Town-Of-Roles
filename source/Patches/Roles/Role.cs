@@ -441,6 +441,10 @@ public static bool RoleWins => CrewWin || ImpWin;
                 {
                     __instance.__4__this.BackgroundBar.material.color = Patches.Colors.Medium;      
                 }   
+                if (PlayerControl.LocalPlayer.Is(RoleEnum.Watcher))
+                {
+                    __instance.__4__this.BackgroundBar.material.color = Patches.Colors.Watcher;      
+                }                 
                 if (PlayerControl.LocalPlayer.Is(RoleEnum.Mystic))
                 {
                     __instance.__4__this.BackgroundBar.material.color = Patches.Colors.Mystic;      

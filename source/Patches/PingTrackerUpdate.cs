@@ -28,11 +28,11 @@ namespace TownOfRoles
             position.AdjustPosition();
 
             __instance.text.text =
-                "<color=#9fcc90>TownOfRoles v" + TownOfRoles.VersionString + "</color>\n" +
+                "<color=#9fcc90>TownOfRoles v1.0.5</color> <color=#FF0000FF>BETA</color>\n" +
                 $"Ping: {AmongUsClient.Instance.Ping}ms\n" +
-                "Modded By: <color=#9fcc90>Jsushi</color>\n" +                
+                "Modded By: <color=#9fcc90>Jsushi</color>\nFormerly From <color=#9fcc90>Town Of Us Reactivated</color>\n" +                
                 (AmongUsClient.Instance.GameState != InnerNet.InnerNetClient.GameStates.Started
-                    ? "Formerly From <color=#9fcc90>Town Of Us Reactivated</color>\nHelped From: <color=#9fcc90>AlchlcDvl</color>\nArtwork By <color=#9fcc90>Lotty</color>" : "");
+                    ? "Helped From: <color=#9fcc90>AlchlcDvl</color>\nArtwork By <color=#9fcc90>Lotty</color>" : "");
         }
     }
 }
