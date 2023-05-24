@@ -10,12 +10,12 @@ namespace TownOfRoles.Roles
         public Pestilence(PlayerControl owner) : base(owner)
         {
             Name = "Pestilence";
+            TaskText = () => "Kill everyone that interacts with you";
             Color = Patches.Colors.Pestilence;
             LastKill = DateTime.UtcNow;
             RoleType = RoleEnum.Pestilence;
             AddToRoleHistory(RoleType);
             StartText = () => "";
-            TaskText = () => "Kill everyone with your unstoppable abilities!\nFake Tasks:";
             Faction = Faction.Neutral;
         }
 

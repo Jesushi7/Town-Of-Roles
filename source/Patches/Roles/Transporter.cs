@@ -10,7 +10,7 @@ using System.Collections.Generic;
 using TownOfRoles.Patches;
 using System.Collections;
 using TownOfRoles.Extensions;
-using TownOfRoles.CrewmateRoles.MedicMod;
+using TownOfRoles.CrewmateRoles.MedicRole;
 
 namespace TownOfRoles.Roles
 {
@@ -35,8 +35,8 @@ namespace TownOfRoles.Roles
         public Transporter(PlayerControl player) : base(player)
         {
             Name = "Transporter";
-            StartText = () => "<color=#00EEFFFF>Choose Two Players To Swap Locations</color>";
-            TaskText = () => "Choose two players to swap locations";
+            StartText = () => "<color=#00EEFFFF>Transport two players to swap positions</color>";
+            TaskText = () => "Transport people";
             Color = Patches.Colors.Transporter;
             LastTransported = DateTime.UtcNow;
             RoleType = RoleEnum.Transporter;

@@ -9,12 +9,12 @@ namespace TownOfRoles.Roles
         public Undertaker(PlayerControl player) : base(player)
         {
             Name = "Undertaker";
-            StartText = () => "<color=#2d0a61>Drag Bodies And Hide Them</color>";
-            TaskText = () => "Drag bodies around to hide them from being reported";
-            Color = Patches.Colors.Undertaker;
+            StartText = () => "Drag and hide bodies from other players";
+            TaskText = () => "Drag bodies away";
+            Color = Patches.Colors.Impostor;
             LastDragged = DateTime.UtcNow;
             RoleType = RoleEnum.Undertaker;
-            FactionName = "<color=#2d0a61>Impostor</color>";                   
+            FactionName = "Impostor";                   
             Faction = Faction.Impostors;              
             AddToRoleHistory(RoleType);
             Faction = Faction.Impostors;

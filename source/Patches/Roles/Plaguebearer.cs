@@ -21,8 +21,8 @@ namespace TownOfRoles.Roles
         public Plaguebearer(PlayerControl player) : base(player)
         {
             Name = "Plaguebearer";
-            StartText = () => "<color=#E6FFB3FF>Infect Everyone To Become Pestilence</color>";
-            TaskText = () => "Infect everyone to become Pestilence\nFake Tasks:";
+            StartText = () => "<color=#E6FFB3FF>Infect people to become Pestilence</color>";
+            TaskText = () => "Spread your infection";
             Color = Patches.Colors.Plaguebearer;
             RoleType = RoleEnum.Plaguebearer;
             AddToRoleHistory(RoleType);

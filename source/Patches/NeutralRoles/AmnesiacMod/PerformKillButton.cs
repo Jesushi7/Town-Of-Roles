@@ -1,15 +1,16 @@
 using HarmonyLib;
 using Hazel;
-using TownOfRoles.CrewmateRoles.InformantMod;
-using TownOfRoles.CrewmateRoles.TrapperMod;
+using TownOfRoles.CrewmateRoles.InformantRole;
+using TownOfRoles.CrewmateRoles.TrapperRole;
 using TownOfRoles.Roles;
 using UnityEngine;
 using System;
 using TownOfRoles.Extensions;
-using TownOfRoles.CrewmateRoles.ImitatorMod;
+using TownOfRoles.CrewmateRoles.ImitatorRole;
 using AmongUs.GameOptions;
 using TownOfRoles.Roles.Modifiers;
 using TownOfRoles.ImpostorRoles.BomberMod;
+using TownOfRoles.Roles.Cultist;
 
 namespace TownOfRoles.NeutralRoles.AmnesiacMod
 {
@@ -342,7 +343,12 @@ namespace TownOfRoles.NeutralRoles.AmnesiacMod
                 SilencerRole.LastSilenced = DateTime.UtcNow;
                 SilencerRole.Silenced = null;
             }
-
+            else if (role == RoleEnum.Cultist)
+            {
+                var CultistRole = Role.GetRole<Cultist>(amnesiac);
+                CultistRole.LastRevived = DateTime.UtcNow;
+            }
+            
             else if (role == RoleEnum.Miner)
             {
                 var minerRole = Role.GetRole<Miner>(amnesiac);

@@ -4,12 +4,12 @@ using TownOfRoles.Roles;
 using UnityEngine;
 using UnityEngine.UI;
 using Il2CppInterop.Runtime.InteropTypes.Arrays;
-using TownOfRoles.CrewmateRoles.MedicMod;
-using TownOfRoles.CrewmateRoles.SwapperMod;
+using TownOfRoles.CrewmateRoles.MedicRole;
+using TownOfRoles.CrewmateRoles.SwapperRole;
 using TownOfRoles.ImpostorRoles.SilencerMod;
 using TownOfRoles.Roles.Modifiers;
 using TownOfRoles.Extensions;
-using TownOfRoles.CrewmateRoles.ImitatorMod;
+using TownOfRoles.CrewmateRoles.ImitatorRole;
 
 namespace TownOfRoles.Modifiers.AssassinMod
 {
@@ -190,7 +190,7 @@ namespace TownOfRoles.Modifiers.AssassinMod
                 int index;
                 for (index = 0; index < MeetingHud.Instance.playerStates.Length; index++) if (MeetingHud.Instance.playerStates[index].TargetPlayerId == voteArea.TargetPlayerId) break;
 
-                swapperrole.Buttons[index].GetComponent<SpriteRenderer>().sprite = CrewmateRoles.SwapperMod.AddButton.DisabledSprite;
+                swapperrole.Buttons[index].GetComponent<SpriteRenderer>().sprite = CrewmateRoles.SwapperRole.AddButton.DisabledSprite;
                 swapperrole.ListOfActives[index] = false;
                 swapperrole.Buttons[index].SetActive(false);
                 swapperrole.Buttons[index].GetComponent<PassiveButton>().OnClick = new Button.ButtonClickedEvent();

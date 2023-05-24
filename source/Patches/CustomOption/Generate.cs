@@ -139,25 +139,11 @@ namespace TownOfRoles.CustomOption
         public static CustomToggleOption AddJuggernaut;        
         public static CustomToggleOption AddPlaguebearer;
 
-        public static CustomHeaderOption CultistSettings;
-        public static CustomNumberOption MayorCultistOn;
-        public static CustomNumberOption SnitchCultistOn;
-        public static CustomNumberOption SheriffCultistOn;
-        public static CustomNumberOption NumberOfSpecialRoles;
-        public static CustomNumberOption MaxChameleons;
-        public static CustomNumberOption MaxEngineers;
-        public static CustomNumberOption MaxMystics;
 
-        public static CustomNumberOption MaxTransporters;
-        public static CustomNumberOption WhisperCooldown;
-        public static CustomNumberOption IncreasedCooldownPerWhisper;
-        public static CustomNumberOption WhisperRadius;
-        public static CustomNumberOption ConversionPercentage;
-        public static CustomNumberOption DecreasedPercentagePerConversion;
-        public static CustomNumberOption ReviveCooldown;
-        public static CustomNumberOption IncreasedCooldownPerRevive;
-        public static CustomNumberOption MaxReveals;
-
+        public static CustomNumberOption CultistOn;
+        public static CustomHeaderOption Cultist;     
+        public static CustomNumberOption ReviveCooldown2;
+        public static CustomNumberOption IncreasedCooldownPerRevive2;        
         public static CustomHeaderOption TaskTrackingSettings;
         public static CustomToggleOption SeeTasksDuringRound;
         public static CustomToggleOption SeeTasksDuringMeeting;
@@ -501,27 +487,27 @@ namespace TownOfRoles.CustomOption
                 PercentFormat);
 
 
-
-
-            BomberOn = new CustomNumberOption(num++, MultiMenu.imposter, "<color=#cf655f>Bomber</color>", 0f, 0f, 100f, 10f,
-                PercentFormat);                
-            EscapistOn = new CustomNumberOption(num++, MultiMenu.imposter, "<color=#5834cf>Escapist</color>", 0f, 0f, 100f, 10f,
-                PercentFormat);
-            GrenadierOn = new CustomNumberOption(num++, MultiMenu.imposter, "<color=#cfc4ba>Grenadier</color>", 0f, 0f, 100f, 10f,
-                PercentFormat);
-            JanitorOn = new CustomNumberOption(num++, MultiMenu.imposter, "<color=#d68185>Janitor</color>", 0f, 0f, 100f, 10f,
+            BomberOn = new CustomNumberOption(num++, MultiMenu.imposter, "<color=#FF0000FF>Bomber</color>", 0f, 0f, 100f, 10f,
                 PercentFormat);   
-            MinerOn = new CustomNumberOption(num++, MultiMenu.imposter, "<color=#565c33>Miner</color>", 0f, 0f, 100f, 10f,
+            CultistOn = new CustomNumberOption(num++, MultiMenu.imposter, "<color=#FF0000FF>Cultist</color>", 0f, 0f, 100f, 10f,
+                PercentFormat);                                
+            EscapistOn = new CustomNumberOption(num++, MultiMenu.imposter, "<color=#FF0000FF>Escapist</color>", 0f, 0f, 100f, 10f,
+                PercentFormat);
+            GrenadierOn = new CustomNumberOption(num++, MultiMenu.imposter, "<color=#FF0000FF>Grenadier</color>", 0f, 0f, 100f, 10f,
+                PercentFormat);
+            JanitorOn = new CustomNumberOption(num++, MultiMenu.imposter, "<color=#FF0000FF>Janitor</color>", 0f, 0f, 100f, 10f,
+                PercentFormat);   
+            MinerOn = new CustomNumberOption(num++, MultiMenu.imposter, "<color=#FF0000FF>Miner</color>", 0f, 0f, 100f, 10f,
                 PercentFormat);                                          
-            MorphlingOn = new CustomNumberOption(num++, MultiMenu.imposter, "<color=#82e673>Morphling</color>", 0f, 0f, 100f, 10f,
+            MorphlingOn = new CustomNumberOption(num++, MultiMenu.imposter, "<color=#FF0000FF>Morphling</color>", 0f, 0f, 100f, 10f,
                 PercentFormat);
             TraitorOn = new CustomNumberOption(num++, MultiMenu.imposter, "<color=#FF0000FF>Traitor</color>", 0f, 0f, 100f, 10f,
                 PercentFormat); 
-            UndertakerOn = new CustomNumberOption(num++, MultiMenu.imposter, "<color=#2d0a61>Undertaker</color>", 0f, 0f, 100f, 10f,
+            UndertakerOn = new CustomNumberOption(num++, MultiMenu.imposter, "<color=#FF0000FF>Undertaker</color>", 0f, 0f, 100f, 10f,
                 PercentFormat);
-            SilencerOn = new CustomNumberOption(num++, MultiMenu.imposter, "<color=#cf7b5f>Silencer</color>", 0f, 0f, 100f, 10f,
+            SilencerOn = new CustomNumberOption(num++, MultiMenu.imposter, "<color=#FF0000FF>Silencer</color>", 0f, 0f, 100f, 10f,
                 PercentFormat);
-            SwooperOn = new CustomNumberOption(num++, MultiMenu.imposter, "<color=#631d18>Swooper</color>", 0f, 0f, 100f, 10f,
+            SwooperOn = new CustomNumberOption(num++, MultiMenu.imposter, "<color=#FF0000FF>Swooper</color>", 0f, 0f, 100f, 10f,
                 PercentFormat);
 
 
@@ -575,7 +561,7 @@ namespace TownOfRoles.CustomOption
 
             mainettings =
                 new CustomHeaderOption(num++, MultiMenu.main, "Game Mode Settings");
-            GameMode = new CustomStringOption(num++, MultiMenu.main, "Game Mode", new[] {"Classic", "All Any", "Killing Only", "Cultist" });
+            GameMode = new CustomStringOption(num++, MultiMenu.main, "Game Mode", new[] {"Classic", "All Any", "Killing Only"});
 
             AllAnySettings =
                 new CustomHeaderOption(num++, MultiMenu.main, "All Any Settings");
@@ -590,40 +576,6 @@ namespace TownOfRoles.CustomOption
             AddArsonist = new CustomToggleOption(num++, MultiMenu.main, "Add <color=#FF4D00FF>Arsonist</color>", true);
             AddJuggernaut = new CustomToggleOption(num++, MultiMenu.main, "Add <color=#8C004DFF>Juggernaut</color>", true);            
             AddPlaguebearer = new CustomToggleOption(num++, MultiMenu.main, "Add <color=#E6FFB3FF>Plaguebearer</color>", true);
-
-            CultistSettings =
-                new CustomHeaderOption(num++, MultiMenu.main, "Cultist Settings");
-            MayorCultistOn = new CustomNumberOption(num++, MultiMenu.main, "<color=#704FA8FF>Mayor</color> (Cultist Mode)", 100f, 0f, 100f, 10f,
-                PercentFormat);
-            SnitchCultistOn = new CustomNumberOption(num++, MultiMenu.main, "<color=#61b26c>Snitch</color> (Cultist Mode)", 100f, 0f, 100f, 10f,
-                PercentFormat);
-            SheriffCultistOn = new CustomNumberOption(num++, MultiMenu.main, "<color=#f8cd46>Sheriff</color> (Cultist Mode)", 100f, 0f, 100f, 10f,
-                PercentFormat);
-            NumberOfSpecialRoles =
-                new CustomNumberOption(num++, MultiMenu.main, "Number Of Special Roles", 4, 0, 4, 1);
-            MaxChameleons =
-                new CustomNumberOption(num++, MultiMenu.main, "Max <color=#708eef>Chameleons</color>", 3, 0, 5, 1);
-            MaxEngineers =
-                new CustomNumberOption(num++, MultiMenu.main, "Max <color=#FFA60AFF>Engineers</color>", 3, 0, 5, 1);
-            MaxMystics =
-                new CustomNumberOption(num++, MultiMenu.main, "Max <color=#4D4DFFFF>Mystics</color>", 3, 0, 5, 1);
-            MaxTransporters =
-                new CustomNumberOption(num++, MultiMenu.main, "Max <color=#00EEFFFF>Transporters</color>", 3, 0, 5, 1);
-            WhisperCooldown =
-                new CustomNumberOption(num++, MultiMenu.main, "Initial Whisper Cooldown", 25f, 10f, 60f, 2.5f, CooldownFormat);
-            IncreasedCooldownPerWhisper =
-                new CustomNumberOption(num++, MultiMenu.main, "Increased Cooldown Per Whisper", 5f, 0f, 15f, 0.5f, CooldownFormat);
-            WhisperRadius =
-                new CustomNumberOption(num++, MultiMenu.main, "Whisper Radius", 1f, 0.25f, 5f, 0.25f, MultiplierFormat);
-            ConversionPercentage = new CustomNumberOption(num++, MultiMenu.main, "Conversion Percentage", 25f, 0f, 100f, 5f,
-                PercentFormat);
-            DecreasedPercentagePerConversion = new CustomNumberOption(num++, MultiMenu.main, "Decreased Conversion Percentage Per Conversion", 5f, 0f, 15f, 1f,
-                PercentFormat);
-            ReviveCooldown =
-                new CustomNumberOption(num++, MultiMenu.main, "Initial Revive Cooldown", 25f, 10f, 60f, 2.5f, CooldownFormat);
-            IncreasedCooldownPerRevive =
-                new CustomNumberOption(num++, MultiMenu.main, "Increased Cooldown Per Revive", 25f, 10f, 60f, 2.5f, CooldownFormat);
-            MaxReveals = new CustomNumberOption(num++, MultiMenu.main, "Maximum Number Of Reveals", 5, 1, 15, 1);
 
             CustomGameSettings =
                 new CustomHeaderOption(num++, MultiMenu.main, "Custom Game Settings");
@@ -984,10 +936,15 @@ namespace TownOfRoles.CustomOption
             WerewolfVent =
                 new CustomToggleOption(num++, MultiMenu.neutral, "<color=#A86629FF>Werewolf</color> Can Vent", false);
 
-
+            Cultist =
+                new CustomHeaderOption(num++, MultiMenu.imposter, "<color=#FF0000FF>Cultist</color>"); 
+            ReviveCooldown2 =
+                new CustomNumberOption(num++, MultiMenu.imposter, "Initial Revive Cooldown", 25f, 10f, 60f, 2.5f, CooldownFormat);
+            IncreasedCooldownPerRevive2 =
+                new CustomNumberOption(num++, MultiMenu.imposter, "Increased Cooldown Per Revive", 25f, 10f, 60f, 2.5f, CooldownFormat);
 
             Bomber =
-                new CustomHeaderOption(num++, MultiMenu.imposter, "<color=#cf655f>Bomber</color>");
+                new CustomHeaderOption(num++, MultiMenu.imposter, "<color=#FF0000FF>Bomber</color>");
             DetonateDelay =
                 new CustomNumberOption(num++, MultiMenu.imposter, "Bomb Delay", 5f, 1f, 15f, 1f, CooldownFormat);
             MaxKillsInDetonation =
@@ -995,17 +952,17 @@ namespace TownOfRoles.CustomOption
             DetonateRadius =
                 new CustomNumberOption(num++, MultiMenu.imposter, "Detonate Radius", 0.25f, 0.05f, 1f, 0.05f, MultiplierFormat);
             BomberVent =
-                new CustomToggleOption(num++, MultiMenu.imposter, "<color=#cf655f>Bomber</color> Can Vent", false);
+                new CustomToggleOption(num++, MultiMenu.imposter, "<color=#FF0000FF>Bomber</color> Can Vent", false);
 
             Escapist =
-                new CustomHeaderOption(num++, MultiMenu.imposter, "<color=#5834cf>Escapist</color>");
+                new CustomHeaderOption(num++, MultiMenu.imposter, "<color=#FF0000FF>Escapist</color>");
             EscapeCooldown =
                 new CustomNumberOption(num++, MultiMenu.imposter, "Recall Cooldown", 25f, 10f, 60f, 2.5f, CooldownFormat);
             EscapistVent =
-                new CustomToggleOption(num++, MultiMenu.imposter, "<color=#5834cf>Escapist</color> Can Vent", false);
+                new CustomToggleOption(num++, MultiMenu.imposter, "<color=#FF0000FF>Escapist</color> Can Vent", false);
 
             Grenadier =
-                new CustomHeaderOption(num++, MultiMenu.imposter, "<color=#cfc4ba>Grenadier</color>");
+                new CustomHeaderOption(num++, MultiMenu.imposter, "<color=#FF0000FF>Grenadier</color>");
             GrenadeCooldown =
                 new CustomNumberOption(num++, MultiMenu.imposter, "Flash Grenade Cooldown", 25f, 10f, 60f, 2.5f, CooldownFormat);
             GrenadeDuration =
@@ -1014,20 +971,20 @@ namespace TownOfRoles.CustomOption
                 new CustomNumberOption(num++, MultiMenu.imposter, "Flash Radius", 1f, 0.25f, 5f, 0.25f, MultiplierFormat);
             GrenadierIndicators =
                 new CustomToggleOption(num++, MultiMenu.imposter, "Indicate Flashed <color=#00EEFFFF>Crewmates</color>", false);
-            GrenadierVent = new CustomToggleOption(num++, MultiMenu.imposter, "<color=#cfc4ba>Grenadier</color> Can Vent", false);                
+            GrenadierVent = new CustomToggleOption(num++, MultiMenu.imposter, "<color=#FF0000FF>Grenadier</color> Can Vent", false);                
 
-            Miner = new CustomHeaderOption(num++, MultiMenu.imposter, "<color=#565c33>Miner</color>");
+            Miner = new CustomHeaderOption(num++, MultiMenu.imposter, "<color=#FF0000FF>Miner</color>");
             MineCooldown =
-                new CustomNumberOption(num++, MultiMenu.imposter, "<color=#565c33>Miner</color> Cooldown", 10f, 1f, 15f, 1f, CooldownFormat);
+                new CustomNumberOption(num++, MultiMenu.imposter, "<color=#FF0000FF>Miner</color> Cooldown", 10f, 1f, 15f, 1f, CooldownFormat);
 
             Morphling =
-                new CustomHeaderOption(num++, MultiMenu.imposter, "<color=#82e673>Morphling</color>");
+                new CustomHeaderOption(num++, MultiMenu.imposter, "<color=#FF0000FF>Morphling</color>");
             MorphlingCooldown =
-                new CustomNumberOption(num++, MultiMenu.imposter, "<color=#82e673>Morphling</color> Cooldown", 25f, 10f, 60f, 2.5f, CooldownFormat);
+                new CustomNumberOption(num++, MultiMenu.imposter, "<color=#FF0000FF>Morphling</color> Cooldown", 25f, 10f, 60f, 2.5f, CooldownFormat);
             MorphlingDuration =
-                new CustomNumberOption(num++, MultiMenu.imposter, "<color=#82e673>Morphling</color> Duration", 10f, 5f, 15f, 1f, CooldownFormat);
+                new CustomNumberOption(num++, MultiMenu.imposter, "<color=#FF0000FF>Morphling</color> Duration", 10f, 5f, 15f, 1f, CooldownFormat);
             MorphlingVent =
-                new CustomToggleOption(num++, MultiMenu.imposter, "<color=#82e673>Morphling</color> Can Vent", false);
+                new CustomToggleOption(num++, MultiMenu.imposter, "<color=#FF0000FF>Morphling</color> Can Vent", false);
             
             Traitor = new CustomHeaderOption(num++, MultiMenu.imposter, "<color=#FF0000FF>Traitor</color>");
             LatestSpawn = new CustomNumberOption(num++, MultiMenu.imposter, "Minimum People Alive When <color=#FF0000FF>Traitor</color> Can Spawn", 5, 3, 15, 1);
@@ -1038,24 +995,24 @@ namespace TownOfRoles.CustomOption
             TraitorColourSwap =
                 new CustomToggleOption(num++, MultiMenu.imposter, "<color=#FF0000FF>Traitor</color> Does Not Swap Colours (Snitch)", false);
             
-            Undertaker = new CustomHeaderOption(num++, MultiMenu.imposter, "<color=#2d0a61>Undertaker</color>");
+            Undertaker = new CustomHeaderOption(num++, MultiMenu.imposter, "<color=#FF0000FF>Undertaker</color>");
             DragCooldown = new CustomNumberOption(num++, MultiMenu.imposter, "Drag Cooldown", 25f, 10f, 60f, 2.5f, CooldownFormat);
             UndertakerDragSpeed =
-                new CustomNumberOption(num++, MultiMenu.imposter, "<color=#2d0a61>Undertaker</color> Drag Speed", 0.1f, 0.5f, 2f, 0.5f, MultiplierFormat);
+                new CustomNumberOption(num++, MultiMenu.imposter, "<color=#FF0000FF>Undertaker</color> Drag Speed", 0.1f, 0.5f, 2f, 0.5f, MultiplierFormat);
 
-            Silencer = new CustomHeaderOption(num++, MultiMenu.imposter, "<color=#cf7b5f>Silencer</color>");
+            Silencer = new CustomHeaderOption(num++, MultiMenu.imposter, "<color=#FF0000FF>Silencer</color>");
             SilenceCooldown =
-                new CustomNumberOption(num++, MultiMenu.imposter, "Initial <color=#cf7b5f>Silencer</color> Cooldown", 10f, 1f, 15f, 1f, CooldownFormat);
+                new CustomNumberOption(num++, MultiMenu.imposter, "Initial <color=#FF0000FF>Silencer</color> Cooldown", 10f, 1f, 15f, 1f, CooldownFormat);
 
-            Swooper = new CustomHeaderOption(num++, MultiMenu.imposter, "<color=#631d18>Swooper</color>");
+            Swooper = new CustomHeaderOption(num++, MultiMenu.imposter, "<color=#FF0000FF>Swooper</color>");
             SwoopCooldown =
-                new CustomNumberOption(num++, MultiMenu.imposter, "<color=#631d18>Swooper</color> Cooldown", 25f, 10f, 60f, 2.5f, CooldownFormat);
+                new CustomNumberOption(num++, MultiMenu.imposter, "<color=#FF0000FF>Swooper</color> Cooldown", 25f, 10f, 60f, 2.5f, CooldownFormat);
             SwoopDuration =
                 new CustomNumberOption(num++, MultiMenu.imposter, "Swoop Duration", 10f, 5f, 15f, 1f, CooldownFormat);
             SwooperVent =
-                new CustomToggleOption(num++, MultiMenu.imposter, "<color=#631d18>Swooper</color> Can Vent", false);
+                new CustomToggleOption(num++, MultiMenu.imposter, "<color=#FF0000FF>Swooper</color> Can Vent", false);
             SwooperPolusVent =
-                new CustomToggleOption(num++, MultiMenu.imposter, "<color=#631d18>Swooper</color> Can Vent On Polus", false);
+                new CustomToggleOption(num++, MultiMenu.imposter, "<color=#FF0000FF>Swooper</color> Can Vent On Polus", false);
 
             /*ButtonBarry = new CustomHeaderOption(num++, MultiMenu.modifiers, "General <color=#f590bc>Modifier</color> Settings");*/
 

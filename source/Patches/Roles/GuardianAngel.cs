@@ -24,11 +24,11 @@ namespace TownOfRoles.Roles
             Name = "Guardian Angel";
             StartText = () =>
                 target == null ? "<color=#B3FFFFFF>You don't have a target for some reason... weird...</color>" : $"<color=#B3FFFFFF>Protect {target.name} With Your Life!</color>";
+            Color = Patches.Colors.GuardianAngel;
             TaskText = () =>
                 target == null
-                    ? "You don't have a target for some reason... weird..."
+                    ? "You don't have a target for some reason"
                     : $"Protect {target.name}!";
-            Color = Patches.Colors.GuardianAngel;
             LastProtected = DateTime.UtcNow;
             FactionName = "<color=#5c5e5d>Neutral</color>";                
             RoleType = RoleEnum.GuardianAngel;

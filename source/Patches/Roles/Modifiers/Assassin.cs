@@ -59,18 +59,21 @@ namespace TownOfRoles.Roles.Modifiers
                 if (!PlayerControl.LocalPlayer.Is(Faction.Impostors))
                 {
                     ColorMapping.Add("Impostor", Colors.Impostor);
-                    if (CustomGameOptions.JanitorOn > 0) ColorMapping.Add("Janitor", Colors.Janitor);
-                    if (CustomGameOptions.MorphlingOn > 0) ColorMapping.Add("Morphling", Colors.Morphling);
-                    if (CustomGameOptions.MinerOn > 0) ColorMapping.Add("Miner", Colors.Miner);
-                    if (CustomGameOptions.SwooperOn > 0) ColorMapping.Add("Swooper", Colors.Swooper);
-                    if (CustomGameOptions.UndertakerOn > 0) ColorMapping.Add("Undertaker", Colors.Undertaker);
-                    if (CustomGameOptions.EscapistOn > 0) ColorMapping.Add("Escapist", Colors.Escapist);            
-                    if (CustomGameOptions.GrenadierOn > 0) ColorMapping.Add("Grenadier", Colors.Grenadier);
+                    if (CustomGameOptions.JanitorOn > 0) ColorMapping.Add("Janitor", Colors.Impostor);
+                    if (CustomGameOptions.CultistOn > 0) ColorMapping.Add("Cultist", Colors.Impostor);
+                    if (CustomGameOptions.CultistOn > 0) ColorMapping.Add("Follower", Colors.Impostor);                                           
+                    if (CustomGameOptions.MorphlingOn > 0) ColorMapping.Add("Morphling", Colors.Impostor);
+                    if (CustomGameOptions.MinerOn > 0) ColorMapping.Add("Miner", Colors.Impostor);
+                    if (CustomGameOptions.SwooperOn > 0) ColorMapping.Add("Swooper", Colors.Impostor);
+                    if (CustomGameOptions.UndertakerOn > 0) ColorMapping.Add("Undertaker", Colors.Impostor);
+                    if (CustomGameOptions.EscapistOn > 0) ColorMapping.Add("Escapist", Colors.Impostor);            
+                    if (CustomGameOptions.GrenadierOn > 0) ColorMapping.Add("Grenadier", Colors.Impostor);
                     if (CustomGameOptions.TraitorOn > 0) ColorMapping.Add("Traitor", Colors.Impostor);
-                    if (CustomGameOptions.SilencerOn > 0) ColorMapping.Add("Silencer", Colors.Silencer);
-                    if (CustomGameOptions.BomberOn > 0) ColorMapping.Add("Bomber", Colors.Bomber);
+                    if (CustomGameOptions.SilencerOn > 0) ColorMapping.Add("Silencer", Colors.Impostor);
+                    if (CustomGameOptions.BomberOn > 0) ColorMapping.Add("Bomber", Colors.Impostor);
                     if (CustomGameOptions.UnderdogOn > 0) ColorMapping.Add("Underdog", Colors.Impostor);
-                    if (CustomGameOptions.DisperserOn > 0) ColorMapping.Add("Disperser", Colors.Impostor);                 
+                    if (CustomGameOptions.DisperserOn > 0) ColorMapping.Add("Disperser", Colors.Impostor); 
+                                    
                 }
             // Add extra options if the options are on
             if (CustomGameOptions.AssassinCrewmateGuess) ColorMapping.Add("Crewmate", Colors.Crewmate);

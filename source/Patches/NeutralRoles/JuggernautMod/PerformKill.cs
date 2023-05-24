@@ -2,7 +2,7 @@ using System;
 using HarmonyLib;
 using Hazel;
 using TownOfRoles.Roles;
-using TownOfRoles.CrewmateRoles.MedicMod;
+using TownOfRoles.CrewmateRoles.MedicRole;
 using AmongUs.GameOptions;
 
 namespace TownOfRoles.NeutralRoles.JuggernautMod

@@ -6,21 +6,19 @@ using Hazel;
 using Reactor.Utilities;
 using Reactor.Utilities.Extensions;
 using Reactor.Networking.Extensions;
-using TownOfRoles.CrewmateRoles.AltruistMod;
-using TownOfRoles.CrewmateRoles.MedicMod;
-using TownOfRoles.CrewmateRoles.SwapperMod;
-using TownOfRoles.CultistRoles.NecromancerMod;
+using TownOfRoles.CrewmateRoles.AltruistRole;
+using TownOfRoles.CrewmateRoles.MedicRole;
+using TownOfRoles.CrewmateRoles.SwapperRole;
 using TownOfRoles.CustomOption;
 using TownOfRoles.Extensions;
 using TownOfRoles.Modifiers.AssassinMod;
 using TownOfRoles.NeutralRoles.ExecutionerMod;
 using TownOfRoles.NeutralRoles.GuardianAngelMod;
 using TownOfRoles.ImpostorRoles.MinerMod;
-using TownOfRoles.CrewmateRoles.AvengerMod;
+using TownOfRoles.CrewmateRoles.AvengerRole;
 using TownOfRoles.NeutralRoles.PhantomMod;
 using TownOfRoles.ImpostorRoles.TraitorMod;
 using TownOfRoles.Roles;
-using TownOfRoles.Roles.Cultist;
 using TownOfRoles.Roles.Modifiers;
 using UnityEngine;
 using Coroutine = TownOfRoles.ImpostorRoles.JanitorMod.Coroutine;
@@ -28,9 +26,11 @@ using Object = UnityEngine.Object;
 using PerformKillButton = TownOfRoles.NeutralRoles.AmnesiacMod.PerformKillButton;
 using Random = UnityEngine.Random; //using Il2CppSystem;
 using TownOfRoles.Patches;
-using TownOfRoles.CrewmateRoles.ImitatorMod;
+using TownOfRoles.CrewmateRoles.ImitatorRole;
 using AmongUs.GameOptions;
-using Murder = TownOfRoles.CrewmateRoles.MedicMod.Murder;
+using Murder = TownOfRoles.CrewmateRoles.MedicRole.Murder;
+using TownOfRoles.CultistRoles.CultistMod;
+using TownOfRoles.Roles.Cultist;
 
 namespace TownOfRoles
 {
@@ -492,69 +492,6 @@ namespace TownOfRoles
                 Role.GenRole<Role>(type, impostors, id);
             }
         }
-        private static void GenEachRoleCultist(List<GameData.PlayerInfo> infected)
-        {
-            var impostors = Utils.GetImpostors(infected);
-            var crewmates = Utils.GetCrewmates(impostors);
-            crewmates.Shuffle();
-            impostors.Shuffle();
-
-            var specialRoles = new List<(Type, int, int, bool)>();
-            var crewRoles = new List<(Type, int, int, bool)>();
-            var impRole = new List<(Type, int, int, bool)>();
-            if (CustomGameOptions.MayorCultistOn > 0) specialRoles.Add((typeof(Mayor), 3, CustomGameOptions.MayorCultistOn, true));
-            if (CustomGameOptions.SnitchCultistOn > 0) specialRoles.Add((typeof(CultistSnitch), 102, CustomGameOptions.SnitchCultistOn, true));
-            if (CustomGameOptions.SheriffCultistOn > 0) specialRoles.Add((typeof(Sheriff), 0, CustomGameOptions.SheriffCultistOn, true));
-            if (specialRoles.Count > CustomGameOptions.SpecialRoleCount) SortRoles(specialRoles, CustomGameOptions.SpecialRoleCount, CustomGameOptions.SpecialRoleCount);
-            if (specialRoles.Count > crewmates.Count) SortRoles(specialRoles, crewmates.Count, crewmates.Count);
-            if (specialRoles.Count < crewmates.Count)
-            {
-                var chameleons = CustomGameOptions.MaxChameleons;
-                var engineers = CustomGameOptions.MaxEngineers;
-                var mystics = CustomGameOptions.MaxMystics;
-                var transporters = CustomGameOptions.MaxTransporters;
-                while (chameleons > 0)
-                {
-                    crewRoles.Add((typeof(Chameleon), 104, 10, false));
-                    chameleons--;
-                }
-                while (engineers > 0)
-                {
-                    crewRoles.Add((typeof(Engineer), 2, 10, false));
-                    engineers--;
-                }
-                while (mystics > 0)
-                {
-                    crewRoles.Add((typeof(CultistMystic), 103, 10, false));
-                    mystics--;
-                }
-                while (transporters > 0)
-                {
-                    crewRoles.Add((typeof(Transporter), 20, 10, false));
-                    transporters--;
-                }
-                SortRoles(crewRoles, crewmates.Count - specialRoles.Count, crewmates.Count - specialRoles.Count);
-            }
-            impRole.Add((typeof(Necromancer), 100, 10, true));
-            impRole.Add((typeof(Whisperer), 101, 10, true));
-            SortRoles(impRole, 1, 1);
-
-            foreach (var (type, id, _, unique) in specialRoles)
-            {
-                Role.GenRole<Role>(type, crewmates, id);
-            }
-            foreach (var (type, id, _, unique) in crewRoles)
-            {
-                Role.GenRole<Role>(type, crewmates, id);
-            }
-            foreach (var (type, id, _, unique) in impRole)
-            {
-                Role.GenRole<Role>(type, impostors, id);
-            }
-
-            foreach (var crewmate in crewmates)
-                Role.GenRole<Role>(typeof(Crewmate), crewmate, 38);
-        }
 
 
         [HarmonyPatch(typeof(PlayerControl), nameof(PlayerControl.HandleRpc))]
@@ -676,24 +613,12 @@ namespace TownOfRoles
                             case 41:
                                 new Bomber(player);
                                 break;                            
-                            case 100:
-                                new Necromancer(player);
-                                break;
-                            case 101:
-                                new Whisperer(player);
-                                break;
-                            case 102:
-                                new CultistSnitch(player);
-                                break;
-                            case 103:
-                                new CultistMystic(player);
-                                break;
-                            case 104:
-                                new Chameleon(player);
-                                break;
                             case 105:
                                 new Camouflager(player);
-                                break;                                                    
+                                break;             
+                            case 106:
+                                new Cultist(player);
+                                break;                                                                         
                         }
                         break;
                     case CustomRPC.SetModifier:
@@ -992,19 +917,7 @@ namespace TownOfRoles
                         var SwooperRole = Role.GetRole<Swooper>(Swooper);
                         SwooperRole.TimeRemaining = CustomGameOptions.SwoopDuration;
                         SwooperRole.Swoop();
-                        break;
-                    case CustomRPC.ChameleonSwoop:
-                        var chameleon = Utils.PlayerById(reader.ReadByte());
-                        var chameleonRole = Role.GetRole<Chameleon>(chameleon);
-                        chameleonRole.TimeRemaining = CustomGameOptions.SwoopDuration;
-                        chameleonRole.Swoop();
-                        break;   
-                    case CustomRPC.CamouflagerSwoop:
-                        var chameleon2 = Utils.PlayerById(reader.ReadByte());
-                        var chameleonRole2 = Role.GetRole<Chameleon>(chameleon2);
-                        chameleonRole2.TimeRemaining = CustomGameOptions.SwoopDuration;
-                        chameleonRole2.Swoop();
-                        break;                                          
+                        break;                                         
                     case CustomRPC.Alert:
                         var veteran = Utils.PlayerById(reader.ReadByte());
                         var veteranRole = Role.GetRole<Veteran>(veteran);
@@ -1126,7 +1039,7 @@ namespace TownOfRoles
                                         CustomGameOptions.ReviveDuration, 0.5f));
 
                                 Coroutines.Start(
-                                    global::TownOfRoles.CrewmateRoles.AltruistMod.Coroutine.AltruistRevive(body,
+                                    global::TownOfRoles.CrewmateRoles.AltruistRole.Coroutine.AltruistRevive(body,
                                         altruistRole));
                             }
 
@@ -1295,17 +1208,17 @@ namespace TownOfRoles
                         var bomber = Utils.PlayerById(reader.ReadByte());
                         Bomber.DetonateKillEnd(playerToDie, bomber);
                         break;
-                    case CustomRPC.Revive:
-                        var necromancer = Utils.PlayerById(reader.ReadByte());
-                        var necromancerRole = Role.GetRole<Necromancer>(necromancer);
-                        var revived = reader.ReadByte();
-                        var theDeadBodies2 = Object.FindObjectsOfType<DeadBody>();
-                        foreach (var body in theDeadBodies2)
-                            if (body.ParentId == revived)
+                    case CustomRPC.Revive2:
+                        var cultist = Utils.PlayerById(reader.ReadByte());
+                        var cultistRole = Role.GetRole<Cultist>(cultist);
+                        var revived2 = reader.ReadByte();
+                        var theDeadBodies3 = Object.FindObjectsOfType<DeadBody>();
+                        foreach (var body in theDeadBodies3)
+                            if (body.ParentId == revived2)
                             {
-                                PerformRevive.Revive(body, necromancerRole);
+                                PerformRevive2.Revive(body, cultistRole);
                             }
-                        break;
+                        break;                        
                     case CustomRPC.Convert:
                         var convertedPlayer = Utils.PlayerById(reader.ReadByte());
                         Utils.Convert(convertedPlayer);
@@ -1497,6 +1410,9 @@ namespace TownOfRoles
                     if (CustomGameOptions.BomberOn > 0)
                         ImpostorRoles.Add((typeof(Bomber), 41, CustomGameOptions.BomberOn, true));
 
+                    if (CustomGameOptions.CultistOn > 0)
+                        ImpostorRoles.Add((typeof(Cultist), 106, CustomGameOptions.CultistOn, true));                        
+
                     #endregion
                     #region Crewmate Modifiers
                     if (Check(CustomGameOptions.TorchOn))
@@ -1569,7 +1485,6 @@ namespace TownOfRoles
                 }
 
                 if (CustomGameOptions.GameMode == GameMode.KillingOnly) GenEachRoleKilling(infected.ToList());
-                else if (CustomGameOptions.GameMode == GameMode.Cultist) GenEachRoleCultist(infected.ToList());
                 else GenEachRole(infected.ToList());
             }
         }

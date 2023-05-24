@@ -21,11 +21,11 @@ namespace TownOfRoles.Roles
         public Grenadier(PlayerControl player) : base(player)
         {
             Name = "Grenadier";
-            StartText = () => "<color=#cfc4ba>Hinder The Crewmates' Vision</color>";
-            TaskText = () => "Blind the crewmates to get sneaky kills";
-            Color = Patches.Colors.Grenadier;
+            StartText = () => "Blind players";
+            TaskText = () => "Flash everyone to get secret kills";
+            Color = Patches.Colors.Impostor;
             LastFlashed = DateTime.UtcNow;
-            FactionName = "<color=#cfc4ba>Impostor</color>";   
+            FactionName = "Impostor";   
                  
             Faction = Faction.Impostors;              
             RoleType = RoleEnum.Grenadier;

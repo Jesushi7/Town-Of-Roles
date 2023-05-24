@@ -1,7 +1,7 @@
 using HarmonyLib;
 using Hazel;
 using System.Linq;
-using TownOfRoles.CrewmateRoles.AvengerMod;
+using TownOfRoles.CrewmateRoles.AvengerRole;
 using TownOfRoles.Extensions;
 using TownOfRoles.Roles;
 

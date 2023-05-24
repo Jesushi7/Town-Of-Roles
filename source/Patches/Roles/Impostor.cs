@@ -7,7 +7,7 @@ namespace TownOfRoles.Roles
         {
             Name = "Impostor";
             StartText = () => "Kill The <color=#00EEFFFF>Crewmates</color>";    
-            TaskText = () => "Find and kill the <color=#00EEFFFF>Crewmates</color>";                      
+            TaskText = () => "Find and kill the <color=#00EEFFFF>Crewmates</color>";                    
             FactionName = "Impostor";             
             Faction = Faction.Impostors;
             RoleType = RoleEnum.Impostor;

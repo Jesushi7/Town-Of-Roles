@@ -40,8 +40,8 @@ namespace TownOfRoles.Roles
         public static IEnumerable<Role> AllRoles => RoleDictionary.Values.ToList();
         protected internal string Name { get; set; }
         public Func<string> StartText;
+        public Func<string> TaskText;        
         protected internal string FactionName { get; set; } = "None";
-        public Func<string> TaskText;
 
         private PlayerControl _player { get; set; }
 
@@ -56,7 +56,7 @@ namespace TownOfRoles.Roles
                 PlayerName = value.Data.PlayerName;
             }
         }
-
+        public static Role LocalRole => GetRole(PlayerControl.LocalPlayer);
         protected float Scale { get; set; } = 1f;
         protected internal Color Color { get; set; }
         protected internal RoleEnum RoleType { get; set; }
@@ -228,7 +228,7 @@ public static bool RoleWins => CrewWin || ImpWin;
 
             Player.nameText().transform.localPosition = new Vector3(0f, 0.15f, -0.5f);
 
-            return Name + "\n" + PlayerName;
+            return PlayerName + "\n" + Name;
         }
 
         public static bool operator ==(Role a, Role b)
@@ -260,13 +260,13 @@ public static bool RoleWins => CrewWin || ImpWin;
             {
                 var task = new GameObject(Name + "Task").AddComponent<ImportantTextTask>();
                 task.transform.SetParent(Player.transform, false);
-                task.Text = $"{ColorString}Role: {Name}\n{TaskText()}</color>";
+                task.Text = $"{ColorString}{Name}: {TaskText()}</color>";
                 Player.myTasks.Insert(0, task);
                 return;
             }
 
             Player.myTasks.ToArray()[0].Cast<ImportantTextTask>().Text =
-                $"{ColorString}Role: {Name}\n{TaskText()}</color>";
+                $"{ColorString}{Name}: {TaskText()}</color>";
         }
 
         public static T Gen<T>(Type type, PlayerControl player, CustomRPC rpc)
@@ -405,114 +405,15 @@ public static bool RoleWins => CrewWin || ImpWin;
                 }
 
                 //Crew Backgrounds
-                if (PlayerControl.LocalPlayer.Is(RoleEnum.Crewmate))
+                if (PlayerControl.LocalPlayer.Is(Faction.Crewmates))
                 {
                     __instance.__4__this.BackgroundBar.material.color = Patches.Colors.Crewmate;      
-                }
-                if (PlayerControl.LocalPlayer.Is(RoleEnum.Altruist))
-                {
-                    __instance.__4__this.BackgroundBar.material.color = Patches.Colors.Altruist;      
-                }         
-                if (PlayerControl.LocalPlayer.Is(RoleEnum.Camouflager))
-                {
-                    __instance.__4__this.BackgroundBar.material.color = Patches.Colors.Chameleon;      
-                }   
-                if (PlayerControl.LocalPlayer.Is(RoleEnum.Engineer))
-                {
-                    __instance.__4__this.BackgroundBar.material.color = Patches.Colors.Engineer;      
-                }    
-                if (PlayerControl.LocalPlayer.Is(RoleEnum.Imitator))
-                {
-                    __instance.__4__this.BackgroundBar.material.color = Patches.Colors.Imitator;      
-                }    
-                if (PlayerControl.LocalPlayer.Is(RoleEnum.Informant))
-                {
-                    __instance.__4__this.BackgroundBar.material.color = Patches.Colors.Informant;      
-                }    
-                if (PlayerControl.LocalPlayer.Is(RoleEnum.Mayor))
-                {
-                    __instance.__4__this.BackgroundBar.material.color = Patches.Colors.Mayor;      
-                }    
-                if (PlayerControl.LocalPlayer.Is(RoleEnum.Medic))
-                {
-                    __instance.__4__this.BackgroundBar.material.color = Patches.Colors.Medic;      
-                }    
-                if (PlayerControl.LocalPlayer.Is(RoleEnum.Medium))
-                {
-                    __instance.__4__this.BackgroundBar.material.color = Patches.Colors.Medium;      
-                }   
-                if (PlayerControl.LocalPlayer.Is(RoleEnum.Watcher))
-                {
-                    __instance.__4__this.BackgroundBar.material.color = Patches.Colors.Watcher;      
-                }                 
-                if (PlayerControl.LocalPlayer.Is(RoleEnum.Mystic))
-                {
-                    __instance.__4__this.BackgroundBar.material.color = Patches.Colors.Mystic;      
-                }   
-                if (PlayerControl.LocalPlayer.Is(RoleEnum.Sheriff))
-                {
-                    __instance.__4__this.BackgroundBar.material.color = Patches.Colors.Sheriff;      
-                }  
-                if (PlayerControl.LocalPlayer.Is(RoleEnum.Snitch))
-                {
-                    __instance.__4__this.BackgroundBar.material.color = Patches.Colors.Snitch;      
-                }    
-                if (PlayerControl.LocalPlayer.Is(RoleEnum.Swapper))
-                {
-                    __instance.__4__this.BackgroundBar.material.color = Patches.Colors.Swapper;      
-                }                                                                                                 if (PlayerControl.LocalPlayer.Is(RoleEnum.Tracker))
-                {
-                    __instance.__4__this.BackgroundBar.material.color = Patches.Colors.Tracker;      
-                }                                                                                                 if (PlayerControl.LocalPlayer.Is(RoleEnum.Transporter))
-                {
-                    __instance.__4__this.BackgroundBar.material.color = Patches.Colors.Transporter;      
-                }    
-                if (PlayerControl.LocalPlayer.Is(RoleEnum.Trapper))
-                {
-                    __instance.__4__this.BackgroundBar.material.color = Patches.Colors.Trapper;      
-                }    
-                if (PlayerControl.LocalPlayer.Is(RoleEnum.Veteran))
-                {
-                    __instance.__4__this.BackgroundBar.material.color = Patches.Colors.Veteran;      
-                }                                                    
+                }                                                  
                 //Neutrals Backgrounds
                 if (PlayerControl.LocalPlayer.Is(Faction.Neutral))
                 {
                     __instance.__4__this.BackgroundBar.material.color = Patches.Colors.Neutral;      
-                }          
-                //Impostor Custom Backgrounds
-                if (PlayerControl.LocalPlayer.Is(RoleEnum.Swooper))
-                {
-                    __instance.__4__this.BackgroundBar.material.color = Patches.Colors.Swooper;      
-                } 
-                if (PlayerControl.LocalPlayer.Is(RoleEnum.Undertaker))
-                {
-                    __instance.__4__this.BackgroundBar.material.color = Patches.Colors.Undertaker;      
-                }  
-                if (PlayerControl.LocalPlayer.Is(RoleEnum.Silencer))
-                {
-                    __instance.__4__this.BackgroundBar.material.color = Patches.Colors.Silencer;      
-                } 
-                if (PlayerControl.LocalPlayer.Is(RoleEnum.Miner))
-                {
-                    __instance.__4__this.BackgroundBar.material.color = Patches.Colors.Miner;      
-                } 
-                            if (PlayerControl.LocalPlayer.Is(RoleEnum.Morphling))
-                {
-                    __instance.__4__this.BackgroundBar.material.color = Patches.Colors.Morphling;      
-                } 
-                if (PlayerControl.LocalPlayer.Is(RoleEnum.Grenadier))
-                {
-                    __instance.__4__this.BackgroundBar.material.color = Patches.Colors.Grenadier;      
-                } 
-                if (PlayerControl.LocalPlayer.Is(RoleEnum.Escapist))
-                {
-                    __instance.__4__this.BackgroundBar.material.color = Patches.Colors.Escapist;      
-                } 
-                if (PlayerControl.LocalPlayer.Is(RoleEnum.Bomber))
-                {
-                    __instance.__4__this.BackgroundBar.material.color = Patches.Colors.Bomber;      
-                }                                                
+                }                                                         
 
                     if (ModifierText != null)
                     {
@@ -636,7 +537,7 @@ public static bool RoleWins => CrewWin || ImpWin;
                     var modTask = new GameObject(modifier.Name + "Task").AddComponent<ImportantTextTask>();
                     modTask.transform.SetParent(player.transform, false);
                     modTask.Text =
-                        $"{modifier.ColorString}Modifier: {modifier.Name}\n{modifier.TaskText()}</color>";
+                        $"{modifier.ColorString}{modifier.Name}: {modifier.TaskText()}</color>";
                     player.myTasks.Insert(0, modTask);
                 }
                 if (ability != null)
@@ -644,7 +545,7 @@ public static bool RoleWins => CrewWin || ImpWin;
                     var modTask = new GameObject(ability.Name + "Task").AddComponent<ImportantTextTask>();
                     modTask.transform.SetParent(player.transform, false);
                     modTask.Text =
-                        $"{ability.ColorString}Ability: {ability.Name}\n{ability.TaskText()}</color>";
+                        $"{ability.ColorString}{ability.Name}: {ability.TaskText()}</color>";
                     player.myTasks.Insert(0, modTask);
                 }
 
@@ -652,7 +553,7 @@ public static bool RoleWins => CrewWin || ImpWin;
                 if (role.RoleType == RoleEnum.Amnesiac && role.Player != PlayerControl.LocalPlayer) return;
                 var task = new GameObject(role.Name + "Task").AddComponent<ImportantTextTask>();
                 task.transform.SetParent(player.transform, false);
-                task.Text = $"{role.ColorString}Role: {role.Name}\n{role.TaskText()}</color>";
+                task.Text = $"{role.ColorString}{role.Name}: {role.TaskText()}</color>";
                 player.myTasks.Insert(0, task);
             }
         }

@@ -5,7 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Reactor.Utilities.Extensions;
-using TownOfRoles.CrewmateRoles.MedicMod;
+using TownOfRoles.CrewmateRoles.MedicRole;
 using TownOfRoles.Extensions;
 using TownOfRoles.Patches;
 using TownOfRoles.Roles;
@@ -18,7 +18,7 @@ using Object = UnityEngine.Object;
 using PerformKill = TownOfRoles.Modifiers.UnderdogMod.PerformKill;
 using Random = UnityEngine.Random;
 using AmongUs.GameOptions;
-using Murder = TownOfRoles.CrewmateRoles.MedicMod.Murder;
+using Murder = TownOfRoles.CrewmateRoles.MedicRole.Murder;
 using System.Reflection;
 using Il2CppInterop.Runtime;
 using System.IO;
@@ -767,9 +767,6 @@ namespace TownOfRoles
             if (playerInfo.IsDead)
                 return false;
 
-            if (CustomGameOptions.GameMode == GameMode.Cultist && !player.Is(RoleEnum.Engineer)) return false;
-            else if (CustomGameOptions.GameMode == GameMode.Cultist && player.Is(RoleEnum.Engineer)) return true;
-
             if (player.Is(RoleEnum.Morphling) && !CustomGameOptions.MorphlingVent
                 || player.Is(RoleEnum.Swooper) && GameOptionsManager.Instance.currentNormalGameOptions.MapId == 2 && !CustomGameOptions.SwooperPolusVent
                 || player.Is(RoleEnum.Grenadier) && !CustomGameOptions.GrenadierVent
@@ -829,12 +826,11 @@ namespace TownOfRoles
                 }
             }
         }
-
-        public static void Convert(PlayerControl player)
+    public static void Convert(PlayerControl player)
         {
-            if (PlayerControl.LocalPlayer == player) Coroutines.Start(FlashCoroutine(Patches.Colors.Impostor));
-            if (PlayerControl.LocalPlayer != player && PlayerControl.LocalPlayer.Is(RoleEnum.CultistMystic)
-                && !PlayerControl.LocalPlayer.Data.IsDead) Coroutines.Start(FlashCoroutine(Patches.Colors.Impostor));
+            if (PlayerControl.LocalPlayer == player) Coroutines.Start(Utils.FlashCoroutine(Color.red, 3f));
+            if (PlayerControl.LocalPlayer != player && PlayerControl.LocalPlayer.Is(RoleEnum.Mystic)
+                && !PlayerControl.LocalPlayer.Data.IsDead) Coroutines.Start(Utils.FlashCoroutine(Color.red, 3f));
 
             if (PlayerControl.LocalPlayer.Is(RoleEnum.Transporter) && PlayerControl.LocalPlayer == player)
             {
@@ -850,49 +846,81 @@ namespace TownOfRoles
                 }
             }
 
-            if (player.Is(RoleEnum.Chameleon))
+            if (player.Is(RoleEnum.Camouflager))
             {
-                var chameleonRole = Role.GetRole<Chameleon>(player);
-                if (chameleonRole.IsSwooped) chameleonRole.UnSwoop();
-                Role.RoleDictionary.Remove(player.PlayerId);
-                var Swooper = new Swooper(player);
-                Swooper.LastSwooped = DateTime.UtcNow;
-                Swooper.RegenTask();
+                Role.RoleDictionary.Remove(player.PlayerId);                
+                var imp2 = new Impostor(player);
+                imp2.Name = "Follower";                 
             }
 
             if (player.Is(RoleEnum.Engineer))
             {
-                var engineer = Role.GetRole<Engineer>(player);
-                engineer.Name = "Demolitionist";
-                engineer.Color = Patches.Colors.Engineer;
-                engineer.Faction = Faction.Impostors;
-                engineer.RegenTask();
+                Role.RoleDictionary.Remove(player.PlayerId);                
+                var imp2 = new Impostor(player);
+                imp2.Name = "Follower";   
+            var engirole = Role.GetRole<Engineer>(PlayerControl.LocalPlayer);
+            UnityEngine.Object.Destroy(engirole.UsesText);                  
             }
-
-
-            if (player.Is(RoleEnum.CultistMystic))
+            if (player.Is(RoleEnum.Veteran))
             {
-                var mystic = Role.GetRole<CultistMystic>(player);
-                mystic.Name = "Clairvoyant";
-                mystic.Color = Patches.Colors.Mystic;
-                mystic.Faction = Faction.Impostors;
-                mystic.RegenTask();
+                Role.RoleDictionary.Remove(player.PlayerId);                
+                var imp2 = new Impostor(player);
+                imp2.Name = "Follower";   
+            var vetrole = Role.GetRole<Veteran>(PlayerControl.LocalPlayer);
+            UnityEngine.Object.Destroy(vetrole.UsesText);                      
+            }            
+            if (player.Is(RoleEnum.Tracker))
+            {
+            {
+                Role.RoleDictionary.Remove(player.PlayerId);                
+                var imp2 = new Impostor(player);
+                imp2.Name = "Follower";
+            var vetrole = Role.GetRole<Tracker>(PlayerControl.LocalPlayer);
+            UnityEngine.Object.Destroy(vetrole.UsesText);                   
+            }
+            }            
+            if (player.Is(RoleEnum.Medic))
+            {
+                Role.RoleDictionary.Remove(player.PlayerId);                
+                var imp2 = new Impostor(player);
+                imp2.Name = "Follower";   
             }
 
+            if (player.Is(RoleEnum.Swapper))
+            {
+                Role.RoleDictionary.Remove(player.PlayerId);                
+                var imp2 = new Impostor(player);
+                imp2.Name = "Follower (Swapper)";   
+            }
 
             if (player.Is(RoleEnum.Transporter))
             {
-                Role.RoleDictionary.Remove(player.PlayerId);
-                var escapist = new Escapist(player);
-                escapist.LastEscape = DateTime.UtcNow;
-                escapist.RegenTask();
+                Role.RoleDictionary.Remove(player.PlayerId);                
+                var imp2 = new Impostor(player);
+                imp2.Name = "Follower";   
+                var tprole = Role.GetRole<Transporter>(PlayerControl.LocalPlayer);
+            UnityEngine.Object.Destroy(tprole.UsesText);                      
+            }
+            if (player.Is(RoleEnum.Imitator))
+            {
+                Role.RoleDictionary.Remove(player.PlayerId);                
+                var imp2 = new Impostor(player);
+                imp2.Name = "Follower";   
             }
 
             if (player.Is(RoleEnum.Crewmate))
             {
-                Role.RoleDictionary.Remove(player.PlayerId);
-                new Impostor(player);
+                Role.RoleDictionary.Remove(player.PlayerId);                
+                var imp2 = new Impostor(player);
+                imp2.Name = "Follower";    
             }
+            if (player.Is(RoleEnum.Altruist))
+            {
+                Role.RoleDictionary.Remove(player.PlayerId);
+                var imp3 = new Impostor(player);
+                imp3.Name = "Follower";   
+            }   
+                     
 
             player.Data.Role.TeamType = RoleTeamTypes.Impostor;
             RoleManager.Instance.SetRole(player, RoleTypes.Impostor);
@@ -906,6 +934,8 @@ namespace TownOfRoles
                 }
             }
         }
+
+        
 
         public static IEnumerator FlashCoroutine(Color color, float waitfor = 1f, float alpha = 0.3f)
         {
@@ -1007,10 +1037,6 @@ public static bool IsImpostor(this PlayerVoteArea playerinfo) => PlayerByVoteAre
             {
                 role.LastInvestigated = DateTime.UtcNow;
             }
-            foreach (CultistSnitch role in Role.GetRoles(RoleEnum.CultistSnitch))
-            {
-                role.LastInvestigated = DateTime.UtcNow;
-            }
             foreach (Sheriff role in Role.GetRoles(RoleEnum.Sheriff))
             {
                 role.LastKilled = DateTime.UtcNow;
@@ -1034,10 +1060,6 @@ public static bool IsImpostor(this PlayerVoteArea playerinfo) => PlayerByVoteAre
             foreach (Mystic role in Role.GetRoles(RoleEnum.Mystic))
             {
                 role.LastExamined = DateTime.UtcNow;
-            }
-            foreach (Chameleon role in Role.GetRoles(RoleEnum.Chameleon))
-            {
-                role.LastSwooped = DateTime.UtcNow;
             }
             foreach (Camouflager role in Role.GetRoles(RoleEnum.Camouflager))
             {
@@ -1106,13 +1128,9 @@ public static bool IsImpostor(this PlayerVoteArea playerinfo) => PlayerByVoteAre
             {
                 role.LastDragged = DateTime.UtcNow;
             }
-            foreach (Necromancer role in Role.GetRoles(RoleEnum.Necromancer))
+            foreach (Cultist role in Role.GetRoles(RoleEnum.Cultist))
             {
                 role.LastRevived = DateTime.UtcNow;
-            }
-            foreach (Whisperer role in Role.GetRoles(RoleEnum.Whisperer))
-            {
-                role.LastWhispered = DateTime.UtcNow;
             }
             #endregion
         }

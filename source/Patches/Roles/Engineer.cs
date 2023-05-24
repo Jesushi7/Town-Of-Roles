@@ -7,11 +7,11 @@ namespace TownOfRoles.Roles
         public Engineer(PlayerControl player) : base(player)
         {
             Name = "Engineer";
-            StartText = () => "<color=#FFA60AFF>Maintain Important Systems On The Ship</color>";
-            TaskText = () => CustomGameOptions.GameMode == GameMode.Cultist ? "Vent around" : "Vent and fix sabotages around the map";
+            StartText = () => "<color=#FFA60AFF>Mantain the ship and help the crew</color>";
+            TaskText = () => "Vent around and fix sabotages";
             Color = Patches.Colors.Engineer;
             RoleType = RoleEnum.Engineer;
-            FactionName = "<color=#FFA60AFF>Crewmate</color>";    
+            FactionName = "<color=#00EEFFFF>Crewmate</color>";    
             Faction = Faction.Crewmates;               
             AddToRoleHistory(RoleType);
             UsesLeft = CustomGameOptions.MaxFixes;

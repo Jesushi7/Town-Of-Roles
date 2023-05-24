@@ -36,9 +36,6 @@ namespace TownOfRoles
             if (playerInfo.IsDead)
                 return false;
 
-            if (CustomGameOptions.GameMode == GameMode.Cultist && !player.Is(RoleEnum.Engineer)) return false;
-            else if (CustomGameOptions.GameMode == GameMode.Cultist && player.Is(RoleEnum.Engineer)) return true;
-
             if (player.Is(RoleEnum.Morphling) && !CustomGameOptions.MorphlingVent
                 //Swooper + Not allowed to Vent On Polus If The Option is Disabled
                 || player.Is(RoleEnum.Swooper) && GameOptionsManager.Instance.currentNormalGameOptions.MapId == 2 && !CustomGameOptions.SwooperPolusVent

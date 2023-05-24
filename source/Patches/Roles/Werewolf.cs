@@ -20,8 +20,8 @@ namespace TownOfRoles.Roles
         public Werewolf(PlayerControl player) : base(player)
         {
             Name = "Werewolf";
-            StartText = () => "<color=#A86629FF>Rampage To Kill Everyone</color>";
-            TaskText = () => "Rampage to kill everyone\nFake Tasks:";
+            StartText = () => "<color=#A86629FF>Rampage to kill everyone</color>";
+            TaskText = () => "Rampage to kill faster";
             Color = Patches.Colors.Werewolf;
             LastRampaged = DateTime.UtcNow;
             FactionName = "<color=#5c5e5d>Neutral</color>";            

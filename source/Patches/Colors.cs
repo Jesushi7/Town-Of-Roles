@@ -42,16 +42,6 @@ namespace TownOfRoles.Patches
 
         //Imposter Colors
         public readonly static Color Impostor = Palette.ImpostorRed;
-        public readonly static Color32 Silencer = new Color32(207, 123, 95, 255); 
-        public readonly static Color32 Bomber = new Color32(207, 101, 95, 255);
-        public static Color Escapist = new Color32(88, 52, 207, 255); //#5834cf
-        public static Color Grenadier = new Color32(207, 196, 186, 255); //#cfc4ba
-        public static Color Morphling = new Color32(130, 230, 115, 255); //#82e673
-        public static Color Janitor = new Color32(214, 129, 133, 255); //#d68185
-        public static Color Miner = new Color32(86, 92, 51, 255); //#565c33         
-        public readonly static Color32 Undertaker = new Color32(45, 10, 97, 255);      
-        public readonly static Color32 Swooper = new Color32(99, 29, 24, 255);
-        public static Color Stealer = new Color32(190, 77, 227, byte.MaxValue);
 
         //Modifiers
         public readonly static Color32 Lovers = new Color32(232, 57, 185, 255);     

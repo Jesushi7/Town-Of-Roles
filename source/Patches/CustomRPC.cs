@@ -76,6 +76,7 @@ namespace TownOfRoles
         Remember,
         BaitReport,
         Transport,
+        Revive2,
         SetUntransportable,
         Mediate,
         GAProtect,
@@ -116,7 +117,7 @@ namespace TownOfRoles
         SetSpawn,
         SetSpawnAirship,
         DoorSyncToilet,
-        SyncPlateform
-               
+        SyncPlateform,
+        
     }
 }

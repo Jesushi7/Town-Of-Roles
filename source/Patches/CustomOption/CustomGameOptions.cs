@@ -1,8 +1,8 @@
-using TownOfRoles.CrewmateRoles.MedicMod;
+using TownOfRoles.CrewmateRoles.MedicRole;
 using TownOfRoles.CustomOption;
 using TownOfRoles.NeutralRoles.ExecutionerMod;
-using TownOfRoles.CrewmateRoles.AvengerMod;
-using TownOfRoles.CrewmateRoles.MediumMod;
+using TownOfRoles.CrewmateRoles.AvengerRole;
+using TownOfRoles.CrewmateRoles.MediumRole;
 using TownOfRoles.NeutralRoles.GuardianAngelMod;
 
 namespace TownOfRoles
@@ -17,8 +17,7 @@ namespace TownOfRoles
     {
         Classic,
         AllAny,
-        KillingOnly,
-        Cultist
+        KillingOnly
     }
     public static class CustomGameOptions
     {
@@ -44,6 +43,7 @@ namespace TownOfRoles
         public static int AltruistOn => (int)Generate.AltruistOn.Get();
         public static int UndertakerOn => (int)Generate.UndertakerOn.Get();
         public static int PhantomOn => (int)Generate.PhantomOn.Get();
+        public static int CultistOn => (int)Generate.CultistOn.Get();        
         public static int AvengerOn => (int)Generate.AvengerOn.Get();
         public static int GrenadierOn => (int)Generate.GrenadierOn.Get();
         public static int VeteranOn => (int)Generate.VeteranOn.Get();
@@ -260,6 +260,8 @@ namespace TownOfRoles
         public static bool EscapistVent => Generate.EscapistVent.Get();
         public static bool SwooperPolusVent => Generate.SwooperPolusVent.Get();        
         public static float DetonateDelay => Generate.DetonateDelay.Get();
+        public static float ReviveCooldown2 => Generate.ReviveCooldown2.Get();
+        public static float IncreasedCooldownPerRevive2 => Generate.IncreasedCooldownPerRevive2.Get();        
         public static int NumberOfBaits => (int)Generate.NumberOfBaits.Get();        
         public static int MaxKillsInDetonation => (int) Generate.MaxKillsInDetonation.Get();
         public static float DetonateRadius => Generate.DetonateRadius.Get();
@@ -292,21 +294,5 @@ namespace TownOfRoles
             (DisableSkipButtonMeetings)Generate.SkipButtonDisable.Get();
         public static GameMode GameMode =>
             (GameMode)Generate.GameMode.Get();
-        public static int MayorCultistOn => (int)Generate.MayorCultistOn.Get();
-        public static int SnitchCultistOn => (int)Generate.SnitchCultistOn.Get();
-        public static int SheriffCultistOn => (int)Generate.SheriffCultistOn.Get();
-        public static int SpecialRoleCount => (int)Generate.NumberOfSpecialRoles.Get();
-        public static int MaxChameleons => (int)Generate.MaxChameleons.Get();
-        public static int MaxEngineers => (int)Generate.MaxEngineers.Get();
-        public static int MaxMystics => (int)Generate.MaxMystics.Get();
-        public static int MaxTransporters => (int)Generate.MaxTransporters.Get();
-        public static float WhisperCooldown => Generate.WhisperCooldown.Get();
-        public static float IncreasedCooldownPerWhisper => Generate.IncreasedCooldownPerWhisper.Get();
-        public static float WhisperRadius => Generate.WhisperRadius.Get();
-        public static int ConversionPercentage => (int) Generate.ConversionPercentage.Get();
-        public static int DecreasedPercentagePerConversion => (int) Generate.DecreasedPercentagePerConversion.Get();
-        public static float ReviveCooldown => Generate.ReviveCooldown.Get();
-        public static float IncreasedCooldownPerRevive => Generate.IncreasedCooldownPerRevive.Get();
-        public static int MaxReveals => (int)Generate.MaxReveals.Get();
     }
 }

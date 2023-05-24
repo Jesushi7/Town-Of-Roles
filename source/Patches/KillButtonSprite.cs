@@ -47,7 +47,7 @@ namespace TownOfRoles
             if (!Kill) Kill = __instance.KillButton.graphic.sprite;
 
             var flag = false;
-            if (PlayerControl.LocalPlayer.Is(RoleEnum.Snitch) || PlayerControl.LocalPlayer.Is(RoleEnum.CultistSnitch))
+            if (PlayerControl.LocalPlayer.Is(RoleEnum.Snitch))
             {
                 __instance.KillButton.graphic.sprite = Snitch;
                 flag = true;
@@ -107,7 +107,7 @@ namespace TownOfRoles
                 __instance.KillButton.graphic.sprite = Infect;
                 flag = true;
             }
-            else if (PlayerControl.LocalPlayer.Is(RoleEnum.Engineer) && CustomGameOptions.GameMode != GameMode.Cultist)
+            else if (PlayerControl.LocalPlayer.Is(RoleEnum.Engineer))
             {
                 __instance.KillButton.graphic.sprite = Fix;
                 flag = true;
@@ -142,7 +142,8 @@ namespace TownOfRoles
             }
 
             if (!PlayerControl.LocalPlayer.Is(Faction.Impostors) &&
-                GameOptionsManager.Instance.CurrentGameOptions.GameMode != GameModes.HideNSeek)
+                GameOptionsManager.Instance.CurrentGameOptions.GameMode != GameModes.HideNSeek ||PlayerControl.LocalPlayer.Is(RoleEnum.Tracker)
+                 ||PlayerControl.LocalPlayer.Is(RoleEnum.Medic)|PlayerControl.LocalPlayer.Is(RoleEnum.Veteran))
             {
                 __instance.KillButton.transform.localPosition = new Vector3(0f, 1f, 0f);
             }
@@ -151,12 +152,11 @@ namespace TownOfRoles
             {
                 __instance.ImpostorVentButton.transform.localPosition = new Vector3(-2f, 0f, 0f);
             }
-            else if (PlayerControl.LocalPlayer.Is(RoleEnum.Werewolf) || CustomGameOptions.EveryoneVent
+            else if (PlayerControl.LocalPlayer.Is(RoleEnum.Werewolf)|| !PlayerControl.LocalPlayer.Is(RoleEnum.Arsonist) || CustomGameOptions.EveryoneVent
             )
             {
                 __instance.ImpostorVentButton.transform.localPosition = new Vector3(-1f, 1f, 0f);
             }
-
             var keyInt = Input.GetKeyInt(KeyCode.Q);
             var controller = ConsoleJoystick.player.GetButtonDown(8);
             if (keyInt | controller && __instance.KillButton != null && flag && !PlayerControl.LocalPlayer.Data.IsDead)

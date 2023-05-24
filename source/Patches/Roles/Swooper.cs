@@ -14,11 +14,11 @@ namespace TownOfRoles.Roles
         public Swooper(PlayerControl player) : base(player)
         {
             Name = "Swooper";
-            StartText = () => "<color=#631d18>Turn Invisible Temporarily</color>";
-            TaskText = () => "Turn invisible and sneakily kill";
-            Color = Patches.Colors.Swooper;
+            StartText = () => "Turn invisible to not get caught";
+            TaskText = () => "Turn invisible";
+            Color = Patches.Colors.Impostor;
             LastSwooped = DateTime.UtcNow;
-            FactionName = "<color=#631d18>Impostor</color>";                           
+            FactionName = "Impostor";                           
             Faction = Faction.Impostors;            
             RoleType = RoleEnum.Swooper;
             AddToRoleHistory(RoleType);

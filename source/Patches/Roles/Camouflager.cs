@@ -13,12 +13,12 @@ namespace TownOfRoles.Roles
         public Camouflager(PlayerControl player) : base(player)
         {
             Name = "Camouflager";
-            StartText = () => "<color=#708eef>Turn Invisible Temporarily</color>";
-            TaskText = () => "Turn invisible to catch killers";
+            StartText = () => "<color=#708eef>Turn invisible temporarily</color>";
+            TaskText = () => "Turn invisible";
             Color = Patches.Colors.Chameleon;
             LastSwooped = DateTime.UtcNow;
             RoleType = RoleEnum.Camouflager;
-            FactionName = "<color=#708eef>Crewmate</color>";    
+            FactionName = "<color=#00EEFFFF>Crewmate</color>";    
             Faction = Faction.Crewmates;               
             AddToRoleHistory(RoleType);
         }

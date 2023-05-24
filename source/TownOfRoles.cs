@@ -31,7 +31,7 @@ namespace TownOfRoles
     {
         private static readonly Assembly myAssembly = Assembly.GetExecutingAssembly();        
         public const string Id = "TownOfRoles";
-        public const string VersionString = "1.0.5";
+        public const string VersionString = "1.1.0";
         public static System.Version Version = System.Version.Parse(VersionString);
         public const int MaxPlayers = 127;
         public const int MaxImpostors = 62;   

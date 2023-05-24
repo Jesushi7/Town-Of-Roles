@@ -7,8 +7,8 @@ using UnityEngine;
 using Reactor.Utilities;
 using TownOfRoles.Patches;
 using AmongUs.GameOptions;
-using TownOfRoles.CrewmateRoles.ImitatorMod;
-using TownOfRoles.CrewmateRoles.InformantMod;
+using TownOfRoles.CrewmateRoles.ImitatorRole;
+using TownOfRoles.CrewmateRoles.InformantRole;
 
 namespace TownOfRoles.ImpostorRoles.TraitorMod
 {

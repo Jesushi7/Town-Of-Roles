@@ -13,10 +13,10 @@ namespace TownOfRoles.Roles
         public Swapper(PlayerControl player) : base(player)
         {
             Name = "Swapper";
-            StartText = () => "<color=#863756>Swap The Votes Of Two People</color>";
-            TaskText = () => "Swap two people's votes to save the Crew!";
+            StartText = () => "<color=#863756>Swap the votes between two players</color>";
+            TaskText = () => "Swap votes";
             Color = Patches.Colors.Swapper;
-            FactionName = "<color=#863756>Crewmate</color>";               
+            FactionName = "<color=#00EEFFFF>Crewmate</color>";               
             RoleType = RoleEnum.Swapper;
             AddToRoleHistory(RoleType);
         }

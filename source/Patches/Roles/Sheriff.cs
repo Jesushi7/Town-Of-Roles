@@ -7,11 +7,11 @@ namespace TownOfRoles.Roles
         public Sheriff(PlayerControl player) : base(player)
         {
             Name = "Sheriff";
-            StartText = () => "<color=#f8cd46>Shoot The </color> <color=#FF0000FF>Impostors</color>";
-            TaskText = () => "Shoot the <color=#FF0000FF>Killers</color>";
+            StartText = () => "<color=#f8cd46>Shoot the</color> <color=#FF0000FF>Impostors</color>";
+            TaskText = () => "Shoot the <color=#FF0000FF>Impostors</color>";
             Color = Patches.Colors.Sheriff;         
             LastKilled = DateTime.UtcNow;
-            FactionName = "<color=#f8cd46>Crewmate</color>";              
+            FactionName = "<color=#00EEFFFF>Crewmate</color>";              
             RoleType = RoleEnum.Sheriff;
             AddToRoleHistory(RoleType);
         }

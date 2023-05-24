@@ -13,11 +13,11 @@ namespace TownOfRoles.Roles
         {
             Name = "Executioner";
             StartText = () =>
-                target == null ? "<color=#2d4222>Vote... uh..Nevermind</color>" : $"<color=#2d4222>Vote {target.name} Out</color>";
+                target == null ? "<color=#2d4222>Vote uh...nevermind</color>" : $"<color=#2d4222>Vote {target.name} Out</color>";
             TaskText = () =>
                 target == null
-                    ? "Vote... uh..Nevermind."
-                    : $"Vote {target.name} out!\nFake Tasks:";
+                    ? "You don't have a target for some reason"
+                    : $"Vote {target.name} out!";
             Color = Patches.Colors.Executioner;
             RoleType = RoleEnum.Executioner;
             FactionName = "<color=#5c5e5d>Neutral</color>";              

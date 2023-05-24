@@ -20,11 +20,11 @@ namespace TownOfRoles.Roles
         public Tracker(PlayerControl player) : base(player)
         {
             Name = "Tracker";
-            StartText = () => "<color=#009900FF>Track Everyone's Movement</color>";
-            TaskText = () => "Track suspicious players";
+            StartText = () => "<color=#009900FF>Track <color=#FF0000FF>suspicious</color> players</color>";
+            TaskText = () => "Track the <color=#FF0000FF>Impostors</color>";
             Color = Patches.Colors.Tracker;
             LastTracked = DateTime.UtcNow;
-            FactionName = "<color=#009900FF>Crewmate</color>";    
+            FactionName = "<color=#00EEFFFF>Crewmate</color>";    
             Faction = Faction.Crewmates;               
             RoleType = RoleEnum.Tracker;
             AddToRoleHistory(RoleType);

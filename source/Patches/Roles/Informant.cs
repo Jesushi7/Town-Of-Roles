@@ -14,14 +14,10 @@ namespace TownOfRoles.Roles
         public Informant(PlayerControl player) : base(player)
         {
             Name = "Informant";
-            StartText = () => "<color=#D4AF37FF>Complete All Your Tasks To Discover The Impostors</color>";
-            TaskText = () =>
-                TasksDone
-                    ? "Find the arrows pointing to the Impostors!"
-                    : "Complete all your tasks to discover the Impostors!";
+            StartText = () => "<color=#D4AF37FF>Finish tasks to find the killers</color>";
             Color = Patches.Colors.Informant;
             RoleType = RoleEnum.Informant;
-            FactionName = "<color=#D4AF37FF>Crewmate</color>";    
+            FactionName = "<color=#00EEFFFF>Crewmate</color>";    
             Faction = Faction.Crewmates;                 
             AddToRoleHistory(RoleType);
         }

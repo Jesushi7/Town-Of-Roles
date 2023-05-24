@@ -19,12 +19,12 @@ namespace TownOfRoles.Roles
         public Morphling(PlayerControl player) : base(player)
         {
             Name = "Morphling";
-            StartText = () => "<color=#82e673>Transform Into Crewmates</color>";
-            TaskText = () => "Morph into crewmates to be disguised";
-            Color = Patches.Colors.Morphling;
+            StartText = () => "Morph into other players";
+            TaskText = () => "Change your look";
+            Color = Patches.Colors.Impostor;
             LastMorphed = DateTime.UtcNow;
             RoleType = RoleEnum.Morphling;
-            FactionName = "<color=#82e673>Impostor</color>";        
+            FactionName = "Impostor";        
             Faction = Faction.Impostors;              
             AddToRoleHistory(RoleType);
             Faction = Faction.Impostors;

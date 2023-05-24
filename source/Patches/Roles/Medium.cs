@@ -16,12 +16,12 @@ namespace TownOfRoles.Roles
         public Medium(PlayerControl player) : base(player)
         {
             Name = "Medium";
-            StartText = () => "<color=#A680FFFF>Watch The Spooky Ghosts</color>";
-            TaskText = () => "Follow ghosts";
+            StartText = () => "<color=#A680FFFF>Find clues from dead people</color>";
+            TaskText = () => "Follow Ghosts";
             Color = Patches.Colors.Medium;
             LastMediated = DateTime.UtcNow;
             RoleType = RoleEnum.Medium;
-            FactionName = "<color=#A680FFFF>Crewmate</color>";    
+            FactionName = "<color=#00EEFFFF>Crewmate</color>";    
             Faction = Faction.Crewmates;               
             AddToRoleHistory(RoleType);
             Scale = 1.4f;

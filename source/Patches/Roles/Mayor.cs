@@ -9,11 +9,11 @@ namespace TownOfRoles.Roles
         public Mayor(PlayerControl player) : base(player)
         {
             Name = "Mayor";
-            StartText = () => "<color=#704FA8FF>Save Your Votes To Vote Multiple Times</color>";
-            TaskText = () => "Save your votes to Mayor dump someone";
+            StartText = () => "<color=#704FA8FF>Safe your votes to vote multiple times</color>";
+            TaskText = () => $"You have {VoteBank} votes left";
             Color = Patches.Colors.Mayor;
             RoleType = RoleEnum.Mayor;
-            FactionName = "<color=#704FA8FF>Crewmate</color>";    
+            FactionName = "<color=#00EEFFFF>Crewmate</color>";    
             Faction = Faction.Crewmates;               
             AddToRoleHistory(RoleType);
             VoteBank = CustomGameOptions.MayorVoteBank;

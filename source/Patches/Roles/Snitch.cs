@@ -10,12 +10,12 @@ namespace TownOfRoles.Roles
         public Snitch(PlayerControl player) : base(player)
         {
             Name = "Snitch";
-            StartText = () => "<color=#61b26c>Reveal The Alliance Of Other Players</color>";
-            TaskText = () => "Reveal alliances of other players to find the Impostors";
+            StartText = () => "<color=#61b26c>Find out player's alliances</color>";
+            TaskText = () => "Find out the alliances of each player";
             Color = Patches.Colors.Snitch;
             LastInvestigated = DateTime.UtcNow;
             RoleType = RoleEnum.Snitch;
-            FactionName = "<color=#61b26c>Crewmate</color>";              
+            FactionName = "<color=#00EEFFFF>Crewmate</color>";              
             AddToRoleHistory(RoleType);
         }
 

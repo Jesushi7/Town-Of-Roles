@@ -50,10 +50,11 @@ namespace TownOfRoles
 
         Necromancer, // 100
         Whisperer, // 101
-        CultistSnitch, // 102
         CultistMystic, // 103
         Chameleon, // 104
         Cultist,
+        Follower,
+        Seer,
 
         None
     }

@@ -4,7 +4,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using TownOfRoles.CrewmateRoles.MedicMod;
+using TownOfRoles.CrewmateRoles.MedicRole;
 using Reactor.Utilities;
 using Reactor.Utilities.Extensions;
 using TownOfRoles.Extensions;
@@ -40,8 +40,8 @@ namespace TownOfRoles.Roles
             IsUsingMimic = false;
             RoleType = RoleEnum.Glitch;
             AddToRoleHistory(RoleType);
-            StartText = () => "<color=#00FF00FF>Murder, Mimic, Hack. Everyone</color>";
-            TaskText = () => "Murder everyone to win\nFake Tasks:";
+            StartText = () => "<color=#00FF00FF>Murder, mimic, hack everyone</color>";
+            TaskText = () => "Kill, mimic and hack everyone";
             Faction = Faction.Neutral;
         }
 

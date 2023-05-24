@@ -2,7 +2,7 @@ using HarmonyLib;
 using Hazel;
 using TownOfRoles.Roles;
 using System.Linq;
-using TownOfRoles.CrewmateRoles.SnitchMod;
+using TownOfRoles.CrewmateRoles.SnitchRole;
 using TownOfRoles.Extensions;
 using UnityEngine;
 using Reactor;

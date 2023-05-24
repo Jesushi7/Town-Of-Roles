@@ -12,7 +12,7 @@ namespace TownOfRoles.Roles.Modifiers
         public ButtonBarry(PlayerControl player) : base(player)
         {
             Name = "Button Barry";
-            TaskText = () => "Call a button from anywhere";
+            TaskText = () => "Call a meeting from anywhere";
             Color = Patches.Colors.Modifiers;
             StartingCooldown = DateTime.UtcNow;
             ModifierType = ModifierEnum.ButtonBarry;

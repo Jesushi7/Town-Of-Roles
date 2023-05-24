@@ -34,9 +34,9 @@ namespace TownOfRoles.Patches
 
             if (PlayerControl.LocalPlayer.Is(RoleEnum.Snitch))
             {
-                var seer = Role.GetRole<Snitch>(PlayerControl.LocalPlayer);
-                seer.LastInvestigated = DateTime.UtcNow;
-                seer.LastInvestigated = seer.LastInvestigated.AddSeconds(CustomGameOptions.InitialCooldowns - CustomGameOptions.SnitchCd);
+                var Snitch = Role.GetRole<Snitch>(PlayerControl.LocalPlayer);
+                Snitch.LastInvestigated = DateTime.UtcNow;
+                Snitch.LastInvestigated = Snitch.LastInvestigated.AddSeconds(CustomGameOptions.InitialCooldowns - CustomGameOptions.SnitchCd);
             }
 
             if (PlayerControl.LocalPlayer.Is(RoleEnum.Sheriff))
@@ -81,25 +81,11 @@ namespace TownOfRoles.Patches
                 chameleon.LastSwooped = chameleon.LastSwooped.AddSeconds(CustomGameOptions.InitialCooldowns - CustomGameOptions.ChameleonSwoopCd);
             }
 
-            if (PlayerControl.LocalPlayer.Is(RoleEnum.Necromancer))
+            if (PlayerControl.LocalPlayer.Is(RoleEnum.Cultist))
             {
-                var necro = Role.GetRole<Necromancer>(PlayerControl.LocalPlayer);
-                necro.LastRevived = DateTime.UtcNow;
-                necro.LastRevived = necro.LastRevived.AddSeconds(CustomGameOptions.InitialCooldowns - CustomGameOptions.ReviveCooldown);
-            }
-
-            if (PlayerControl.LocalPlayer.Is(RoleEnum.CultistSnitch))
-            {
-                var seer = Role.GetRole<CultistSnitch>(PlayerControl.LocalPlayer);
-                seer.LastInvestigated = DateTime.UtcNow;
-                seer.LastInvestigated = seer.LastInvestigated.AddSeconds(CustomGameOptions.InitialCooldowns - CustomGameOptions.SnitchCd);
-            }
-
-            if (PlayerControl.LocalPlayer.Is(RoleEnum.Whisperer))
-            {
-                var whisperer = Role.GetRole<Whisperer>(PlayerControl.LocalPlayer);
-                whisperer.LastWhispered = DateTime.UtcNow;
-                whisperer.LastWhispered = whisperer.LastWhispered.AddSeconds(CustomGameOptions.InitialCooldowns - CustomGameOptions.WhisperCooldown);
+                var cultist = Role.GetRole<Cultist>(PlayerControl.LocalPlayer);
+                cultist.LastRevived = DateTime.UtcNow;
+                cultist.LastRevived = cultist.LastRevived.AddSeconds(CustomGameOptions.InitialCooldowns - CustomGameOptions.ReviveCooldown2);
             }
 
             if (PlayerControl.LocalPlayer.Is(RoleEnum.Silencer))

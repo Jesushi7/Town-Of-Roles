@@ -22,7 +22,7 @@ namespace TownOfRoles.Roles
         {
             Name = "Avenger";
             StartText = () => "";
-            TaskText = () => "Complete all your tasks to reveal impostors!";
+            TaskText = () => "Finish your tasks to reveal the evildoers";
             Color = Patches.Colors.Avenger;
             RoleType = RoleEnum.Avenger;
             AddToRoleHistory(RoleType);

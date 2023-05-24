@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using TMPro;
-using TownOfRoles.CrewmateRoles.TrapperMod;
+using TownOfRoles.CrewmateRoles.TrapperRole;
 using UnityEngine;
 
 namespace TownOfRoles.Roles
@@ -24,11 +24,11 @@ namespace TownOfRoles.Roles
         public Trapper(PlayerControl player) : base(player)
         {
             Name = "Trapper";
-            StartText = () => "<color=#75fa4c>Place Traps To Know Roles</color>";
+            StartText = () => "<color=#75fa4c>Place traps to know people's role</color>";
             TaskText = () => "Place traps";
             Color = Patches.Colors.Trapper;
             RoleType = RoleEnum.Trapper;
-            FactionName = "<color=#75fa4c>Crewmate</color>";    
+            FactionName = "<color=#00EEFFFF>Crewmate</color>";    
             Faction = Faction.Crewmates;               
             LastTrapped = DateTime.UtcNow;
             trappedPlayers = new List<RoleEnum>();

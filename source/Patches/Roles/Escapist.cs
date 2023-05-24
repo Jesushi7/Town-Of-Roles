@@ -14,12 +14,12 @@ namespace TownOfRoles.Roles
         public Escapist(PlayerControl player) : base(player)
         {
             Name = "Escapist";
-            StartText = () => "<color=#5834cf>Get Away From Kills With Ease</color>";
-            TaskText = () => "Teleport to get away from bodies";
-            Color = Patches.Colors.Escapist;
+            StartText = () => "Mark a place to transport yourself";
+            TaskText = () => "Transport yourself away";
+            Color = Patches.Colors.Impostor;
             RoleType = RoleEnum.Escapist;
             AddToRoleHistory(RoleType);
-            FactionName = "<color=#5834cf>Impostor</color>";  
+            FactionName = "Impostor";  
                   
             Faction = Faction.Impostors;              
             Faction = Faction.Impostors;

@@ -11,8 +11,8 @@ namespace TownOfRoles.Roles
         public Jester(PlayerControl player) : base(player)
         {
             Name = "Jester";
-            StartText = () => "<color=#cb81c0>Get Voted Out</color>";
-            TaskText = () => SpawnedAs ? "Trick everyone into voting you\nFake Tasks:" : "Your target was killed.\nNow you trick everyone to vote you and win!\nFake Tasks:";
+            StartText = () => "<color=#cb81c0>Fool everyone to vote you</color>";
+			TaskText = () => "Get voted out!";
             Color = Patches.Colors.Jester;
             RoleType = RoleEnum.Jester;
             AddToRoleHistory(RoleType);

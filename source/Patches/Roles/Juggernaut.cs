@@ -14,8 +14,8 @@ namespace TownOfRoles.Roles
             LastKill = DateTime.UtcNow;
             RoleType = RoleEnum.Juggernaut;
             AddToRoleHistory(RoleType);
-            StartText = () => "<color=#8C004DFF>Your Power Grows With Every Kill</color>";
-            TaskText = () => "With each kill your kill cooldown decreases\nFake Tasks:";
+            StartText = () => "<color=#8C004DFF>Kill everyone to get low cooldown</color>";
+            TaskText = () => "With each kill your cooldown gets lower";
             Faction = Faction.Neutral;
             FactionName = "<color=#5c5e5d>Neutral</color>";           
         }

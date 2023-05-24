@@ -9,15 +9,16 @@ namespace TownOfRoles.Roles
         public DeadBody CurrentTarget;
         public static ArrowBehaviour Arrow;
         public static PlayerControl Target;        
+        public Role RevivedRole;        
         public bool ReviveUsed;
         
         public Altruist(PlayerControl player) : base(player)
         {
             Name = "Altruist";
-            StartText = () => "<color=#2d6aa5>Sacrifice Yourself To Save Another</color>";
-            TaskText = () => "Help the crew by reviving someone \nat the cost of your life";
+            StartText = () => "<color=#2d6aa5>Revive someone at the cost of your life</color>";
+            TaskText = () => "Revive someone at the cost of your life";         
             Color = Patches.Colors.Altruist;
-            FactionName = "<color=#2d6aa5>Crewmate</color>";    
+            FactionName = "<color=#00EEFFFF>Crewmate</color>";    
             Faction = Faction.Crewmates;               
             RoleType = RoleEnum.Altruist;
             AddToRoleHistory(RoleType);
@@ -36,5 +37,6 @@ namespace TownOfRoles.Roles
                 yield return Utils.FlashCoro(role.Color, "Someone has been revived!");
             }    
         }    
+        public bool IsOP => RevivedRole?.RoleType == RoleEnum.Medic;        
     }
 }

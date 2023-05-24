@@ -7,7 +7,7 @@ namespace TownOfRoles.Roles.Modifiers
         public Multitasker(PlayerControl player) : base(player)
         {
             Name = "Multitasker";
-            TaskText = () => "Your task windows are transparent";
+            TaskText = () => "Your tasks are transparent";
             Color = Patches.Colors.Modifiers;
             ModifierType = ModifierEnum.Multitasker;
         }
