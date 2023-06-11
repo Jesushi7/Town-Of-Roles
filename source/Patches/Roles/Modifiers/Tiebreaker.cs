@@ -7,7 +7,7 @@ namespace TownOfRoles.Roles.Modifiers
         public Tiebreaker(PlayerControl player) : base(player)
         {
             Name = "Tiebreaker";
-            TaskText = () => "Break the ties";
+            TaskText = () => "Break the tie";
             Color = Patches.Colors.Modifiers;
             ModifierType = ModifierEnum.Tiebreaker;
         }

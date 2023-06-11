@@ -14,8 +14,8 @@ namespace TownOfRoles.Roles
             LastKill = DateTime.UtcNow;
             RoleType = RoleEnum.Juggernaut;
             AddToRoleHistory(RoleType);
-            StartText = () => "<color=#8C004DFF>Kill everyone to get low cooldown</color>";
-            TaskText = () => "With each kill your cooldown gets lower";
+            StartText = () => "<color=#8C004DFF>Your power grows with every kill</color>";
+            TaskText = () => "With each kill your kill cooldown decreases";
             Faction = Faction.Neutral;
             FactionName = "<color=#5c5e5d>Neutral</color>";           
         }
@@ -32,7 +32,7 @@ namespace TownOfRoles.Roles
             if (PlayerControl.AllPlayerControls.ToArray().Count(x => !x.Data.IsDead && !x.Data.Disconnected) <= 2 &&
                     PlayerControl.AllPlayerControls.ToArray().Count(x => !x.Data.IsDead && !x.Data.Disconnected &&
                     (x.Data.IsImpostor() || x.Is(RoleEnum.Glitch) || x.Is(RoleEnum.Arsonist) ||
-                    x.Is(RoleEnum.Werewolf) || x.Is(RoleEnum.Plaguebearer) || x.Is(RoleEnum.Pestilence))) == 0)
+                    x.Is(RoleEnum.Werewolf)|| x.Is(RoleEnum.SerialKiller)  || x.Is(RoleEnum.Plaguebearer) || x.Is(RoleEnum.Pestilence))) == 0)
             {
                 var writer = AmongUsClient.Instance.StartRpcImmediately(
                     PlayerControl.LocalPlayer.NetId,

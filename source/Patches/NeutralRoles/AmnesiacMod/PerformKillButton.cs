@@ -1,12 +1,12 @@
 using HarmonyLib;
 using Hazel;
-using TownOfRoles.CrewmateRoles.InformantRole;
-using TownOfRoles.CrewmateRoles.TrapperRole;
+using TownOfRoles.CrewmateRoles.InformantMod;
+using TownOfRoles.CrewmateRoles.TrapperMod;
 using TownOfRoles.Roles;
 using UnityEngine;
 using System;
 using TownOfRoles.Extensions;
-using TownOfRoles.CrewmateRoles.ImitatorRole;
+using TownOfRoles.CrewmateRoles.ImitatorMod;
 using AmongUs.GameOptions;
 using TownOfRoles.Roles.Modifiers;
 using TownOfRoles.ImpostorRoles.BomberMod;
@@ -102,13 +102,14 @@ namespace TownOfRoles.NeutralRoles.AmnesiacMod
                 case RoleEnum.Executioner:
                 case RoleEnum.Arsonist:
                 case RoleEnum.Amnesiac:
-                case RoleEnum.Glitch:
-                case RoleEnum.Juggernaut:
-                case RoleEnum.GuardianAngel:
+                case RoleEnum.Glitch:             
+                case RoleEnum.Juggernaut:                
+                case RoleEnum.Guardian:
                 case RoleEnum.Plaguebearer:
                 case RoleEnum.Pestilence:
                 case RoleEnum.Werewolf:
-
+                case RoleEnum.SerialKiller:
+                
                     rememberImp = false;
 
                     break;
@@ -143,7 +144,7 @@ namespace TownOfRoles.NeutralRoles.AmnesiacMod
                 {
                     var jester = new Jester(other);
                     jester.RegenTask();
-                    if (role == RoleEnum.Arsonist || role == RoleEnum.Glitch || role == RoleEnum.Plaguebearer ||
+                    if (role == RoleEnum.Arsonist ||role == RoleEnum.SerialKiller || role == RoleEnum.Glitch || role == RoleEnum.Plaguebearer ||
                             role == RoleEnum.Pestilence || role == RoleEnum.Werewolf || role == RoleEnum.Juggernaut)
                     {
                         if (CustomGameOptions.AmneTurnNeutAssassin)
@@ -197,7 +198,6 @@ namespace TownOfRoles.NeutralRoles.AmnesiacMod
                 var sheriffRole = Role.GetRole<Sheriff>(amnesiac);
                 sheriffRole.LastKilled = DateTime.UtcNow;
             }
-
             else if (role == RoleEnum.Engineer)
             {
                 var engiRole = Role.GetRole<Engineer>(amnesiac);
@@ -291,9 +291,9 @@ namespace TownOfRoles.NeutralRoles.AmnesiacMod
 
 
 
-            else if (role == RoleEnum.GuardianAngel)
+            else if (role == RoleEnum.Guardian)
             {
-                var gaRole = Role.GetRole<GuardianAngel>(amnesiac);
+                var gaRole = Role.GetRole<Guardian>(amnesiac);
                 gaRole.LastProtected = DateTime.UtcNow;
                 gaRole.UsesLeft = CustomGameOptions.MaxProtects;
             }
@@ -343,18 +343,17 @@ namespace TownOfRoles.NeutralRoles.AmnesiacMod
                 SilencerRole.LastSilenced = DateTime.UtcNow;
                 SilencerRole.Silenced = null;
             }
-            else if (role == RoleEnum.Cultist)
-            {
-                var CultistRole = Role.GetRole<Cultist>(amnesiac);
-                CultistRole.LastRevived = DateTime.UtcNow;
-            }
-            
+
             else if (role == RoleEnum.Miner)
             {
                 var minerRole = Role.GetRole<Miner>(amnesiac);
                 minerRole.LastMined = DateTime.UtcNow;
             }
-
+            else if (role == RoleEnum.Cultist)
+            {
+                var CultistRole = Role.GetRole<Cultist>(amnesiac);
+                CultistRole.LastRevived = DateTime.UtcNow;
+            }
             else if (role == RoleEnum.Undertaker)
             {
                 var dienerRole = Role.GetRole<Undertaker>(amnesiac);
@@ -381,7 +380,11 @@ namespace TownOfRoles.NeutralRoles.AmnesiacMod
                 var pestRole = Role.GetRole<Pestilence>(amnesiac);
                 pestRole.LastKill = DateTime.UtcNow;
             }
-
+            else if (role == RoleEnum.SerialKiller)
+            {
+                var jack = Role.GetRole<SerialKiller>(amnesiac);
+                jack.LastKill = DateTime.UtcNow;          
+            }   
             else if (role == RoleEnum.Trapper)
             {
                 var trapperRole = Role.GetRole<Trapper>(amnesiac);

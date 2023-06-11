@@ -26,8 +26,10 @@ namespace TownOfRoles
         Transporter, // 20
         Medium, // 21
         Trapper, // 22
-        GuardianAngel, // 24
+        Guardian, // 24
         Plaguebearer, // 26
+        Cultist,        
+        Follower,        
         Pestilence,
         Werewolf, // 27
         Mystic, // 28
@@ -44,25 +46,24 @@ namespace TownOfRoles
         Escapist, // 37
         Bomber, // 41
         Stealer,
-
+        Pessimistic,
         Crewmate, // 38
         Impostor, // 39
+        Vampire,
 
         Necromancer, // 100
         Whisperer, // 101
+        CultistSnitch, // 102
         CultistMystic, // 103
         Chameleon, // 104
-        Cultist,
-        Follower,
-        Seer,
-
+    SerialKiller,
         None
     }
 
     public enum ModifierEnum
     {
         Lover, // 0
-        Torch, // 1
+        Nightowl, // 1
         Mini,
         Diseased, // 2
         Flash, // 3
@@ -80,6 +81,7 @@ namespace TownOfRoles
         Underdog, // 14
         Drunk,
         Oblivious,
+        Watcher,
         ChameleonModifier,
     }
 

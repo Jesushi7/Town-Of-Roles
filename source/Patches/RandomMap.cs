@@ -118,25 +118,24 @@ namespace TownOfRoles
             Generate.SnitchCooldown.Set((float)Generate.SnitchCooldown.Value + change, false);
             Generate.TrackCooldown.Set((float)Generate.TrackCooldown.Value + change, false);
             Generate.TrapCooldown.Set((float)Generate.TrapCooldown.Value + change, false);
-            Generate.SheriffKillCd.Set((float)Generate.SheriffKillCd.Value + change, false);
             Generate.AlertCooldown.Set((float)Generate.AlertCooldown.Value + change, false);
             Generate.TransportCooldown.Set((float)Generate.TransportCooldown.Value + change, false);
             Generate.ProtectCd.Set((float)Generate.ProtectCd.Value + change, false);
+            Generate.ReviveCooldown2.Set((float)Generate.ReviveCooldown2.Value + change, false);            
             Generate.DouseCooldown.Set((float)Generate.DouseCooldown.Value + change, false);
             Generate.InfectCooldown.Set((float)Generate.InfectCooldown.Value + change, false);
-            Generate.PestKillCooldown.Set((float)Generate.PestKillCooldown.Value + change, false);
             Generate.MimicCooldownOption.Set((float)Generate.MimicCooldownOption.Value + change, false);
             Generate.HackCooldownOption.Set((float)Generate.HackCooldownOption.Value + change, false);
-            Generate.GlitchKillCooldownOption.Set((float)Generate.GlitchKillCooldownOption.Value + change, false);
             Generate.RampageCooldown.Set((float)Generate.RampageCooldown.Value + change, false);
             Generate.GrenadeCooldown.Set((float)Generate.GrenadeCooldown.Value + change, false);
             Generate.MorphlingCooldown.Set((float)Generate.MorphlingCooldown.Value + change, false);
             Generate.SwoopCooldown.Set((float)Generate.SwoopCooldown.Value + change, false);
             Generate.MineCooldown.Set((float)Generate.MineCooldown.Value + change, false);
             Generate.DragCooldown.Set((float)Generate.DragCooldown.Value + change, false);
-            Generate.EscapeCooldown.Set((float)Generate.EscapeCooldown.Value + change, false);
+            Generate.EscapeCooldown.Set((float)Generate.EscapeCooldown.Value + change, false);         
             Generate.JuggKillCooldown.Set((float)Generate.JuggKillCooldown.Value + change, false);
-            Generate.ReviveCooldown2.Set((float)Generate.ReviveCooldown2.Value + change, false);
+            Generate.ReviveCooldown.Set((float)Generate.ReviveCooldown.Value + change, false);
+            Generate.WhisperCooldown.Set((float)Generate.WhisperCooldown.Value + change, false);
             GameOptionsManager.Instance.currentNormalGameOptions.KillCooldown += change;
             if (change % 5 != 0)
             {

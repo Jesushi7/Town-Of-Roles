@@ -21,7 +21,7 @@ namespace TownOfRoles.NeutralRoles.PestilenceMod
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
                     && AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started);
 
-            __instance.KillButton.SetCoolDown(role.KillTimer(), CustomGameOptions.PestKillCd);
+            __instance.KillButton.SetCoolDown(role.KillTimer(), GameOptionsManager.Instance.currentNormalGameOptions.KillCooldown);
 
             Utils.SetTarget(ref role.ClosestPlayer, __instance.KillButton);
         }

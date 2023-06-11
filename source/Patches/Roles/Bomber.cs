@@ -4,7 +4,7 @@ using Reactor.Utilities;
 using TownOfRoles.Extensions;
 using Il2CppInterop.Runtime.InteropTypes.Arrays;
 using Reactor.Utilities.Extensions;
-using TownOfRoles.CrewmateRoles.MedicRole;
+using TownOfRoles.CrewmateRoles.MedicMod;
 using System;
 using TownOfRoles.ImpostorRoles.BomberMod;
 using System.Reflection;
@@ -27,8 +27,8 @@ namespace TownOfRoles.Roles
         public Bomber(PlayerControl player) : base(player)
         {
             Name = "Bomber";
-            StartText = () => "Plant bombs to nuke everyone";
-            TaskText = () => "Plant bombs";
+            StartText = () => "Bomb everyone";
+            TaskText = () => "Plant bombs to kill everyone";
             Color = Patches.Colors.Impostor;
             StartingCooldown = DateTime.UtcNow;
             RoleType = RoleEnum.Bomber;

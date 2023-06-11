@@ -15,7 +15,7 @@ namespace TownOfRoles.NeutralRoles.GlitchMod
             {
                 ((Glitch)glitch).LastMimic = DateTime.UtcNow.AddSeconds(CustomGameOptions.InitialCooldowns + CustomGameOptions.MimicCooldown * -1);
                 ((Glitch)glitch).LastHack = DateTime.UtcNow.AddSeconds(CustomGameOptions.InitialCooldowns + CustomGameOptions.HackCooldown * -1);
-                ((Glitch)glitch).LastKill = DateTime.UtcNow.AddSeconds(CustomGameOptions.InitialCooldowns + CustomGameOptions.GlitchKillCooldown * -1);
+                ((Glitch)glitch).LastKill = DateTime.UtcNow.AddSeconds(CustomGameOptions.InitialCooldowns + GameOptionsManager.Instance.currentNormalGameOptions.KillCooldown * -1);
             }
         }
     }

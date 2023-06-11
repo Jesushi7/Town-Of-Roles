@@ -33,7 +33,7 @@ namespace TownOfRoles.NeutralRoles.PestilenceMod
             else if (interact[1] == true)
             {
                 role.LastKill = DateTime.UtcNow;
-                role.LastKill = role.LastKill.AddSeconds(CustomGameOptions.ProtectKCReset - CustomGameOptions.PestKillCd);
+                role.LastKill = role.LastKill.AddSeconds(CustomGameOptions.ProtectKCReset - GameOptionsManager.Instance.currentNormalGameOptions.KillCooldown);
                 return false;
             }
             else if (interact[3] == true) return false;

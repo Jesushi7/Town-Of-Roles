@@ -4,7 +4,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using TownOfRoles.CrewmateRoles.MedicRole;
+using TownOfRoles.CrewmateRoles.MedicMod;
 using Reactor.Utilities;
 using Reactor.Utilities.Extensions;
 using TownOfRoles.Extensions;
@@ -40,8 +40,8 @@ namespace TownOfRoles.Roles
             IsUsingMimic = false;
             RoleType = RoleEnum.Glitch;
             AddToRoleHistory(RoleType);
-            StartText = () => "<color=#00FF00FF>Murder, mimic, hack everyone</color>";
-            TaskText = () => "Kill, mimic and hack everyone";
+            StartText = () => "<color=#00FF00FF>Murder, Mimic, Hack. Everyone</color>";
+            TaskText = () => "Murder everyone to win";
             Faction = Faction.Neutral;
         }
 
@@ -65,7 +65,7 @@ namespace TownOfRoles.Roles
 
             if (PlayerControl.AllPlayerControls.ToArray().Count(x => !x.Data.IsDead && !x.Data.Disconnected) <= 2 &&
                     PlayerControl.AllPlayerControls.ToArray().Count(x => !x.Data.IsDead && !x.Data.Disconnected &&
-                    (x.Data.IsImpostor() || x.Is(RoleEnum.Arsonist) || x.Is(RoleEnum.Juggernaut) ||
+                    (x.Data.IsImpostor() || x.Is(RoleEnum.Arsonist)|| x.Is(RoleEnum.SerialKiller) || x.Is(RoleEnum.Juggernaut) ||
                     x.Is(RoleEnum.Werewolf) || x.Is(RoleEnum.Plaguebearer) || x.Is(RoleEnum.Pestilence))) == 0)
             {
                 var writer = AmongUsClient.Instance.StartRpcImmediately(
@@ -470,9 +470,9 @@ namespace TownOfRoles.Roles
                     && !MeetingHud.Instance && !__gInstance.Player.Data.IsDead
                     && AmongUsClient.Instance.GameState == InnerNetClient.GameStates.Started);
                 __instance.KillButton.SetCoolDown(
-                    CustomGameOptions.GlitchKillCooldown -
+                    GameOptionsManager.Instance.currentNormalGameOptions.KillCooldown -
                     (float)(DateTime.UtcNow - __gInstance.LastKill).TotalSeconds,
-                    CustomGameOptions.GlitchKillCooldown);
+                    GameOptionsManager.Instance.currentNormalGameOptions.KillCooldown);
 
                 __instance.KillButton.SetTarget(null);
                 __gInstance.KillTarget = null;
@@ -502,7 +502,7 @@ namespace TownOfRoles.Roles
                     else if (interact[1] == true)
                     {
                         __gInstance.LastKill = DateTime.UtcNow;
-                        __gInstance.LastKill = __gInstance.LastKill.AddSeconds(CustomGameOptions.ProtectKCReset - CustomGameOptions.GlitchKillCooldown);
+                        __gInstance.LastKill = __gInstance.LastKill.AddSeconds(CustomGameOptions.ProtectKCReset - GameOptionsManager.Instance.currentNormalGameOptions.KillCooldown);
                         return;
                     }
                     else if (interact[3] == true) return;

@@ -35,7 +35,7 @@ namespace TownOfRoles
                 else if (SettingsPage == 1) builder.AppendLine("Page 3: <color=#26ffff>Crewmate</color> Settings");
                 else if (SettingsPage == 2) builder.AppendLine("Page 4: <color=#80797c>Neutral</color> Settings");
                 else if (SettingsPage == 3) builder.AppendLine("Page 5: <color=#FF0000FF>Impostor</color> Settings");
-                else if (SettingsPage == 4) builder.AppendLine("Page 6: <color=#f590bc>Modifier</color> Settings");
+                else if (SettingsPage == 4) builder.AppendLine("Page 6: <color=#9cbee4>Modifier</color> Settings");
 
                 if (SettingsPage == -1) builder.Append(new StringBuilder(__result));
 

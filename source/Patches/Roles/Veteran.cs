@@ -18,11 +18,11 @@ namespace TownOfRoles.Roles
         public Veteran(PlayerControl player) : base(player)
         {
             Name = "Veteran";
-            StartText = () => "<color=#998040FF>Alert to kill anyone Who interacts With you</color>";
-            TaskText = () => "Shoot whoever touches you";
+            StartText = () => "<color=#998040FF>Alert to kill anyone who interacts with you</color>";
+            TaskText = () => "Alert to kill whoever interacts with you";
             Color = Patches.Colors.Veteran;
             LastAlerted = DateTime.UtcNow;
-            FactionName = "<color=#00EEFFFF>Crewmate</color>";    
+            FactionName = "Crewmate";    
             Faction = Faction.Crewmates;               
             RoleType = RoleEnum.Veteran;
             AddToRoleHistory(RoleType);

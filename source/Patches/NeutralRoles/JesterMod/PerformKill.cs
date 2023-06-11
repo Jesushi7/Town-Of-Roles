@@ -85,7 +85,7 @@ namespace TownOfRoles.NeutralRoles.JesterMod
 												if (flag10)
 												{
 													role.LastKilled = DateTime.UtcNow;
-													role.LastKilled = role.LastKilled.AddSeconds((double)(CustomGameOptions.GlitchKillCooldown + CustomGameOptions.ProtectKCReset));
+													role.LastKilled = role.LastKilled.AddSeconds((double)(GameOptionsManager.Instance.currentNormalGameOptions.KillCooldown + CustomGameOptions.ProtectKCReset));
 													result = false;
 												}
 												else
@@ -94,7 +94,7 @@ namespace TownOfRoles.NeutralRoles.JesterMod
 													if (flag11)
 													{
 														role.LastKilled = DateTime.UtcNow;
-														role.LastKilled = role.LastKilled.AddSeconds((double)(CustomGameOptions.GlitchKillCooldown + CustomGameOptions.ProtectKCReset));
+														role.LastKilled = role.LastKilled.AddSeconds((double)(GameOptionsManager.Instance.currentNormalGameOptions.KillCooldown + CustomGameOptions.ProtectKCReset));
 														result = false;
 													}
 													else

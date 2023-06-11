@@ -1,7 +1,6 @@
 using HarmonyLib;
 using Hazel;
 using Reactor.Utilities.Extensions;
-using TownOfRoles.CrewmateRoles.MedicRole;
 using TownOfRoles.Roles;
 using TownOfRoles.Roles.Cultist;
 using UnityEngine;
@@ -10,6 +9,7 @@ using System.Linq;
 using Object = UnityEngine.Object;
 using System;
 using AmongUs.GameOptions;
+using TownOfRoles.CrewmateRoles.MedicMod;
 
 namespace TownOfRoles.CultistRoles.CultistMod
 {
@@ -100,7 +100,7 @@ namespace TownOfRoles.CultistRoles.CultistMod
                 catch
                 {
                 }
-            Utils.Convert(player);
+            Utils.Convert2(player);
             return;
         }
     }

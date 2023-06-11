@@ -13,8 +13,8 @@ namespace TownOfRoles.Roles
         public Silencer(PlayerControl player) : base(player)
         {
             Name = "Silencer";
-            StartText = () => "Silence a player during meetings";
-            TaskText = () => "Mute a player during meetings";
+            StartText = () => "Silence players during meetings";
+            TaskText = () => "Mute players";
             Color = Patches.Colors.Impostor;
             LastSilenced = DateTime.UtcNow;
             RoleType = RoleEnum.Silencer;

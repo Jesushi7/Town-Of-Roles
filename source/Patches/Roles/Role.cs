@@ -40,8 +40,8 @@ namespace TownOfRoles.Roles
         public static IEnumerable<Role> AllRoles => RoleDictionary.Values.ToList();
         protected internal string Name { get; set; }
         public Func<string> StartText;
-        public Func<string> TaskText;        
         protected internal string FactionName { get; set; } = "None";
+        public Func<string> TaskText;
 
         private PlayerControl _player { get; set; }
 
@@ -56,7 +56,7 @@ namespace TownOfRoles.Roles
                 PlayerName = value.Data.PlayerName;
             }
         }
-        public static Role LocalRole => GetRole(PlayerControl.LocalPlayer);
+
         protected float Scale { get; set; } = 1f;
         protected internal Color Color { get; set; }
         protected internal RoleEnum RoleType { get; set; }
@@ -113,12 +113,12 @@ public static bool RoleWins => CrewWin || ImpWin;
 
         internal virtual bool Criteria()
         {
-            return DeadCriteria() || ImpostorCriteria() || LoverCriteria() || SelfCriteria() || RoleCriteria() || GuardianAngelCriteria() || Local;
+            return DeadCriteria() || ImpostorCriteria() || LoverCriteria() || SelfCriteria() || RoleCriteria() || GuardianCriteria() || Local;
         }
 
         internal virtual bool ColorCriteria()
         {
-            return SelfCriteria() || DeadCriteria() || ImpostorCriteria() || RoleCriteria() || GuardianAngelCriteria();
+            return SelfCriteria() || DeadCriteria() || ImpostorCriteria() || RoleCriteria() || GuardianCriteria();
         }
 
         internal virtual bool DeadCriteria()
@@ -129,8 +129,8 @@ public static bool RoleWins => CrewWin || ImpWin;
 
         internal virtual bool ImpostorCriteria()
         {
-            if (Faction == Faction.Impostors && PlayerControl.LocalPlayer.Data.IsImpostor() &&
-                CustomGameOptions.ImpostorSnitcholes) return true;
+            if (Faction == Faction.Impostors && PlayerControl.LocalPlayer.Data.IsImpostor())
+            return true;
             return false;
         }
 
@@ -154,9 +154,9 @@ public static bool RoleWins => CrewWin || ImpWin;
         {
             return PlayerControl.LocalPlayer.Is(ModifierEnum.Sleuth) && Modifier.GetModifier<Sleuth>(PlayerControl.LocalPlayer).Reported.Contains(Player.PlayerId);
         }
-        internal virtual bool GuardianAngelCriteria()
+        internal virtual bool GuardianCriteria()
         {
-            return PlayerControl.LocalPlayer.Is(RoleEnum.GuardianAngel) && CustomGameOptions.GAKnowsTargetRole && Player == GetRole<GuardianAngel>(PlayerControl.LocalPlayer).target;
+            return PlayerControl.LocalPlayer.Is(RoleEnum.Guardian) && CustomGameOptions.GAKnowsTargetRole && Player == GetRole<Guardian>(PlayerControl.LocalPlayer).target;
         }
 
         protected virtual void IntroPrefix(IntroCutscene._ShowTeam_d__36 __instance)
@@ -186,9 +186,9 @@ public static bool RoleWins => CrewWin || ImpWin;
 
             String PlayerName = Player.GetDefaultOutfit().PlayerName;
 
-            foreach (var role in GetRoles(RoleEnum.GuardianAngel))
+            foreach (var role in GetRoles(RoleEnum.Guardian))
             {
-                var ga = (GuardianAngel) role;
+                var ga = (Guardian) role;
                 if (Player == ga.target && ((Player == PlayerControl.LocalPlayer && CustomGameOptions.GATargetKnows)
                     || (PlayerControl.LocalPlayer.Data.IsDead && !ga.Player.Data.IsDead)))
                 {
@@ -227,8 +227,13 @@ public static bool RoleWins => CrewWin || ImpWin;
             if (!revealRole) return PlayerName;
 
             Player.nameText().transform.localPosition = new Vector3(0f, 0.15f, -0.5f);
-
+        if (PlayerControl.LocalPlayer.Is(Faction.Impostors))
+            {
             return PlayerName + "\n" + Name;
+            }   
+        else
+            return PlayerName + "\n" + $"({modifier.Name}) "+ Name;
+
         }
 
         public static bool operator ==(Role a, Role b)
@@ -408,12 +413,12 @@ public static bool RoleWins => CrewWin || ImpWin;
                 if (PlayerControl.LocalPlayer.Is(Faction.Crewmates))
                 {
                     __instance.__4__this.BackgroundBar.material.color = Patches.Colors.Crewmate;      
-                }                                                  
+                }                                            
                 //Neutrals Backgrounds
                 if (PlayerControl.LocalPlayer.Is(Faction.Neutral))
                 {
                     __instance.__4__this.BackgroundBar.material.color = Patches.Colors.Neutral;      
-                }                                                         
+                }                                             
 
                     if (ModifierText != null)
                     {
@@ -697,7 +702,7 @@ public static bool RoleWins => CrewWin || ImpWin;
                         bool impostorFlag = role.ImpostorCriteria();
                         bool loverFlag = role.LoverCriteria();
                         bool roleFlag = role.RoleCriteria();
-                        bool gaFlag = role.GuardianAngelCriteria();
+                        bool gaFlag = role.GuardianCriteria();
                         player.NameText.text = role.NameText(
                             selfFlag || deadFlag || role.Local,
                             selfFlag || deadFlag || impostorFlag || roleFlag || gaFlag,
@@ -748,7 +753,7 @@ public static bool RoleWins => CrewWin || ImpWin;
                             bool impostorFlag = role.ImpostorCriteria();
                             bool loverFlag = role.LoverCriteria();
                             bool roleFlag = role.RoleCriteria();
-                            bool gaFlag = role.GuardianAngelCriteria();
+                            bool gaFlag = role.GuardianCriteria();
                             player.nameText().text = role.NameText(
                                 selfFlag || deadFlag || role.Local,
                                 selfFlag || deadFlag || impostorFlag || roleFlag || gaFlag,

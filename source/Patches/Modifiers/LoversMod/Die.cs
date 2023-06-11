@@ -1,5 +1,5 @@
 using HarmonyLib;
-using TownOfRoles.CrewmateRoles.AltruistRole;
+using TownOfRoles.CrewmateRoles.AltruistMod;
 using TownOfRoles.Roles.Modifiers;
 using TownOfRoles.Roles;
 

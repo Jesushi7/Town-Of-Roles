@@ -1,5 +1,5 @@
 using HarmonyLib;
-using TownOfRoles.CrewmateRoles.EngineerRole;
+using TownOfRoles.CrewmateRoles.EngineerMod;
 using TownOfRoles.Patches;
 using TownOfRoles.Roles;
 using TownOfRoles.Roles.Modifiers;

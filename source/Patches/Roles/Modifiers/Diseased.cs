@@ -7,7 +7,7 @@ namespace TownOfRoles.Roles.Modifiers
         public Diseased(PlayerControl player) : base(player)
         {
             Name = "Diseased";
-            TaskText = () => "When you die your killer will have long cooldown";
+            TaskText = () => "Killing you gives your killer a high kill cooldown";
             Color = Patches.Colors.Modifiers;
             ModifierType = ModifierEnum.Diseased;     
         }

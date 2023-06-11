@@ -17,10 +17,13 @@ namespace TownOfRoles.Classes
         public static bool IsFreePlay => AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay;
         public static bool IsRoaming => IsInGame && !MeetingHud.Instance && !Minigame.Instance;
         public static bool IsMeeting => IsInGame && MeetingHud.Instance;
+        
         public static bool IsAA => CustomGameOptions.GameMode == GameMode.AllAny;
         public static bool IsClassic => CustomGameOptions.GameMode == GameMode.Classic;
         public static bool IsKilling => CustomGameOptions.GameMode == GameMode.KillingOnly; 
+        
         public static bool NoLobby => !(IsInGame || IsLobby || IsEnded || IsRoaming || IsMeeting);        
+         public static bool Inactive2 => PlayerControl.AllPlayerControls.Count <= 1 || PlayerControl.LocalPlayer == null || PlayerControl.LocalPlayer.Data == null || NoLobby;
         public static bool Inactive => PlayerControl.AllPlayerControls.Count <= 1 || PlayerControl.LocalPlayer == null || PlayerControl.LocalPlayer.Data == null || NoLobby ||
             !PlayerControl.LocalPlayer.CanMove;        
     }

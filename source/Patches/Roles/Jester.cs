@@ -11,8 +11,8 @@ namespace TownOfRoles.Roles
         public Jester(PlayerControl player) : base(player)
         {
             Name = "Jester";
-            StartText = () => "<color=#cb81c0>Fool everyone to vote you</color>";
-			TaskText = () => "Get voted out!";
+            StartText = () => "<color=#cb81c0>Get voted out/color>";
+            TaskText = () => SpawnedAs ? "Trick everyone into voting you" : "Your target was killed.\nNow you trick everyone to vote you and win!";
             Color = Patches.Colors.Jester;
             RoleType = RoleEnum.Jester;
             AddToRoleHistory(RoleType);
@@ -48,7 +48,7 @@ namespace TownOfRoles.Roles
 		{
 			DateTime utcNow = DateTime.UtcNow;
 			TimeSpan timeSpan = utcNow - this.LastKilled;
-			float num = CustomGameOptions.GlitchKillCooldown * 1000f;
+			float num = GameOptionsManager.Instance.currentNormalGameOptions.KillCooldown * 1000f;
 			bool flag2 = num - (float)timeSpan.TotalMilliseconds < 0f;
 			bool flag3 = flag2;
 			float result;

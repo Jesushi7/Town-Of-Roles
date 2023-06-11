@@ -3,7 +3,7 @@ using TownOfRoles.Roles;
 using UnityEngine;
 using TownOfRoles.Extensions;
 
-namespace TownOfRoles.NeutralRoles.GuardianAngelMod
+namespace TownOfRoles.NeutralRoles.GuardianMod
 {
     public enum ProtectOptions
     {
@@ -21,9 +21,9 @@ namespace TownOfRoles.NeutralRoles.GuardianAngelMod
 
         public static void Postfix(HudManager __instance)
         {
-            foreach (var role in Role.GetRoles(RoleEnum.GuardianAngel))
+            foreach (var role in Role.GetRoles(RoleEnum.Guardian))
             {
-                var ga = (GuardianAngel) role;
+                var ga = (Guardian) role;
 
                 var player = ga.target;
                 if (player == null) continue;
@@ -51,7 +51,7 @@ namespace TownOfRoles.NeutralRoles.GuardianAngelMod
                         player.myRend().material.SetFloat("_Outline", 1f);
                         player.myRend().material.SetColor("_OutlineColor", ProtectedColor);
                     }
-                    else if (PlayerControl.LocalPlayer.Is(RoleEnum.GuardianAngel) &&
+                    else if (PlayerControl.LocalPlayer.Is(RoleEnum.Guardian) &&
                              (showProtected == ProtectOptions.GA || showProtected == ProtectOptions.SelfAndGA))
                     {
                         player.myRend().material.SetColor("_VisorColor", ProtectedColor);

@@ -6,10 +6,10 @@ namespace TownOfRoles.Roles
         public Crewmate(PlayerControl player) : base(player)
         {
             Name = "Crewmate";
-            StartText = () => "<color=#00EEFFFF>Find The</color> <color=#FF0000FF>Impostors</color>"; 
-            TaskText = () => "Find the <color=#FF0000FF>Impostors</color>";                    
+            StartText = () => "Find the <color=#FF0000FF>Impostors</color>";   
+            TaskText = () => "Find the <color=#FF0000FF>Impostors</color>";                     
             RoleType = RoleEnum.Crewmate;
-            FactionName = "<color=#00EEFFFF>Crewmate</color>";    
+            FactionName = "Crewmate";    
             Faction = Faction.Crewmates;              
             AddToRoleHistory(RoleType);
             Color = Patches.Colors.Crewmate;

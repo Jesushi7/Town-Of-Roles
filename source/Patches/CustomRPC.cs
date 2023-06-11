@@ -38,7 +38,7 @@ namespace TownOfRoles
         JuggernautLose,
         ArsonistLose,
         NobodyWins,
-        PhantomLose,
+        PhantomLose,             
         GAImpWin,
         GAImpLose,
         CrewWin,
@@ -76,7 +76,6 @@ namespace TownOfRoles
         Remember,
         BaitReport,
         Transport,
-        Revive2,
         SetUntransportable,
         Mediate,
         GAProtect,
@@ -89,10 +88,13 @@ namespace TownOfRoles
         Convert,
         ChameleonSwoop,
         CamouflagerSwoop,
+        SerialKillerSwoop,
         Imitate,
         StartImitate,
         Detonate,
-
+        Revive2,
+        SerialKillerWin,
+        SerialKillerLose,
         BypassKill,
         SetMimic,
         RpcResetAnim,
@@ -118,6 +120,5 @@ namespace TownOfRoles
         SetSpawnAirship,
         DoorSyncToilet,
         SyncPlateform,
-        
     }
 }

@@ -13,7 +13,7 @@ namespace TownOfRoles.Roles
         {
             Name = "Phantom";
             StartText = () => "";
-            TaskText = () => "Finish tasks to win without being clicked!";
+            TaskText = () => "Finish tasks to win";
             Color = Patches.Colors.Phantom;
             RoleType = RoleEnum.Phantom;
             AddToRoleHistory(RoleType);

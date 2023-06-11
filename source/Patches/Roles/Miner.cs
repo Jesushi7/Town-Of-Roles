@@ -15,8 +15,8 @@ namespace TownOfRoles.Roles
         public Miner(PlayerControl player) : base(player)
         {
             Name = "Miner";
-            StartText = () => "Make your own vent network";
-            TaskText = () => "Create new vents";
+            StartText = () => "Make a new network of vents";
+            TaskText = () => "Create Vents";
             Color = Patches.Colors.Impostor;
             LastMined = DateTime.UtcNow;
             RoleType = RoleEnum.Miner;

@@ -1,4 +1,4 @@
-## *Note: This repository is a fork of [Town of Us Reactivated] (https://github.com/eDonnes124/Town-Of-Us-R)*
+## *Note: This repository is an unofficial continuation of Town of Us due to the original repository being discontinued.*
 
 ![LOGO](./Images/TOU-logo.png)
 
@@ -26,7 +26,7 @@ An Among Us mod that adds a bunch of roles, modifiers and game settings
 
 **Neutral Roles**
 - [Amnesiac](#amnesiac)
-- [Guardian Angel](#guardian-angel)
+- [Guardian](#guardian-angel)
 - [Survivor](#survivor)
 - [Executioner](#executioner)
 - [Jester](#jester)
@@ -54,7 +54,7 @@ An Among Us mod that adds a bunch of roles, modifiers and game settings
 - [Blind](#blind)
 - [Diseased](#diseased)
 - [Multitasker](#multitasker)
-- [Torch](#torch)
+- [Nightowl](#torch)
 - [Button Barry](#button-barry)
 - [Flash](#flash)
 - [Giant](#giant)
@@ -81,7 +81,7 @@ An Among Us mod that adds a bunch of roles, modifiers and game settings
   <ul> <li>Added a new Examine Report to Mystic</li> </ul>
   <ul> <li>Engineer Fix Per Round/Game changed to Uses throughout the game</li> </ul>
   <ul> <li>Made Medic & Trapper imitatable for the Imitator</li> </ul>
-  <ul> <li>Added indications so the dead can see who the Guardian Angel and Executioner targets are</li> </ul>
+  <ul> <li>Added indications so the dead can see who the Guardian and Executioner targets are</li> </ul>
   <ul> <li>Removed option for Informant to be hidden on Game Start</li> </ul>
   </details>
   <details>
@@ -98,7 +98,7 @@ An Among Us mod that adds a bunch of roles, modifiers and game settings
   <ul> <li>New Setting: Enable Hidden Roles</li> </ul>
   <ul> <li>New Settings for hidden roles</li> </ul>
   <ul> <li>New Setting: Undertaker Drag Speed</li> </ul>
-  <ul> <li>Bug Fix: Executioner/Guardian Angel turned Amnesiac/Jester/Survivor no longer have red text after changing role</li> </ul>
+  <ul> <li>Bug Fix: Executioner/Guardian turned Amnesiac/Jester/Survivor no longer have red text after changing role</li> </ul>
   <ul> <li>Amnesiac remembering a role no longer makes their task list swap with the player they remembered</li> </ul>
   <ul> <li>Bug Fix: Amnesiac no longer sees themself with the remembered players' modifier</li> </ul>
   <ul> <li>Bug Fix: Amnesiac no longer loses tasks if the person they remembered from disconnects or vice versa</li> </ul>
@@ -107,7 +107,7 @@ An Among Us mod that adds a bunch of roles, modifiers and game settings
   <ul> <li>Bug Fix: Underdog now can have a kill cooldown below 10secs</li> </ul>
   <ul> <li>Bug Fix: Miner's mines are no longer invisible in certain places</li> </ul>
   <ul> <li>Bug Fix: Undertaker no longer can make a body become invisible in certain places</li> </ul>
-  <ul> <li>Bug Fix: Neutral Killers now get correct cooldowns when attacking a vesting Survivor or a Guardian Angel shield</li> </ul>
+  <ul> <li>Bug Fix: Neutral Killers now get correct cooldowns when attacking a vesting Survivor or a Guardian shield</li> </ul>
   <ul> <li>Adjusted the Trapper's trap & Grenadier's flash radius so they scale correctly</li> </ul>
   </details>
   <details>
@@ -180,7 +180,7 @@ An Among Us mod that adds a bunch of roles, modifiers and game settings
   <ul> <li>Submerged Compatibility mostly thanks to MyDragonBreath</li> </ul>
   <ul> <li>New Setting: Assassins can guess Crewmate Modifiers</li> </ul>
   <ul> <li>New Setting: Assassins and Gambler can guess after voting</li> </ul>
-  <ul> <li>New Settings: Guardian Angel knows their target's role and Guardian Angel's target knows they have a Guardian Angel</li> </ul>
+  <ul> <li>New Settings: Guardian knows their target's role and Guardian's target knows they have a Guardian</li> </ul>
   <ul> <li>New Settings: Bait minimum and maximum delay</li> </ul>
   <ul> <li>New Setting: Diseased Kill Multiplier</li> </ul>
   <ul> <li>New Setting: Flash Speed</li> </ul>
@@ -202,7 +202,7 @@ An Among Us mod that adds a bunch of roles, modifiers and game settings
   <summary> v3.0.0 </summary>
   <ul> <li>New Role: Medium</li> </ul>
   <ul> <li>New Role: Survivor</li> </ul>
-  <ul> <li>New Role: Guardian Angel</li> </ul>
+  <ul> <li>New Role: Guardian</li> </ul>
   <ul> <li>New Role: Silencer</li> </ul>
   <ul> <li>New Role: Mystic</li> </ul>
   <ul> <li>Camouflager removed</li> </ul>
@@ -384,7 +384,7 @@ An Among Us mod that adds a bunch of roles, modifiers and game settings
   <ul> <li>Bug Fix: Host no longer sees Undertaker dragging a body after they dropped it</li> </ul>
   <ul> <li>Bug Fix: Host now has correct cooldowns on game start</li> </ul>
   <ul> <li>Bug Fix: Investigator footprint interval fixed (lag not entirely fixed)</li> </ul>
-  <ul> <li>Bug Fix: Fixed the issue where Torch/Diseased were not given to anyone</li> </ul>
+  <ul> <li>Bug Fix: Fixed the issue where Nightowl/Diseased were not given to anyone</li> </ul>
   <ul> <li>Bug Fix: Made it so the Phantom only has to upload data and not download it</li> </ul>
   <ul> <li>Bug Fix: Phantom no longer spawns in the admin vent</li> </ul>
   </details>
@@ -640,7 +640,7 @@ The Mystic is a Crewmate that can examine other players for suspicious behaviour
 If the player the Mystic examines has killed recently the Mystic will be alerted about it.
 ### Role Info
 - Your target has an unusual obsession with dead bodies (Altruist/Amnesiac/Janitor/Medium/Undertaker)
-- Your target tries to protect themselves or others by any means necessary (Grenadier/Guardian Angel/Medic/Survivor/Veteran)
+- Your target tries to protect themselves or others by any means necessary (Grenadier/Guardian/Medic/Survivor/Veteran)
 - Your target is a causer of chaos (Bomber/Executioner/Jester/Swapper/Transporter)
 - Your target is concealing information (Silencer/Mayor/Informant/Swooper/Trapper)
 - Your target started innocent but gained the capability to kill (Juggernaut/Sheriff/Traitor/Gambler/Werewolf)
@@ -994,22 +994,22 @@ Once they remember their role, they go on to try win with their new win conditio
 | Arrow Appear Delay | The delay of the arrows appearing after the person died | Time | 5s |
 
 -----------------------
-## Guardian Angel
+## Guardian
 ### **Team: Neutral**
-The Guardian Angel is a Neutral role which aligns with the faction of their target.\
+The Guardian is a Neutral role which aligns with the faction of their target.\
 Their job is to protect their target at all costs.\
 If their target loses, they lose.
 
 ### Game Options
 | Name | Description | Type | Default |
 |----------|:-------------:|:------:|:------:|
-| Guardian Angel | The percentage probability of the Guardian Angel appearing | Percentage | 0% |
-| Protect Cooldown | The cooldown of the Guardian Angel's Protect button | Time | 25s |
-| Protect Duration | How long The Guardian Angel's Protect lasts | Time | 10s |
+| Guardian | The percentage probability of the Guardian appearing | Percentage | 0% |
+| Protect Cooldown | The cooldown of the Guardian's Protect button | Time | 25s |
+| Protect Duration | How long The Guardian's Protect lasts | Time | 10s |
 | Kill Cooldown Reset on Attack | The attackers kill cooldown after they attacked the protected target | Time | 2.5s |
 | Max Uses | The amount of times the Protect ability can be used | Number | 5 |
 | Show Protected Player | Who should be able to see who is Protected | Self / GA / Self + GA / Everyone | Self |
-| Guardian Angel becomes on Target Dead | Which role the Guardian Angel becomes when their target dies | Crewmate / Amnesiac / Survivor / Jester | Crewmate |
+| Guardian becomes on Target Dead | Which role the Guardian becomes when their target dies | Crewmate / Amnesiac / Survivor / Jester | Crewmate |
 | Target Knows GA Exists | Whether the GA's Target knows they have a GA | Toggle | False |
 | GA Knows Targets Role | Whether the GA knows their target's role | Toggle | False |
 
@@ -1349,13 +1349,13 @@ The Multitasker's tasks are transparent.
 | Multitasker | The percentage probability of the Multitasker appearing | Percentage | 0% |
 
 -----------------------
-## Torch
+## Nightowl
 ### **Applied to: Crewmates**
-The Torch's vision doesn't get reduced when the lights are sabotaged.
+The Nightowl's vision doesn't get reduced when the lights are sabotaged.
 ### Game Options
 | Name | Description | Type | Default |
 |----------|:-------------:|:------:|:------:|
-| Torch | The percentage probability of the Torch appearing | Percentage | 0% |
+| Nightowl | The percentage probability of the Nightowl appearing | Percentage | 0% |
 
 -----------------------
 ## Button Barry
@@ -1626,8 +1626,8 @@ If you have any bugs or any need to contact me, join the [Discord Server](https:
 [Among-Us-Love-Couple-Mod](https://github.com/Woodi-dev/Among-Us-Love-Couple-Mod) - For the inspiration of Lovers role.\
 [ExtraRolesAmongUs](https://github.com/NotHunter101/ExtraRolesAmongUs) - For the Engineer & Medic roles.\
 [TooManyRolesMods](https://github.com/Hardel-DW/TooManyRolesMods) - For the Investigator & Time Lord roles.\
-[TorchMod](https://github.com/tomozbot/TorchMod) - For the inspiration of the Torch modifier.\
-[XtraCube](https://github.com/XtraCube) - For the RainbowMod.\
+[NightowlMod](https://github.com/tomozbot/NightowlMod) - For the inspiration of the Nightowl modifier.\
+[XtraCube](https://github.com/XtraCube) - For the ColorsMod.\
 [PhasmoFireGod](https://twitch.tv/PhasmoFireGod) and [Ophidian](https://www.instagram.com/ixean.studio) - Button Art.\
 [TheOtherRoles](https://github.com/Eisbison/TheOtherRoles) - For the inspiration of the Gambler, Tracker and Spy roles, as well as the Bait modifier.\
 [5up](https://www.twitch.tv/5uppp) and the Submarine Team - For the inspiration of the Grenadier role.\

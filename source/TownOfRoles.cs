@@ -12,7 +12,7 @@ using Reactor.Utilities.Extensions;
 using Reactor.Networking.Attributes;
 using TownOfRoles.CustomOption;
 using TownOfRoles.Patches;
-using TownOfRoles.RainbowMod;
+using TownOfRoles.ColorsMod;
 using TownOfRoles.Extensions;
 using Il2CppInterop.Runtime;
 using Il2CppInterop.Runtime.Injection;
@@ -37,17 +37,13 @@ namespace TownOfRoles
         public const int MaxImpostors = 62;   
         public static Assembly Assembly => typeof(TownOfRoles).Assembly;
         public static Assembly Executing => Assembly.GetExecutingAssembly();        
-        public static bool LobbyCapped = true;
-        public static bool Persistence = true;
-        public static bool MCIActive = false;
-
 
         public static Sprite JanitorClean;
         public static Sprite EngineerFix;      
         public static Sprite LighterRoleSprite;        
         public static Sprite Rewind;      
         public static Sprite Logo;        
-
+public static AmongUs.GameOptions.NormalGameOptionsV07 VanillaOptions => GameOptionsManager.Instance.currentNormalGameOptions;
         public static Sprite SwapperSwitch;
         public static Sprite SwapperSwitchDisabled;
         public static Sprite Footprint;
@@ -69,7 +65,8 @@ namespace TownOfRoles
         public static Sprite CycleBackSprite;
         public static Sprite CycleForwardSprite;
         public static Sprite GuessSprite;
-
+        public static Sprite ZoomPlusButton;
+        public static Sprite ZoomMinusButton;
         public static Sprite ShootSprite;        
         public static Sprite DragSprite;
         public static Sprite DropSprite;
@@ -106,6 +103,7 @@ namespace TownOfRoles
         public static Sprite LockSprite;
 
         public static Sprite CrewSettingsButtonSprite;
+        public static Sprite LobbyPaintSprite;        
         public static Sprite NeutralSettingsButtonSprite;
         public static Sprite ImposterSettingsButtonSprite;
         public static Sprite ModifierSettingsButtonSprite;
@@ -115,7 +113,6 @@ namespace TownOfRoles
 
         public static Sprite HorseEnabledImage;
         public static Sprite HorseDisabledImage;
-        public static Vector3 ButtonPosition { get; private set; } = new Vector3(2.6f, 0.7f, -9f);
         public static Sprite VaultSprite;
         public static Sprite CokpitSprite;
         public static Sprite TaskSprite;
@@ -155,6 +152,7 @@ namespace TownOfRoles
             MorphSprite = CreateSprite("TownOfRoles.Resources.Morph.png");
             DiscordImage = Utils.CreateSprite("TownOfRoles.Resources.Discord.png");       
             Arrow = CreateSprite("TownOfRoles.Resources.Arrow.png");
+            LobbyPaintSprite = CreateSprite("TownOfRoles.Resources.LobbyPaint.png");            
             MineSprite = CreateSprite("TownOfRoles.Resources.Mine.png");
             SwoopSprite = CreateSprite("TownOfRoles.Resources.Swoop.png");
             CamoSprite = CreateSprite("TownOfRoles.Resources.Camouflage.png");                       
@@ -192,6 +190,8 @@ namespace TownOfRoles
             RampageSprite = CreateSprite("TownOfRoles.Resources.Rampage.png");
             TrapSprite = CreateSprite("TownOfRoles.Resources.Trap.png");
             ExamineSprite = CreateSprite("TownOfRoles.Resources.Examine.png");
+            ZoomPlusButton = CreateSprite("TownOfRoles.Resources.Plus.png");
+            ZoomMinusButton = CreateSprite("TownOfRoles.Resources.Minus.png");            
             EscapeSprite = CreateSprite("TownOfRoles.Resources.Recall.png");
             MarkSprite = CreateSprite("TownOfRoles.Resources.Mark.png");
             Revive2Sprite = CreateSprite("TownOfRoles.Resources.Revive2.png");

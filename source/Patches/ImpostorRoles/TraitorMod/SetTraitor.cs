@@ -7,8 +7,8 @@ using UnityEngine;
 using Reactor.Utilities;
 using TownOfRoles.Patches;
 using AmongUs.GameOptions;
-using TownOfRoles.CrewmateRoles.ImitatorRole;
-using TownOfRoles.CrewmateRoles.InformantRole;
+using TownOfRoles.CrewmateRoles.ImitatorMod;
+using TownOfRoles.CrewmateRoles.InformantMod;
 
 namespace TownOfRoles.ImpostorRoles.TraitorMod
 {
@@ -31,12 +31,13 @@ namespace TownOfRoles.ImpostorRoles.TraitorMod
                     .Where(x => !x.Data.IsDead && !x.Data.Disconnected).ToList();
             foreach (var player in alives)
             {
-                if (((!player.Is(RoleEnum.Glitch) || !player.Is(RoleEnum.Juggernaut)
-                    || !player.Is(RoleEnum.Arsonist) || !player.Is(RoleEnum.Plaguebearer) || !player.Is(RoleEnum.Pestilence)
-                    || !player.Is(RoleEnum.Werewolf)) && CustomGameOptions.NeutralKillingTraitorSpawn))
+                if (player.Data.IsImpostor() || ((player.Is(RoleEnum.Glitch) || player.Is(RoleEnum.Juggernaut)
+                    || player.Is(RoleEnum.Arsonist) || player.Is(RoleEnum.Plaguebearer) || player.Is(RoleEnum.Pestilence)
+                    || player.Is(RoleEnum.Werewolf)) && CustomGameOptions.NeutralKillingStopsTraitor))
                 {
                     return;
                 }
+            
                 else if (player.Data.IsImpostor())
                 {
                     return;

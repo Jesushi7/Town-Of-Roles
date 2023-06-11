@@ -23,8 +23,8 @@ namespace TownOfRoles.Roles
         public Arsonist(PlayerControl player) : base(player)
         {
             Name = "Arsonist";
-            StartText = () => "<color=#FF4D00FF>Douse players and ignite them</color>";
-            TaskText = () => "Douse everyone and ignite them all to win";
+            StartText = () => "<color=#FF4D00FF>Douse everyone and ignite the light</color>";
+            TaskText = () => "Douse players and ignite to kill all douses";
             Color = Patches.Colors.Arsonist;
             LastDoused = DateTime.UtcNow;
             RoleType = RoleEnum.Arsonist;
@@ -49,7 +49,7 @@ namespace TownOfRoles.Roles
 
             if (PlayerControl.AllPlayerControls.ToArray().Count(x => !x.Data.IsDead && !x.Data.Disconnected) <= 2 &&
                     PlayerControl.AllPlayerControls.ToArray().Count(x => !x.Data.IsDead && !x.Data.Disconnected &&
-                    (x.Data.IsImpostor() || x.Is(RoleEnum.Glitch) || x.Is(RoleEnum.Juggernaut) ||
+                    (x.Data.IsImpostor() || x.Is(RoleEnum.Glitch)|| x.Is(RoleEnum.SerialKiller) || x.Is(RoleEnum.Juggernaut) ||
                     x.Is(RoleEnum.Werewolf) || x.Is(RoleEnum.Plaguebearer) || x.Is(RoleEnum.Pestilence))) == 0)
             {
                 var writer = AmongUsClient.Instance.StartRpcImmediately(

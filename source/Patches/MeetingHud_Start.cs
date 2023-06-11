@@ -2,6 +2,8 @@ using HarmonyLib;
 using Object = UnityEngine.Object;
 using Hazel;
 using Reactor.Utilities.Extensions;
+using UnityEngine;
+using TownOfRoles.Patches;
 
 namespace TownOfRoles
 {
@@ -16,6 +18,17 @@ namespace TownOfRoles
             {
                 player.MyPhysics.ResetAnimState();
             }
+
+            HudUpdate.Zooming = false;
+            Camera.main.orthographicSize = 3f;
+
+            foreach (var cam in Camera.allCameras)
+            {
+                if (cam?.gameObject.name == "UI Camera")
+                    cam.orthographicSize = 3f;
+            }
+
+            ResolutionManager.ResolutionChanged.Invoke((float)Screen.width / Screen.height);
         }
     }
 

@@ -2,7 +2,7 @@ using HarmonyLib;
 using Hazel;
 using TownOfRoles.Roles;
 
-namespace TownOfRoles.NeutralRoles.GuardianAngelMod
+namespace TownOfRoles.NeutralRoles.GuardianMod
 {
     [HarmonyPatch(typeof(GameManager), nameof(GameManager.RpcEndGame))]
     public class EndGame
@@ -10,11 +10,11 @@ namespace TownOfRoles.NeutralRoles.GuardianAngelMod
         public static bool Prefix(GameManager __instance, [HarmonyArgument(0)] GameOverReason reason)
         {
             foreach (var role in Role.AllRoles)
-                if (role.RoleType == RoleEnum.GuardianAngel && ((GuardianAngel)role).target.Is(Faction.Impostors))
+                if (role.RoleType == RoleEnum.Guardian && ((Guardian)role).target.Is(Faction.Impostors))
                 {
                     if (reason != GameOverReason.HumansByVote && reason != GameOverReason.HumansByTask)
                     {
-                        ((GuardianAngel)role).ImpTargetWin();
+                        ((Guardian)role).ImpTargetWin();
 
                         var writer = AmongUsClient.Instance.StartRpcImmediately(PlayerControl.LocalPlayer.NetId,
                             (byte)CustomRPC.GAImpWin,
@@ -23,7 +23,7 @@ namespace TownOfRoles.NeutralRoles.GuardianAngelMod
                     }
                     else
                     {
-                        ((GuardianAngel)role).ImpTargetLose();
+                        ((Guardian)role).ImpTargetLose();
 
                         var writer = AmongUsClient.Instance.StartRpcImmediately(PlayerControl.LocalPlayer.NetId,
                             (byte)CustomRPC.GAImpLose,

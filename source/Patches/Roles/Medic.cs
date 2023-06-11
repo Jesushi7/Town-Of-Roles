@@ -12,12 +12,12 @@ namespace TownOfRoles.Roles
         public Medic(PlayerControl player) : base(player)
         {
             Name = "Medic";
-            StartText = () => "<color=#7efbc2>Shield a player to safe them</color>";
-            TaskText = () => "Shield a player";
+            StartText = () => "<color=#7efbc2>Protect a Player With a Shield</color>";
+            TaskText = () => "Protect a player";
             Color = Patches.Colors.Medic;
             StartingCooldown = DateTime.UtcNow;
             RoleType = RoleEnum.Medic;
-            FactionName = "<color=#00EEFFFF>Crewmate</color>";    
+            FactionName = "Crewmate";    
             Faction = Faction.Crewmates;               
             AddToRoleHistory(RoleType);
             ShieldedPlayer = null;

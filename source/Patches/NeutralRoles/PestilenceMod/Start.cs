@@ -13,7 +13,7 @@ namespace TownOfRoles.NeutralRoles.PestilenceMod
             {
                 var pestilence = (Pestilence)role;
                 pestilence.LastKill = DateTime.UtcNow;
-                pestilence.LastKill = pestilence.LastKill.AddSeconds(CustomGameOptions.InitialCooldowns - CustomGameOptions.PestKillCd);
+                pestilence.LastKill = pestilence.LastKill.AddSeconds(CustomGameOptions.InitialCooldowns - GameOptionsManager.Instance.currentNormalGameOptions.KillCooldown);
             }
         }
     }

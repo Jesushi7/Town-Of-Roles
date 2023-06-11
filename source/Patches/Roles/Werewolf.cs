@@ -21,7 +21,7 @@ namespace TownOfRoles.Roles
         {
             Name = "Werewolf";
             StartText = () => "<color=#A86629FF>Rampage to kill everyone</color>";
-            TaskText = () => "Rampage to kill faster";
+            TaskText = () => "Rampage to kill everyone";
             Color = Patches.Colors.Werewolf;
             LastRampaged = DateTime.UtcNow;
             FactionName = "<color=#5c5e5d>Neutral</color>";            
@@ -48,8 +48,8 @@ namespace TownOfRoles.Roles
 
             if (PlayerControl.AllPlayerControls.ToArray().Count(x => !x.Data.IsDead && !x.Data.Disconnected) <= 2 &&
                     PlayerControl.AllPlayerControls.ToArray().Count(x => !x.Data.IsDead && !x.Data.Disconnected &&
-                    (x.Data.IsImpostor() || x.Is(RoleEnum.Glitch) || x.Is(RoleEnum.Arsonist) ||
-                    x.Is(RoleEnum.Juggernaut) || x.Is(RoleEnum.Plaguebearer) || x.Is(RoleEnum.Pestilence))) == 0)
+                    (x.Data.IsImpostor() || x.Is(RoleEnum.Glitch)  ||  x.Is(RoleEnum.SerialKiller) || x.Is(RoleEnum.Arsonist) ||
+                    x.Is(RoleEnum.Juggernaut)  || x.Is(RoleEnum.Plaguebearer) || x.Is(RoleEnum.Pestilence))) == 0)
             {
                 var writer = AmongUsClient.Instance.StartRpcImmediately(
                     PlayerControl.LocalPlayer.NetId,

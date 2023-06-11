@@ -7,7 +7,7 @@ namespace TownOfRoles.Roles
         {
             Name = "Traitor";
             StartText = () => "";
-            TaskText = () => "Betray the crewmates!";
+            TaskText = () => "Betray the Crewmates!";
             Color = Patches.Colors.Impostor;
             RoleType = RoleEnum.Traitor;
             AddToRoleHistory(RoleType);

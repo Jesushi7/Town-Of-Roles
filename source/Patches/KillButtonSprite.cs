@@ -47,7 +47,7 @@ namespace TownOfRoles
             if (!Kill) Kill = __instance.KillButton.graphic.sprite;
 
             var flag = false;
-            if (PlayerControl.LocalPlayer.Is(RoleEnum.Snitch))
+            if (PlayerControl.LocalPlayer.Is(RoleEnum.Snitch) || PlayerControl.LocalPlayer.Is(RoleEnum.CultistSnitch))
             {
                 __instance.KillButton.graphic.sprite = Snitch;
                 flag = true;
@@ -66,7 +66,7 @@ namespace TownOfRoles
             {
                 __instance.KillButton.graphic.sprite = Revive;
                 flag = true;
-            }
+            }        
             else if (PlayerControl.LocalPlayer.Is(RoleEnum.Veteran))
             {
                 __instance.KillButton.graphic.sprite = Alert;
@@ -97,7 +97,7 @@ namespace TownOfRoles
                 __instance.KillButton.graphic.sprite = Mediate;
                 flag = true;
             }
-            else if (PlayerControl.LocalPlayer.Is(RoleEnum.GuardianAngel))
+            else if (PlayerControl.LocalPlayer.Is(RoleEnum.Guardian))
             {
                 __instance.KillButton.graphic.sprite = Protect;
                 flag = true;
@@ -107,7 +107,7 @@ namespace TownOfRoles
                 __instance.KillButton.graphic.sprite = Infect;
                 flag = true;
             }
-            else if (PlayerControl.LocalPlayer.Is(RoleEnum.Engineer))
+            else if (PlayerControl.LocalPlayer.Is(RoleEnum.Engineer) && CustomGameOptions.GameMode != GameMode.Cultist)
             {
                 __instance.KillButton.graphic.sprite = Fix;
                 flag = true;
@@ -138,25 +138,26 @@ namespace TownOfRoles
                 __instance.KillButton.buttonLabelText.gameObject.SetActive(true);
                 __instance.KillButton.transform.localPosition = new Vector3(0f, 1f, 0f);
                 __instance.KillButton.buttonLabelText.text = "Kill";
-                flag = PlayerControl.LocalPlayer.Is(RoleEnum.Sheriff) || PlayerControl.LocalPlayer.Is(RoleEnum.Pestilence) || PlayerControl.LocalPlayer.Is(RoleEnum.Werewolf) || PlayerControl.LocalPlayer.Is(RoleEnum.Juggernaut);
+                flag = PlayerControl.LocalPlayer.Is(RoleEnum.Sheriff)|| PlayerControl.LocalPlayer.Is(RoleEnum.SerialKiller) || PlayerControl.LocalPlayer.Is(RoleEnum.Pestilence) || PlayerControl.LocalPlayer.Is(RoleEnum.Werewolf) || PlayerControl.LocalPlayer.Is(RoleEnum.Juggernaut);
             }
 
             if (!PlayerControl.LocalPlayer.Is(Faction.Impostors) &&
-                GameOptionsManager.Instance.CurrentGameOptions.GameMode != GameModes.HideNSeek ||PlayerControl.LocalPlayer.Is(RoleEnum.Tracker)
-                 ||PlayerControl.LocalPlayer.Is(RoleEnum.Medic)|PlayerControl.LocalPlayer.Is(RoleEnum.Veteran))
+                GameOptionsManager.Instance.CurrentGameOptions.GameMode != GameModes.HideNSeek)
             {
                 __instance.KillButton.transform.localPosition = new Vector3(0f, 1f, 0f);
             }
-            if (PlayerControl.LocalPlayer.Is(RoleEnum.Engineer) || PlayerControl.LocalPlayer.Is(RoleEnum.Glitch)
-                 || PlayerControl.LocalPlayer.Is(RoleEnum.Pestilence) || PlayerControl.LocalPlayer.Is(RoleEnum.Plaguebearer)||  PlayerControl.LocalPlayer.Is(RoleEnum.Jester)   || PlayerControl.LocalPlayer.Is(RoleEnum.Juggernaut)|| PlayerControl.LocalPlayer.Is(RoleEnum.Arsonist))
+            if (PlayerControl.LocalPlayer.Is(RoleEnum.Engineer) ||  PlayerControl.LocalPlayer.Is(RoleEnum.SerialKiller)
+                 || PlayerControl.LocalPlayer.Is(RoleEnum.Pestilence)|| PlayerControl.LocalPlayer.Is(RoleEnum.Glitch)  || PlayerControl.LocalPlayer.Is(RoleEnum.Plaguebearer)||  PlayerControl.LocalPlayer.Is(RoleEnum.Jester)   || PlayerControl.LocalPlayer.Is(RoleEnum.Juggernaut)|| PlayerControl.LocalPlayer.Is(RoleEnum.Arsonist))
             {
                 __instance.ImpostorVentButton.transform.localPosition = new Vector3(-2f, 0f, 0f);
             }
-            else if (PlayerControl.LocalPlayer.Is(RoleEnum.Werewolf)|| !PlayerControl.LocalPlayer.Is(RoleEnum.Arsonist) || CustomGameOptions.EveryoneVent
+            
+            else if (PlayerControl.LocalPlayer.Is(RoleEnum.Werewolf) ||  CustomGameOptions.EveryoneVent
             )
             {
                 __instance.ImpostorVentButton.transform.localPosition = new Vector3(-1f, 1f, 0f);
             }
+
             var keyInt = Input.GetKeyInt(KeyCode.Q);
             var controller = ConsoleJoystick.player.GetButtonDown(8);
             if (keyInt | controller && __instance.KillButton != null && flag && !PlayerControl.LocalPlayer.Data.IsDead)

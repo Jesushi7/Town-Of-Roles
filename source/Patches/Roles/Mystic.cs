@@ -15,12 +15,12 @@ namespace TownOfRoles.Roles
         public Mystic(PlayerControl player) : base(player)
         {
             Name = "Mystic";
-            StartText = () => "<color=#4D4DFFFF>Find out who killed and where the kills are</color>";
-            TaskText = () => "Find out where there kills are and who killed";
+            StartText = () => "<color=#4D4DFFFF>Understand when and where kills happen</color>";
+            TaskText = () => "Find out where the kills are and who killed";
             Color = Patches.Colors.Mystic;
             RoleType = RoleEnum.Mystic;
             LastExamined = DateTime.UtcNow;            
-            FactionName = "<color=#00EEFFFF>Crewmate</color>";    
+            FactionName = "Crewmate";    
             Faction = Faction.Crewmates;               
             AddToRoleHistory(RoleType);
         }

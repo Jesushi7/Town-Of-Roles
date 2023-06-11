@@ -18,8 +18,8 @@ namespace TownOfRoles
             var role = Role.GetRole(__instance.HauntTarget);
             var modifier = Modifier.GetModifier(__instance.HauntTarget);
 
-            __instance.FilterText.text = modifier != null ? $"{modifier.Name} - {role.Name}"
-                                                          : $"{role.Name}";
+            __instance.FilterText.text = modifier != null ? $"{modifier.Name} - {role.Name} (Ghost)"
+                                                          : $"{role.Name} (Ghost)";
             return false;
         }
     }

@@ -21,8 +21,8 @@ namespace TownOfRoles.Roles
         public Grenadier(PlayerControl player) : base(player)
         {
             Name = "Grenadier";
-            StartText = () => "Blind players";
-            TaskText = () => "Flash everyone to get secret kills";
+            StartText = () => "Flash everyone to get sneaky kills";
+            TaskText = () => "Blind everyone";
             Color = Patches.Colors.Impostor;
             LastFlashed = DateTime.UtcNow;
             FactionName = "Impostor";   

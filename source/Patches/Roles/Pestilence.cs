@@ -10,12 +10,12 @@ namespace TownOfRoles.Roles
         public Pestilence(PlayerControl owner) : base(owner)
         {
             Name = "Pestilence";
-            TaskText = () => "Kill everyone that interacts with you";
             Color = Patches.Colors.Pestilence;
             LastKill = DateTime.UtcNow;
             RoleType = RoleEnum.Pestilence;
             AddToRoleHistory(RoleType);
             StartText = () => "";
+            TaskText = () => "Kill everyone with your unstoppable abilities!";
             Faction = Faction.Neutral;
         }
 
@@ -30,7 +30,7 @@ namespace TownOfRoles.Roles
             if (PlayerControl.AllPlayerControls.ToArray().Count(x => !x.Data.IsDead && !x.Data.Disconnected) <= 2 &&
                     PlayerControl.AllPlayerControls.ToArray().Count(x => !x.Data.IsDead && !x.Data.Disconnected &&
                     (x.Data.IsImpostor() || x.Is(RoleEnum.Glitch) || x.Is(RoleEnum.Arsonist) ||
-                    x.Is(RoleEnum.Juggernaut) || x.Is(RoleEnum.Werewolf) || x.Is(RoleEnum.Plaguebearer))) == 0)
+                    x.Is(RoleEnum.Juggernaut)  || x.Is(RoleEnum.SerialKiller)|| x.Is(RoleEnum.Werewolf) || x.Is(RoleEnum.Plaguebearer))) == 0)
             {
                 var writer = AmongUsClient.Instance.StartRpcImmediately(
                     PlayerControl.LocalPlayer.NetId,
@@ -62,7 +62,7 @@ namespace TownOfRoles.Roles
         {
             var utcNow = DateTime.UtcNow;
             var timeSpan = utcNow - LastKill;
-            var num = CustomGameOptions.PestKillCd * 1000f;
+            var num = GameOptionsManager.Instance.currentNormalGameOptions.KillCooldown * 1000f;
             var flag2 = num - (float)timeSpan.TotalMilliseconds < 0f;
             if (flag2) return 0;
             return (num - (float)timeSpan.TotalMilliseconds) / 1000f;

@@ -9,7 +9,7 @@ namespace TownOfRoles.Patches
         public static bool Prefix(VitalsMinigame __instance)
         {
             if (PlayerControl.LocalPlayer.Data.IsDead) return true;
-            if(
+            if (CustomGameOptions.GameMode == GameMode.Cultist ||
                 (PlayerControl.LocalPlayer.Is(RoleEnum.Transporter) && !CustomGameOptions.TransporterVitals))
             {
                 Object.Destroy(__instance.gameObject);

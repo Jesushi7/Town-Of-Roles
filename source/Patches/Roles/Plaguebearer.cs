@@ -21,8 +21,8 @@ namespace TownOfRoles.Roles
         public Plaguebearer(PlayerControl player) : base(player)
         {
             Name = "Plaguebearer";
-            StartText = () => "<color=#E6FFB3FF>Infect people to become Pestilence</color>";
-            TaskText = () => "Spread your infection";
+            StartText = () => "<color=#E6FFB3FF>Infect Everyone To Become Pestilence</color>";
+            TaskText = () => "Infect everyone to become Pestilence";
             Color = Patches.Colors.Plaguebearer;
             RoleType = RoleEnum.Plaguebearer;
             AddToRoleHistory(RoleType);
@@ -38,7 +38,7 @@ namespace TownOfRoles.Roles
             if (PlayerControl.AllPlayerControls.ToArray().Count(x => !x.Data.IsDead && !x.Data.Disconnected) <= 2 &&
                     PlayerControl.AllPlayerControls.ToArray().Count(x => !x.Data.IsDead && !x.Data.Disconnected &&
                     (x.Data.IsImpostor() || x.Is(RoleEnum.Glitch) || x.Is(RoleEnum.Arsonist) ||
-                    x.Is(RoleEnum.Juggernaut) || x.Is(RoleEnum.Werewolf) || x.Is(RoleEnum.Pestilence))) == 0)
+                    x.Is(RoleEnum.Juggernaut) || x.Is(RoleEnum.SerialKiller)|| x.Is(RoleEnum.Werewolf) || x.Is(RoleEnum.Pestilence))) == 0)
             {
                 var writer = AmongUsClient.Instance.StartRpcImmediately(
                     PlayerControl.LocalPlayer.NetId,

@@ -1,5 +1,5 @@
 using HarmonyLib;
-using TownOfRoles.CrewmateRoles.MedicRole;
+using TownOfRoles.CrewmateRoles.MedicMod;
 using Hazel;
 using TownOfRoles.Extensions;
 using TownOfRoles.Roles;

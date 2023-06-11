@@ -2,18 +2,18 @@ using HarmonyLib;
 using Hazel;
 using TownOfRoles.Roles;
 
-namespace TownOfRoles.NeutralRoles.GuardianAngelMod
+namespace TownOfRoles.NeutralRoles.GuardianMod
 {
     [HarmonyPatch(typeof(KillButton), nameof(KillButton.DoClick))]
     public class Protect
     {
         public static bool Prefix(KillButton __instance)
         {
-            var flag = PlayerControl.LocalPlayer.Is(RoleEnum.GuardianAngel);
+            var flag = PlayerControl.LocalPlayer.Is(RoleEnum.Guardian);
             if (!flag) return true;
             if (!PlayerControl.LocalPlayer.CanMove) return false;
             if (PlayerControl.LocalPlayer.Data.IsDead) return false;
-            var role = Role.GetRole<GuardianAngel>(PlayerControl.LocalPlayer);
+            var role = Role.GetRole<Guardian>(PlayerControl.LocalPlayer);
             if (!role.ButtonUsable) return false;
             var protectButton = DestroyableSingleton<HudManager>.Instance.KillButton;
             if (__instance == protectButton)

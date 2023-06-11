@@ -12,8 +12,8 @@ namespace TownOfRoles.Roles
         public Amnesiac(PlayerControl player) : base(player)
         {
             Name = "Amnesiac";
-            StartText = () => "<color=#80B2FFFF>Find a body to remember a role</color>";
-            TaskText = () => "Find a body to remember a new role";
+            StartText = () => "<color=#80B2FFFF>Remember A Role Of A Deceased Player</color>";
+            TaskText = () => SpawnedAs ? "Find a dead body to remember a role" : "Your target was killed. Now remember a new role!";
             Color = Patches.Colors.Amnesiac;
             RoleType = RoleEnum.Amnesiac;
             AddToRoleHistory(RoleType);

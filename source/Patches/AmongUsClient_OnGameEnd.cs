@@ -63,7 +63,7 @@ namespace TownOfRoles
                         foreach (var win in winners) TempData.winners.Add(win);
                         return;
                     }
-                }
+                }                   
             }
             foreach (var role in Role.AllRoles)
             {
@@ -91,6 +91,18 @@ namespace TownOfRoles
                         return;
                     }
                 }
+      
+                else if (type == RoleEnum.SerialKiller)
+                {
+                    var SerialKiller = (SerialKiller)role;
+                    if (SerialKiller.SerialKillerWins)
+                    {
+                        var winners = Utils.potentialWinners.Where(x => x.PlayerName == SerialKiller.PlayerName).ToList();
+                        TempData.winners = new List<WinningPlayerData>();
+                        foreach (var win in winners) TempData.winners.Add(win);
+                        return;
+                    }
+                }                
                 else if (type == RoleEnum.Arsonist)
                 {
                     var arsonist = (Arsonist)role;

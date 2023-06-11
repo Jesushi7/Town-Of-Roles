@@ -2,7 +2,7 @@ using HarmonyLib;
 using Hazel;
 using TownOfRoles.Roles;
 using System.Linq;
-using TownOfRoles.CrewmateRoles.SnitchRole;
+using TownOfRoles.CrewmateRoles.SnitchMod;
 using TownOfRoles.Extensions;
 using UnityEngine;
 using Reactor;
@@ -27,7 +27,7 @@ namespace TownOfRoles.NeutralRoles.ArsonistMod
                     .Where(x => !x.Data.IsDead && !x.Data.Disconnected).ToList();
             foreach (var player in alives)
             {
-                if (player.Data.IsImpostor() || player.Is(RoleEnum.Glitch) || player.Is(RoleEnum.Juggernaut)
+                if (player.Data.IsImpostor() || player.Is(RoleEnum.Glitch)|| player.Is(RoleEnum.SerialKiller) || player.Is(RoleEnum.Juggernaut)
                     || player.Is(RoleEnum.Plaguebearer) || player.Is(RoleEnum.Pestilence) || player.Is(RoleEnum.Werewolf))
                 {
                     return;

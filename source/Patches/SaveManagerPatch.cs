@@ -1,6 +1,6 @@
 ﻿using HarmonyLib;
 
-namespace TownOfRoles.RainbowMod
+namespace TownOfRoles.ColorsMod
 {
     [HarmonyPatch(typeof(AmongUs.Data.Player.PlayerData), nameof(AmongUs.Data.Player.PlayerData.FileName), MethodType.Getter)]
     public class SaveManagerPatch

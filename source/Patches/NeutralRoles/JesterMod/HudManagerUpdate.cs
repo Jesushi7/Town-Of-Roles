@@ -27,7 +27,7 @@ namespace TownOfRoles.NeutralRoles.JesterMod
 							{
 								Jester role = Role.GetRole<Jester>(PlayerControl.LocalPlayer);
 								__instance.KillButton.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled) && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead);
-								__instance.KillButton.SetCoolDown(role.KillTimer(), CustomGameOptions.GlitchKillCooldown);
+								__instance.KillButton.SetCoolDown(role.KillTimer(), GameOptionsManager.Instance.currentNormalGameOptions.KillCooldown);
 								Utils.SetTarget(ref role.ClosestPlayer, __instance.KillButton, float.NaN, null);
 								Utils.SetTarget(ref role.ClosestPlayer, __instance.KillButton, float.NaN, null);
 								SpriteRenderer renderer = __instance.KillButton.graphic;

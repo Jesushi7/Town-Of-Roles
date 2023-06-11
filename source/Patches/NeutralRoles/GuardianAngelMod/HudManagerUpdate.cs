@@ -2,7 +2,7 @@ using HarmonyLib;
 using TownOfRoles.Roles;
 using UnityEngine;
 
-namespace TownOfRoles.NeutralRoles.GuardianAngelMod
+namespace TownOfRoles.NeutralRoles.GuardianMod
 {
     [HarmonyPatch(typeof(HudManager))]
     public class HudManagerUpdate
@@ -18,10 +18,10 @@ namespace TownOfRoles.NeutralRoles.GuardianAngelMod
             if (PlayerControl.AllPlayerControls.Count <= 1) return;
             if (PlayerControl.LocalPlayer == null) return;
             if (PlayerControl.LocalPlayer.Data == null) return;
-            if (!PlayerControl.LocalPlayer.Is(RoleEnum.GuardianAngel)) return;
+            if (!PlayerControl.LocalPlayer.Is(RoleEnum.Guardian)) return;
             var protectButton = __instance.KillButton;
 
-            var role = Role.GetRole<GuardianAngel>(PlayerControl.LocalPlayer);
+            var role = Role.GetRole<Guardian>(PlayerControl.LocalPlayer);
 
             if (role.UsesText == null && role.UsesLeft > 0)
             {

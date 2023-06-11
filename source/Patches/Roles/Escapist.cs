@@ -14,8 +14,8 @@ namespace TownOfRoles.Roles
         public Escapist(PlayerControl player) : base(player)
         {
             Name = "Escapist";
-            StartText = () => "Mark a place to transport yourself";
-            TaskText = () => "Transport yourself away";
+            StartText = () => "Mark a place to get away from kills";
+            TaskText = () => "Teleport to get away from bodies";
             Color = Patches.Colors.Impostor;
             RoleType = RoleEnum.Escapist;
             AddToRoleHistory(RoleType);

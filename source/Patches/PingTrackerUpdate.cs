@@ -1,4 +1,6 @@
+using System.Text;
 using HarmonyLib;
+using TMPro;
 using UnityEngine;
 
 namespace TownOfRoles
@@ -7,32 +9,30 @@ namespace TownOfRoles
     [HarmonyPatch(typeof(PingTracker), nameof(PingTracker.Update))]
     public static class PingTracker_Update
     {
-        [HarmonyPrefix]
-        public static void Prefix(PingTracker __instance)
-        {
-            if (!__instance.GetComponentInChildren<SpriteRenderer>())
-            {
-                var spriteObject = new GameObject("Logo");
-                spriteObject.AddComponent<SpriteRenderer>().sprite = TownOfRoles.Logo;
-                spriteObject.transform.parent = __instance.transform;
-                spriteObject.transform.localPosition = new Vector3(-1f, -0.3f, -1);
-                spriteObject.transform.localScale *= 0.72f;
-            }
-        }        
-
+      private static readonly StringBuilder sb = new();
+        
         [HarmonyPostfix]
         public static void Postfix(PingTracker __instance)
         {
-            var position = __instance.GetComponent<AspectPosition>();
-            position.DistanceFromEdge = new Vector3(3.6f, 0.1f, 0);
-            position.AdjustPosition();
-
+  //Thanks to Town of Host Edited for this code
+        __instance.text.alignment = TextAlignmentOptions.TopRight;
+        sb.Clear();
+        sb.Append(Utils.credentialsText);
+        var ping = AmongUsClient.Instance.Ping;
+        string color = "#ff4500";
+        if (ping < 90) color = "#44dfcc";
+        else if (ping < 100) color = "#7bc690";
+        else if (ping < 200) color = "#f3920e";
+        else if (ping < 400) color = "#ff146e";
+        
             __instance.text.text =
-                "<color=#9fcc90>TownOfRoles v1.1.0</color> <color=#FF0000FF>BETA</color>\n" +
-                $"Ping: {AmongUsClient.Instance.Ping}ms\n" +
-                "Modded By: <color=#9fcc90>Jsushi</color>\nFormerly From <color=#9fcc90>Town Of Us Reactivated</color>\n" +                
+                "<color=#9fcc90>TownOfRoles v" + TownOfRoles.VersionString + "</color>\n"+   
+              ($"<color={color}>Ping: {ping}ms</color>") +                    
+                  (!MeetingHud.Instance
+                    ? "<size=70%>\nCreated by: <color=#9fcc90>Jsushi</color>\n</size>" +
+                    "<size=70%>Helped from: <color=#9fcc90>Kara and AlchlcDvl</color>\n</size>" : "") +
                 (AmongUsClient.Instance.GameState != InnerNet.InnerNetClient.GameStates.Started
-                    ? "Helped From: <color=#9fcc90>AlchlcDvl</color>\nArtwork By <color=#9fcc90>Lotty</color>" : "");
+                    ? "<size=70%>Formerly: <color=#9fcc90>Donners, Slushiegoose & Polus.gg</color></size>" : "");       
         }
     }
 }

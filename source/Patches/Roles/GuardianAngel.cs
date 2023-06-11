@@ -6,7 +6,7 @@ using TownOfRoles.Extensions;
 
 namespace TownOfRoles.Roles
 {
-    public class GuardianAngel : Role
+    public class Guardian : Role
     {
         public bool Enabled;
         public DateTime LastProtected;
@@ -19,19 +19,19 @@ namespace TownOfRoles.Roles
 
         public PlayerControl target;
 
-        public GuardianAngel(PlayerControl player) : base(player)
+        public Guardian(PlayerControl player) : base(player)
         {
-            Name = "Guardian Angel";
+            Name = "Guardian";
             StartText = () =>
-                target == null ? "<color=#B3FFFFFF>You don't have a target for some reason... weird...</color>" : $"<color=#B3FFFFFF>Protect {target.name} With Your Life!</color>";
-            Color = Patches.Colors.GuardianAngel;
+                target == null ? "<color=#B3FFFFFF>You don't have a client for some reason... weird...</color>" : $"<color=#B3FFFFFF>Protect {target.name} With Your Life!</color>";
             TaskText = () =>
                 target == null
-                    ? "You don't have a target for some reason"
-                    : $"Protect {target.name}!";
+                    ? "You don't have a client for some reason... weird..."
+                    : $"Protect your client!\nClient: {target.name}";
+            Color = Patches.Colors.Guardian;
             LastProtected = DateTime.UtcNow;
             FactionName = "<color=#5c5e5d>Neutral</color>";                
-            RoleType = RoleEnum.GuardianAngel;
+            RoleType = RoleEnum.Guardian;
             AddToRoleHistory(RoleType);
             Faction = Faction.Neutral;
             Scale = 1.4f;
@@ -60,7 +60,7 @@ namespace TownOfRoles.Roles
 
         public void UnProtect()
         {
-            var ga = GetRole<GuardianAngel>(Player);
+            var ga = GetRole<Guardian>(Player);
             if (!ga.target.IsShielded())
             {
                 ga.target.myRend().material.SetColor("_VisorColor", Palette.VisorColor);

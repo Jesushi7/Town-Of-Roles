@@ -18,9 +18,9 @@ namespace TownOfRoles.Roles
         {
             Name = "Imitator";
             StartText = () => "<color=#B3D94DFF>Copy dead people's role</color>";
-            TaskText = () => "Imitate roles";
+            TaskText = () => "Use dead roles to benefit the crew";
             Color = Patches.Colors.Imitator;
-            FactionName = "<color=#00EEFFFF>Crewmate</color>";              
+            FactionName = "Crewmate";              
             RoleType = RoleEnum.Imitator;
             AddToRoleHistory(RoleType);
         }

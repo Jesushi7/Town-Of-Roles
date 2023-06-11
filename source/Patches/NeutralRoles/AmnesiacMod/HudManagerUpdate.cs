@@ -3,7 +3,7 @@ using TownOfRoles.Roles;
 using UnityEngine;
 using Object = UnityEngine.Object;
 using System.Linq;
-using TownOfRoles.CrewmateRoles.MedicRole;
+using TownOfRoles.CrewmateRoles.MedicMod;
 using AmongUs.GameOptions;
 
 namespace TownOfRoles.NeutralRoles.AmnesiacMod

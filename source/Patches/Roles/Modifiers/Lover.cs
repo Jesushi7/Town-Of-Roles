@@ -14,7 +14,7 @@ namespace TownOfRoles.Roles.Modifiers
             Name = "Lover";
             SymbolName = "♥";
             TaskText = () =>
-                "You are in love with " + OtherLover.Player.name + "!";
+                "You are in love with " + OtherLover.Player.name;
             Color = Colors.Lovers;
             ModifierType = ModifierEnum.Lover;
         }
@@ -41,10 +41,10 @@ namespace TownOfRoles.Roles.Modifiers
             foreach(var player in canHaveModifiers)
             {
                 if (player.Is(Faction.Impostors) || ((player.Is(RoleEnum.Glitch) || player.Is(RoleEnum.Arsonist) || player.Is(RoleEnum.Plaguebearer)
-                    || player.Is(RoleEnum.Werewolf) || player.Is(RoleEnum.Juggernaut)) && CustomGameOptions.NeutralLovers))
+                    || player.Is(RoleEnum.Werewolf) ||player.Is(RoleEnum.SerialKiller) || player.Is(RoleEnum.Juggernaut)) && CustomGameOptions.NeutralLovers))
                     impostors.Add(player);
                 else if (player.Is(Faction.Crewmates) || (player.Is(Faction.Neutral) && !player.Is(RoleEnum.Glitch) && !player.Is(RoleEnum.Arsonist)
-                    && !player.Is(RoleEnum.Plaguebearer) && !player.Is(RoleEnum.Werewolf) && !player.Is(RoleEnum.Juggernaut) && CustomGameOptions.NeutralLovers))
+                    && !player.Is(RoleEnum.Plaguebearer) && !player.Is(RoleEnum.Werewolf) && !player.Is(RoleEnum.Juggernaut) && !player.Is(RoleEnum.SerialKiller)&& CustomGameOptions.NeutralLovers))
                     crewmates.Add(player);
             }
 

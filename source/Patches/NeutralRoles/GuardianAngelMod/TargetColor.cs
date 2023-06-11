@@ -4,7 +4,7 @@ using TownOfRoles.Extensions;
 using TownOfRoles.Roles;
 using UnityEngine;
 
-namespace TownOfRoles.NeutralRoles.GuardianAngelMod
+namespace TownOfRoles.NeutralRoles.GuardianMod
 {
     public enum BecomeOptions
     {
@@ -16,7 +16,7 @@ namespace TownOfRoles.NeutralRoles.GuardianAngelMod
     [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]
     public class GATargetColor
     {
-        private static void UpdateMeeting(MeetingHud __instance, GuardianAngel role)
+        private static void UpdateMeeting(MeetingHud __instance, Guardian role)
         {
             if (CustomGameOptions.GAKnowsTargetRole) return;
             foreach (var player in __instance.playerStates)
@@ -29,10 +29,10 @@ namespace TownOfRoles.NeutralRoles.GuardianAngelMod
             if (PlayerControl.AllPlayerControls.Count <= 1) return;
             if (PlayerControl.LocalPlayer == null) return;
             if (PlayerControl.LocalPlayer.Data == null) return;
-            if (!PlayerControl.LocalPlayer.Is(RoleEnum.GuardianAngel)) return;
+            if (!PlayerControl.LocalPlayer.Is(RoleEnum.Guardian)) return;
             if (PlayerControl.LocalPlayer.Data.IsDead) return;
 
-            var role = Role.GetRole<GuardianAngel>(PlayerControl.LocalPlayer);
+            var role = Role.GetRole<Guardian>(PlayerControl.LocalPlayer);
 
             if (MeetingHud.Instance != null) UpdateMeeting(MeetingHud.Instance, role);
 
