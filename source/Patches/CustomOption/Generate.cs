@@ -528,6 +528,7 @@ namespace TownOfRoles.CustomOption
                 PercentFormat);
             SwooperOn = new CustomNumberOption(num++, MultiMenu.imposter, "<color=#FF0000FF>Swooper</color>", 0f, 0f, 100f, 10f,
                 PercentFormat);
+           
             CrewmateModifiers = new CustomHeaderOption(num++, MultiMenu.modifiers, "<color=#8cffff>Crewmate</color> <color=#9cbee4>Modifiers</color>");
             BlindOn = new CustomNumberOption(num++, MultiMenu.modifiers, "<color=#9cbee4>Blind</color>", 0f, 0f, 100f, 10f,
                 PercentFormat);
