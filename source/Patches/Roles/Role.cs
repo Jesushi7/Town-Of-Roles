@@ -227,12 +227,19 @@ public static bool RoleWins => CrewWin || ImpWin;
             if (!revealRole) return PlayerName;
 
             Player.nameText().transform.localPosition = new Vector3(0f, 0.15f, -0.5f);
+            
+        if(Classes.GameStates.IsMeeting)
+        {
+            return PlayerName + "\n" + Name;
+        }            
         if (PlayerControl.LocalPlayer.Is(Faction.Impostors))
             {
             return PlayerName + "\n" + Name;
             }   
         else
+        {
             return PlayerName + "\n" + $"({modifier.Name}) "+ Name;
+        }
 
         }
 

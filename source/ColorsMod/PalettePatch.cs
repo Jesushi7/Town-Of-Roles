@@ -46,7 +46,15 @@ namespace TownOfRoles.ColorsMod
                 (StringNames)999999,//"Rainbow",
                 (StringNames)222222,//"Ice",                
                 (StringNames)222221,//"Sunrise",
-                
+                (StringNames)222223,//Northie
+                (StringNames)222224,//RaLu   
+                (StringNames)222225,//Fizz  
+                (StringNames)222226,//GGamer    
+                (StringNames)222227,//snax    
+                (StringNames)222228,//lotty   
+                (StringNames)222229,//Bordeaux  
+                (StringNames)222210,//peach    
+                (StringNames)222211,//Signal Orange                    
             };
             Palette.PlayerColors = new[]
             {
@@ -89,7 +97,16 @@ namespace TownOfRoles.ColorsMod
 
                 //TOR colors
                 new Color32(0xA8, 0xDF, 0xFF, byte.MaxValue),   
-                new Color32(0xFF, 0xCA, 0x19, byte.MaxValue),                           
+                new Color32(0xFF, 0xCA, 0x19, byte.MaxValue),     
+                new Color32(50, 125, 105, byte.MaxValue),          
+                new Color32(235, 192, 192, byte.MaxValue),          
+                new Color32(178, 38, 180, byte.MaxValue),   
+                new Color32(0, 49, 83, byte.MaxValue),    
+                new Color32(221, 87, 28, byte.MaxValue),  
+                new Color32(63, 77, 60, byte.MaxValue),        
+                new Color32(109, 7, 26, byte.MaxValue),    
+                new Color32(255, 164, 119, byte.MaxValue), 
+                new Color32(0xF7, 0x44, 0x17, byte.MaxValue), 
             };
             Palette.ShadowColors = new[]
             {
@@ -133,6 +150,15 @@ namespace TownOfRoles.ColorsMod
                 //TOR colors
                 new Color32(0x59, 0x9F, 0xC8, byte.MaxValue),
                 new Color32(0xDB, 0x44, 0x42, byte.MaxValue),
+                new Color32(37, 97, 81, byte.MaxValue),
+                new Color32(201, 163, 163, byte.MaxValue),
+                new Color32(144, 29, 145, byte.MaxValue),
+                new Color32(0, 26, 43, byte.MaxValue),
+                new Color32(191, 73, 21, byte.MaxValue),
+                new Color32(41, 51, 39, byte.MaxValue),
+                new Color32(54, 2, 11, byte.MaxValue),
+                new Color32(238, 128, 100, byte.MaxValue),
+                new Color32(0x9B, 0x2E, 0x0F, byte.MaxValue),
             };
         }
     }

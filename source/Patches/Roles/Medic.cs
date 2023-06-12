@@ -57,15 +57,17 @@ namespace TownOfRoles.Roles
             LightDarkColors.Add(32, "darker"); // Tawny
             LightDarkColors.Add(33, "lighter"); // Gold
             LightDarkColors.Add(34, "lighter"); // Rainbow
-            LightDarkColors.Add(35, "lighter"); // Sloth
-            LightDarkColors.Add(36, "lighter"); // Northie :)
-            LightDarkColors.Add(37, "darker"); // Darkness
-            LightDarkColors.Add(38, "darker"); // Juggernaut   
-            LightDarkColors.Add(39, "lighter"); // RaLu
-            LightDarkColors.Add(40, "lighter"); // Diddly
-            LightDarkColors.Add(42, "lighter"); // Hannah
-            LightDarkColors.Add(43, "lighter"); // RufusZeno
-            LightDarkColors.Add(44, "lighter"); // Veteran                                                                                                         
+            LightDarkColors.Add(35, "lighter"); // Ice
+            LightDarkColors.Add(36, "lighter"); // Sunrise       
+            LightDarkColors.Add(37, "darker"); // Northie   
+            LightDarkColors.Add(38, "lighter"); // RaLu     
+            LightDarkColors.Add(39, "Darker");//Fizz           
+            LightDarkColors.Add(40, "Darker");//GGamer       
+            LightDarkColors.Add(41, "lighter");//snax        
+            LightDarkColors.Add(42, "darker");//lotty   
+            LightDarkColors.Add(43, "darker");//bordeaux    
+            LightDarkColors.Add(44, "lighter");//peach  
+            LightDarkColors.Add(45, "darker");//signal orange                                                                                                                                               
         }
         public float StartTimer()
         {

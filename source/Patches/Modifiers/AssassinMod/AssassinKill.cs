@@ -127,11 +127,6 @@ namespace TownOfRoles.Modifiers.AssassinMod
                 }
             }
             player.Die(DeathReason.Kill, false);
-            if (checkLover && player.IsLover() && CustomGameOptions.BothLoversDie)
-            {
-                var otherLover = Modifier.GetModifier<Lover>(player).OtherLover.Player;
-                if (!otherLover.Is(RoleEnum.Pestilence)) MurderPlayer(otherLover, false);
-            }
 
             var meetingHud = MeetingHud.Instance;
             if (amOwner)

@@ -30,6 +30,17 @@ namespace TownOfRoles.ColorsMod
                 999999 => "Rainbow",
                 222222 => "Ice",
                 222221 => "Sunrise",
+                222223 => "Northie",
+                222224 => "RaLu",
+                222225 => "Fizz",
+                222226 => "GGamer",
+                222227 => "Snax",
+                222228 => "Lotty",
+                222229 => "Bordeaux",
+                222210 => "Peach",
+                222211 => "Signal-Orange",
+
+
                 _ => null
             };
             if (newResult != null)

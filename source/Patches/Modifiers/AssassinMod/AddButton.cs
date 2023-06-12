@@ -162,8 +162,6 @@ namespace TownOfRoles.Modifiers.AssassinMod
                 var toDie = playerRole.Name == currentGuess ? playerRole.Player : role.Player;
                 if (playerModifier != null)
                     toDie = (playerRole.Name == currentGuess || playerModifier.Name == currentGuess) ? playerRole.Player : role.Player;
-
-                if (!toDie.Is(RoleEnum.Pestilence) || PlayerControl.LocalPlayer.Is(RoleEnum.Pestilence))
                 {
                     if (PlayerControl.LocalPlayer.Is(ModifierEnum.DoubleShot) && toDie == PlayerControl.LocalPlayer)
                     {
@@ -182,7 +180,7 @@ namespace TownOfRoles.Modifiers.AssassinMod
                             if (toDie.IsLover() && CustomGameOptions.BothLoversDie)
                             {
                                 var lover = ((Lover)playerModifier).OtherLover.Player;
-                                if (!lover.Is(RoleEnum.Pestilence)) ShowHideButtons.HideSingle(role, lover.PlayerId, false);
+                                ShowHideButtons.HideSingle(role, lover.PlayerId, false);
                             }
                         }
                     }
@@ -194,7 +192,7 @@ namespace TownOfRoles.Modifiers.AssassinMod
                         if (toDie.IsLover() && CustomGameOptions.BothLoversDie)
                         {
                             var lover = ((Lover)playerModifier).OtherLover.Player;
-                            if (!lover.Is(RoleEnum.Pestilence)) ShowHideButtons.HideSingle(role, lover.PlayerId, false);
+                            ShowHideButtons.HideSingle(role, lover.PlayerId, false);
                         }
                     }
                 }

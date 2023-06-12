@@ -294,6 +294,7 @@ namespace TownOfRoles.CustomOption
         public static CustomToggleOption TraitorCanAssassin;
         public static CustomNumberOption AssassinKills;
         public static CustomToggleOption AssassinMultiKill;
+        
         public static CustomToggleOption AssassinCrewmateGuess;
         public static CustomToggleOption AssassinGuessGlobalModifiers;
         public static CustomToggleOption AssassinGuessModifiers;

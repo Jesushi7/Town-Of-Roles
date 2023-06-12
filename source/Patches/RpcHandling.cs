@@ -45,6 +45,7 @@ namespace TownOfRoles
         private static readonly List<(Type, int, int)> GlobalModifiers = new List<(Type, int, int)>();
         private static readonly List<(Type, int, int)> ImpostorModifiers = new List<(Type, int, int)>();
         private static readonly List<(Type, int, int)> ButtonModifiers = new List<(Type, int, int)>();
+        private static readonly List<(Type, int, int)> ChameleonModifier = new List<(Type, int, int)>();
         private static readonly List<(Type, int, int)> AssassinModifiers = new List<(Type, int, int)>();
         private static readonly List<(Type, CustomRPC, int)> AssassinAbility = new List<(Type, CustomRPC, int)>();
         private static bool PhantomOn;
@@ -189,6 +190,7 @@ namespace TownOfRoles
             SortModifiers(GlobalModifiers, crewmates.Count + impostors.Count);
             SortModifiers(ImpostorModifiers, impostors.Count);
             SortModifiers(ButtonModifiers, crewmates.Count + impostors.Count);
+            SortModifiers(ChameleonModifier, crewmates.Count);
 
             if (Check(CustomGameOptions.VanillaGame))
             {
@@ -199,6 +201,7 @@ namespace TownOfRoles
                 GlobalModifiers.Clear();
                 ImpostorModifiers.Clear();
                 ButtonModifiers.Clear();
+                ChameleonModifier.Clear();
                 AssassinModifiers.Clear();
                 AssassinAbility.Clear();
                 ImpostorRoles.Clear();
@@ -330,6 +333,14 @@ namespace TownOfRoles
                 if (canHaveModifier.Count == 0) break;
                 Role.GenModifier<Modifier>(type, canHaveModifier, id);
             }
+            
+            //make it so The Morpher roles can't be chameleon because can't be asked to fix the visual bugs it make
+            canHaveModifier.RemoveAll(player => player.Is(RoleEnum.Glitch)||player.Is(RoleEnum.Morphling) );
+            foreach (var (type, id, _) in ChameleonModifier)
+            {
+                if (canHaveModifier.Count == 0) break;
+                Role.GenModifier<Modifier>(type, canHaveModifier, id);
+            }
 
             canHaveModifier.RemoveAll(player => player.Is(Faction.Neutral) || player.Is(Faction.Impostors));
             canHaveModifier.Shuffle();
@@ -341,7 +352,7 @@ namespace TownOfRoles
             }
 
 
-            var toChooseFromCrew = PlayerControl.AllPlayerControls.ToArray().Where(x => x.Is(Faction.Crewmates) && !x.Is(ModifierEnum.Lover)).ToList();
+            var toChooseFromCrew = PlayerControl.AllPlayerControls.ToArray().Where(x => x.Is(Faction.Crewmates)).ToList();
             if (TraitorOn && toChooseFromCrew.Count != 0)
             {
                 var rand = Random.RandomRangeInt(0, toChooseFromCrew.Count);
@@ -1406,6 +1417,7 @@ namespace TownOfRoles
                 GlobalModifiers.Clear();
                 ImpostorModifiers.Clear();
                 ButtonModifiers.Clear();
+                ChameleonModifier.Clear();
                 AssassinModifiers.Clear();
                 AssassinAbility.Clear();
 
@@ -1607,7 +1619,7 @@ namespace TownOfRoles
                         GlobalModifiers.Add((typeof(Oblivious), 17, CustomGameOptions.ObliviousOn));                         
                                                           
                     if (Check(CustomGameOptions.ChameleonModifierOn))
-                        GlobalModifiers.Add((typeof(ChameleonModifier), 20, CustomGameOptions.ChameleonModifierOn));
+                        ChameleonModifier.Add((typeof(ChameleonModifier), 20, CustomGameOptions.ChameleonModifierOn));
 
                     #endregion
                     #region Impostor Modifiers
