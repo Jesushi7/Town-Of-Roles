@@ -29,16 +29,6 @@ namespace TownOfRoles.CrewmateRoles.SnitchMod
                             {
                                 state.NameText.color = Color.green;
                             }
-                            else if (player.Is(RoleEnum.Traitor) && CustomGameOptions.TraitorColourSwap)
-                            {
-                                foreach (var role in Role.GetRoles(RoleEnum.Traitor))
-                                {
-                                    var traitor = (Traitor)role;
-                                    if (traitor.formerRole == RoleEnum.Sheriff ||
-                                        traitor.formerRole == RoleEnum.Veteran) state.NameText.color = Color.red;
-                                    else state.NameText.color = Color.green;
-                                }
-                            }
                             else
                             {
                                 state.NameText.color = Color.red;
@@ -77,16 +67,6 @@ namespace TownOfRoles.CrewmateRoles.SnitchMod
                             player.Is(RoleEnum.Plaguebearer) || player.Is(RoleEnum.Pestilence) || player.Is(RoleEnum.Werewolf)) && !CustomGameOptions.NeutKillingRed))
                         {
                             player.nameText().color = Color.green;
-                        }
-                        else if (player.Is(RoleEnum.Traitor) && CustomGameOptions.TraitorColourSwap)
-                        {
-                            foreach (var role in Role.GetRoles(RoleEnum.Traitor))
-                            {
-                                var traitor = (Traitor)role;
-                                if (traitor.formerRole == RoleEnum.Sheriff||
-                                    traitor.formerRole == RoleEnum.Veteran) player.nameText().color = Color.red;
-                                else player.nameText().color = Color.green;
-                            }
                         }
                         else
                         {

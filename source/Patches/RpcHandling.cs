@@ -18,7 +18,6 @@ using TownOfRoles.NeutralRoles.GuardianMod;
 using TownOfRoles.ImpostorRoles.MinerMod;
 using TownOfRoles.CrewmateRoles.AvengerMod;
 using TownOfRoles.NeutralRoles.PhantomMod;
-using TownOfRoles.ImpostorRoles.TraitorMod;
 using TownOfRoles.Roles;
 using TownOfRoles.Roles.Cultist;
 using TownOfRoles.Roles.Modifiers;
@@ -50,7 +49,6 @@ namespace TownOfRoles
         private static readonly List<(Type, CustomRPC, int)> AssassinAbility = new List<(Type, CustomRPC, int)>();
         private static bool PhantomOn;
         private static bool AvengerOn;
-        private static bool TraitorOn;
 
         internal static bool Check(int probability)
         {
@@ -210,7 +208,6 @@ namespace TownOfRoles
                 impRoles.Clear();
                 PhantomOn = false;
                 AvengerOn = false;
-                TraitorOn = false;
             }
 
             if (CustomGameOptions.GameMode == GameMode.AllAny)
@@ -335,7 +332,7 @@ namespace TownOfRoles
             }
             
             //make it so The Morpher roles can't be chameleon because can't be asked to fix the visual bugs it make
-            canHaveModifier.RemoveAll(player => player.Is(RoleEnum.Glitch)||player.Is(RoleEnum.Morphling) );
+            canHaveModifier.RemoveAll(player => player.Is(RoleEnum.Glitch)||player.Is(RoleEnum.Morphling)||player.Is(RoleEnum.Amnesiac) );
             foreach (var (type, id, _) in ChameleonModifier)
             {
                 if (canHaveModifier.Count == 0) break;
@@ -353,26 +350,7 @@ namespace TownOfRoles
 
 
             var toChooseFromCrew = PlayerControl.AllPlayerControls.ToArray().Where(x => x.Is(Faction.Crewmates)).ToList();
-            if (TraitorOn && toChooseFromCrew.Count != 0)
-            {
-                var rand = Random.RandomRangeInt(0, toChooseFromCrew.Count);
-                var pc = toChooseFromCrew[rand];
-
-                SetTraitor.WillBeTraitor = pc;
-
-                var writer = AmongUsClient.Instance.StartRpcImmediately(PlayerControl.LocalPlayer.NetId,
-                    (byte)CustomRPC.SetTraitor, SendOption.Reliable, -1);
-                writer.Write(pc.PlayerId);
-                AmongUsClient.Instance.FinishRpcImmediately(writer);
-            }
-            else
-            {
-                var writer = AmongUsClient.Instance.StartRpcImmediately(PlayerControl.LocalPlayer.NetId,
-                    (byte)CustomRPC.SetTraitor, SendOption.Reliable, -1);
-                writer.Write(byte.MaxValue);
-                AmongUsClient.Instance.FinishRpcImmediately(writer);
-            }
-
+           
             if (AvengerOn && toChooseFromCrew.Count != 0)
             {
                 var rand = Random.RandomRangeInt(0, toChooseFromCrew.Count);
@@ -414,7 +392,7 @@ namespace TownOfRoles
                 AmongUsClient.Instance.FinishRpcImmediately(writer);
             }
 
-            var exeTargets = PlayerControl.AllPlayerControls.ToArray().Where(x => x.Is(Faction.Crewmates) && !x.Is(ModifierEnum.Lover) && !x.Is(RoleEnum.Mayor) && !x.Is(RoleEnum.Swapper) && x != SetTraitor.WillBeTraitor).ToList();
+            var exeTargets = PlayerControl.AllPlayerControls.ToArray().Where(x => x.Is(Faction.Crewmates) && !x.Is(ModifierEnum.Lover) && !x.Is(RoleEnum.Mayor) && !x.Is(RoleEnum.Swapper)).ToList();
             foreach (var role in Role.GetRoles(RoleEnum.Executioner))
             {
                 var exe = (Executioner)role;
@@ -790,7 +768,10 @@ namespace TownOfRoles
                                 break; 
                             case 21:
                                 new Watcher(player2);
-                                break;                                                                                                                                                                                                                   
+                                break; 
+                            case 22:
+                                new Spy(player2);
+                                break;                                                                                                                                                                                                                                                          
                         }
                         break;
 
@@ -932,7 +913,6 @@ namespace TownOfRoles
                         break;
                     case CustomRPC.StartImitate:
                         var imitator2 = Utils.PlayerById(reader.ReadByte());
-                        if (imitator2.Is(RoleEnum.Traitor)) break;
                         var imitatorRole2 = Role.GetRole<Imitator>(imitator2);
                         StartImitate.Imitate(imitatorRole2);
                         break;
@@ -1321,25 +1301,6 @@ namespace TownOfRoles
                     case CustomRPC.AvengerFinished:
                         HighlightImpostors.UpdateMeeting(MeetingHud.Instance);
                         break;
-                    case CustomRPC.SetTraitor:
-                        readByte = reader.ReadByte();
-                        SetTraitor.WillBeTraitor = readByte == byte.MaxValue ? null : Utils.PlayerById(readByte);
-                        break;
-                    case CustomRPC.TraitorSpawn:
-                        var traitor = SetTraitor.WillBeTraitor;
-                        if (traitor == StartImitate.ImitatingPlayer) StartImitate.ImitatingPlayer = null;
-                        var oldRole = Role.GetRole(traitor);
-                        var killsList = (oldRole.CorrectKills, oldRole.IncorrectKills, oldRole.CorrectAssassinKills, oldRole.IncorrectAssassinKills);
-                        Role.RoleDictionary.Remove(traitor.PlayerId);
-                        var traitorRole = new Traitor(traitor);
-                        traitorRole.formerRole = oldRole.RoleType;
-                        traitorRole.CorrectKills = killsList.CorrectKills;
-                        traitorRole.IncorrectKills = killsList.IncorrectKills;
-                        traitorRole.CorrectAssassinKills = killsList.CorrectAssassinKills;
-                        traitorRole.IncorrectAssassinKills = killsList.IncorrectAssassinKills;
-                        traitorRole.RegenTask();
-                        SetTraitor.TurnImp(traitor);
-                        break;
                     case CustomRPC.Escape:
                         var escapist = Utils.PlayerById(reader.ReadByte());
                         var escapistRole = Role.GetRole<Escapist>(escapist);
@@ -1438,13 +1399,11 @@ namespace TownOfRoles
                 {
                     PhantomOn = Check(CustomGameOptions.PhantomOn);
                     AvengerOn = Check(CustomGameOptions.AvengerOn);
-                    TraitorOn = Check(CustomGameOptions.TraitorOn);
                 }
                 else
                 {
                     PhantomOn = false;
                     AvengerOn = false;
-                    TraitorOn = false;
                 }
 
                 if (CustomGameOptions.GameMode == GameMode.Classic || CustomGameOptions.GameMode == GameMode.AllAny)
@@ -1587,6 +1546,9 @@ namespace TownOfRoles
 
                     if (Check(CustomGameOptions.DiseasedOn))
                         GlobalModifiers.Add((typeof(Diseased), 2, CustomGameOptions.DiseasedOn));
+
+                    if (Check(CustomGameOptions.SpyOn))
+                        GlobalModifiers.Add((typeof(Spy), 22, CustomGameOptions.SpyOn));
 
                     if (Check(CustomGameOptions.BaitOn))
                         GlobalModifiers.Add((typeof(Bait), 7, CustomGameOptions.BaitOn));

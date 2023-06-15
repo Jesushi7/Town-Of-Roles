@@ -78,7 +78,6 @@ namespace TownOfRoles.Roles.Modifiers
                     if (CustomGameOptions.UndertakerOn > 0) ColorMapping.Add("Undertaker", Colors.Impostor);
                     if (CustomGameOptions.EscapistOn > 0) ColorMapping.Add("Escapist", Colors.Impostor);            
                     if (CustomGameOptions.GrenadierOn > 0) ColorMapping.Add("Grenadier", Colors.Impostor);
-                    if (CustomGameOptions.TraitorOn > 0) ColorMapping.Add("Traitor", Colors.Impostor);
                     if (CustomGameOptions.SilencerOn > 0) ColorMapping.Add("Silencer", Colors.Impostor);
                     if (CustomGameOptions.BomberOn > 0) ColorMapping.Add("Bomber", Colors.Impostor);
                     if (CustomGameOptions.UnderdogOn > 0) ColorMapping.Add("Underdog", Colors.Impostor);
@@ -91,8 +90,9 @@ namespace TownOfRoles.Roles.Modifiers
             if (CustomGameOptions.AssassinGuessModifiers && CustomGameOptions.DiseasedOn > 0) ColorMapping.Add("Diseased", Colors.Modifiers);
             if (CustomGameOptions.AssassinGuessModifiers && CustomGameOptions.MultitaskerOn > 0) ColorMapping.Add("Multitasker", Colors.Modifiers);
             if (CustomGameOptions.AssassinGuessModifiers && CustomGameOptions.NightowlOn > 0) ColorMapping.Add("Nightowl", Colors.Modifiers);
-            if (CustomGameOptions.AssassinGuessGlobalModifiers && CustomGameOptions.ButtonBarryOn > 0) ColorMapping.Add("Button Barry", Colors.Modifiers);    
-            if (CustomGameOptions.AssassinGuessModifiers && CustomGameOptions.LighterOn > 0) ColorMapping.Add("Lighter", Colors.Modifiers);                     
+            if (CustomGameOptions.AssassinGuessModifiers && CustomGameOptions.LighterOn > 0) ColorMapping.Add("Lighter", Colors.Modifiers);            
+            if (CustomGameOptions.AssassinGuessSpy && CustomGameOptions.SpyOn > 0) ColorMapping.Add("Spy", Colors.Modifiers); 
+            if (CustomGameOptions.AssassinGuessButtonBarry && CustomGameOptions.ButtonBarryOn > 0) ColorMapping.Add("Button Barry", Colors.Modifiers);                         
             if (CustomGameOptions.AssassinGuessLovers && CustomGameOptions.LoversOn > 0) ColorMapping.Add("Lover", Colors.Lovers);
 
             // Sorts the list alphabetically. 

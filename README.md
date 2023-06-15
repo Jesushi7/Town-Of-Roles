@@ -437,7 +437,7 @@ An Among Us mod that adds a bunch of roles, modifiers and game settings
   <ul> <li> Fix for the disconnect issue</li> </ul>
   <ul> <li> Fix for the username placement </li> </ul>
   <ul> <li> Fix for the Medic  </li> </ul>
-  <ul> <li> Fix for the Spy </li> </ul>
+  <ul> <li> Fix for the Trapper </li> </ul>
   <ul> <li> Fix for the Mayor </li> </ul>
   <ul> <li> Fix for the Arsonist </li> </ul>
   <ul> <li> Fix for the Assassin </li> </ul>
@@ -646,7 +646,7 @@ If the player the Mystic examines has killed recently the Mystic will be alerted
 - Your target started innocent but gained the capability to kill (Juggernaut/Sheriff/Traitor/Gambler/Werewolf)
 - Your target likes to interact with others (Arsonist/Mystic/Plaguebearer/Snitch/Tracker)
 - Your target likes exploring (Engineer/Escapist/Investigator/Miner/Mystic)
-- Your target views the world through a different lens (Glitch/Imitator/Morphling/Spy)
+- Your target views the world through a different lens (Glitch/Imitator/Morphling/Trapper)
 - Your target appears to be roleless (Crewmate/Impostor)
 
 ### Game Options
@@ -1629,7 +1629,7 @@ If you have any bugs or any need to contact me, join the [Discord Server](https:
 [NightowlMod](https://github.com/tomozbot/NightowlMod) - For the inspiration of the Nightowl modifier.\
 [XtraCube](https://github.com/XtraCube) - For the ColorsMod.\
 [PhasmoFireGod](https://twitch.tv/PhasmoFireGod) and [Ophidian](https://www.instagram.com/ixean.studio) - Button Art.\
-[TheOtherRoles](https://github.com/Eisbison/TheOtherRoles) - For the inspiration of the Gambler, Tracker and Spy roles, as well as the Bait modifier.\
+[TheOtherRoles](https://github.com/Eisbison/TheOtherRoles) - For the inspiration of the Gambler, Tracker and Trapper roles, as well as the Bait modifier.\
 [5up](https://www.twitch.tv/5uppp) and the Submarine Team - For the inspiration of the Grenadier role.\
 [Guus](https://github.com/OhMyGuus) - For support for the old Among Us versions (v2021.11.9.5 and v2021.12.15).\
 [MyDragonBreath](https://github.com/MyDragonBreath) - For Submerged Compatibility, the Trapper role and support for the new Among Us version (v2022.6.21).\

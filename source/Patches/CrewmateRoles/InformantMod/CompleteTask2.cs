@@ -35,7 +35,7 @@ namespace TownOfRoles.CrewmateRoles.InformantMod
                         {
                             Coroutines.Start(Utils.FlashCoroutine(role.Color));
                         }
-                        else if ((PlayerControl.LocalPlayer.Data.IsImpostor() && (!PlayerControl.LocalPlayer.Is(RoleEnum.Traitor) || CustomGameOptions.InformantSeesTraitor))
+                        else if ((PlayerControl.LocalPlayer.Data.IsImpostor())
                             || ((PlayerControl.LocalPlayer.Is(RoleEnum.Glitch) || PlayerControl.LocalPlayer.Is(RoleEnum.Juggernaut)
                             || PlayerControl.LocalPlayer.Is(RoleEnum.Arsonist)|| PlayerControl.LocalPlayer.Is(RoleEnum.SerialKiller) || PlayerControl.LocalPlayer.Is(RoleEnum.Werewolf)
                             || PlayerControl.LocalPlayer.Is(RoleEnum.Plaguebearer) || PlayerControl.LocalPlayer.Is(RoleEnum.Pestilence)) && CustomGameOptions.InformantSeesNeutrals))
@@ -59,21 +59,6 @@ namespace TownOfRoles.CrewmateRoles.InformantMod
                     {
                         Coroutines.Start(Utils.FlashCoroutine(Color.green));
                         var impostors = PlayerControl.AllPlayerControls.ToArray().Where(x => x.Data.IsImpostor());
-                        var traitor = PlayerControl.AllPlayerControls.ToArray().Where(x => x.Is(RoleEnum.Traitor));
-                        foreach (var imp in impostors)
-                        {
-                            if (!imp.Is(RoleEnum.Traitor) || CustomGameOptions.InformantSeesTraitor)
-                            {
-                                var gameObj = new GameObject();
-                                var arrow = gameObj.AddComponent<ArrowBehaviour>();
-                                gameObj.transform.parent = PlayerControl.LocalPlayer.gameObject.transform;
-                                var renderer = gameObj.AddComponent<SpriteRenderer>();
-                                renderer.sprite = Sprite;
-                                arrow.image = renderer;
-                                gameObj.layer = 5;
-                                role.InformantArrows.Add(imp.PlayerId, arrow);
-                            }
-                        }
                     }
                     else if (PlayerControl.LocalPlayer.Data.IsImpostor() || ((PlayerControl.LocalPlayer.Is(RoleEnum.Glitch)  ||  PlayerControl.LocalPlayer.Is(RoleEnum.Juggernaut)
                             || PlayerControl.LocalPlayer.Is(RoleEnum.Arsonist) || PlayerControl.LocalPlayer.Is(RoleEnum.Werewolf)|| PlayerControl.LocalPlayer.Is(RoleEnum.SerialKiller)

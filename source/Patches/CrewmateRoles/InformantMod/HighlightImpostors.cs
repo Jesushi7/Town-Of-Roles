@@ -16,9 +16,7 @@ namespace TownOfRoles.CrewmateRoles.InformantMod
                 {
                     if (player.PlayerId != state.TargetPlayerId) continue;
                     var role = Role.GetRole(player);
-                    if (player.Is(Faction.Impostors) && !player.Is(RoleEnum.Traitor))
-                        state.NameText.color = Palette.ImpostorRed;
-                    else if (player.Is(RoleEnum.Traitor) && CustomGameOptions.InformantSeesTraitor)
+                    if (player.Is(Faction.Impostors))
                         state.NameText.color = Palette.ImpostorRed;
                     if (player.Is(RoleEnum.Glitch) || player.Is(RoleEnum.Werewolf) 
                 || player.Is(RoleEnum.Juggernaut)|| player.Is(RoleEnum.SerialKiller)||player.Is(RoleEnum.Plaguebearer) || player.Is(RoleEnum.Pestilence)
@@ -37,8 +35,6 @@ namespace TownOfRoles.CrewmateRoles.InformantMod
 
             foreach (var player in PlayerControl.AllPlayerControls)
             {
-                if (player.Data.IsImpostor() && !player.Is(RoleEnum.Traitor)) player.nameText().color = Palette.ImpostorRed;
-                else if (player.Is(RoleEnum.Traitor) && CustomGameOptions.InformantSeesTraitor) player.nameText().color = Palette.ImpostorRed;
                 var playerRole = Role.GetRole(player);
                 if (playerRole.Faction == Faction.Neutral && CustomGameOptions.InformantSeesNeutrals)
                     player.nameText().color = playerRole.Color;

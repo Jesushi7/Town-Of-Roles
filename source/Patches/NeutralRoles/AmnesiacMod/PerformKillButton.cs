@@ -418,7 +418,7 @@ namespace TownOfRoles.NeutralRoles.AmnesiacMod
             otherRole.CorrectAssassinKills = killsList.CorrectAssassinKills;
             otherRole.IncorrectAssassinKills = killsList.IncorrectAssassinKills;
 
-            if (amnesiac.Is(Faction.Impostors) && (!amnesiac.Is(RoleEnum.Traitor) || CustomGameOptions.InformantSeesTraitor))
+            if (amnesiac.Is(Faction.Impostors))
             {
                 foreach (var snitch in Role.GetRoles(RoleEnum.Informant))
                 {

@@ -41,7 +41,6 @@ namespace TownOfRoles
         Janitor, // 32
         Undertaker, // 33
         Grenadier, // 34
-        Traitor,
         Silencer, // 36
         Escapist, // 37
         Bomber, // 41
@@ -83,6 +82,7 @@ namespace TownOfRoles
         Oblivious,
         Watcher,
         ChameleonModifier,
+        Spy
     }
 
     public enum AbilityEnum

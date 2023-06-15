@@ -17,15 +17,7 @@ namespace TownOfRoles
 
         SetAvenger,
         AvengerDied,
-        CatchAvenger,
-
-        SetTraitor,
-        TraitorSpawn,
-
-        StealerVotes,
-
-        ScavengerWin,
-        ScavengerLose,
+        CatchAvenger, 
         LoveWin,
         GlitchWin,
         JuggernautWin,

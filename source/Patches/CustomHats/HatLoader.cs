@@ -119,6 +119,7 @@ hatBehaviour.hatViewData.viewData.AltShader = new Material(Shader.Find("Unlit/Pl
             hat.hatViewData = b;
             hat.ChipOffset = new Vector2(-0.1f, 0.35f);
 
+
             hat.InFront = true;
             hat.NoBounce = true;
 

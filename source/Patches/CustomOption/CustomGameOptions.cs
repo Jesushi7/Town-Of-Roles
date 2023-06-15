@@ -20,6 +20,13 @@ namespace TownOfRoles
         KillingOnly,
         Cultist
     }
+    public enum AdminDeadPlayers
+    {
+        Nobody,
+        Spy,
+        EveryoneButSpy,
+        Everyone
+    }    
     public static class CustomGameOptions
     {
         public static int MayorOn => (int)Generate.MayorOn.Get();
@@ -39,8 +46,9 @@ namespace TownOfRoles
         public static int MinerOn => (int)Generate.MinerOn.Get();
         public static int SwooperOn => (int)Generate.SwooperOn.Get();                 
         public static int CamouflagerOn => (int)Generate.CamouflagerOn.Get();     
+        public static int SpyOn => (int)Generate.SpyOn.Get();             
         public static int ArsonistOn => (int)Generate.ArsonistOn.Get();
-    
+        public static AdminDeadPlayers WhoSeesDead => (AdminDeadPlayers)Generate.WhoSeesDead.Get();
         public static int AltruistOn => (int)Generate.AltruistOn.Get();
         public static int UndertakerOn => (int)Generate.UndertakerOn.Get();
         public static int PhantomOn => (int)Generate.PhantomOn.Get();
@@ -50,7 +58,6 @@ namespace TownOfRoles
      
         public static int TrackerOn => (int)Generate.TrackerOn.Get();
         public static int TrapperOn => (int)Generate.TrapperOn.Get();
-        public static int TraitorOn => (int)Generate.TraitorOn.Get();
         public static int TransporterOn => (int)Generate.TransporterOn.Get();
         public static int MediumOn => (int)Generate.MediumOn.Get();
         public static int GuardianOn => (int)Generate.GuardianOn.Get();
@@ -120,7 +127,6 @@ namespace TownOfRoles
         public static bool CrewKillingRed => Generate.CrewKillingRed.Get();
         public static bool NeutralNNK => Generate.NeutralNNK.Get();
         public static bool NeutKillingRed => Generate.NeutKillingRed.Get();
-        public static bool TraitorColourSwap => Generate.TraitorColourSwap.Get();
         public static float MimicCooldown => Generate.MimicCooldownOption.Get();
         public static float MimicDuration => Generate.MimicDurationOption.Get();
         public static float HackCooldown => Generate.HackCooldownOption.Get();
@@ -143,7 +149,6 @@ namespace TownOfRoles
         public static bool InformantSeesNeutrals => Generate.InformantSeesNeutrals.Get();
         public static int InformantTasksRemaining => (int)Generate.InformantTasksRemaining.Get();
         public static bool InformantSeesImpInMeeting => Generate.InformantSeesImpInMeeting.Get();
-        public static bool InformantSeesTraitor => Generate.InformantSeesTraitor.Get();
         public static float MineCd => Generate.MineCooldown.Get();      
         public static float SwoopCd => Generate.SwoopCooldown.Get();
         public static float SwoopDuration => Generate.SwoopDuration.Get();      
@@ -173,7 +178,8 @@ namespace TownOfRoles
         public static bool SheriffBodyReport => Generate.SheriffBodyReport.Get();     
         public static float DragCd => Generate.DragCooldown.Get();
         public static float UndertakerDragSpeed => Generate.UndertakerDragSpeed.Get();
-        public static bool AssassinGuessGlobalModifiers => Generate.AssassinGuessGlobalModifiers.Get();
+        public static bool AssassinGuessSpy => Generate.AssassinGuessSpy.Get();        
+        public static bool AssassinGuessButtonBarry => Generate.AssassinGuessButtonBarry.Get();
         public static bool AssassinGuessModifiers => Generate.AssassinGuessModifiers.Get();
         public static bool AssassinGuessLovers => Generate.AssassinGuessLovers.Get();
         public static bool AssassinCrewmateGuess => Generate.AssassinCrewmateGuess.Get();
@@ -184,7 +190,6 @@ namespace TownOfRoles
          public static int NumberOfCrewAssassins => (int)Generate.NumberOfCrewAssassins.Get();       
         public static bool AmneTurnImpAssassin => Generate.AmneTurnImpAssassin.Get();
         public static bool AmneTurnNeutAssassin => Generate.AmneTurnNeutAssassin.Get();
-        public static bool TraitorCanAssassin => Generate.TraitorCanAssassin.Get();
         public static bool AssassinMultiKill => Generate.AssassinMultiKill.Get();
         public static bool AssassinateAfterVoting => Generate.AssassinateAfterVoting.Get();
         public static float UnderdogKillBonus => Generate.UnderdogKillBonus.Get();
@@ -209,8 +214,6 @@ namespace TownOfRoles
         public static float TrackCd => Generate.TrackCooldown.Get();
         public static bool ResetOnNewRound => Generate.ResetOnNewRound.Get();
         public static int MaxTracks => (int)Generate.MaxTracks.Get();
-        public static int LatestSpawn => (int)Generate.LatestSpawn.Get();
-        public static bool NeutralKillingStopsTraitor => Generate.NeutralKillingStopsTraitor.Get();
         public static float TransportCooldown => Generate.TransportCooldown.Get();
         public static int TransportMaxUses => (int)Generate.TransportMaxUses.Get();
         public static bool TransporterVitals => Generate.TransporterVitals.Get();
