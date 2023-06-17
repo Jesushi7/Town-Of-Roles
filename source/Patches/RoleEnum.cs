@@ -49,7 +49,7 @@ namespace TownOfRoles
         Crewmate, // 38
         Impostor, // 39
         Vampire,
-
+        Judge,
         Necromancer, // 100
         Whisperer, // 101
         CultistSnitch, // 102

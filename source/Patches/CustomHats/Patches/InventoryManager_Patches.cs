@@ -1,4 +1,4 @@
-using HarmonyLib;
+/*using HarmonyLib;
 
 namespace TownOfRoles.Patches.CustomHats.Patches
 {
@@ -11,4 +11,4 @@ namespace TownOfRoles.Patches.CustomHats.Patches
         }
     }
 
-}   
+}   */

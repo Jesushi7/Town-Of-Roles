@@ -4,6 +4,7 @@ namespace TownOfRoles
     {
         Crewmates,
         Impostors,
-        Neutral
+        Neutral,
+        None
     }
 }

@@ -1,4 +1,4 @@
-using System;
+/*using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
@@ -126,4 +126,4 @@ hatBehaviour.hatViewData.viewData.AltShader = new Material(Shader.Find("Unlit/Pl
             return hat;
         }
     }
-}
+}*/

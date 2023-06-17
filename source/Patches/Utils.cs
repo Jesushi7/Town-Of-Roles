@@ -399,6 +399,18 @@ namespace TownOfRoles
             }
             return playerControlList;
         }
+        public static Faction GetFaction(this PlayerControl player)
+        {
+            if (player == null)
+                return Faction.None;
+
+            var role = Role.GetRole(player);
+
+            if (role == null)
+                return player.Data.IsImpostor() ? Faction.Impostors : Faction.Crewmates;
+
+            return role.Faction;
+        }        
  public static IEnumerator FlashCoro(Color color, string message = "", float duration = 1f, float size = 100f)
         {
             if (!HudManager.Instance || HudManager.Instance.FullScreen == null)

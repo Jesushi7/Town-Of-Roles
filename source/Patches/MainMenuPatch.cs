@@ -15,14 +15,8 @@ namespace TownOfRoles.Patches
         private static AnnouncementPopUp popUp;
         static void Postfix(MainMenuManager __instance)
         {
-            var amongUsLogo = GameObject.Find("bannerLogo_AmongUs");
-            if (amongUsLogo != null) {
-                amongUsLogo.transform.localScale *= 0.6f;
-                amongUsLogo.transform.position += Vector3.up * 0.25f;
-            }
-
             var torLogo = new GameObject("bannerLogo_TownOfRoles");
-            torLogo.transform.position = Vector3.up;
+            torLogo.transform.position = new Vector3(2.095f, -0.25f, 520f);
             torLogo .transform.localScale /= 1.7f;
             var renderer = torLogo.AddComponent<SpriteRenderer>();
             renderer.sprite = Sprite;

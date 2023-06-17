@@ -17,6 +17,7 @@ namespace TownOfRoles
 
         SetAvenger,
         AvengerDied,
+        JudgeKill,
         CatchAvenger, 
         LoveWin,
         GlitchWin,

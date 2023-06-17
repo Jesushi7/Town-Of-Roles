@@ -10,6 +10,7 @@ using TownOfRoles.ImpostorRoles.SilencerMod;
 using TownOfRoles.Roles.Modifiers;
 using TownOfRoles.Extensions;
 using TownOfRoles.CrewmateRoles.ImitatorMod;
+using RewiredConsts;
 
 namespace TownOfRoles.Modifiers.AssassinMod
 {
@@ -45,7 +46,7 @@ namespace TownOfRoles.Modifiers.AssassinMod
             var assassinPlayer = Role.GetRole(assassin);
             if (player == assassin) assassinPlayer.IncorrectAssassinKills += 1;
             else assassinPlayer.CorrectAssassinKills += 1;
-        }
+        }    
         public static void MurderPlayer(
             PlayerVoteArea voteArea,
             PlayerControl player,
@@ -55,8 +56,9 @@ namespace TownOfRoles.Modifiers.AssassinMod
             var hudManager = DestroyableSingleton<HudManager>.Instance;
             if (checkLover)
             {
+            //DestroyableSingleton<HudManager>.Instance.Chat.AddChat(PlayerControl.LocalPlayer, "The Assassin shot" + ((Object) player).name + "!");                
                 SoundManager.Instance.PlaySound(player.KillSfx, false, 0.8f);
-                hudManager.KillOverlay.ShowKillAnimation(player.Data, player.Data);
+                //hudManager.KillOverlay.ShowKillAnimation(player.Data, player.Data);
             }
             var amOwner = player.AmOwner;
             if (amOwner)
@@ -120,6 +122,17 @@ namespace TownOfRoles.Modifiers.AssassinMod
                     }
                 }
 
+                var player2 = PlayerControl.LocalPlayer;
+
+                var guess = Role.GetRole(player);
+
+            if ((player2.GetFaction() == PlayerControl.LocalPlayer.GetFaction() && (player2.GetFaction() is Faction.Impostors or Faction.Neutral)) ||
+                CustomGameOptions.DeadSnitcholes)
+            {
+                if (player2 != player)
+                    hudManager.Chat.AddChat(PlayerControl.LocalPlayer, $"{player2.name} Guessed the Role {guess.Name} for {player.name}!");
+            }
+            
                 if (player.Is(AbilityEnum.Assassin))
                 {
                     var assassin = Ability.GetAbility<Assassin>(PlayerControl.LocalPlayer);

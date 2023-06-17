@@ -18,7 +18,7 @@ namespace TownOfRoles
             {
                 var textMeshPro = UObject.Instantiate(__instance.text);
                 textMeshPro.transform.position = new(0f, -0.3f, 0f);
-                textMeshPro.text = $"<color=#9fcc90>Modded By Jsushi - v1.1.0</color>\n<color=#9fcc90>Artwork By Lotty</color></size>";
+                textMeshPro.text = $"<color=#9fcc90>Created By Jsushi - v1.1.0</color>\n<color=#9fcc90>Artwork By Lotty</color></size>";
                 textMeshPro.alignment = TextAlignmentOptions.Center;
                 textMeshPro.fontSize *= 0.75f;
                 textMeshPro.fontStyle = FontStyles.Bold;
