@@ -88,6 +88,13 @@ namespace TownOfRoles.Patches
                 cultist.LastRevived = cultist.LastRevived.AddSeconds(CustomGameOptions.InitialCooldowns - CustomGameOptions.ReviveCooldown2);
             }
             
+            if (PlayerControl.LocalPlayer.Is(RoleEnum.Oracle))
+            {
+                var oracle = Role.GetRole<Oracle>(PlayerControl.LocalPlayer);
+                oracle.LastConfessed = DateTime.UtcNow;
+                oracle.LastConfessed = oracle.LastConfessed.AddSeconds(CustomGameOptions.InitialCooldowns - CustomGameOptions.ConfessCd);
+            }
+
             if (PlayerControl.LocalPlayer.Is(RoleEnum.Necromancer))
             {
                 var necro = Role.GetRole<Necromancer>(PlayerControl.LocalPlayer);

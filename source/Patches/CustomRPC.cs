@@ -16,6 +16,8 @@ namespace TownOfRoles
         CatchPhantom,
 
         SetAvenger,
+        Confess,
+        SavedConfessor,
         AvengerDied,
         JudgeKill,
         CatchAvenger, 

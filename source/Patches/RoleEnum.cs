@@ -55,7 +55,8 @@ namespace TownOfRoles
         CultistSnitch, // 102
         CultistMystic, // 103
         Chameleon, // 104
-    SerialKiller,
+        SerialKiller,
+        Oracle,
         None
     }
 

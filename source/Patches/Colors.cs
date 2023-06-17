@@ -21,7 +21,7 @@ namespace TownOfRoles.Patches
         public readonly static Color Medium = new Color(0.65f, 0.5f, 1f, 1f);
         public readonly static Color32 Mystic = new Color32(77, 77, 255, 255);
         public readonly static Color32 Trapper = new Color32(117, 250, 76, 255);    
-
+		public static readonly Color32 Oracle = new Color32(47, 31, 115, 255);
         public readonly static Color Imitator = new Color(0.7f, 0.85f, 0.3f, 1f);
         public readonly static Color32 Chameleon = new Color32(112, 142, 239, 255);        
 

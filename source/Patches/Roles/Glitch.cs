@@ -25,7 +25,7 @@ namespace TownOfRoles.Roles
 
         public Glitch(PlayerControl owner) : base(owner)
         {
-            Name = "Glitch";
+            Name = "The Glitch";
             Color = Patches.Colors.Glitch;
             LastHack = DateTime.UtcNow;
             LastMimic = DateTime.UtcNow;

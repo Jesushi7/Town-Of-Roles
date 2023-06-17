@@ -73,6 +73,7 @@ public static AmongUs.GameOptions.NormalGameOptionsV07 VanillaOptions => GameOpt
         public static Sprite FlashSprite;
         public static Sprite AlertSprite;            
         public static Sprite RememberSprite;
+        public static Sprite ConfessSprite;
         public static Sprite TrackSprite;
         public static Sprite PlantSprite;
         public static Sprite DetonateSprite;
@@ -175,7 +176,8 @@ public static AmongUs.GameOptions.NormalGameOptionsV07 VanillaOptions => GameOpt
             RememberSprite = CreateSprite("TownOfRoles.Resources.Remember.png");
             TrackSprite = CreateSprite("TownOfRoles.Resources.Track.png");
             PlantSprite = CreateSprite("TownOfRoles.Resources.Plant.png");
-            LighterRoleSprite = CreateSprite("TownOfRoles.Resources.LighterRole.png");            
+            LighterRoleSprite = CreateSprite("TownOfRoles.Resources.LighterRole.png");         
+            ConfessSprite = CreateSprite("TownOfRoles.Resources.Confess.png");   
             DetonateSprite = CreateSprite("TownOfRoles.Resources.Detonate.png");
             TransportSprite = CreateSprite("TownOfRoles.Resources.Transport.png");
             MediateSprite = CreateSprite("TownOfRoles.Resources.Mediate.png");

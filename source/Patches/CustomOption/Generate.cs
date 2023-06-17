@@ -322,6 +322,14 @@ namespace TownOfRoles.CustomOption
         public static CustomToggleOption GrenadierVent;
         public static CustomNumberOption FlashRadius;
 
+		public static CustomNumberOption OracleOn;
+		public static CustomHeaderOption Oracle;
+		public static CustomNumberOption ConfessCooldown;
+		public static CustomNumberOption RevealAccuracy;
+		public static CustomToggleOption NeutralBenignShowsEvil;
+		public static CustomToggleOption NeutralNonKillersShowsEvil;
+		public static CustomToggleOption NeutralKillingShowsEvil;
+
         public static CustomHeaderOption Veteran;
         public static CustomToggleOption KilledOnAlert;
         public static CustomNumberOption AlertCooldown;
@@ -460,7 +468,9 @@ namespace TownOfRoles.CustomOption
             MediumOn = new CustomNumberOption(num++, MultiMenu.crewmate, "<color=#A680FFFF>Medium</color>", 0f, 0f, 100f, 10f,
                 PercentFormat);  
             MysticOn = new CustomNumberOption(num++, MultiMenu.crewmate, "<color=#4D4DFFFF>Mystic</color>", 0f, 0f, 100f, 10f,
-                PercentFormat);                                                      
+                PercentFormat);                                    
+            OracleOn = new CustomNumberOption(num++, MultiMenu.crewmate, "<color=#2f1f73>Oracle</color>", 0f, 0f, 100f, 10f, 
+                PercentFormat);                                  
             SheriffOn = new CustomNumberOption(num++, MultiMenu.crewmate, "<color=#f8cd46>Sheriff</color>", 0f, 0f, 100f, 10f,
                 PercentFormat);
             SnitchOn = new CustomNumberOption(num++, MultiMenu.crewmate, "<color=#61b26c>Snitch</color>", 0f, 0f, 100f, 10f,
@@ -489,7 +499,6 @@ namespace TownOfRoles.CustomOption
                 PercentFormat);                                     
 
 
-
             NeutralKillingRoles = new CustomHeaderOption(num++, MultiMenu.neutral, "<color=#80797c>Neutral</color> <color=#FF0000FF>Killers</color>");
             ArsonistOn = new CustomNumberOption(num++, MultiMenu.neutral, "<color=#FF4D00FF>Arsonist</color>", 0f, 0f, 100f, 10f,
                 PercentFormat);
@@ -497,7 +506,7 @@ namespace TownOfRoles.CustomOption
                 PercentFormat);                  
             SerialKillerOn = new CustomNumberOption(num++, MultiMenu.neutral, "<color=#642DEAFF>Serial Killer</color>", 0f, 0f, 100f, 10f,
                 PercentFormat);  
-            GlitchOn = new CustomNumberOption(num++, MultiMenu.neutral, "<color=#00FF00FF>Glitch</color>", 0f, 0f, 100f, 10f,
+            GlitchOn = new CustomNumberOption(num++, MultiMenu.neutral, "<color=#00FF00FF>The Glitch</color>", 0f, 0f, 100f, 10f,
                 PercentFormat);                              
             PlaguebearerOn = new CustomNumberOption(num++, MultiMenu.neutral, "<color=#E6FFB3FF>Plaguebearer</color>", 0f, 0f, 100f, 10f,
                 PercentFormat);
@@ -789,6 +798,14 @@ namespace TownOfRoles.CustomOption
             MysticArrowDuration =
                 new CustomNumberOption(num++, MultiMenu.crewmate, "Dead Body Arrow Duration", 5f, 0f, 15f, 1f, CooldownFormat);
 
+			Oracle = new CustomHeaderOption(num++, MultiMenu.crewmate, "<color=#2f1f73>Oracle</color>");
+			ConfessCooldown = new CustomNumberOption(num++, MultiMenu.crewmate, "Confess Cooldown", 25f, 10f, 60f, 2.5f, 
+            CooldownFormat);
+			RevealAccuracy = new CustomNumberOption(num++, MultiMenu.crewmate, "Reveal Accuracy", 80f, 0f, 100f, 10f, 
+            PercentFormat);
+			NeutralNonKillersShowsEvil = new CustomToggleOption(num++, MultiMenu.crewmate, "<color=#80797c>Neutral</color> Non-<color=#FF0000FF>Killing</color> Roles Show Evil", false);
+			NeutralKillingShowsEvil = new CustomToggleOption(num++, MultiMenu.crewmate, "<color=#80797c>Neutral</color> <color=#FF0000FF>Killing</color> Roles Show Evil", true);
+
             Sheriff =
                 new CustomHeaderOption(num++, MultiMenu.crewmate, "<color=#f8cd46>Sheriff</color>");
             SheriffKillOther =
@@ -802,7 +819,7 @@ namespace TownOfRoles.CustomOption
             SheriffKillsSerialKiller =
                 new CustomToggleOption(num++, MultiMenu.crewmate, "<color=#f8cd46>Sheriff</color> Kills <color=#642DEAFF>Serial Killer</color>", false);
             SheriffKillsGlitch =
-                new CustomToggleOption(num++, MultiMenu.crewmate, "<color=#f8cd46>Sheriff</color> Kills <color=#00FF00FF>Glitch</color>", false);
+                new CustomToggleOption(num++, MultiMenu.crewmate, "<color=#f8cd46>Sheriff</color> Kills <color=#00FF00FF>The Glitch</color>", false);
             SheriffKillsLovers =
                 new CustomToggleOption(num++, MultiMenu.crewmate, "<color=#f8cd46>Sheriff</color> Kills <color=#e839b9>Lovers</color>", false);                
             SheriffKillsJuggernaut =
@@ -818,11 +835,11 @@ namespace TownOfRoles.CustomOption
             SnitchCooldown =
                 new CustomNumberOption(num++, MultiMenu.crewmate, "<color=#61b26c>Snitch</color> Cooldown", 25f, 10f, 60f, 2.5f, CooldownFormat);
             CrewKillingRed =
-                new CustomToggleOption(num++, MultiMenu.crewmate, "Crewmate Killing Roles Show Evil", false);
+                new CustomToggleOption(num++, MultiMenu.crewmate, "<color=#8cffff>Crewmate</color> <color=#FF0000FF>Killing</color> Roles Show Evil", false);
             NeutralNNK =
-                new CustomToggleOption(num++, MultiMenu.crewmate, "Neutral Non-Killing Roles Show Evil", false);
+                new CustomToggleOption(num++, MultiMenu.crewmate, "<color=#80797c>Neutral</color> Non-<color=#FF0000FF>Killing</color> Roles Show Evil", false);
             NeutKillingRed =
-                new CustomToggleOption(num++, MultiMenu.crewmate, "Neutral Killing Roles Show Evil", false);
+                new CustomToggleOption(num++, MultiMenu.crewmate, "<color=#80797c>Neutral</color> <color=#FF0000FF>Killing</color> Roles Show Evil", false);
 
             Swapper =
                 new CustomHeaderOption(num++, MultiMenu.crewmate, "<color=#863756>Swapper</color>");
@@ -952,15 +969,15 @@ namespace TownOfRoles.CustomOption
                 new CustomToggleOption(num++, MultiMenu.neutral, "Ignite Cooldown Removed When <color=#FF4D00FF>Arsonist</color> Is Last Killer", false);
             
             TheGlitch =
-                new CustomHeaderOption(num++, MultiMenu.neutral, "<color=#00FF00FF>Glitch</color>");
+                new CustomHeaderOption(num++, MultiMenu.neutral, "<color=#00FF00FF>The Glitch</color>");
             MimicCooldownOption = new CustomNumberOption(num++, MultiMenu.neutral, "Mimic Cooldown", 25f, 10f, 60f, 2.5f, CooldownFormat);
             MimicDurationOption = new CustomNumberOption(num++, MultiMenu.neutral, "Mimic Duration", 10f, 1f, 15f, 1f, CooldownFormat);
             HackCooldownOption = new CustomNumberOption(num++, MultiMenu.neutral, "Hack Cooldown", 25f, 10f, 60f, 2.5f, CooldownFormat);
             HackDurationOption = new CustomNumberOption(num++, MultiMenu.neutral, "Hack Duration", 10f, 1f, 15f, 1f, CooldownFormat);
             GlitchHackDistanceOption =
-                new CustomStringOption(num++, MultiMenu.neutral, "<color=#00FF00FF>Glitch</color> Hack Distance", new[] { "Short", "Normal", "Long" });
+                new CustomStringOption(num++, MultiMenu.neutral, "<color=#00FF00FF>The Glitch</color> Hack Distance", new[] { "Short", "Normal", "Long" });
             GlitchVent =
-                new CustomToggleOption(num++, MultiMenu.neutral, "<color=#00FF00FF>Glitch</color> Can Vent", false);
+                new CustomToggleOption(num++, MultiMenu.neutral, "<color=#00FF00FF>The Glitch</color> Can Vent", false);
 
             Juggernaut =
                 new CustomHeaderOption(num++, MultiMenu.neutral, "<color=#8C004DFF>Juggernaut</color>");

@@ -31,6 +31,7 @@ namespace TownOfRoles
     {
         public static int MayorOn => (int)Generate.MayorOn.Get();
         public static int JesterOn => (int)Generate.JesterOn.Get();     
+        public static int OracleOn => (int)Generate.OracleOn.Get();             
         public static int SheriffOn => (int)Generate.SheriffOn.Get();
         public static int JanitorOn => (int)Generate.JanitorOn.Get();
         public static int EngineerOn => (int)Generate.EngineerOn.Get();
@@ -93,7 +94,12 @@ namespace TownOfRoles
         public static int UnderdogOn => (int)Generate.UnderdogOn.Get();
         public static int VanillaGame => (int)Generate.VanillaGame.Get();
         public static float InitialCooldowns => Generate.InitialCooldowns.Get();
-        public static bool BothLoversDie => Generate.BothLoversDie.Get();
+        public static float RevealAccuracy => Generate.RevealAccuracy.Get();      
+        public static float ConfessCd => Generate.ConfessCooldown.Get();          
+        public static bool BothLoversDie => Generate.BothLoversDie.Get();          
+        public static bool NeutralBenignShowsEvil => Generate.NeutralBenignShowsEvil.Get();
+          public static bool NeutralKillingShowsEvil => Generate.NeutralKillingShowsEvil.Get();
+        public static bool NeutralNonKillersShowsEvil => Generate.NeutralNonKillersShowsEvil.Get();
         public static bool NeutralLovers => Generate.NeutralLovers.Get();   
         public static bool SheriffKillOther => Generate.SheriffKillOther.Get();      
         public static bool SheriffKillsExecutioner => Generate.SheriffKillsExecutioner.Get();

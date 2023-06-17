@@ -91,6 +91,7 @@ namespace TownOfRoles.NeutralRoles.AmnesiacMod
                 case RoleEnum.Mystic:
                 case RoleEnum.Trapper:
                 case RoleEnum.Imitator:
+                case RoleEnum.Oracle:
                 
                     rememberImp = false;
                     rememberNeut = false;
@@ -203,7 +204,12 @@ namespace TownOfRoles.NeutralRoles.AmnesiacMod
                 var engiRole = Role.GetRole<Engineer>(amnesiac);
                 engiRole.UsesLeft = CustomGameOptions.MaxFixes;
             }
-
+            else if (role == RoleEnum.Oracle)
+            {
+                var oracleRole = Role.GetRole<Oracle>(amnesiac);
+				oracleRole.Confessor = null;
+				oracleRole.LastConfessed = DateTime.UtcNow;
+            }
             else if (role == RoleEnum.Medic)
             {
                 var medicRole = Role.GetRole<Medic>(amnesiac);

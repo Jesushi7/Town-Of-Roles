@@ -31,6 +31,7 @@ namespace TownOfRoles
         private static Sprite Transport => TownOfRoles.TransportSprite;
         private static Sprite Shoot => TownOfRoles.ShootSprite;        
         private static Sprite Mediate => TownOfRoles.MediateSprite;
+        private static Sprite Confess => TownOfRoles.ConfessSprite;
         private static Sprite Protect => TownOfRoles.ProtectSprite;
         private static Sprite Infect => TownOfRoles.InfectSprite;
         private static Sprite Trap => TownOfRoles.TrapSprite;
@@ -92,6 +93,11 @@ namespace TownOfRoles
                 __instance.KillButton.graphic.sprite = Transport;
                 flag = true;
             }
+            else if (PlayerControl.LocalPlayer.Is(RoleEnum.Oracle))
+            {
+                __instance.KillButton.graphic.sprite = Confess;
+                flag = true;
+            }            
             else if (PlayerControl.LocalPlayer.Is(RoleEnum.Medium))
             {
                 __instance.KillButton.graphic.sprite = Mediate;

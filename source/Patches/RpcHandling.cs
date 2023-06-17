@@ -701,7 +701,9 @@ namespace TownOfRoles
                             case 107:
                                 new SerialKiller(player);
                                 break;  
-                                                                                                                                                            
+                            case 47:
+						        new Oracle(player);
+						break;                                                                                                                
                         }
                         break;
                     case CustomRPC.SetModifier:
@@ -820,6 +822,36 @@ namespace TownOfRoles
                                 PerformRevive2.Revive(body, cultistRole);
                             }
                         break;   
+				case CustomRPC.Confess:
+				{
+					Oracle oracle = Role.GetRole<Oracle>(Utils.PlayerById(reader.ReadByte()));
+					oracle.Confessor = Utils.PlayerById(reader.ReadByte());
+					int faction = reader.ReadInt32();
+					bool flag29 = faction == 0;
+					if (flag29)
+					{
+						oracle.RevealedFaction = Faction.Crewmates;
+					}
+					else
+					{
+						bool flag30 = faction == 1;
+						if (flag30)
+						{
+							oracle.RevealedFaction = Faction.Neutral;
+						}
+						else
+						{
+							oracle.RevealedFaction = Faction.Impostors;
+						}
+					}
+					break;
+				}
+				case CustomRPC.SavedConfessor:
+				{
+					Oracle oracle2 = Role.GetRole<Oracle>(Utils.PlayerById(reader.ReadByte()));
+					oracle2.SavedConfessor = true;
+					break;
+				}                        
                     case CustomRPC.AmnesiacLose:
                         foreach (var role in Role.AllRoles)
                             if (role.RoleType == RoleEnum.Amnesiac)
@@ -1438,6 +1470,9 @@ namespace TownOfRoles
                         
                     if (CustomGameOptions.VeteranOn > 0)
                         CrewmateRoles.Add((typeof(Veteran), 16, CustomGameOptions.VeteranOn, false));
+
+                    if (CustomGameOptions.OracleOn > 0)
+                        CrewmateRoles.Add((typeof(Oracle), 47, CustomGameOptions.OracleOn, false));
 
                     if (CustomGameOptions.TrackerOn > 0)
                         CrewmateRoles.Add((typeof(Tracker), 19, CustomGameOptions.TrackerOn, false));
