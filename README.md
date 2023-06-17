@@ -70,7 +70,7 @@ An Among Us mod that adds a bunch of roles, modifiers and game settings
 # Releases
 | Among Us - Version| Mod Version | Link |
 |----------|-------------|-----------------|
-| 2022.12.14s & 2022.12.14e | v4.0.2 | [Download](https://github.com/eDonnes124/Town-Of-Us/releases/download/v4.0.2/ToU.v4.0.2.zip) |
+| 2022.3.28s & 2022.3.28e | v1.0.5 Beta | [Download](https://github.com/Jsushi7/Town-Of-Roles/releases/download/1.0.5/TownOfRoles.1.0.5.BETA.zip) |
 
 <details>
   <summary> Changelog </summary>
