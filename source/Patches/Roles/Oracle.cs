@@ -10,10 +10,11 @@ namespace TownOfRoles.Roles
 		public Oracle(PlayerControl player) : base(player)
 		{
 			Name = "Oracle";
-			StartText = (() => "Get Other Player's To Confess Their Sins");
+			StartText = (() => "<color=#2f1f73>Get Other Player's To Confess Their Sins</color>");
 			TaskText = (() => "Get other player to confess");
 			Color = Colors.Oracle;
 			LastConfessed = DateTime.UtcNow;
+			FactionName = "Crewmate";
 			Accuracy = CustomGameOptions.RevealAccuracy;
 			FirstMeetingDead = true;
 			FirstMeetingDead = false;

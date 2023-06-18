@@ -30,7 +30,7 @@ namespace TownOfRoles
               ($"<color={color}>Ping: {ping}ms</color>") +                    
                   (!MeetingHud.Instance
                     ? "<size=70%>\nCreated by: <color=#9fcc90>Jsushi</color>\n</size>" +
-                    "<size=70%>Helped from: <color=#9fcc90>Kara, AlchlcDvl</color> and <color=#9fcc90>Discussions</color\n</size>" : "") +
+                    "<size=70%>Helped from: <color=#9fcc90>Kara, AlchlcDvl</color> and <color=#9fcc90>Discussions</color>\n</size>" : "") +
                 (AmongUsClient.Instance.GameState != InnerNet.InnerNetClient.GameStates.Started
                     ? "<size=70%>Formerly: <color=#9fcc90>Donners, Slushiegoose & Polus.gg</color></size>" : "");       
         }

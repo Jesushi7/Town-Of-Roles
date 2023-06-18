@@ -43,10 +43,10 @@ namespace TownOfRoles.CrewmateRoles.MysticMod
         {
             if (player.Is(RoleEnum.Glitch) || player.Is(RoleEnum.Imitator) || StartImitate.ImitatingPlayer == player
                  || player.Is(RoleEnum.Morphling) || player.Is(RoleEnum.Camouflager))
-                return "Your target is one of these roles: Glitch, Imitator, Morphling or Camouflager.";
+                return "Your target is one of these roles: The Glitch, Imitator, Morphling or Camouflager.";
             else if (player.Is(RoleEnum.Altruist) || player.Is(RoleEnum.Amnesiac) || player.Is(RoleEnum.Janitor)
-                 || player.Is(RoleEnum.Medium) || player.Is(RoleEnum.Undertaker))
-                return "Your target is one of these roles: Undertaker, Altruist, Amnesiac, Janitor, Medium or Cultist.";
+                 || player.Is(RoleEnum.Medium) || player.Is(RoleEnum.Undertaker)|| player.Is(RoleEnum.Oracle))
+                return "Your target is one of these roles: Undertaker, Altruist, Amnesiac, Oracle, Janitor, Medium or Cultist.";
             else if (player.Is(RoleEnum.Grenadier) || player.Is(RoleEnum.Guardian) || player.Is(RoleEnum.Medic)
                   || player.Is(RoleEnum.Veteran))
                 return "Your target is one of these roles: Grenadier, Guardian, Medic or Veteran.";

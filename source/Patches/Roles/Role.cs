@@ -227,17 +227,21 @@ public static bool RoleWins => CrewWin || ImpWin;
 
             Player.nameText().transform.localPosition = new Vector3(0f, 0.15f, -0.5f);
             
-        if(Classes.GameStates.IsMeeting)
+        if(Classes.GameStates.IsMeeting && !PlayerControl.LocalPlayer.Is(Faction.Impostors))
         {
-            return PlayerName + "\n" + Name;
-        }            
+            return PlayerName + $"\n<size=70%><color=#" + Patches.Colors.Modifiers.ToHtmlStringRGBA()+ $">{modifier.Name}</color> " + Name +"</size>";
+        }
+        if (Classes.GameStates.IsMeeting && PlayerControl.LocalPlayer.Is(Faction.Impostors))       
+        {
+            return  PlayerName + "\n" +"<size=70%>" + Name +"</size>";
+        }
         if (PlayerControl.LocalPlayer.Is(Faction.Impostors))
             {
-            return PlayerName + "\n" + Name;
+            return "<size=70%>" + Name + "</size>" + "\n" + PlayerName;
             }   
         else
         {
-            return PlayerName + "\n" + $"({modifier.Name}) "+ Name;
+            return $"<size=70%><color=#" + Patches.Colors.Modifiers.ToHtmlStringRGBA()+ $">{modifier.Name}</color> " + Name +"</size>\n"+ PlayerName;
         }
 
         }
