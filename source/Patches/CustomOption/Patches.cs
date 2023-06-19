@@ -164,7 +164,7 @@ namespace TownOfRoles.CustomOption
                     if (title != null)
                     {
                         title.GetComponent<TextTranslatorTMP>().Destroy();
-                        title.GetComponent<TMPro.TextMeshPro>().m_text = $"Town of Roles {Menus[index]} Settings";
+                        title.GetComponent<TMPro.TextMeshPro>().m_text = $"{Menus[index]} Settings";
                     }
                     var sliderInner = gameGroup?.FindChild("SliderInner");
                     if (sliderInner != null)

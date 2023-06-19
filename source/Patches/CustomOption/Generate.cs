@@ -1063,7 +1063,7 @@ namespace TownOfRoles.CustomOption
             Undertaker = new CustomHeaderOption(num++, MultiMenu.imposter, "<color=#FF0000FF>Undertaker</color>");
             DragCooldown = new CustomNumberOption(num++, MultiMenu.imposter, "Drag Cooldown", 25f, 10f, 60f, 2.5f, CooldownFormat);
             UndertakerDragSpeed =
-                new CustomNumberOption(num++, MultiMenu.imposter, "Drag Speed", 0.1f, 0.5f, 2f, 0.5f, MultiplierFormat);
+                new CustomNumberOption(num++, MultiMenu.imposter, "Drag Speed", 0.75f, 0.25f, 1f, 0.05f, MultiplierFormat);
 
             Silencer = new CustomHeaderOption(num++, MultiMenu.imposter, "<color=#FF0000FF>Silencer</color>");
             SilenceCooldown =

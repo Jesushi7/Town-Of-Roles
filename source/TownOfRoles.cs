@@ -109,7 +109,7 @@ public static AmongUs.GameOptions.NormalGameOptionsV07 VanillaOptions => GameOpt
         public static Sprite ImposterSettingsButtonSprite;
         public static Sprite ModifierSettingsButtonSprite;
         public static Sprite ToUBanner;
-        public static Sprite UpdateTOUButton;
+        public static Sprite UpdateTORButton;
         public static Sprite UpdateSubmergedButton;
 
         public static Sprite HorseEnabledImage;
@@ -210,7 +210,7 @@ public static AmongUs.GameOptions.NormalGameOptionsV07 VanillaOptions => GameOpt
             ModifierSettingsButtonSprite = CreateSprite("TownOfRoles.Resources.Modifiers.png");
             SettingsSprite = CreateSprite("TownOfRoles.Resources.SettingsButton.png");            
             ToUBanner = CreateSprite("TownOfRoles.Resources.BannerTOR.png");
-            UpdateTOUButton = CreateSprite("TownOfRoles.Resources.UpdateToUButton.png");
+            UpdateTORButton = CreateSprite("TownOfRoles.Resources.UpdateTORButton.png");
             UpdateSubmergedButton = CreateSprite("TownOfRoles.Resources.UpdateSubmergedButton.png");
 
             HorseEnabledImage = CreateSprite("TownOfRoles.Resources.HorseOn.png");
