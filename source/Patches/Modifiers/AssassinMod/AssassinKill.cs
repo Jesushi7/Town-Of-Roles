@@ -58,7 +58,7 @@ namespace TownOfRoles.Modifiers.AssassinMod
             {
             //DestroyableSingleton<HudManager>.Instance.Chat.AddChat(PlayerControl.LocalPlayer, "The Assassin shot" + ((Object) player).name + "!");                
                 SoundManager.Instance.PlaySound(player.KillSfx, false, 0.8f);
-                //hudManager.KillOverlay.ShowKillAnimation(player.Data, player.Data);
+                hudManager.KillOverlay.ShowKillAnimation(player.Data, player.Data);
             }
 
             var amOwner = player.AmOwner;

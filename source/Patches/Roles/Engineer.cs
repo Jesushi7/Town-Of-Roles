@@ -7,8 +7,8 @@ namespace TownOfRoles.Roles
         public Engineer(PlayerControl player) : base(player)
         {
             Name = "Engineer";
-            StartText = () => "<color=#FFA60AFF>Maintain Important Systems On The Ship</color>";
-            TaskText = () => CustomGameOptions.GameMode == GameMode.Cultist ? "Vent around" : "Vent and fix sabotages around the map";
+            StartText = () => "<color=#FFA60AFF>Maintain important systems on the ship</color>";
+            TaskText = () => CustomGameOptions.GameMode == GameMode.Cultist ? "Vent around" : "Vent and fix sabotages";
             Color = Patches.Colors.Engineer;
             RoleType = RoleEnum.Engineer;
             FactionName = "Crewmate";    

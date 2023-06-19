@@ -14,13 +14,13 @@ namespace TownOfRoles
         [HarmonyPostfix]
         public static void Postfix(PingTracker __instance)
         {
-  //Thanks to Town of Host Edited for this code
+      //Thanks to Town of Host Edited for this code
         __instance.text.alignment = TextAlignmentOptions.TopRight;
         sb.Clear();
         sb.Append(Utils.credentialsText);
         var ping = AmongUsClient.Instance.Ping;
         string color = "#ff4500";
-        if (ping < 90) color = "#44dfcc";
+        if (ping < 80) color = "#44dfcc";
         else if (ping < 100) color = "#7bc690";
         else if (ping < 200) color = "#f3920e";
         else if (ping < 400) color = "#ff146e";

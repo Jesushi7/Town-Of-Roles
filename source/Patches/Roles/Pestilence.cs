@@ -15,7 +15,7 @@ namespace TownOfRoles.Roles
             RoleType = RoleEnum.Pestilence;
             AddToRoleHistory(RoleType);
             StartText = () => "";
-            TaskText = () => "Kill everyone with your unstoppable abilities!";
+            TaskText = () => "Kill everyone with your unstoppable abilities";
             Faction = Faction.Neutral;
         }
 

@@ -331,8 +331,7 @@ namespace TownOfRoles
                 Role.GenModifier<Modifier>(type, canHaveModifier, id);
             }
             
-            //make it so The Morpher roles can't be chameleon because can't be asked to fix the visual bugs it make
-            canHaveModifier.RemoveAll(player => player.Is(RoleEnum.Glitch)||player.Is(RoleEnum.Morphling)||player.Is(RoleEnum.Amnesiac) );
+            canHaveModifier.RemoveAll(player => player.Is(RoleEnum.Glitch)||player.Is(RoleEnum.Morphling)||player.Is(RoleEnum.Amnesiac)||player.Is(RoleEnum.Guardian)||player.Is(RoleEnum.Executioner));
             foreach (var (type, id, _) in ChameleonModifier)
             {
                 if (canHaveModifier.Count == 0) break;

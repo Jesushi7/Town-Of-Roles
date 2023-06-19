@@ -22,18 +22,18 @@ namespace TownOfRoles.CrewmateRoles.OracleMod
 							bool flag3 = role.RevealedFaction == Faction.Crewmates;
 							if (flag3)
 							{
-								state.NameText.text = "<color=#00FFFFFF>(Crewmate) </color>" + state.NameText.text;
+								state.NameText.text = "<color=#00FFFFFF>( C ) </color>" + state.NameText.text;
 							}
 							else
 							{
 								bool flag4 = role.RevealedFaction == Faction.Impostors;
 								if (flag4)
 								{
-									state.NameText.text = "<color=#FF0000FF>(Impostor) </color>" + state.NameText.text;
+									state.NameText.text = "<color=#FF0000FF>( I ) </color>" + state.NameText.text;
 								}
 								else
 								{
-									state.NameText.text = "<color=#808080FF>(Neutral) </color>" + state.NameText.text;
+									state.NameText.text = "<color=#808080FF>( N ) </color>" + state.NameText.text;
 								}
 							}
 						}
