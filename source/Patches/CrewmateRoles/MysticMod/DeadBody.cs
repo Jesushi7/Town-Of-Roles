@@ -59,9 +59,9 @@ namespace TownOfRoles.CrewmateRoles.MysticMod
             else if (player.Is(RoleEnum.Juggernaut) || player.Is(RoleEnum.Pestilence) || player.Is(RoleEnum.Sheriff)
                  || player.Is(RoleEnum.Werewolf))
                 return "Your target is one of these roles: Juggernaut, Pestilence, Sheriff or Werewolf.";
-            else if (player.Is(RoleEnum.Arsonist) || player.Is(RoleEnum.Plaguebearer)
+            else if (player.Is(RoleEnum.Pyromaniac) || player.Is(RoleEnum.Plaguebearer)
                  || player.Is(RoleEnum.Snitch) || player.Is(RoleEnum.Tracker))
-                return "Your target is one of these roles: Arsonist, Snitch, Tracker or Plaguebearer.";
+                return "Your target is one of these roles: Pyromaniac, Snitch, Tracker or Plaguebearer.";
             else if (player.Is(RoleEnum.Engineer)|| player.Is(RoleEnum.SerialKiller) || player.Is(RoleEnum.Escapist) || player.Is(RoleEnum.Miner))
                 return "Your target likes exploring\nThey must be an Engineer, Escapist, Miner or Serial Killer.";
             else if (player.Is(RoleEnum.Crewmate) || player.Is(RoleEnum.Impostor))

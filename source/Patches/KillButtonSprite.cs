@@ -58,7 +58,7 @@ namespace TownOfRoles
                 __instance.KillButton.graphic.sprite = Medic;
                 flag = true;
             }
-            else if (PlayerControl.LocalPlayer.Is(RoleEnum.Arsonist))
+            else if (PlayerControl.LocalPlayer.Is(RoleEnum.Pyromaniac))
             {
                 __instance.KillButton.graphic.sprite = Douse;
                 flag = true;
@@ -153,7 +153,7 @@ namespace TownOfRoles
                 __instance.KillButton.transform.localPosition = new Vector3(0f, 1f, 0f);
             }
             if (PlayerControl.LocalPlayer.Is(RoleEnum.Engineer) ||  PlayerControl.LocalPlayer.Is(RoleEnum.SerialKiller)
-                 || PlayerControl.LocalPlayer.Is(RoleEnum.Pestilence)|| PlayerControl.LocalPlayer.Is(RoleEnum.Glitch)  || PlayerControl.LocalPlayer.Is(RoleEnum.Plaguebearer)||  PlayerControl.LocalPlayer.Is(RoleEnum.Jester)   || PlayerControl.LocalPlayer.Is(RoleEnum.Juggernaut)|| PlayerControl.LocalPlayer.Is(RoleEnum.Arsonist))
+                 || PlayerControl.LocalPlayer.Is(RoleEnum.Pestilence)|| PlayerControl.LocalPlayer.Is(RoleEnum.Glitch)  || PlayerControl.LocalPlayer.Is(RoleEnum.Plaguebearer)||  PlayerControl.LocalPlayer.Is(RoleEnum.Jester)   || PlayerControl.LocalPlayer.Is(RoleEnum.Juggernaut)|| PlayerControl.LocalPlayer.Is(RoleEnum.Pyromaniac))
             {
                 __instance.ImpostorVentButton.transform.localPosition = new Vector3(-2f, 0f, 0f);
             }

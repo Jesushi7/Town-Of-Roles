@@ -4,7 +4,7 @@ using TownOfRoles.Extensions;
 using TownOfRoles.Roles;
 using UnityEngine;
 
-namespace TownOfRoles.NeutralRoles.ArsonistMod
+namespace TownOfRoles.NeutralRoles.PyromaniacMod
 {
     [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]
     public static class HudManagerUpdate
@@ -16,8 +16,8 @@ namespace TownOfRoles.NeutralRoles.ArsonistMod
             if (PlayerControl.AllPlayerControls.Count <= 1) return;
             if (PlayerControl.LocalPlayer == null) return;
             if (PlayerControl.LocalPlayer.Data == null) return;
-            if (!PlayerControl.LocalPlayer.Is(RoleEnum.Arsonist)) return;
-            var role = Role.GetRole<Arsonist>(PlayerControl.LocalPlayer);
+            if (!PlayerControl.LocalPlayer.Is(RoleEnum.Pyromaniac)) return;
+            var role = Role.GetRole<Pyromaniac>(PlayerControl.LocalPlayer);
 
             foreach (var playerId in role.DousedPlayers)
             {

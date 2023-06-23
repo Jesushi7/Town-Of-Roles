@@ -4,18 +4,18 @@ using Hazel;
 using TownOfRoles.Roles;
 using AmongUs.GameOptions;
 
-namespace TownOfRoles.NeutralRoles.ArsonistMod
+namespace TownOfRoles.NeutralRoles.PyromaniacMod
 {
     [HarmonyPatch(typeof(KillButton), nameof(KillButton.DoClick))]
     public class PerformKill
     {
         public static bool Prefix(KillButton __instance)
         {
-            var flag = PlayerControl.LocalPlayer.Is(RoleEnum.Arsonist);
+            var flag = PlayerControl.LocalPlayer.Is(RoleEnum.Pyromaniac);
             if (!flag) return true;
             if (PlayerControl.LocalPlayer.Data.IsDead) return false;
             if (!PlayerControl.LocalPlayer.CanMove) return false;
-            var role = Role.GetRole<Arsonist>(PlayerControl.LocalPlayer);
+            var role = Role.GetRole<Pyromaniac>(PlayerControl.LocalPlayer);
             if (!__instance.isActiveAndEnabled || __instance.isCoolingDown) return false;
 
             if (__instance == role.IgniteButton && role.DousedAlive > 0)

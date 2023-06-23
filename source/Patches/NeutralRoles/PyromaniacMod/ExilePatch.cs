@@ -7,7 +7,7 @@ using TownOfRoles.Extensions;
 using UnityEngine;
 using Reactor;
 
-namespace TownOfRoles.NeutralRoles.ArsonistMod
+namespace TownOfRoles.NeutralRoles.PyromaniacMod
 {
     [HarmonyPatch(typeof(AirshipExileController), nameof(AirshipExileController.WrapUpAndSpawn))]
     public static class AirshipExileController_WrapUpAndSpawn
@@ -22,7 +22,7 @@ namespace TownOfRoles.NeutralRoles.ArsonistMod
         public static void ExileControllerPostfix(ExileController __instance)
         {
             var exiled = __instance.exiled?.Object;
-            if (!PlayerControl.LocalPlayer.Is(RoleEnum.Arsonist)) return;
+            if (!PlayerControl.LocalPlayer.Is(RoleEnum.Pyromaniac)) return;
             var alives = PlayerControl.AllPlayerControls.ToArray()
                     .Where(x => !x.Data.IsDead && !x.Data.Disconnected).ToList();
             foreach (var player in alives)
@@ -33,7 +33,7 @@ namespace TownOfRoles.NeutralRoles.ArsonistMod
                     return;
                 }
             }
-            var role = Role.GetRole<Arsonist>(PlayerControl.LocalPlayer);
+            var role = Role.GetRole<Pyromaniac>(PlayerControl.LocalPlayer);
             role.LastKiller = true;
             return;
         }

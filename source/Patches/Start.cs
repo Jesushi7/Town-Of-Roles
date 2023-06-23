@@ -168,9 +168,9 @@ namespace TownOfRoles.Patches
                 undertaker.LastDragged = undertaker.LastDragged.AddSeconds(CustomGameOptions.InitialCooldowns - CustomGameOptions.DragCd);
             }
 
-            if (PlayerControl.LocalPlayer.Is(RoleEnum.Arsonist))
+            if (PlayerControl.LocalPlayer.Is(RoleEnum.Pyromaniac))
             {
-                var arsonist = Role.GetRole<Arsonist>(PlayerControl.LocalPlayer);
+                var arsonist = Role.GetRole<Pyromaniac>(PlayerControl.LocalPlayer);
                 arsonist.LastDoused = DateTime.UtcNow;
                 arsonist.LastDoused = arsonist.LastDoused.AddSeconds(CustomGameOptions.InitialCooldowns - CustomGameOptions.DouseCd);
             }

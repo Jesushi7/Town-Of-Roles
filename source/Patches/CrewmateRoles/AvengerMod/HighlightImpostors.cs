@@ -19,7 +19,7 @@ namespace TownOfRoles.CrewmateRoles.AvengerMod
                         state.NameText.color = Palette.ImpostorRed;
                     if (player.Is(RoleEnum.Glitch) || player.Is(RoleEnum.Werewolf) 
                 || player.Is(RoleEnum.Juggernaut) ||  player.Is(RoleEnum.SerialKiller)||player.Is(RoleEnum.Plaguebearer) || player.Is(RoleEnum.Pestilence)
-                || player.Is(RoleEnum.Arsonist) && CustomGameOptions.AvengerRevealsNeutrals)
+                || player.Is(RoleEnum.Pyromaniac) && CustomGameOptions.AvengerRevealsNeutrals)
                         state.NameText.color = role.Color;
                 }
             }

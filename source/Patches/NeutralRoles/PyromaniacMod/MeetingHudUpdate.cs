@@ -3,7 +3,7 @@ using HarmonyLib;
 using TownOfRoles.Roles;
 using UnityEngine;
 
-namespace TownOfRoles.NeutralRoles.ArsonistMod
+namespace TownOfRoles.NeutralRoles.PyromaniacMod
 {
     [HarmonyPatch(typeof(MeetingHud), nameof(MeetingHud.Update))]
     public static class MeetingHudUpdate
@@ -12,9 +12,9 @@ namespace TownOfRoles.NeutralRoles.ArsonistMod
         {
             var localPlayer = PlayerControl.LocalPlayer;
             var _role = Role.GetRole(localPlayer);
-            if (_role?.RoleType != RoleEnum.Arsonist) return;
+            if (_role?.RoleType != RoleEnum.Pyromaniac) return;
             if (localPlayer.Data.IsDead) return;
-            var role = (Arsonist)_role;
+            var role = (Pyromaniac)_role;
             foreach (var state in __instance.playerStates)
             {
                 var targetId = state.TargetPlayerId;

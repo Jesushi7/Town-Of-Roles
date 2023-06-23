@@ -13,7 +13,7 @@ namespace TownOfRoles
         TimeMaster,            
         Glitch, // 11
         Informant, // 12
-        Arsonist, // 13
+        Pyromaniac, // 13
         Altruist, // 14
         Phantom,
         Avenger,

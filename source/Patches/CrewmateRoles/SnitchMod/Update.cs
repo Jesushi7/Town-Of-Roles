@@ -24,7 +24,7 @@ namespace TownOfRoles.CrewmateRoles.SnitchMod
                             ((player.Is(RoleEnum.Sheriff) || player.Is(RoleEnum.Veteran)) && !CustomGameOptions.CrewKillingRed) ||
                             ((player.Is(RoleEnum.Amnesiac) || player.Is(RoleEnum.Guardian)) && !CustomGameOptions.NeutralNNK) ||
                             ((player.Is(RoleEnum.Executioner) ||player.Is(RoleEnum.Jester) || player.Is(RoleEnum.Phantom)) && !CustomGameOptions.NeutralNNK) ||
-                            ((player.Is(RoleEnum.Arsonist)  || player.Is(RoleEnum.Glitch) ||  player.Is(RoleEnum.SerialKiller) || player.Is(RoleEnum.Juggernaut) ||
+                            ((player.Is(RoleEnum.Pyromaniac)  || player.Is(RoleEnum.Glitch) ||  player.Is(RoleEnum.SerialKiller) || player.Is(RoleEnum.Juggernaut) ||
                             player.Is(RoleEnum.Plaguebearer) || player.Is(RoleEnum.Pestilence) || player.Is(RoleEnum.Werewolf)) && !CustomGameOptions.NeutKillingRed))
                             {
                                 state.NameText.color = Color.green;
@@ -63,7 +63,7 @@ namespace TownOfRoles.CrewmateRoles.SnitchMod
                             ((player.Is(RoleEnum.Sheriff) || player.Is(RoleEnum.Veteran)) && !CustomGameOptions.CrewKillingRed) ||
                             ((player.Is(RoleEnum.Amnesiac) || player.Is(RoleEnum.Guardian)) && !CustomGameOptions.NeutralNNK) ||
                             ((player.Is(RoleEnum.Executioner)  || player.Is(RoleEnum.Jester) || player.Is(RoleEnum.Phantom)) && !CustomGameOptions.NeutralNNK) ||
-                            ((player.Is(RoleEnum.Arsonist) || player.Is(RoleEnum.Glitch)  || player.Is(RoleEnum.SerialKiller) ||  player.Is(RoleEnum.Juggernaut) ||
+                            ((player.Is(RoleEnum.Pyromaniac) || player.Is(RoleEnum.Glitch)  || player.Is(RoleEnum.SerialKiller) ||  player.Is(RoleEnum.Juggernaut) ||
                             player.Is(RoleEnum.Plaguebearer) || player.Is(RoleEnum.Pestilence) || player.Is(RoleEnum.Werewolf)) && !CustomGameOptions.NeutKillingRed))
                         {
                             player.nameText().color = Color.green;

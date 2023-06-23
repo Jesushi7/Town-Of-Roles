@@ -103,10 +103,10 @@ namespace TownOfRoles
                         return;
                     }
                 }                
-                else if (type == RoleEnum.Arsonist)
+                else if (type == RoleEnum.Pyromaniac)
                 {
-                    var arsonist = (Arsonist)role;
-                    if (arsonist.ArsonistWins)
+                    var arsonist = (Pyromaniac)role;
+                    if (arsonist.PyromaniacWins)
                     {
                         var winners = Utils.potentialWinners.Where(x => x.PlayerName == arsonist.PlayerName).ToList();
                         TempData.winners = new List<WinningPlayerData>();

@@ -52,7 +52,7 @@ namespace TownOfRoles
             if (player.Is(RoleEnum.Engineer) ||
                 (player.Is(RoleEnum.Glitch) && CustomGameOptions.GlitchVent) || 
                 (player.Is(RoleEnum.Plaguebearer) && CustomGameOptions.PlaguebearerVent)||  
-                (player.Is(RoleEnum.Arsonist) && CustomGameOptions.ArsoVent)||
+                (player.Is(RoleEnum.Pyromaniac) && CustomGameOptions.ArsoVent)||
                 (player.Is(RoleEnum.SerialKiller) && CustomGameOptions.SerialKillerVent) ||
                 (player.Is(RoleEnum.Juggernaut) && CustomGameOptions.JuggVent) ||
                 (player.Is(RoleEnum.Werewolf) && CustomGameOptions.WerewolfVent)||

@@ -38,7 +38,7 @@ namespace TownOfRoles
                 player._object.Is(RoleEnum.Juggernaut) || player._object.Is(RoleEnum.Werewolf) 
                  || player._object.Is(RoleEnum.SerialKiller) || player._object.Is(RoleEnum.Pestilence) ||
                 (player._object.Is(RoleEnum.Jester) && CustomGameOptions.JesterImpVision) ||
-                (player._object.Is(RoleEnum.Arsonist) && CustomGameOptions.ArsoImpVision))
+                (player._object.Is(RoleEnum.Pyromaniac) && CustomGameOptions.ArsoImpVision))
             {
                 __result = __instance.MaxLightRadius * GameOptionsManager.Instance.currentNormalGameOptions.ImpostorLightMod;
                 return false;

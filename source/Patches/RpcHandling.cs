@@ -257,7 +257,7 @@ namespace TownOfRoles
             canHaveAbility2.Shuffle();         
 
             canHaveAbility4.RemoveAll(player => !player.Is(Faction.Neutral) || player.Is(RoleEnum.Glitch) || player.Is(RoleEnum.SerialKiller)
-             || player.Is(RoleEnum.Juggernaut)  || player.Is(RoleEnum.Arsonist)  || player.Is(RoleEnum.Plaguebearer) || player.Is(RoleEnum.Pestilence));
+             || player.Is(RoleEnum.Juggernaut)  || player.Is(RoleEnum.Pyromaniac)  || player.Is(RoleEnum.Plaguebearer) || player.Is(RoleEnum.Pestilence));
             canHaveAbility4.Shuffle();                 
             var impAssassins = CustomGameOptions.NumberOfImpostorAssassins;
             var neutAssassins = CustomGameOptions.NumberOfNeutralKillingAssassins;
@@ -445,8 +445,8 @@ namespace TownOfRoles
             NeutralKillingRoles.Add((typeof(Werewolf), 27, 10, true));
             NeutralKillingRoles.Add((typeof(Juggernaut), 18, 10, true));      
             NeutralKillingRoles.Add((typeof(SerialKiller), 107, 10, true));                       
-            if (CustomGameOptions.AddArsonist)
-                NeutralKillingRoles.Add((typeof(Arsonist), 13, 10, true));
+            if (CustomGameOptions.AddPyromaniac)
+                NeutralKillingRoles.Add((typeof(Pyromaniac), 13, 10, true));
             if (CustomGameOptions.AddPlaguebearer)
                 NeutralKillingRoles.Add((typeof(Plaguebearer), 26, 10, true));
 
@@ -602,7 +602,7 @@ namespace TownOfRoles
                                 new Informant(player);
                                 break;
                             case 13:
-                                new Arsonist(player);
+                                new Pyromaniac(player);
                                 break;
                             case 14:
                                 new Altruist(player);
@@ -1109,24 +1109,24 @@ namespace TownOfRoles
                     case CustomRPC.Douse:
                         var arsonist = Utils.PlayerById(reader.ReadByte());
                         var douseTarget2 = Utils.PlayerById(reader.ReadByte());
-                        var arsonistRole = Role.GetRole<Arsonist>(arsonist);
+                        var arsonistRole = Role.GetRole<Pyromaniac>(arsonist);
                         arsonistRole.DousedPlayers.Add(douseTarget2.PlayerId);
                         arsonistRole.LastDoused = DateTime.UtcNow;
                         break;
                     case CustomRPC.Ignite:
-                        var theArsonist = Utils.PlayerById(reader.ReadByte());
-                        var theArsonistRole = Role.GetRole<Arsonist>(theArsonist);
-                        theArsonistRole.Ignite();
+                        var thePyromaniac = Utils.PlayerById(reader.ReadByte());
+                        var thePyromaniacRole = Role.GetRole<Pyromaniac>(thePyromaniac);
+                        thePyromaniacRole.Ignite();
                         break;
 
-                    case CustomRPC.ArsonistWin:
-                        var theArsonistTheRole = Role.AllRoles.FirstOrDefault(x => x.RoleType == RoleEnum.Arsonist);
-                        ((Arsonist) theArsonistTheRole)?.Wins();
+                    case CustomRPC.PyromaniacWin:
+                        var thePyromaniacTheRole = Role.AllRoles.FirstOrDefault(x => x.RoleType == RoleEnum.Pyromaniac);
+                        ((Pyromaniac) thePyromaniacTheRole)?.Wins();
                         break;
-                    case CustomRPC.ArsonistLose:
+                    case CustomRPC.PyromaniacLose:
                         foreach (var role in Role.AllRoles)
-                            if (role.RoleType == RoleEnum.Arsonist)
-                                ((Arsonist) role).Loses();
+                            if (role.RoleType == RoleEnum.Pyromaniac)
+                                ((Pyromaniac) role).Loses();
                         break;
                     case CustomRPC.WerewolfWin:
                         var theWerewolfTheRole = Role.AllRoles.FirstOrDefault(x => x.RoleType == RoleEnum.Werewolf);
@@ -1508,8 +1508,8 @@ namespace TownOfRoles
                     if (CustomGameOptions.GlitchOn > 0)
                         NeutralKillingRoles.Add((typeof(Glitch), 11, CustomGameOptions.GlitchOn, true));
 
-                    if (CustomGameOptions.ArsonistOn > 0)
-                        NeutralKillingRoles.Add((typeof(Arsonist), 13, CustomGameOptions.ArsonistOn, true));
+                    if (CustomGameOptions.PyromaniacOn > 0)
+                        NeutralKillingRoles.Add((typeof(Pyromaniac), 13, CustomGameOptions.PyromaniacOn, true));
 
                     if (CustomGameOptions.PlaguebearerOn > 0)
                         NeutralKillingRoles.Add((typeof(Plaguebearer), 26, CustomGameOptions.PlaguebearerOn, true));

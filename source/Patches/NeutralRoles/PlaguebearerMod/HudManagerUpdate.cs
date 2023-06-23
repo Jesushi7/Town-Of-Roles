@@ -51,7 +51,7 @@ namespace TownOfRoles.NeutralRoles.PlaguebearerMod
                     foreach (var player in alives)
                     {
                         if (player.Data.IsImpostor() || player.Is(RoleEnum.Glitch) || player.Is(RoleEnum.Juggernaut)|| player.Is(RoleEnum.SerialKiller)
-                            || player.Is(RoleEnum.Arsonist) || player.Is(RoleEnum.Werewolf))
+                            || player.Is(RoleEnum.Pyromaniac) || player.Is(RoleEnum.Werewolf))
                         {
                             transform = true;
                         }

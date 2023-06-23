@@ -65,7 +65,7 @@ namespace TownOfRoles.Roles
 
             if (PlayerControl.AllPlayerControls.ToArray().Count(x => !x.Data.IsDead && !x.Data.Disconnected) <= 2 &&
                     PlayerControl.AllPlayerControls.ToArray().Count(x => !x.Data.IsDead && !x.Data.Disconnected &&
-                    (x.Data.IsImpostor() || x.Is(RoleEnum.Arsonist)|| x.Is(RoleEnum.SerialKiller) || x.Is(RoleEnum.Juggernaut) ||
+                    (x.Data.IsImpostor() || x.Is(RoleEnum.Pyromaniac)|| x.Is(RoleEnum.SerialKiller) || x.Is(RoleEnum.Juggernaut) ||
                     x.Is(RoleEnum.Werewolf) || x.Is(RoleEnum.Plaguebearer) || x.Is(RoleEnum.Pestilence))) == 0)
             {
                 var writer = AmongUsClient.Instance.StartRpcImmediately(

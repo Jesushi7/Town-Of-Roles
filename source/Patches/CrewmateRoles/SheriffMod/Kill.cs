@@ -33,7 +33,7 @@ namespace TownOfRoles.CrewmateRoles.SheriffMod
                          role.ClosestPlayer.Is(RoleEnum.SerialKiller) && CustomGameOptions.SheriffKillsSerialKiller ||
                         role.ClosestPlayer.Is(RoleEnum.Juggernaut) && CustomGameOptions.SheriffKillsJuggernaut ||
                         role.ClosestPlayer.Is(RoleEnum.Executioner) && CustomGameOptions.SheriffKillsExecutioner ||
-                        role.ClosestPlayer.Is(RoleEnum.Arsonist) && CustomGameOptions.SheriffKillsArsonist ||
+                        role.ClosestPlayer.Is(RoleEnum.Pyromaniac) && CustomGameOptions.SheriffKillsPyromaniac ||
                         role.ClosestPlayer.Is(ModifierEnum.Lover) && CustomGameOptions.SheriffKillsLovers ||
                         role.ClosestPlayer.Is(RoleEnum.Werewolf) && CustomGameOptions.SheriffKillsWerewolf ||
                         role.ClosestPlayer.Is(RoleEnum.Plaguebearer) && CustomGameOptions.SheriffKillsPlaguebearer;

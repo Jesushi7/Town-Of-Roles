@@ -7,10 +7,10 @@ using UnityEngine;
 
 namespace TownOfRoles.Roles
 {
-    public class Arsonist : Role
+    public class Pyromaniac : Role
     {
         private KillButton _igniteButton;
-        public bool ArsonistWins;
+        public bool PyromaniacWins;
         public PlayerControl ClosestPlayerDouse;
         public PlayerControl ClosestPlayerIgnite;
         public List<byte> DousedPlayers = new List<byte>();
@@ -20,14 +20,14 @@ namespace TownOfRoles.Roles
         public int DousedAlive => DousedPlayers.Count(x => Utils.PlayerById(x) != null && Utils.PlayerById(x).Data != null && !Utils.PlayerById(x).Data.IsDead);
 
 
-        public Arsonist(PlayerControl player) : base(player)
+        public Pyromaniac(PlayerControl player) : base(player)
         {
-            Name = "Arsonist";
-            StartText = () => "<color=#FF4D00FF>Douse everyone and ignite the light</color>";
+            Name = "Pyromaniac";
+            StartText = () => "<color=#e89d51>Douse everyone and ignite the light</color>";
             TaskText = () => "Douse players and ignite to kill all douses";
-            Color = Patches.Colors.Arsonist;
+            Color = Patches.Colors.Pyromaniac;
             LastDoused = DateTime.UtcNow;
-            RoleType = RoleEnum.Arsonist;
+            RoleType = RoleEnum.Pyromaniac;
             FactionName = "<color=#5c5e5d>Neutral</color>";    
             Faction = Faction.Neutral;               
             AddToRoleHistory(RoleType);
@@ -54,7 +54,7 @@ namespace TownOfRoles.Roles
             {
                 var writer = AmongUsClient.Instance.StartRpcImmediately(
                     PlayerControl.LocalPlayer.NetId,
-                    (byte) CustomRPC.ArsonistWin,
+                    (byte) CustomRPC.PyromaniacWin,
                     SendOption.Reliable,
                     -1
                 );
@@ -71,7 +71,7 @@ namespace TownOfRoles.Roles
 
         public void Wins()
         {
-            ArsonistWins = true;
+            PyromaniacWins = true;
         }
 
         public void Loses()

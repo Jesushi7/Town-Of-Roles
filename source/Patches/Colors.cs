@@ -30,7 +30,7 @@ namespace TownOfRoles.Patches
         public static Color32 Scavenger => new(140, 64, 5, 255);
         public readonly static Color32 Executioner = new Color32(45, 66, 34, 255);  
         public readonly static Color Glitch = Color.green;       
-        public readonly static Color Arsonist = new Color(1f, 0.3f, 0f);
+        public readonly static Color Pyromaniac = new Color(0.90f, 0.61f, 0.31f, 1f);
         public static Color32 SerialKiller => new(100, 45, 234, 255); //#642DEAFF        
         public readonly static Color Phantom = new Color(0.4f, 0.16f, 0.38f, 1f);
         public static Color32 Incendiary => new(238, 112, 46, 255); //#ee702e        

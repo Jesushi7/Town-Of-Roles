@@ -17,8 +17,10 @@ namespace TownOfRoles
             if (GameOptionsManager.Instance.CurrentGameOptions.GameMode == GameModes.HideNSeek) return true;
             var role = Role.GetRole(__instance.HauntTarget);
             var modifier = Modifier.GetModifier(__instance.HauntTarget);
+            var ability = Ability.GetAbility(__instance.HauntTarget);
 
             __instance.FilterText.text = modifier != null ? $"{modifier.Name} - {role.Name}"
+            : __instance.FilterText.text = ability != null ? $"({ability.Name}) {role.Name}"
                                                           : $"{role.Name}";
             return false;
         }

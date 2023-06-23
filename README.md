@@ -31,7 +31,7 @@ An Among Us mod that adds a bunch of roles, modifiers and game settings
 - [Executioner](#executioner)
 - [Jester](#jester)
 - [Phantom](#phantom)
-- [Arsonist](#arsonist)
+- [Pyromaniac](#arsonist)
 - [Juggernaut](#juggernaut)
 - [Plaguebearer](#plaguebearer)
 - [Glitch](#the-glitch)
@@ -117,8 +117,8 @@ An Among Us mod that adds a bunch of roles, modifiers and game settings
   <ul> <li>New Modifier: Disperser</li> </ul>
   <ul> <li>New Modifier: Multitasker</li> </ul>
   <ul> <li>New Modifier: Double Shot</li> </ul>
-  <ul> <li>New Settings: Arsonist/Jester has Impostor Vision</li> </ul>
-  <ul> <li>New Setting: Arsonist Ignite Cooldown removed when they're the final killer</li> </ul>
+  <ul> <li>New Settings: Pyromaniac/Jester has Impostor Vision</li> </ul>
+  <ul> <li>New Setting: Pyromaniac Ignite Cooldown removed when they're the final killer</li> </ul>
   <ul> <li>Reporting bodies now spreads the Plaguebearer's infection</li> </ul>
   <ul> <li>Changed Underdog from a role to a modifier</li> </ul>
   <ul> <li>Changed Blind to a Crewmate Modifier</li> </ul>
@@ -158,7 +158,7 @@ An Among Us mod that adds a bunch of roles, modifiers and game settings
   <ul> <li>New Role: Trapper</li> </ul>
   <ul> <li>New Role: Mystic</li> </ul>
   <ul> <li>New Modifier: Blind (replacing Drunk)</li> </ul>
-  <ul> <li>Arsonist Rework: Douse and Ignite are on the same cooldown, however to ignite they must be standing next to one of their douses</li> </ul>
+  <ul> <li>Pyromaniac Rework: Douse and Ignite are on the same cooldown, however to ignite they must be standing next to one of their douses</li> </ul>
   <ul> <li>New Settings: Gambler/Assassin can guess lovers</li> </ul>
   <ul> <li>New Setting: Traitor does not swap colours for Snitch</li> </ul>
   <ul> <li>New Settings: Sheriff can shoot Werewolf/Plaguebearer</li> </ul>
@@ -320,8 +320,8 @@ An Among Us mod that adds a bunch of roles, modifiers and game settings
   <ul> <li>Removed Acron’s hats as he requested their removal</li> </ul>
   <ul> <li>Bug Fix: Lovers no longer win if the other disconnects</li> </ul>
   <ul> <li>Bug Fix: Mayor votes no longer double on a disconnect</li> </ul>
-  <ul> <li>Bug Fix: When Shifter shifts with Arsonist, the douse also shifts now</li> </ul>
-  <ul> <li>Bug Fix: Shifter can now ignite after shifting with the Arsonist</li> </ul>
+  <ul> <li>Bug Fix: When Shifter shifts with Pyromaniac, the douse also shifts now</li> </ul>
+  <ul> <li>Bug Fix: Shifter can now ignite after shifting with the Pyromaniac</li> </ul>
   <ul> <li>Bug Fix: Impostors no longer see their teammate’s name go pink at the end of the meeting if their teammate is a Loving Impostor</li> </ul>
   <ul> <li>Bug Fix: Investigator no longer lags the player into oblivion</li> </ul>
   <ul> <li>Bug Fix: The game no longer infinitely tries to distribute crewmate modifiers when there are more modifiers than crewmates</li> </ul>
@@ -366,7 +366,7 @@ An Among Us mod that adds a bunch of roles, modifiers and game settings
   <ul> <li>Setting for Sheriff can kill Executioner</li> </ul>
   <ul> <li>Setting for Morphling, Swooper, Undertaker and Glitch to vent</li> </ul>
   <ul> <li>Setting for Undertaker to vent while dragging a body</li> </ul>
-  <ul> <li>Setting for Mayor, Swapper, Jester, Executioner and Arsonist to not be able to button</li> </ul>
+  <ul> <li>Setting for Mayor, Swapper, Jester, Executioner and Pyromaniac to not be able to button</li> </ul>
   <ul> <li>Setting for Executioner becomes Shifter on target death</li> </ul>
   <ul> <li>Setting for Phantom to do less tasks</li> </ul>
   <ul> <li>Setting for Assassin to assassinate Informant via ‘Crewmate’ guess</li> </ul>
@@ -439,7 +439,7 @@ An Among Us mod that adds a bunch of roles, modifiers and game settings
   <ul> <li> Fix for the Medic  </li> </ul>
   <ul> <li> Fix for the Trapper </li> </ul>
   <ul> <li> Fix for the Mayor </li> </ul>
-  <ul> <li> Fix for the Arsonist </li> </ul>
+  <ul> <li> Fix for the Pyromaniac </li> </ul>
   <ul> <li> Fix for the Assassin </li> </ul>
   <ul> <li> Fix for the Phantom </li> </ul>
   <ul> <li> Modded Handshake </li> </ul>
@@ -644,7 +644,7 @@ If the player the Mystic examines has killed recently the Mystic will be alerted
 - Your target is a causer of chaos (Bomber/Executioner/Jester/Swapper/Transporter)
 - Your target is concealing information (Silencer/Mayor/Informant/Swooper/Trapper)
 - Your target started innocent but gained the capability to kill (Juggernaut/Sheriff/Traitor/Gambler/Werewolf)
-- Your target likes to interact with others (Arsonist/Mystic/Plaguebearer/Snitch/Tracker)
+- Your target likes to interact with others (Pyromaniac/Mystic/Plaguebearer/Snitch/Tracker)
 - Your target likes exploring (Engineer/Escapist/Investigator/Miner/Mystic)
 - Your target views the world through a different lens (Glitch/Imitator/Morphling/Trapper)
 - Your target appears to be roleless (Crewmate/Impostor)
@@ -785,7 +785,7 @@ However, if they kill a Crewmate or a Neutral player they can't kill, they inste
 | Sheriff Kills Jester | Whether the Sheriff is able to kill the Jester | Toggle | False |
 | Sheriff Kills Glitch | Whether the Sheriff is able to kill Glitch | Toggle | False |
 | Sheriff Kills Executioner | Whether the Sheriff is able to kill the Executioner | Toggle | False |
-| Sheriff Kills Arsonist | Whether the Sheriff is able to kill the Arsonist | Toggle | False |
+| Sheriff Kills Pyromaniac | Whether the Sheriff is able to kill the Pyromaniac | Toggle | False |
 | Sheriff Kills Werewolf | Whether the Sheriff is able to kill the Werewolf | Toggle | False |
 | Sheriff Kills Plaguebearer | Whether the Sheriff is able to kill the Plaguebearer | Toggle | False |
 | Sheriff Kill Cooldown | The cooldown on the Sheriff's kill button | Time | 25s |
@@ -1070,21 +1070,21 @@ They become half-invisible when they die and has to complete all their tasks wit
 | When Phantom Can Be Clicked | The amount of tasks remaining when the Phantom Can Be Clicked | Number | 5 |
 
 -----------------------
-## Arsonist
+## Pyromaniac
 ### **Team: Neutral**
 
-The Arsonist is a Neutral role with its own win condition.\
+The Pyromaniac is a Neutral role with its own win condition.\
 They have two abilities, one is to douse other players with gasoline.\
 The other is to ignite all doused players.\
-The Arsonist needs to be the last killer alive to win the game.
+The Pyromaniac needs to be the last killer alive to win the game.
 ### Game Options
 | Name | Description | Type | Default |
 |----------|:-------------:|:------:|:------:|
-| Arsonist | The percentage probability of the Arsonist appearing | Percentage | 0% |
-| Douse Cooldown | The cooldown of the Arsonist's Douse button | Time | 25s |
-| Maximum Alive Players Doused | The maximum amount of players that the Arsonist can have doused | Number | 5 |
-| Arsonist Has Impostor Vision | Whether the Arsonist Has Impostor Vision | Toggle | False |
-| Ignite Cooldown Removed When Arso Is Last Killer | Whether the Arsonist's Ignite Cooldown is removed when they're the final killer | Toggle | False |
+| Pyromaniac | The percentage probability of the Pyromaniac appearing | Percentage | 0% |
+| Douse Cooldown | The cooldown of the Pyromaniac's Douse button | Time | 25s |
+| Maximum Alive Players Doused | The maximum amount of players that the Pyromaniac can have doused | Number | 5 |
+| Pyromaniac Has Impostor Vision | Whether the Pyromaniac Has Impostor Vision | Toggle | False |
+| Ignite Cooldown Removed When Arso Is Last Killer | Whether the Pyromaniac's Ignite Cooldown is removed when they're the final killer | Toggle | False |
 
 -----------------------
 ## Juggernaut
@@ -1499,7 +1499,7 @@ When they are the only remaining Impostor, they will have their kill cooldown sh
 | Neutral Roles | How many neutrals roles will spawn | Number | 1 |
 | Veteran Count | How many Veterans will spawn | Number | 1 |
 | Gambler Count | How many Gamblers will spawn | Number | 1 |
-| Add Arsonist | Whether Arsonist will be added to the role list | Toggle | True |
+| Add Pyromaniac | Whether Pyromaniac will be added to the role list | Toggle | True |
 | Add Plaguebearer | Whether Plaguebearer will be added to the role list | Toggle | True |
 
 -----------------------

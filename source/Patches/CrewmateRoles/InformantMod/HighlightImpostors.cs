@@ -20,7 +20,7 @@ namespace TownOfRoles.CrewmateRoles.InformantMod
                         state.NameText.color = Palette.ImpostorRed;
                     if (player.Is(RoleEnum.Glitch) || player.Is(RoleEnum.Werewolf) 
                 || player.Is(RoleEnum.Juggernaut)|| player.Is(RoleEnum.SerialKiller)||player.Is(RoleEnum.Plaguebearer) || player.Is(RoleEnum.Pestilence)
-                || player.Is(RoleEnum.Arsonist) && CustomGameOptions.InformantSeesNeutrals)
+                || player.Is(RoleEnum.Pyromaniac) && CustomGameOptions.InformantSeesNeutrals)
                         state.NameText.color = role.Color;
                 }
             }

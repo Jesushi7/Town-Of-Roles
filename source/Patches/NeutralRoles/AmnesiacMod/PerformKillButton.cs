@@ -101,7 +101,7 @@ namespace TownOfRoles.NeutralRoles.AmnesiacMod
 
                 case RoleEnum.Jester:
                 case RoleEnum.Executioner:
-                case RoleEnum.Arsonist:
+                case RoleEnum.Pyromaniac:
                 case RoleEnum.Amnesiac:
                 case RoleEnum.Glitch:             
                 case RoleEnum.Juggernaut:                
@@ -145,7 +145,7 @@ namespace TownOfRoles.NeutralRoles.AmnesiacMod
                 {
                     var jester = new Jester(other);
                     jester.RegenTask();
-                    if (role == RoleEnum.Arsonist ||role == RoleEnum.SerialKiller || role == RoleEnum.Glitch || role == RoleEnum.Plaguebearer ||
+                    if (role == RoleEnum.Pyromaniac ||role == RoleEnum.SerialKiller || role == RoleEnum.Glitch || role == RoleEnum.Plaguebearer ||
                             role == RoleEnum.Pestilence || role == RoleEnum.Werewolf || role == RoleEnum.Juggernaut)
                     {
                         if (CustomGameOptions.AmneTurnNeutAssassin)
@@ -288,9 +288,9 @@ namespace TownOfRoles.NeutralRoles.AmnesiacMod
                 SnitchRole.LastInvestigated = DateTime.UtcNow;
             }
 
-            else if (role == RoleEnum.Arsonist)
+            else if (role == RoleEnum.Pyromaniac)
             {
-                var arsoRole = Role.GetRole<Arsonist>(amnesiac);
+                var arsoRole = Role.GetRole<Pyromaniac>(amnesiac);
                 arsoRole.DousedPlayers.RemoveRange(0, arsoRole.DousedPlayers.Count);
                 arsoRole.LastDoused = DateTime.UtcNow;
             }

@@ -588,7 +588,7 @@ namespace TownOfRoles
                     var sheriff = Role.GetRole<Sheriff>(killer);
                     if (target.Is(Faction.Impostors) ||
                         target.Is(RoleEnum.Glitch) && CustomGameOptions.SheriffKillsGlitch ||
-                        target.Is(RoleEnum.Arsonist) && CustomGameOptions.SheriffKillsArsonist ||
+                        target.Is(RoleEnum.Pyromaniac) && CustomGameOptions.SheriffKillsPyromaniac ||
                         target.Is(RoleEnum.Plaguebearer) && CustomGameOptions.SheriffKillsPlaguebearer ||
                         target.Is(RoleEnum.Pestilence) && CustomGameOptions.SheriffKillsPlaguebearer ||
                         target.Is(RoleEnum.Werewolf) && CustomGameOptions.SheriffKillsWerewolf ||
@@ -669,7 +669,7 @@ namespace TownOfRoles
                     target.myTasks.Insert(0, importantTextTask);
                 }
 
-                if (!killer.Is(RoleEnum.Arsonist))
+                if (!killer.Is(RoleEnum.Pyromaniac))
                 {
                     killer.MyPhysics.StartCoroutine(killer.KillAnimations.Random().CoPerformKill(killer, target));
                 }
@@ -803,7 +803,7 @@ namespace TownOfRoles
                 return true;
 
             if (player.Is(RoleEnum.Engineer) ||
-                (player.Is(RoleEnum.Glitch) && CustomGameOptions.GlitchVent) || (player.Is(RoleEnum.Plaguebearer) && CustomGameOptions.PlaguebearerVent) ||  (player.Is(RoleEnum.Arsonist) && CustomGameOptions.ArsoVent)||(player.Is(RoleEnum.Juggernaut) && CustomGameOptions.JuggVent) ||(player.Is(RoleEnum.Werewolf) && CustomGameOptions.WerewolfVent)||
+                (player.Is(RoleEnum.Glitch) && CustomGameOptions.GlitchVent) || (player.Is(RoleEnum.Plaguebearer) && CustomGameOptions.PlaguebearerVent) ||  (player.Is(RoleEnum.Pyromaniac) && CustomGameOptions.ArsoVent)||(player.Is(RoleEnum.Juggernaut) && CustomGameOptions.JuggVent) ||(player.Is(RoleEnum.Werewolf) && CustomGameOptions.WerewolfVent)||
                  CustomGameOptions.EveryoneVent||(player.Is(RoleEnum.SerialKiller) && CustomGameOptions.SerialKillerVent)  ||
                                  (player.Is(RoleEnum.Pestilence) && CustomGameOptions.PestVent) || (player.Is(RoleEnum.Jester) && CustomGameOptions.JesterVent))
                 return true;
@@ -1184,7 +1184,7 @@ public static bool IsImpostor(this PlayerVoteArea playerinfo) => PlayerByVoteAre
             {
                 role.LastProtected = DateTime.UtcNow;
             }
-            foreach (Arsonist role in Role.GetRoles(RoleEnum.Arsonist))
+            foreach (Pyromaniac role in Role.GetRoles(RoleEnum.Pyromaniac))
             {
                 role.LastDoused = DateTime.UtcNow;
             }

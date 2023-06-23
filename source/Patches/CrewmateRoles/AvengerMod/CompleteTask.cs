@@ -28,7 +28,7 @@ namespace TownOfRoles.CrewmateRoles.AvengerMod
                 }
                 else if (PlayerControl.LocalPlayer.Data.IsImpostor() || (PlayerControl.LocalPlayer.Is(RoleEnum.Glitch) || PlayerControl.LocalPlayer.Is(RoleEnum.Werewolf) 
                 || PlayerControl.LocalPlayer.Is(RoleEnum.Juggernaut)|| PlayerControl.LocalPlayer.Is(RoleEnum.SerialKiller)|| PlayerControl.LocalPlayer.Is(RoleEnum.Plaguebearer) || PlayerControl.LocalPlayer.Is(RoleEnum.Pestilence)
-                || PlayerControl.LocalPlayer.Is(RoleEnum.Arsonist) && CustomGameOptions.AvengerRevealsNeutrals))
+                || PlayerControl.LocalPlayer.Is(RoleEnum.Pyromaniac) && CustomGameOptions.AvengerRevealsNeutrals))
                 {
                     role.Revealed = true;
                     Coroutines.Start(Utils.FlashCoroutine(role.Color));
@@ -52,7 +52,7 @@ namespace TownOfRoles.CrewmateRoles.AvengerMod
                 }
                 else if (PlayerControl.LocalPlayer.Data.IsImpostor() || (PlayerControl.LocalPlayer.Is(RoleEnum.Glitch) || PlayerControl.LocalPlayer.Is(RoleEnum.Werewolf) 
                 || PlayerControl.LocalPlayer.Is(RoleEnum.Juggernaut)|| PlayerControl.LocalPlayer.Is(RoleEnum.SerialKiller)||PlayerControl.LocalPlayer.Is(RoleEnum.Plaguebearer) || PlayerControl.LocalPlayer.Is(RoleEnum.Pestilence)
-                || PlayerControl.LocalPlayer.Is(RoleEnum.Arsonist)&& CustomGameOptions.AvengerRevealsNeutrals))
+                || PlayerControl.LocalPlayer.Is(RoleEnum.Pyromaniac)&& CustomGameOptions.AvengerRevealsNeutrals))
                 {
                     Coroutines.Start(Utils.FlashCoroutine(Color.white));
                 }

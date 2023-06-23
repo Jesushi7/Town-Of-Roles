@@ -10,7 +10,7 @@ namespace TownOfRoles
         public static void Postfix(Vent __instance, [HarmonyArgument(1)] ref bool mainTarget)
         {
             var player = PlayerControl.LocalPlayer;
-            bool active = PlayerControl.LocalPlayer != null  && !MeetingHud.Instance && (player.Is(RoleEnum.Arsonist)|| player.Is(RoleEnum.SerialKiller) || player.Is(RoleEnum.Engineer) || player.Is(RoleEnum.Glitch) || player.Is(RoleEnum.Jester) || player.Is(RoleEnum.Juggernaut) || player.Is(RoleEnum.Pestilence) || player.Is(RoleEnum.Werewolf));
+            bool active = PlayerControl.LocalPlayer != null  && !MeetingHud.Instance && (player.Is(RoleEnum.Pyromaniac)|| player.Is(RoleEnum.SerialKiller) || player.Is(RoleEnum.Engineer) || player.Is(RoleEnum.Glitch) || player.Is(RoleEnum.Jester) || player.Is(RoleEnum.Juggernaut) || player.Is(RoleEnum.Pestilence) || player.Is(RoleEnum.Werewolf));
             if (!active) return;
             Color color = Role.GetRole(PlayerControl.LocalPlayer).Color;
             ((Renderer)__instance.myRend).material.SetColor("_OutlineColor", color);

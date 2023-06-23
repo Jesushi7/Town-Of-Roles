@@ -56,7 +56,7 @@ namespace TownOfRoles.CrewmateRoles.OracleMod
 				{
 					List<PlayerControl> evilPlayers = (from x in PlayerControl.AllPlayerControls.ToArray()
 					where !x.Data.IsDead && !x.Data.Disconnected && (x.Is(Faction.Impostors) || 
-					(x.Is(Faction.Neutral) &&  x.Is(RoleEnum.Glitch)&&  x.Is(RoleEnum.Werewolf)&&  x.Is(RoleEnum.SerialKiller) &&  x.Is(RoleEnum.Arsonist) 
+					(x.Is(Faction.Neutral) &&  x.Is(RoleEnum.Glitch)&&  x.Is(RoleEnum.Werewolf)&&  x.Is(RoleEnum.SerialKiller) &&  x.Is(RoleEnum.Pyromaniac) 
 					&&  x.Is(RoleEnum.Plaguebearer) &&  x.Is(RoleEnum.Pestilence) && CustomGameOptions.NeutralKillingShowsEvil) 
 					|| (x.Is(Faction.Neutral)&&  x.Is(RoleEnum.Jester) &&  x.Is(RoleEnum.Executioner)
 					&&  x.Is(RoleEnum.Guardian) &&  x.Is(RoleEnum.Amnesiac) &&  x.Is(RoleEnum.Phantom) && CustomGameOptions.NeutralNonKillersShowsEvil))

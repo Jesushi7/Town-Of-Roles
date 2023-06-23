@@ -37,7 +37,7 @@ namespace TownOfRoles.CrewmateRoles.InformantMod
                         }
                         else if ((PlayerControl.LocalPlayer.Data.IsImpostor())
                             || ((PlayerControl.LocalPlayer.Is(RoleEnum.Glitch) || PlayerControl.LocalPlayer.Is(RoleEnum.Juggernaut)
-                            || PlayerControl.LocalPlayer.Is(RoleEnum.Arsonist)|| PlayerControl.LocalPlayer.Is(RoleEnum.SerialKiller) || PlayerControl.LocalPlayer.Is(RoleEnum.Werewolf)
+                            || PlayerControl.LocalPlayer.Is(RoleEnum.Pyromaniac)|| PlayerControl.LocalPlayer.Is(RoleEnum.SerialKiller) || PlayerControl.LocalPlayer.Is(RoleEnum.Werewolf)
                             || PlayerControl.LocalPlayer.Is(RoleEnum.Plaguebearer) || PlayerControl.LocalPlayer.Is(RoleEnum.Pestilence)) && CustomGameOptions.InformantSeesNeutrals))
                         {
                             Coroutines.Start(Utils.FlashCoroutine(role.Color));
@@ -61,7 +61,7 @@ namespace TownOfRoles.CrewmateRoles.InformantMod
                         var impostors = PlayerControl.AllPlayerControls.ToArray().Where(x => x.Data.IsImpostor());
                     }
                     else if (PlayerControl.LocalPlayer.Data.IsImpostor() || ((PlayerControl.LocalPlayer.Is(RoleEnum.Glitch)  ||  PlayerControl.LocalPlayer.Is(RoleEnum.Juggernaut)
-                            || PlayerControl.LocalPlayer.Is(RoleEnum.Arsonist) || PlayerControl.LocalPlayer.Is(RoleEnum.Werewolf)|| PlayerControl.LocalPlayer.Is(RoleEnum.SerialKiller)
+                            || PlayerControl.LocalPlayer.Is(RoleEnum.Pyromaniac) || PlayerControl.LocalPlayer.Is(RoleEnum.Werewolf)|| PlayerControl.LocalPlayer.Is(RoleEnum.SerialKiller)
                             || PlayerControl.LocalPlayer.Is(RoleEnum.Plaguebearer) || PlayerControl.LocalPlayer.Is(RoleEnum.Pestilence)) && CustomGameOptions.InformantSeesNeutrals))
                     {
                         Coroutines.Start(Utils.FlashCoroutine(Color.green));

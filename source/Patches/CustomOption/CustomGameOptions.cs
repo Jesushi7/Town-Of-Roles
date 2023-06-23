@@ -48,7 +48,7 @@ namespace TownOfRoles
         public static int SwooperOn => (int)Generate.SwooperOn.Get();                 
         public static int CamouflagerOn => (int)Generate.CamouflagerOn.Get();     
         public static int SpyOn => (int)Generate.SpyOn.Get();             
-        public static int ArsonistOn => (int)Generate.ArsonistOn.Get();
+        public static int PyromaniacOn => (int)Generate.PyromaniacOn.Get();
         public static AdminDeadPlayers WhoSeesDead => (AdminDeadPlayers)Generate.WhoSeesDead.Get();
         public static int AltruistOn => (int)Generate.AltruistOn.Get();
         public static int UndertakerOn => (int)Generate.UndertakerOn.Get();
@@ -106,7 +106,7 @@ namespace TownOfRoles
         public static bool SheriffKillsLovers => Generate.SheriffKillsLovers.Get();        
         
         public static bool SheriffKillsJester => Generate.SheriffKillsJester.Get();
-        public static bool SheriffKillsArsonist => Generate.SheriffKillsArsonist.Get();
+        public static bool SheriffKillsPyromaniac => Generate.SheriffKillsPyromaniac.Get();
         public static bool SheriffKillsJuggernaut => Generate.SheriffKillsJuggernaut.Get();
         public static bool SheriffKillsSerialKiller => Generate.SheriffKillsSerialKiller.Get();
         public static bool SheriffKillsPlaguebearer => Generate.SheriffKillsPlaguebearer.Get();
@@ -175,7 +175,7 @@ namespace TownOfRoles
         public static bool RandomNumberImps => Generate.RandomNumberImps.Get();
         public static int NeutralRoles => (int)Generate.NeutralRoles2.Get();
         public static int VeteranCount => (int)Generate.VeteranCount.Get();                      
-        public static bool AddArsonist => Generate.AddArsonist.Get();
+        public static bool AddPyromaniac => Generate.AddPyromaniac.Get();
         public static bool AddPlaguebearer => Generate.AddPlaguebearer.Get();
         public static bool ParallelMedScans => Generate.ParallelMedScans.Get();
         public static int MaxFixes => (int)Generate.MaxFixes.Get();
