@@ -4,7 +4,7 @@
 
 An Among Us mod that adds a bunch of roles, modifiers and game settings
 
-Discord Server at: [Discord](https://discord.gg/YbugdzDKZE)
+Join the [Discord](https://discord.gg/YbugdzDKZE)!
 
 **Crewmate Roles**
 - [Avenger](#Avenger)
