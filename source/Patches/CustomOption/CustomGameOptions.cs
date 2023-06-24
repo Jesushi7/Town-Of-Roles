@@ -56,7 +56,9 @@ namespace TownOfRoles
         public static int AvengerOn => (int)Generate.AvengerOn.Get();
         public static int GrenadierOn => (int)Generate.GrenadierOn.Get();
         public static int VeteranOn => (int)Generate.VeteranOn.Get();
-     
+        public static int VampireOn => (int)Generate.VampireOn.Get();
+        public static float BiteDuration => Generate.BiteDuration.Get();
+        public static bool VampireVent => Generate.VampireVent.Get();             
         public static int TrackerOn => (int)Generate.TrackerOn.Get();
         public static int TrapperOn => (int)Generate.TrapperOn.Get();
         public static int TransporterOn => (int)Generate.TransporterOn.Get();

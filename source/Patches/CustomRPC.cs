@@ -7,6 +7,7 @@ namespace TownOfRoles
         SetCouple,
         SetAssassin,
         SetTarget,
+        Bite,        
         SetGATarget,
 
         VersionHandshake,

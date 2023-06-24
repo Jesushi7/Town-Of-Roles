@@ -74,6 +74,8 @@ public static AmongUs.GameOptions.NormalGameOptionsV07 VanillaOptions => GameOpt
         public static Sprite AlertSprite;            
         public static Sprite RememberSprite;
         public static Sprite ConfessSprite;
+        public static Sprite PoisonSprite;
+        public static Sprite PoisonedSprite;
         public static Sprite TrackSprite;
         public static Sprite PlantSprite;
         public static Sprite DetonateSprite;
@@ -163,6 +165,8 @@ public static AmongUs.GameOptions.NormalGameOptionsV07 VanillaOptions => GameOpt
             ShootSprite = CreateSprite("TownOfRoles.Resources.Shoot.png");            
             ReviveSprite = CreateSprite("TownOfRoles.Resources.Revive.png");
             ButtonSprite = CreateSprite("TownOfRoles.Resources.Button.png");
+            PoisonSprite = CreateSprite("TownOfRoles.Resources.Poison.png");
+            PoisonedSprite = CreateSprite("TownOfRoles.Resources.Poisoned.png");            
             DisperseSprite = CreateSprite("TownOfRoles.Resources.Disperse.png");
             DragSprite = CreateSprite("TownOfRoles.Resources.Drag.png");
             DropSprite = CreateSprite("TownOfRoles.Resources.Drop.png");

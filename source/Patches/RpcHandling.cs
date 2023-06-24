@@ -700,6 +700,9 @@ namespace TownOfRoles
                             case 107:
                                 new SerialKiller(player);
                                 break;  
+                            case 109:
+                                new Vampire(player);
+                                break;                                  
                             case 47:
 						        new Oracle(player);
 						break;                                                                                                                
@@ -1100,6 +1103,12 @@ namespace TownOfRoles
                         if (PlayerControl.LocalPlayer.PlayerId != mediatedPlayer.PlayerId) break;
                         medium.AddMediatePlayer(mediatedPlayer.PlayerId);
                         break;
+                    case CustomRPC.Bite:
+                        var poisoner = Utils.PlayerById(reader.ReadByte());
+                        var poisoned = Utils.PlayerById(reader.ReadByte());
+                        var poisonerRole = Role.GetRole<Vampire>(poisoner);
+                        poisonerRole.BittenPlayer = poisoned;
+                        break;                        
                     case CustomRPC.FlashGrenade:
                         var grenadier = Utils.PlayerById(reader.ReadByte());
                         var grenadierRole = Role.GetRole<Grenadier>(grenadier);
@@ -1540,6 +1549,9 @@ namespace TownOfRoles
 
                     if (CustomGameOptions.MinerOn > 0)
                         ImpostorRoles.Add((typeof(Miner), 29, CustomGameOptions.MinerOn, true));
+
+                    if (CustomGameOptions.VampireOn > 0 && CustomGameOptions.GameMode != GameMode.KillingOnly)
+                        ImpostorRoles.Add((typeof(Vampire), 109, CustomGameOptions.VampireOn, true));
 
                     if (CustomGameOptions.SwooperOn > 0)
                         ImpostorRoles.Add((typeof(Swooper), 30, CustomGameOptions.SwooperOn, false));

@@ -304,6 +304,11 @@ namespace TownOfRoles.CustomOption
         public static CustomNumberOption ReviveCooldown2;
         public static CustomNumberOption IncreasedCooldownPerRevive2;     
 
+        public static CustomNumberOption VampireOn;
+        public static CustomHeaderOption Vampire;
+        public static CustomNumberOption BiteDuration;
+        public static CustomToggleOption VampireVent;
+
         public static CustomHeaderOption Underdog;
         public static CustomNumberOption UnderdogKillBonus;
         public static CustomToggleOption UnderdogIncreasedKC;
@@ -529,12 +534,14 @@ namespace TownOfRoles.CustomOption
             MorphlingOn = new CustomNumberOption(num++, MultiMenu.imposter, "<color=#FF0000FF>Morphling</color>", 0f, 0f, 100f, 10f,
                 PercentFormat);
             UndertakerOn = new CustomNumberOption(num++, MultiMenu.imposter, "<color=#FF0000FF>Undertaker</color>", 0f, 0f, 100f, 10f,
-                PercentFormat);
+                PercentFormat);        
             SilencerOn = new CustomNumberOption(num++, MultiMenu.imposter, "<color=#FF0000FF>Silencer</color>", 0f, 0f, 100f, 10f,
                 PercentFormat);
             SwooperOn = new CustomNumberOption(num++, MultiMenu.imposter, "<color=#FF0000FF>Swooper</color>", 0f, 0f, 100f, 10f,
                 PercentFormat);
-           
+            VampireOn = new CustomNumberOption(num++, MultiMenu.imposter, "<color=#FF0000FF>Vampire</color>", 0f, 0f, 100f, 10f,
+                PercentFormat);   
+
             CrewmateModifiers = new CustomHeaderOption(num++, MultiMenu.modifiers, "<color=#8cffff>Crewmate</color> <color=#9cbee4>Modifiers</color>");
             BlindOn = new CustomNumberOption(num++, MultiMenu.modifiers, "<color=#9cbee4>Blind</color>", 0f, 0f, 100f, 10f,
                 PercentFormat);
@@ -1078,6 +1085,12 @@ namespace TownOfRoles.CustomOption
             SwooperPolusVent =
                 new CustomToggleOption(num++, MultiMenu.imposter, "<color=#FF0000FF>Swooper</color> Can Vent On Polus", false);
 
+            Vampire =
+                new CustomHeaderOption(num++, MultiMenu.imposter, "<color=#FF0000FF>Vampire</color>");
+            BiteDuration =
+                new CustomNumberOption(num++, MultiMenu.imposter, "Bite Kill Delay", 5f, 1f, 15f, 1f, CooldownFormat);
+            VampireVent =
+                new CustomToggleOption(num++, MultiMenu.imposter, "<color=#FF0000FF>Vampire</color> Can Use Vent", false);
 
             Bait = new CustomHeaderOption(num++, MultiMenu.modifiers, "<color=#9cbee4>Bait</color>");
             BaitMinDelay = new CustomNumberOption(num++, MultiMenu.modifiers, "Minimum Delay for the <color=#9cbee4>Bait</color> Report", 0f, 0f, 15f, 0.5f, CooldownFormat);

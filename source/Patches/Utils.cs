@@ -669,7 +669,7 @@ namespace TownOfRoles
                     target.myTasks.Insert(0, importantTextTask);
                 }
 
-                if (!killer.Is(RoleEnum.Pyromaniac))
+                if (!killer.Is(RoleEnum.Vampire) && !killer.Is(RoleEnum.Pyromaniac))
                 {
                     killer.MyPhysics.StartCoroutine(killer.KillAnimations.Random().CoPerformKill(killer, target));
                 }
@@ -1158,6 +1158,10 @@ public static bool IsImpostor(this PlayerVoteArea playerinfo) => PlayerByVoteAre
             {
                 role.LastTransported = DateTime.UtcNow;
             }
+            foreach (Vampire role in Role.GetRoles(RoleEnum.Vampire))
+            {
+                role.LastBitten = DateTime.UtcNow;
+            }            
             foreach (Veteran role in Role.GetRoles(RoleEnum.Veteran))
             {
                 role.LastAlerted = DateTime.UtcNow;

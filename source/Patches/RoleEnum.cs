@@ -44,11 +44,11 @@ namespace TownOfRoles
         Silencer, // 36
         Escapist, // 37
         Bomber, // 41
+        Vampire,
         Stealer,
         Pessimistic,
         Crewmate, // 38
         Impostor, // 39
-        Vampire,
         Judge,
         Necromancer, // 100
         Whisperer, // 101

@@ -70,6 +70,13 @@ namespace TownOfRoles.CrewmateRoles.AltruistMod
             }
             if (target != null) Object.Destroy(target.gameObject);
 
+            var player2 = Utils.PlayerById(parentId);
+
+            foreach (var poisoner in Role.GetRoles(RoleEnum.Vampire))
+            {
+                var poisonerRole = (Vampire)poisoner;
+                if (poisonerRole.BittenPlayer == player2) poisonerRole.BittenPlayer = poisonerRole.Player;
+            }
             if (player.IsLover() && CustomGameOptions.BothLoversDie)
             {
                 var lover = Modifier.GetModifier<Lover>(player).OtherLover.Player;

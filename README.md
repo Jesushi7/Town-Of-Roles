@@ -92,7 +92,7 @@ An Among Us mod that adds a bunch of roles, modifiers and game settings
   <summary> v4.0.0 </summary>
   <ul> <li>Compatibility with the new Among Us version v2022.12.14</li> </ul>
   <ul> <li>New Role: Imitator (Replacing Time Lord)</li> </ul>
-  <ul> <li>New Role: Bomber (Poisoner rework)</li> </ul>
+  <ul> <li>New Role: Bomber (Vampire rework)</li> </ul>
   <ul> <li>New Game Mode: Cultist</li> </ul>
   <ul> <li>New Game Mode Roles: Necromancer & Whisperer as well as Crewmate/Impostor variants of already existing roles</li> </ul>
   <ul> <li>New Setting: Enable Hidden Roles</li> </ul>
@@ -148,7 +148,7 @@ An Among Us mod that adds a bunch of roles, modifiers and game settings
   <ul> <li>Bug Fix: Underdog now gets the correct cooldown when there is more then 1 Impostor</li> </ul>
   <ul> <li>Bug Fix: An Impostor killing a Diseased player will now get the correct cooldown</li> </ul>
   <ul> <li>Bug Fix: The only person who will know they have a GA is the GA target (if target knows they have a GA)</li> </ul>
-  <ul> <li>Bug Fix: Revived players from Poisoner kills no longer instantly die at the start of the next meeting</li> </ul>
+  <ul> <li>Bug Fix: Revived players from Vampire kills no longer instantly die at the start of the next meeting</li> </ul>
   </details>
   <details>
   <summary> v3.2.0 </summary>
@@ -169,7 +169,7 @@ An Among Us mod that adds a bunch of roles, modifiers and game settings
   <ul> <li>Transporter can now die to a Veteran on alert if they transport the Veteran</li> </ul>
   <ul> <li>Bug Fix: Impostors on high ping can no longer kill multiple players</li> </ul>
   <ul> <li>Bug Fix: Poisoned players now die before a meeting and not during a meeting</li> </ul>
-  <ul> <li>Bug Fix: Glitch and Poisoner can no longer kill/poison in vents</li> </ul>
+  <ul> <li>Bug Fix: Glitch and Vampire can no longer kill/poison in vents</li> </ul>
   <ul> <li>Bug Fix: Underdog now gets the correct cooldown when killing a diseased player</li> </ul>
   <ul> <li>Bug Fix: Phantom/Avenger now appear in the correct places</li> </ul>
   <ul> <li>Bug Fix: The Silencer now sees the correct colour name of their teammates depending on if they are Silenced or not</li> </ul>
@@ -216,9 +216,9 @@ An Among Us mod that adds a bunch of roles, modifiers and game settings
   </details>
   <details>
   <summary> v2.6.5 </summary>
-  <ul> <li>Fixed Amnesiac remembering Poisoner interaction</li> </ul>
+  <ul> <li>Fixed Amnesiac remembering Vampire interaction</li> </ul>
   <ul> <li>Fixed Button Barry not working during sabotages</li> </ul>
-  <ul> <li>Fixed Poisoner interactions against Medic shields and Veteran alerts</li> </ul>
+  <ul> <li>Fixed Vampire interactions against Medic shields and Veteran alerts</li> </ul>
   <ul> <li>Transporting now works a little differently</li> </ul>
   <ul> <li>If a player is transported when they are in a position out of bounds while on something like a ladder, it rejects the transport</li> </ul>
   <ul> <li>Glitch and Transporter can now be lovers</li> </ul>
@@ -255,7 +255,7 @@ An Among Us mod that adds a bunch of roles, modifiers and game settings
   </details>
   <details>
   <summary> v2.6.1 </summary>
-  <ul> <li>Fixed Poisoner killing Bait after another report resulting in a duplicated meeting</li> </ul>
+  <ul> <li>Fixed Vampire killing Bait after another report resulting in a duplicated meeting</li> </ul>
   <ul> <li>Fixed the issue where the Informant spawning as Crewmate would see their name gold</li> </ul>
   <ul> <li>Fixed Amnesiac remembering Transporter becoming an Impostor</li> </ul>
   <ul> <li>Fixed Tracker Arrows</li> </ul>
@@ -288,7 +288,7 @@ An Among Us mod that adds a bunch of roles, modifiers and game settings
   <ul> <li>Changed Assassin from a Role to a Default Ability</li> </ul>
   <ul> <li>New Role: Amnesiac (replacing Shifter)</li> </ul>
   <ul> <li>New Role: Veteran</li> </ul>
-  <ul> <li>New Role: Poisoner</li> </ul>
+  <ul> <li>New Role: Vampire</li> </ul>
   <ul> <li>New Role: Tracker</li> </ul>
   <ul> <li>New Modifier: Bait</li> </ul>
   <ul> <li>Renamed Retributionist to Gambler</li> </ul>
@@ -1633,7 +1633,7 @@ If you have any bugs or any need to contact me, join the [Discord Server](https:
 [5up](https://www.twitch.tv/5uppp) and the Submarine Team - For the inspiration of the Grenadier role.\
 [Guus](https://github.com/OhMyGuus) - For support for the old Among Us versions (v2021.11.9.5 and v2021.12.15).\
 [MyDragonBreath](https://github.com/MyDragonBreath) - For Submerged Compatibility, the Trapper role and support for the new Among Us version (v2022.6.21).\
-[ItsTheNumberH](https://github.com/itsTheNumberH/Town-Of-H) - For the code used for Blind, Bait, Poisoner and partially for Tracker, as well as other bug fixes.\
+[ItsTheNumberH](https://github.com/itsTheNumberH/Town-Of-H) - For the code used for Blind, Bait, Vampire and partially for Tracker, as well as other bug fixes.\
 [Ruiner](https://github.com/ruiner189/Town-Of-Us-Redux) - For lovers changed into a modifier and Task Tracking.\
 [Term](https://www.twitch.tv/termboii) - For creating Transporter, Medium, Silencer, Plaguebearer, Sleuth, Multitasker and porting v2.5.0 to the new Among Us version (v2021.12.15).\
 [BryBry16](https://github.com/Brybry16/BetterPolus) - For the code used for Better Polus.\

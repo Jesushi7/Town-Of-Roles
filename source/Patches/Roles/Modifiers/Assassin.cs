@@ -70,6 +70,7 @@ namespace TownOfRoles.Roles.Modifiers
                 if (!PlayerControl.LocalPlayer.Is(Faction.Impostors))
                 {
                     ColorMapping.Add("Impostor", Colors.Impostor);
+                    if (CustomGameOptions.VampireOn > 0) ColorMapping.Add("Vampire", Colors.Impostor);
                     if (CustomGameOptions.CultistOn > 0) ColorMapping.Add("Cultist", Colors.Impostor);
                     if (CustomGameOptions.CultistOn > 0) ColorMapping.Add("Follower", Colors.Impostor);
                     if (CustomGameOptions.JanitorOn > 0) ColorMapping.Add("Janitor", Colors.Impostor);
