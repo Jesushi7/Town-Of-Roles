@@ -13,35 +13,35 @@ using TownOfRoles.Roles.Modifiers;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace TownOfRoles.NeutralRoles.VampireMod
+namespace TownOfRoles.NeutralRoles.JackalMod
 {
   [HarmonyPatch(typeof (KillButton), "DoClick")]
   public class Bite
   {
     public static bool Prefix(KillButton __instance)
     {
-      if (UnityEngine.Object.op_Inequality((UnityEngine.Object) __instance, (Object) DestroyableSingleton<HudManager>.Instance.KillButton) || !PlayerControl.LocalPlayer.Is(RoleEnum.Vampire))
+      if (UnityEngine.Object.op_Inequality((UnityEngine.Object) __instance, (Object) DestroyableSingleton<HudManager>.Instance.KillButton) || !PlayerControl.LocalPlayer.Is(RoleEnum.Jackal))
         return true;
-      Vampire role1 = Role.GetRole<Vampire>(PlayerControl.LocalPlayer);
+      Jackal role1 = Role.GetRole<Jackal>(PlayerControl.LocalPlayer);
       if (!PlayerControl.LocalPlayer.CanMove || Object.op_Equality((Object) role1.ClosestPlayer, (Object) null) || (double) role1.BiteTimer() != 0.0 || !((Behaviour) __instance).enabled)
         return false;
       float killDistance = GameOptionsData.KillDistances[GameOptionsManager.Instance.currentNormalGameOptions.KillDistance];
       if ((double) Vector2.Distance(role1.ClosestPlayer.GetTruePosition(), PlayerControl.LocalPlayer.GetTruePosition()) > (double) killDistance || Object.op_Equality((Object) role1.ClosestPlayer, (Object) null))
         return false;
-      List<PlayerControl> list1 = PlayerControl.AllPlayerControls.ToArray().Where<PlayerControl>((Func<PlayerControl, bool>) (x => x.Is(RoleEnum.Vampire))).ToList<PlayerControl>();
+      List<PlayerControl> list1 = PlayerControl.AllPlayerControls.ToArray().Where<PlayerControl>((Func<PlayerControl, bool>) (x => x.Is(RoleEnum.Jackal))).ToList<PlayerControl>();
       foreach (Phantom role2 in Role.GetRoles(RoleEnum.Phantom))
       {
-        if (role2.formerRole == RoleEnum.Vampire)
+        if (role2.formerRole == RoleEnum.Jackal)
           list1.Add(role2.Player);
       }
-      List<PlayerControl> list2 = PlayerControl.AllPlayerControls.ToArray().Where<PlayerControl>((Func<PlayerControl, bool>) (x => x.Is(RoleEnum.Vampire) && !x.Data.IsDead && !x.Data.Disconnected)).ToList<PlayerControl>();
-      if (role1.ClosestPlayer.Is(RoleEnum.VampireHunter))
+      List<PlayerControl> list2 = PlayerControl.AllPlayerControls.ToArray().Where<PlayerControl>((Func<PlayerControl, bool>) (x => x.Is(RoleEnum.Jackal) && !x.Data.IsDead && !x.Data.Disconnected)).ToList<PlayerControl>();
+      if (role1.ClosestPlayer.Is(RoleEnum.JackalHunter))
       {
         role1.LastBit = DateTime.UtcNow;
         Utils.RpcMurderPlayer(role1.ClosestPlayer, PlayerControl.LocalPlayer);
         return false;
       }
-      if ((role1.ClosestPlayer.Is(Faction.Crewmates) || role1.ClosestPlayer.Is(Faction.Neutral) && !role1.ClosestPlayer.Is(ModifierEnum.Lover) && list2.Count == 1 && list1.Count < CustomGameOptions.MaxVampiresPerGame))
+      if ((role1.ClosestPlayer.Is(Faction.Crewmates) || role1.ClosestPlayer.Is(Faction.Neutral) && !role1.ClosestPlayer.Is(ModifierEnum.Lover) && list2.Count == 1 && list1.Count < CustomGameOptions.MaxJackalsPerGame))
       {
         List<bool> boolList = Utils.Interact(PlayerControl.LocalPlayer, role1.ClosestPlayer);
         if (boolList[4])
@@ -160,7 +160,7 @@ namespace TownOfRoles.NeutralRoles.VampireMod
       Role.RoleDictionary.Remove(newVamp.PlayerId);
       if (Object.op_Equality((Object) PlayerControl.LocalPlayer, (Object) newVamp))
       {
-        Vampire vampire = new Vampire(PlayerControl.LocalPlayer);
+        Jackal vampire = new Jackal(PlayerControl.LocalPlayer);
         vampire.CorrectKills = valueTuple.Item1;
         vampire.IncorrectKills = valueTuple.Item2;
         vampire.CorrectAssassinKills = valueTuple.Item3;
@@ -169,7 +169,7 @@ namespace TownOfRoles.NeutralRoles.VampireMod
       }
       else
       {
-        Vampire vampire = new Vampire(newVamp);
+        Jackal vampire = new Jackal(newVamp);
         vampire.CorrectKills = valueTuple.Item1;
         vampire.IncorrectKills = valueTuple.Item2;
         vampire.CorrectAssassinKills = valueTuple.Item3;

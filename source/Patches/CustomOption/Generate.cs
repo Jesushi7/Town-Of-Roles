@@ -50,6 +50,7 @@ namespace TownOfRoles.CustomOption
         public static CustomNumberOption UndertakerOn;
 
         public static CustomToggleOption MorphlingVent;
+            
         public static CustomHeaderOption CrewmateModifiers;
         public static CustomNumberOption BaitOn;
         public static CustomNumberOption BlindOn;
@@ -96,7 +97,6 @@ namespace TownOfRoles.CustomOption
         public static CustomNumberOption LargeMapDecreasedLongTasks;
 
         public static CustomHeaderOption CustomGameSettings;      
-        public static CustomToggleOption ColourblindComms;  
         public static CustomNumberOption ChatCooldown;               
         public static CustomToggleOption AppearanceAnimation;        
         public static CustomToggleOption OxySlow;
@@ -180,7 +180,14 @@ namespace TownOfRoles.CustomOption
         public static CustomToggleOption SheriffBodyReport;
 
         public static CustomHeaderOption Engineer;
-        public static CustomNumberOption MaxFixes;
+        public static CustomToggleOption EngiHasVentCooldown;
+        public static CustomNumberOption EngiVentCooldown;
+        public static CustomNumberOption EngiVentDuration;
+        public static CustomStringOption EngineerPer;
+        public static CustomToggleOption EngiHasCooldown;
+        public static CustomNumberOption EngiCooldown;
+        public static CustomNumberOption EngiFixPerRound;
+        public static CustomNumberOption EngiFixPerGame;
 
 
         public static CustomHeaderOption Medic;
@@ -188,6 +195,7 @@ namespace TownOfRoles.CustomOption
         public static CustomStringOption WhoGetsNotification;
         public static CustomToggleOption ShieldBreaks;
         public static CustomToggleOption MedicReportSwitch;
+        public static CustomToggleOption MedicFlashReport;        
         public static CustomNumberOption MedicReportNameDuration;
         public static CustomNumberOption MedicReportColorDuration;
 
@@ -199,6 +207,7 @@ namespace TownOfRoles.CustomOption
 
         public static CustomHeaderOption Swapper;
         public static CustomToggleOption SwapperButton;
+        public static CustomToggleOption SwapAfterVoting;
 
         public static CustomHeaderOption Transporter;
         public static CustomNumberOption TransportCooldown;
@@ -283,6 +292,7 @@ namespace TownOfRoles.CustomOption
 
         public static CustomHeaderOption Assassin;
         public static CustomToggleOption ImpostorsVent;        
+        public static CustomStringOption WhoSeesFailedFlash;        
         public static CustomNumberOption NumberOfImpostorAssassins;
         public static CustomNumberOption NumberOfNeutralKillingAssassins;
         public static CustomNumberOption NumberOfNeutralNonKillingAssassins;        
@@ -327,6 +337,11 @@ namespace TownOfRoles.CustomOption
         public static CustomToggleOption GrenadierVent;
         public static CustomNumberOption FlashRadius;
 
+        public static CustomNumberOption DisguiserOn;
+        public static CustomHeaderOption Disguiser;
+        public static CustomNumberOption DisguiserCooldown;
+        public static CustomNumberOption DisguiserDuration;
+
 		public static CustomNumberOption OracleOn;
 		public static CustomHeaderOption Oracle;
 		public static CustomNumberOption ConfessCooldown;
@@ -362,12 +377,21 @@ namespace TownOfRoles.CustomOption
         public static CustomHeaderOption Amnesiac;
         public static CustomToggleOption RememberArrows;
         public static CustomNumberOption RememberArrowDelay;
+        public static CustomToggleOption BegninNeutralHasTasks;
 
         public static CustomHeaderOption Medium;
         public static CustomNumberOption MediateCooldown;
         public static CustomToggleOption ShowMediatePlayer;
         public static CustomToggleOption ShowMediumToDead;
         public static CustomStringOption DeadRevealed;
+
+        public static CustomNumberOption VultureOn;
+        public static CustomHeaderOption Vulture;
+        public static CustomNumberOption EatNeeded;
+        public static CustomToggleOption VultureVent;
+        public static CustomToggleOption VultureCdOn;
+        public static CustomNumberOption VultureCd;
+        public static CustomToggleOption SheriffKillsVulture;
 
 
         public static CustomHeaderOption Guardian;
@@ -379,6 +403,7 @@ namespace TownOfRoles.CustomOption
         public static CustomStringOption GaOnTargetDeath;
         public static CustomToggleOption GATargetKnows;
         public static CustomToggleOption GAKnowsTargetRole;
+        public static CustomNumberOption MaxPlayers;
 
         public static CustomHeaderOption Mystic;
         public static CustomNumberOption InitialExamineCooldown;
@@ -502,25 +527,28 @@ namespace TownOfRoles.CustomOption
                 PercentFormat);                              
             PhantomOn = new CustomNumberOption(num++, MultiMenu.neutral, "<color=#662962FF>Phantom</color>", 0f, 0f, 100f, 10f,
                 PercentFormat);                                     
-
-
-            NeutralKillingRoles = new CustomHeaderOption(num++, MultiMenu.neutral, "<color=#80797c>Neutral</color> <color=#FF0000FF>Killers</color>");
-            PyromaniacOn = new CustomNumberOption(num++, MultiMenu.neutral, "<color=#e89d51>Pyromaniac</color>", 0f, 0f, 100f, 10f,
+            VultureOn = new CustomNumberOption(num++, MultiMenu.neutral,"<color=#8C4005FF>Vulture</color>", 40f, 0f, 100f, 10f,
                 PercentFormat);
+
+            NeutralKillingRoles = new CustomHeaderOption(num++, MultiMenu.neutral, "<color=#80797c>Neutral</color> <color=#FF0000FF>Killers</color>");                   
             JuggernautOn = new CustomNumberOption(num++, MultiMenu.neutral, "<color=#8C004DFF>Juggernaut</color>", 0f, 0f, 100f, 10f,
-                PercentFormat);                  
-            SerialKillerOn = new CustomNumberOption(num++, MultiMenu.neutral, "<color=#642DEAFF>Serial Killer</color>", 0f, 0f, 100f, 10f,
-                PercentFormat);  
+                PercentFormat);                
             GlitchOn = new CustomNumberOption(num++, MultiMenu.neutral, "<color=#00FF00FF>The Glitch</color>", 0f, 0f, 100f, 10f,
                 PercentFormat);                              
             PlaguebearerOn = new CustomNumberOption(num++, MultiMenu.neutral, "<color=#E6FFB3FF>Plaguebearer</color>", 0f, 0f, 100f, 10f,
                 PercentFormat);
+            PyromaniacOn = new CustomNumberOption(num++, MultiMenu.neutral, "<color=#e89d51>Pyromaniac</color>", 0f, 0f, 100f, 10f,
+                PercentFormat);              
+            SerialKillerOn = new CustomNumberOption(num++, MultiMenu.neutral, "<color=#642DEAFF>Serial Killer</color>", 0f, 0f, 100f, 10f,
+                PercentFormat);                   
             WerewolfOn = new CustomNumberOption(num++, MultiMenu.neutral, "<color=#A86629FF>Werewolf</color>", 0f, 0f, 100f, 10f,
                 PercentFormat);
 
 
             BomberOn = new CustomNumberOption(num++, MultiMenu.imposter, "<color=#FF0000FF>Bomber</color>", 0f, 0f, 100f, 10f,
                 PercentFormat);           
+            DisguiserOn = new CustomNumberOption(num++, MultiMenu.imposter, "<color=#FF0000FF>Disguiser</color>", 0f, 0f, 100f, 10f,
+                PercentFormat);                
             CultistOn = new CustomNumberOption(num++, MultiMenu.imposter, "<color=#FF0000FF>Cultist</color>", 0f, 0f, 100f, 10f,
                 PercentFormat);                      
             EscapistOn = new CustomNumberOption(num++, MultiMenu.imposter, "<color=#FF0000FF>Escapist</color>", 0f, 0f, 100f, 10f,
@@ -648,7 +676,7 @@ namespace TownOfRoles.CustomOption
 
             CustomGameSettings =
                 new CustomHeaderOption(num++, MultiMenu.main, "Custom Game Settings");
-            ColourblindComms = new CustomToggleOption(num++, MultiMenu.main, "Camouflaged Comms", false); 
+           // MaxPlayers = new CustomNumberOption(num++, MultiMenu.main, "Max Players", 12, 4, 15, 1);               
             ChatCooldown = new CustomNumberOption(num++, MultiMenu.main, "Chat Cooldown", 3, 0, 3, 0.1f, CooldownFormat);
             RandomSpawns = new CustomToggleOption(num++, MultiMenu.main, "Enable Random Spawns", false);                   
             OxySlow = new CustomToggleOption(num++, MultiMenu.main, "Oxygen Sabotage Slows Down Players", true);         
@@ -703,6 +731,7 @@ namespace TownOfRoles.CustomOption
                  new CustomNumberOption(num++, MultiMenu.main, "Airship/Submerged Decreased Long Tasks", 0, 0, 3, 1);
 
             Assassin = new CustomHeaderOption(num++, MultiMenu.imposter, "<color=#FF0000FF>Assassin Ability</color>");
+            WhoSeesFailedFlash = new CustomStringOption(num++, MultiMenu.imposter, "Who Sees <color=#FF0000FF>Assassins</color> Failed Notification", new[] { "Everyone","<color=#FF0000FF>Impostors</color>","Target + <color=#FF0000FF>Impostors</color>", "Target + <color=#FF0000FF>AssassinS</color>","<color=#FF0000FF>Assassins</color>"});            
             NumberOfImpostorAssassins = new CustomNumberOption(num++, MultiMenu.imposter, "Number Of <color=#FF0000FF>Impostor</color> <color=#FF0000FF>Assassins</color>", 1, 0, 4, 1);
             NumberOfNeutralKillingAssassins = new CustomNumberOption(num++, MultiMenu.imposter, "Number Of <color=#80797c>Neutral</color> <color=#FF0000FF>Killers</color> <color=#FF0000FF>Assassins</color>", 1, 0, 5, 1);
             NumberOfNeutralNonKillingAssassins = new CustomNumberOption(num++, MultiMenu.imposter, "Number Of <color=#80797c>Neutral</color> Non-Killer <color=#FF0000FF>Assassins</color>", 1, 0, 5, 1);            
@@ -740,9 +769,24 @@ namespace TownOfRoles.CustomOption
 
 
             Engineer =
-                new CustomHeaderOption(num++, MultiMenu.crewmate, "<color=#FFA60AFF>Engineer</color>");
-            MaxFixes =
-                new CustomNumberOption(num++, MultiMenu.crewmate, "Maximum Number Of Fixes", 5, 1, 15, 1);
+                new CustomHeaderOption(num++, MultiMenu.crewmate,  "<color=#FFA60AFF>Engineer</color>");
+            EngiHasVentCooldown =
+                new CustomToggleOption(num++, MultiMenu.crewmate, "<color=#FFA60AFF>Engineer</color> Has A Vent Cooldown & Duration", true);
+            EngiVentCooldown = 
+                new CustomNumberOption(num++, MultiMenu.crewmate,  "<color=#FFA60AFF>Engineer</color> Vent Cooldown", 25f, 10f, 60f, 2.5f);
+            EngiVentDuration = 
+                new CustomNumberOption(num++, MultiMenu.crewmate,  "<color=#FFA60AFF>Engineer</color> Vent Duration", 25f, 10f, 60f, 2.5f);
+            EngineerPer =
+                new CustomStringOption(num++, MultiMenu.crewmate,  "<color=#FFA60AFF>Engineer</color> Fix Per", new[] { "Custom", "Round", "Game" });
+            EngiHasCooldown =
+                new CustomToggleOption(num++, MultiMenu.crewmate,  "<color=#FFA60AFF>Engineer</color> Has A Fix Cooldown", false);
+            EngiCooldown = 
+                new CustomNumberOption(num++, MultiMenu.crewmate,  "<color=#FFA60AFF>Engineer</color> Fix Cooldown", 25f, 10f, 60f, 2.5f);
+            EngiFixPerRound = 
+                new CustomNumberOption(num++, MultiMenu.crewmate,  "<color=#FFA60AFF>Engineer</color> Max Fix Per Round", 1, 0, 10, 1);
+            EngiFixPerGame =
+                new CustomNumberOption(num++, MultiMenu.crewmate,  "<color=#FFA60AFF>Engineer</color> Max Fix Per Game", 2, 0, 100, 1);
+
 
             Informant = new CustomHeaderOption(num++, MultiMenu.crewmate, "<color=#D4AF37FF>Informant</color>");
 
@@ -768,6 +812,7 @@ namespace TownOfRoles.CustomOption
                     new[] { "<color=#7efbc2>Medic</color>", "Shielded", "Everyone", "Nobody" });
             ShieldBreaks = new CustomToggleOption(num++, MultiMenu.crewmate, "Shield Breaks On Murder Attempt", false);
             MedicReportSwitch = new CustomToggleOption(num++, MultiMenu.crewmate, "Show <color=#7efbc2>Medic</color> Reports");
+            MedicFlashReport = new CustomToggleOption(num++, MultiMenu.crewmate,  "<color=#7efbc2>Medic</color> Report Can't Have Name If Flashed By <color=#FF0000FF>Grenadier</color>", true);
             MedicReportNameDuration =
                 new CustomNumberOption(num++, MultiMenu.crewmate, "Time Where <color=#7efbc2>Medic</color> Will Have Name", 0f, 0f, 60f, 2.5f,
                     CooldownFormat);
@@ -817,7 +862,9 @@ namespace TownOfRoles.CustomOption
                 new CustomHeaderOption(num++, MultiMenu.crewmate, "<color=#f8cd46>Sheriff</color>");
             SheriffKillOther =
                 new CustomToggleOption(num++, MultiMenu.crewmate, "<color=#f8cd46>Sheriff</color> Miskill Kills <color=#8cffff>Crewmate</color>", false);
-            SheriffKillsExecutioner =
+            SheriffKillsVulture =
+                new CustomToggleOption(num++, MultiMenu.crewmate,  "<color=#f8cd46>Sheriff</color> Kills <color=#2d4222>Vulture</color>", true);
+           SheriffKillsExecutioner =
                 new CustomToggleOption(num++, MultiMenu.crewmate, "<color=#f8cd46>Sheriff</color> Kills <color=#2d4222>Executioner</color>", false);
             SheriffKillsJester =
                 new CustomToggleOption(num++, MultiMenu.crewmate, "<color=#f8cd46>Sheriff</color> Kills <color=#cb81c0>Jester</color>", false);
@@ -852,6 +899,8 @@ namespace TownOfRoles.CustomOption
                 new CustomHeaderOption(num++, MultiMenu.crewmate, "<color=#863756>Swapper</color>");
             SwapperButton =
                 new CustomToggleOption(num++, MultiMenu.crewmate, "<color=#863756>Swapper</color> Can Button", true);
+            SwapAfterVoting =
+                new CustomToggleOption(num++, MultiMenu.crewmate, "<color=#863756>Swapper</color> Can Swap After Voting", true);
 
             Tracker =
                 new CustomHeaderOption(num++, MultiMenu.crewmate, "<color=#009900FF>Tracker</color>");
@@ -898,7 +947,7 @@ namespace TownOfRoles.CustomOption
             MaxAlerts = new CustomNumberOption(num++, MultiMenu.crewmate, "Maximum Number Of Alerts", 5, 1, 15, 1);
         
 
-            NeutralRolesMinMax = new CustomHeaderOption(num++, MultiMenu.neutral, "<color=#80797c>Neutral</color> Min/Max");
+            NeutralRolesMinMax = new CustomHeaderOption(num++, MultiMenu.neutral, "<color=#80797c>Neutral</color> Roles Settings");
             MinNeutralNonKillingRoles =
                 new CustomNumberOption(num++, MultiMenu.neutral, "Min <color=#80797c>Neutral</color> Non-<color=#FF0000FF>Killing</color> Roles", 1, 0, 5, 1);
             MaxNeutralNonKillingRoles =
@@ -907,7 +956,8 @@ namespace TownOfRoles.CustomOption
                 new CustomNumberOption(num++, MultiMenu.neutral, "Min <color=#80797c>Neutral</color> <color=#FF0000FF>Killing</color> Roles", 1, 0, 4, 1);
             MaxNeutralKillingRoles =
                 new CustomNumberOption(num++, MultiMenu.neutral, "Max <color=#80797c>Neutral</color> <color=#FF0000FF>Killing</color> Roles", 1, 0, 4, 1);
-
+            BegninNeutralHasTasks =
+                new CustomToggleOption(num++, MultiMenu.neutral, "Begnin Neutrals Roles Can Use Tasks", false);
 
             Amnesiac = new CustomHeaderOption(num++, MultiMenu.neutral, "<color=#80B2FFFF>Amnesiac</color>");
             RememberArrows =
@@ -960,19 +1010,26 @@ namespace TownOfRoles.CustomOption
             PhantomTasksRemaining =
                  new CustomNumberOption(num++, MultiMenu.neutral, "Tasks Remaining When <color=#662962FF>Phantom</color> Can Be Clicked", 5, 1, 15, 1);
 
+            Vulture =
+                new CustomHeaderOption(num++, MultiMenu.neutral, "<color=#8C4005FF>Vulture</color>");
+            EatNeeded =
+                new CustomNumberOption(num++, MultiMenu.neutral, "Number Of Bodies To Win", 5, 1, 15, 1);
+            VultureCdOn =
+                new CustomToggleOption(num++, MultiMenu.neutral, "<color=#8C4005FF>Vulture</color> Have A Cooldown", true);
+            VultureVent =
+                new CustomToggleOption(num++, MultiMenu.neutral, "<color=#8C4005FF>Vulture</color> Can Vent", true);
+            VultureCd =
+                new CustomNumberOption(num++,MultiMenu.neutral,  "<color=#8C4005FF>Vulture</color> Cooldown", 15, 10, 60, 2.5f, CooldownFormat);
 
-            Pyromaniac = new CustomHeaderOption(num++, MultiMenu.neutral, "<color=#e89d51>Pyromaniac</color>");
-            DouseCooldown =
-                new CustomNumberOption(num++, MultiMenu.neutral, "Douse Cooldown", 25f, 10f, 60f, 2.5f, CooldownFormat);
-            MaxDoused =
-                new CustomNumberOption(num++, MultiMenu.neutral, "Maximum Alive Players Doused", 5, 1, 15, 1);
-            ArsoImpVision =
-                new CustomToggleOption(num++, MultiMenu.neutral, "<color=#e89d51>Pyromaniac</color> Has Impostor Vision", false);               
-           ArsoVent =
-                new CustomToggleOption(num++, MultiMenu.neutral, "<color=#e89d51>Pyromaniac</color> Can Vent", false);                
-            IgniteCdRemoved =
-                new CustomToggleOption(num++, MultiMenu.neutral, "Ignite Cooldown Removed When <color=#e89d51>Pyromaniac</color> Is Last Killer", false);
-            
+
+           
+            Juggernaut =
+                new CustomHeaderOption(num++, MultiMenu.neutral, "<color=#8C004DFF>Juggernaut</color>");
+            JuggKillCooldown = new CustomNumberOption(num++, MultiMenu.neutral, "<color=#8C004DFF>Juggernaut</color> Initial Kill Cooldown", 25f, 10f, 60f, 2.5f, CooldownFormat);
+            ReducedKCdPerKill = new CustomNumberOption(num++, MultiMenu.neutral, "Reduced Kill Cooldown Per Kill", 5f, 2.5f, 10f, 2.5f, CooldownFormat);
+            JuggVent =
+                new CustomToggleOption(num++, MultiMenu.neutral, "<color=#8C004DFF>Juggernaut</color> Can Vent", false);
+
             TheGlitch =
                 new CustomHeaderOption(num++, MultiMenu.neutral, "<color=#00FF00FF>The Glitch</color>");
             MimicCooldownOption = new CustomNumberOption(num++, MultiMenu.neutral, "Mimic Cooldown", 25f, 10f, 60f, 2.5f, CooldownFormat);
@@ -984,13 +1041,6 @@ namespace TownOfRoles.CustomOption
             GlitchVent =
                 new CustomToggleOption(num++, MultiMenu.neutral, "<color=#00FF00FF>The Glitch</color> Can Vent", false);
 
-            Juggernaut =
-                new CustomHeaderOption(num++, MultiMenu.neutral, "<color=#8C004DFF>Juggernaut</color>");
-            JuggKillCooldown = new CustomNumberOption(num++, MultiMenu.neutral, "<color=#8C004DFF>Juggernaut</color> Initial Kill Cooldown", 25f, 10f, 60f, 2.5f, CooldownFormat);
-            ReducedKCdPerKill = new CustomNumberOption(num++, MultiMenu.neutral, "Reduced Kill Cooldown Per Kill", 5f, 2.5f, 10f, 2.5f, CooldownFormat);
-            JuggVent =
-                new CustomToggleOption(num++, MultiMenu.neutral, "<color=#8C004DFF>Juggernaut</color> Can Vent", false);
-
 
             Plaguebearer = new CustomHeaderOption(num++, MultiMenu.neutral, "<color=#E6FFB3FF>Plaguebearer</color>");
             InfectCooldown =
@@ -999,6 +1049,23 @@ namespace TownOfRoles.CustomOption
                 new CustomToggleOption(num++, MultiMenu.neutral, "<color=#E6FFB3FF>Plaguebearer</color> Can Vent", false);           
             PestVent =
                 new CustomToggleOption(num++, MultiMenu.neutral, "<color=#424242FF>Pestilence</color> Can Vent", false);
+
+ Pyromaniac = new CustomHeaderOption(num++, MultiMenu.neutral, "<color=#e89d51>Pyromaniac</color>");
+            DouseCooldown =
+                new CustomNumberOption(num++, MultiMenu.neutral, "Douse Cooldown", 25f, 10f, 60f, 2.5f, CooldownFormat);
+            MaxDoused =
+                new CustomNumberOption(num++, MultiMenu.neutral, "Maximum Alive Players Doused", 5, 1, 15, 1);
+            ArsoImpVision =
+                new CustomToggleOption(num++, MultiMenu.neutral, "<color=#e89d51>Pyromaniac</color> Has Impostor Vision", false);               
+           ArsoVent =
+                new CustomToggleOption(num++, MultiMenu.neutral, "<color=#e89d51>Pyromaniac</color> Can Vent", false);                
+            IgniteCdRemoved =
+                new CustomToggleOption(num++, MultiMenu.neutral, "Ignite Cooldown Removed When <color=#e89d51>Pyromaniac</color> Is Last Killer", false);
+
+
+            SerialKiller = new CustomHeaderOption(num++, MultiMenu.neutral, "<color=#642DEAFF>Serial Killer</color>");
+            SerialKillerVent =
+                new CustomToggleOption(num++, MultiMenu.neutral, "<color=#642DEAFF>Serial Killer</color> Can Vent", false);
 
 
             Werewolf = new CustomHeaderOption(num++, MultiMenu.neutral, "<color=#A86629FF>Werewolf</color>");
@@ -1011,10 +1078,6 @@ namespace TownOfRoles.CustomOption
             WerewolfVent =
                 new CustomToggleOption(num++, MultiMenu.neutral, "<color=#A86629FF>Werewolf</color> Can Vent", false);
 
-            SerialKiller = new CustomHeaderOption(num++, MultiMenu.neutral, "<color=#642DEAFF>Serial Killer</color>");
-            SerialKillerVent =
-                new CustomToggleOption(num++, MultiMenu.neutral, "<color=#642DEAFF>Serial Killer</color> Can Vent", false);
-
 
             Bomber =
                 new CustomHeaderOption(num++, MultiMenu.imposter, "<color=#FF0000FF>Bomber</color>");
@@ -1026,6 +1089,13 @@ namespace TownOfRoles.CustomOption
                 new CustomNumberOption(num++, MultiMenu.imposter, "Detonate Radius", 0.25f, 0.05f, 1f, 0.05f, MultiplierFormat);
             BomberVent =
                 new CustomToggleOption(num++, MultiMenu.imposter, "<color=#FF0000FF>Bomber</color> Can Vent", false);
+
+            Disguiser =
+                new CustomHeaderOption(num++, MultiMenu.imposter, "<color=#FF0000FF>Disguiser</color>");
+            DisguiserCooldown =
+                new CustomNumberOption(num++,MultiMenu.imposter,  "<color=#FF0000FF>Disguise</color> Cooldown", 25, 10, 40, 2.5f, CooldownFormat);
+            DisguiserDuration =
+                new CustomNumberOption(num++, MultiMenu.imposter, "<color=#FF0000FF>Disguise</color> Duration", 10, 5, 15, 1f, CooldownFormat);
 
             Cultist =
                 new CustomHeaderOption(num++, MultiMenu.imposter, "<color=#FF0000FF>Cultist</color>"); 

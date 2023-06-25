@@ -9,8 +9,10 @@ using TownOfRoles.CrewmateRoles.MedicMod;
 namespace TownOfRoles.ImpostorRoles.VampireMod
 {
     [HarmonyPatch(typeof(KillButton), nameof(KillButton.DoClick))]
-    public class PerformPoisonKill
+    public class PerformBiteKill
     {
+        public static Sprite BiteSprite => TownOfRoles.PoisonSprite;
+        public static Sprite BittenSprite => TownOfRoles.PoisonedSprite;
 
         public static bool Prefix(KillButton __instance)
         {
@@ -22,7 +24,7 @@ namespace TownOfRoles.ImpostorRoles.VampireMod
             var target = role.ClosestPlayer;
             if (target == null) return false;
             if (!__instance.isActiveAndEnabled) return false;
-            if (role.PoisonTimer() > 0) return false;
+            if (role.BiteTimer() > 0) return false;
             if (role.Enabled == true) return false;
             if (role.Player.inVent)
             {

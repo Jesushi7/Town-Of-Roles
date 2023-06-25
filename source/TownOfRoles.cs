@@ -66,6 +66,8 @@ public static AmongUs.GameOptions.NormalGameOptionsV07 VanillaOptions => GameOpt
         public static Sprite CycleForwardSprite;
         public static Sprite GuessSprite;
         public static Sprite ZoomPlusButton;
+
+        public static Sprite VultureEat;        
         public static Sprite ZoomMinusButton;
         public static Sprite ShootSprite;        
         public static Sprite DragSprite;
@@ -109,11 +111,11 @@ public static AmongUs.GameOptions.NormalGameOptionsV07 VanillaOptions => GameOpt
         public static Sprite LobbyPaintSprite;        
         public static Sprite NeutralSettingsButtonSprite;
         public static Sprite ImposterSettingsButtonSprite;
+        public static Sprite Disguise;        
         public static Sprite ModifierSettingsButtonSprite;
         public static Sprite ToUBanner;
         public static Sprite UpdateTORButton;
         public static Sprite UpdateSubmergedButton;
-
         public static Sprite HorseEnabledImage;
         public static Sprite HorseDisabledImage;
         public static Sprite VaultSprite;
@@ -150,6 +152,7 @@ public static AmongUs.GameOptions.NormalGameOptionsV07 VanillaOptions => GameOpt
             Footprint = CreateSprite("TownOfRoles.Resources.Footprint.png");
             NormalKill = CreateSprite("TownOfRoles.Resources.NormalKill.png");
             MedicSprite = CreateSprite("TownOfRoles.Resources.Medic.png");
+            HackSprite = CreateSprite("TownOfRoles.Resources.HackerButton.png");            
             SnitchSprite = CreateSprite("TownOfRoles.Resources.Snitch.png");
             SampleSprite = CreateSprite("TownOfRoles.Resources.Sample.png");
             MorphSprite = CreateSprite("TownOfRoles.Resources.Morph.png");
@@ -168,6 +171,7 @@ public static AmongUs.GameOptions.NormalGameOptionsV07 VanillaOptions => GameOpt
             PoisonSprite = CreateSprite("TownOfRoles.Resources.Poison.png");
             PoisonedSprite = CreateSprite("TownOfRoles.Resources.Poisoned.png");            
             DisperseSprite = CreateSprite("TownOfRoles.Resources.Disperse.png");
+            VultureEat = CreateSprite("TownOfRoles.Resources.VultureEat.png");            
             DragSprite = CreateSprite("TownOfRoles.Resources.Drag.png");
             DropSprite = CreateSprite("TownOfRoles.Resources.Drop.png");
             JesterVent = CreateSprite("TownOfRoles.Resources.JesterVent.png");          
@@ -188,6 +192,7 @@ public static AmongUs.GameOptions.NormalGameOptionsV07 VanillaOptions => GameOpt
             ProtectSprite = CreateSprite("TownOfRoles.Resources.Protect.png");
             SilenceSprite = CreateSprite("TownOfRoles.Resources.Silence.png");
             Rewind = CreateSprite("TownOfRoles.Resources.Rewind.png");            
+            Disguise = CreateSprite("TownOfRoles.Resources.Disguise.png");            
             SilenceLetterSprite = CreateSprite("TownOfRoles.Resources.SilenceLetter.png");
             SilenceOverlaySprite = CreateSprite("TownOfRoles.Resources.SilenceOverlay.png");
             LighterSprite = CreateSprite("TownOfRoles.Resources.Lighter.png");

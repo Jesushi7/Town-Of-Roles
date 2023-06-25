@@ -1154,6 +1154,10 @@ public static bool IsImpostor(this PlayerVoteArea playerinfo) => PlayerByVoteAre
             {
                 role.LastTracked = DateTime.UtcNow;
             }
+            foreach (Vulture role in Role.GetRoles(RoleEnum.Vulture))
+            {
+                role.LastEat = DateTime.UtcNow;
+            }            
             foreach (Transporter role in Role.GetRoles(RoleEnum.Transporter))
             {
                 role.LastTransported = DateTime.UtcNow;

@@ -11,11 +11,13 @@ using TownOfRoles.Roles.Modifiers;
 using TownOfRoles.Extensions;
 using TownOfRoles.CrewmateRoles.ImitatorMod;
 using RewiredConsts;
+using Reactor.Utilities;
 
 namespace TownOfRoles.Modifiers.AssassinMod
 {
     public class AssassinKill
     {
+        public static bool HaveFailedGuess = false;        
         public static void RpcMurderPlayer(PlayerControl player, PlayerControl assassin)
         {
             PlayerVoteArea voteArea = MeetingHud.Instance.playerStates.First(
@@ -33,7 +35,22 @@ namespace TownOfRoles.Modifiers.AssassinMod
             writer.Write(assassin.PlayerId);
             AmongUsClient.Instance.FinishRpcImmediately(writer);
         }
+        public static void AssassinFail(byte playerId, byte targetId)
+        {
+            if ((PlayerControl.LocalPlayer.PlayerId == playerId || PlayerControl.LocalPlayer.PlayerId == targetId) && (CustomGameOptions.WhoSeesFailedFlash == WhoSeesFailedFlash.TargetPlusAssassin))
+                Coroutines.Start(Utils.FlashCoroutine(Color.red));
 
+            if ((PlayerControl.LocalPlayer.Data.IsImpostor() || PlayerControl.LocalPlayer.PlayerId == targetId) && (CustomGameOptions.WhoSeesFailedFlash == WhoSeesFailedFlash.TargetPlusImpostors))
+                Coroutines.Start(Utils.FlashCoroutine(Color.red));
+
+            if (PlayerControl.LocalPlayer.Data.IsImpostor() && CustomGameOptions.WhoSeesFailedFlash == WhoSeesFailedFlash.Impostors)
+                Coroutines.Start(Utils.FlashCoroutine(Color.red));
+                
+            if (CustomGameOptions.WhoSeesFailedFlash == WhoSeesFailedFlash.Everyone)
+                Coroutines.Start(Utils.FlashCoroutine(Color.red));
+
+            HaveFailedGuess = true;
+        }
         public static void MurderPlayer(PlayerControl player, bool checkLover = true)
         {
             PlayerVoteArea voteArea = MeetingHud.Instance.playerStates.First(

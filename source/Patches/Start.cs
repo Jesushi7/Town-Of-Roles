@@ -52,7 +52,12 @@ namespace TownOfRoles.Patches
                 tracker.LastTracked = DateTime.UtcNow;
                 tracker.LastTracked = tracker.LastTracked.AddSeconds(CustomGameOptions.InitialCooldowns - CustomGameOptions.TrackCd);
             }
-
+            if (PlayerControl.LocalPlayer.Is(RoleEnum.Vulture))
+            {
+                var vulture = Role.GetRole<Vulture>(PlayerControl.LocalPlayer);
+                vulture.LastEat = DateTime.UtcNow;
+                vulture.LastEat = vulture.LastEat.AddSeconds(CustomGameOptions.InitialCooldowns - CustomGameOptions.VultureCd);
+            }
             if (PlayerControl.LocalPlayer.Is(RoleEnum.Transporter))
             {
                 var transporter = Role.GetRole<Transporter>(PlayerControl.LocalPlayer);

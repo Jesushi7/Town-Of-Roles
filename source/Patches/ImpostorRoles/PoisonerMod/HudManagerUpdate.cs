@@ -23,19 +23,12 @@ namespace TownOfRoles.ImpostorRoles.VampireMod
             var role = Role.GetRole<Vampire>(PlayerControl.LocalPlayer);
             if (role.BiteButton == null)
             {
-                role.BiteButton = Object.Instantiate(__instance.KillButton, HudManager.Instance.transform);
+                role.BiteButton = Object.Instantiate(__instance.KillButton, __instance.KillButton.transform.parent);
                 role.BiteButton.graphic.enabled = true;
+                role.BiteButton.gameObject.SetActive(false);
             }
             role.BiteButton.graphic.sprite = PoisonSprite;
             role.BiteButton.transform.localPosition = new Vector3(0f, 1f, 0f);
-            
-            var flag = false;
-            var keyInt = Input.GetKeyInt(KeyCode.Q);
-            var controller = ConsoleJoystick.player.GetButtonDown(8);
-            if (keyInt | controller && role.BiteButton != null && flag && !PlayerControl.LocalPlayer.Data.IsDead)
-                __instance.KillButton.DoClick();
-            role.BiteButton.gameObject.SetActive(!PlayerControl.LocalPlayer.Data.IsDead && !MeetingHud.Instance);
-            __instance.KillButton.Hide();
 
             var notImp = PlayerControl.AllPlayerControls
                     .ToArray()
@@ -72,7 +65,7 @@ namespace TownOfRoles.ImpostorRoles.VampireMod
                         role.BiteButton.graphic.color = Palette.DisabledClear;
                         role.BiteButton.graphic.material.SetFloat("_Desat", 1f);
                     }
-                    role.BiteButton.SetCoolDown(role.PoisonTimer(), GameOptionsManager.Instance.currentNormalGameOptions.KillCooldown);
+                    role.BiteButton.SetCoolDown(role.BiteTimer(), GameOptionsManager.Instance.currentNormalGameOptions.KillCooldown);
                     role.BittenPlayer = PlayerControl.LocalPlayer; //Only do this to stop repeatedly trying to re-kill poisoned player. null didn't work for some reason
                 }
             }

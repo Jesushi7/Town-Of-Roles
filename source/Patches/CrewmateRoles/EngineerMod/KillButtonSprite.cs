@@ -8,21 +8,42 @@ namespace TownOfRoles.CrewmateRoles.EngineerMod
     [HarmonyPatch(typeof(HudManager))]
     public class KillButtonSprite
     {
+        private static Sprite Sprite => TownOfRoles.EngineerFix;
+
+        private static void UpdtateEngineerVentTimer(HudManager __instance, Engineer role)
+        {
+            var ventButton = __instance.ImpostorVentButton;
+            if (ventButton.cooldownTimerText == null) ventButton.cooldownTimerText = Object.Instantiate(__instance.KillButton.cooldownTimerText, ventButton.transform);
+            if (PlayerControl.LocalPlayer.inVent)
+            {
+                if (role.TimeRemaining <= 0)
+                {
+                    ventButton.DoClick();
+                }
+                ventButton.SetCoolDown(role.TimeRemaining, CustomGameOptions.EngiVentDuration);
+                role.TimeRemaining -= Time.deltaTime;
+            }
+            else
+            {
+                ventButton.SetCoolDown(role.EngineerTimer(role.LastVent, CustomGameOptions.EngiVentCooldown), CustomGameOptions.EngiVentCooldown);
+            }
+        }
+
         [HarmonyPatch(nameof(HudManager.Update))]
         public static void Postfix(HudManager __instance)
         {
-            if (CustomGameOptions.GameMode == GameMode.Cultist) return;
             if (PlayerControl.AllPlayerControls.Count <= 1) return;
             if (PlayerControl.LocalPlayer == null) return;
             if (PlayerControl.LocalPlayer.Data == null) return;
             if (!PlayerControl.LocalPlayer.Is(RoleEnum.Engineer)) return;
-
             var role = Role.GetRole<Engineer>(PlayerControl.LocalPlayer);
+            if (CustomGameOptions.EngiHasVentCooldown) UpdtateEngineerVentTimer(__instance, role);
+            if (__instance.KillButton == null) return;
 
-            if (role.UsesText == null && role.UsesLeft > 0)
+            if (role.UsesText == null && role.EngiFixPerRound > 0 && role.EngiFixPerGame > 0)
             {
                 role.UsesText = Object.Instantiate(__instance.KillButton.cooldownTimerText, __instance.KillButton.transform);
-                role.UsesText.gameObject.SetActive(false);
+                role.UsesText.gameObject.SetActive(true);
                 role.UsesText.transform.localPosition = new Vector3(
                     role.UsesText.transform.localPosition.x + 0.26f,
                     role.UsesText.transform.localPosition.y + 0.29f,
@@ -33,16 +54,15 @@ namespace TownOfRoles.CrewmateRoles.EngineerMod
             }
             if (role.UsesText != null)
             {
-                role.UsesText.text = role.UsesLeft + "";
+                role.UsesText.text = role.EngiFixPerRound + "/" + role.EngiFixPerGame;
             }
-
+            
+            __instance.KillButton.graphic.sprite = Sprite;
+            if ((CustomGameOptions.EngineerFixPer == EngineerFixPer.Custom) && CustomGameOptions.EngiHasCooldown) __instance.KillButton.SetCoolDown(role.EngineerTimer(role.LastFix, CustomGameOptions.EngiCooldown), CustomGameOptions.EngiCooldown);
+            else __instance.KillButton.SetCoolDown(0f, 10f);
             __instance.KillButton.SetCoolDown(0f, 10f);
-            __instance.KillButton.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
-                    && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
-                    && AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started);
-            role.UsesText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
-                    && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
-                    && AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started);
+            __instance.KillButton.gameObject.SetActive(!PlayerControl.LocalPlayer.Data.IsDead &&
+                                                       __instance.UseButton.isActiveAndEnabled && !MeetingHud.Instance && role.EngiFixPerRound > 0 && role.EngiFixPerGame > 0);
             if (PlayerControl.LocalPlayer.Data.IsDead) return;
             if (!ShipStatus.Instance) return;
             var system = ShipStatus.Instance.Systems[SystemTypes.Sabotage].Cast<SabotageSystemType>();
@@ -51,15 +71,19 @@ namespace TownOfRoles.CrewmateRoles.EngineerMod
             var dummyActive = system.dummy.IsActive;
             var sabActive = specials.Any(s => s.IsActive);
             var renderer = __instance.KillButton.graphic;
-            if (sabActive & !dummyActive & role.ButtonUsable & __instance.KillButton.enabled)
+            if (sabActive & !dummyActive & role.EngiFixPerRound > 0 & role.EngiFixPerGame > 0 & __instance.KillButton.enabled)
             {
                 renderer.color = Palette.EnabledColor;
                 renderer.material.SetFloat("_Desat", 0f);
+                role.UsesText.color = Palette.EnabledColor;
+                role.UsesText.material.SetFloat("_Desat", 0f);
                 return;
             }
 
             renderer.color = Palette.DisabledClear;
             renderer.material.SetFloat("_Desat", 1f);
+            role.UsesText.color = Palette.DisabledClear;
+            role.UsesText.material.SetFloat("_Desat", 1f);
         }
     }
 }

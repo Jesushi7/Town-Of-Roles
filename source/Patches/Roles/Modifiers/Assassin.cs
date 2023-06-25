@@ -58,11 +58,11 @@ namespace TownOfRoles.Roles.Modifiers
                 }         
                 if (CustomGameOptions.AmnesiacOn > 0 || (CustomGameOptions.ExecutionerOn > 0 && CustomGameOptions.OnTargetDead == OnTargetDead.Amnesiac) || (CustomGameOptions.GuardianOn > 0 && CustomGameOptions.GaOnTargetDeath == BecomeOptions.Amnesiac)) ColorMapping.Add("Amnesiac", Colors.Amnesiac);
                 if (CustomGameOptions.GuardianOn > 0) ColorMapping.Add("Guardian", Colors.Guardian);
+                if (CustomGameOptions.VultureOn > 0) ColorMapping.Add("Vulture", Colors.Vulture);
                 if (CustomGameOptions.ExecutionerOn > 0) ColorMapping.Add("Executioner", Colors.Executioner);
                 if (CustomGameOptions.JesterOn > 0 || (CustomGameOptions.ExecutionerOn > 0 && CustomGameOptions.OnTargetDead == OnTargetDead.Jester) || (CustomGameOptions.GuardianOn > 0 && CustomGameOptions.GaOnTargetDeath == BecomeOptions.Jester)) ColorMapping.Add("Jester", Colors.Jester);
                 if (CustomGameOptions.PyromaniacOn > 0 && !PlayerControl.LocalPlayer.Is(RoleEnum.Pyromaniac)) ColorMapping.Add("Pyromaniac", Colors.Pyromaniac);
                 if (CustomGameOptions.GlitchOn > 0 && !PlayerControl.LocalPlayer.Is(RoleEnum.Glitch)) ColorMapping.Add("The Glitch", Colors.Glitch);
-
                 if (CustomGameOptions.WerewolfOn > 0 && !PlayerControl.LocalPlayer.Is(RoleEnum.Werewolf)) ColorMapping.Add("Werewolf", Colors.Werewolf);
                 if (CustomGameOptions.JuggernautOn > 0 && !PlayerControl.LocalPlayer.Is(RoleEnum.Juggernaut)) ColorMapping.Add("Juggernaut", Colors.Juggernaut);
                 if (CustomGameOptions.SerialKillerOn > 0 && !PlayerControl.LocalPlayer.Is(RoleEnum.SerialKiller)) ColorMapping.Add("Serial Killer", Colors.SerialKiller);
@@ -70,6 +70,7 @@ namespace TownOfRoles.Roles.Modifiers
                 if (!PlayerControl.LocalPlayer.Is(Faction.Impostors))
                 {
                     ColorMapping.Add("Impostor", Colors.Impostor);
+                    if (CustomGameOptions.DisguiserOn > 0) ColorMapping.Add("Disguiser", Colors.Impostor);
                     if (CustomGameOptions.VampireOn > 0) ColorMapping.Add("Vampire", Colors.Impostor);
                     if (CustomGameOptions.CultistOn > 0) ColorMapping.Add("Cultist", Colors.Impostor);
                     if (CustomGameOptions.CultistOn > 0) ColorMapping.Add("Follower", Colors.Impostor);

@@ -10,22 +10,22 @@ namespace TownOfRoles.CrewmateRoles.EngineerMod
     {
         public static bool Prefix(KillButton __instance)
         {
-            if (CustomGameOptions.GameMode == GameMode.Cultist) return false;
             if (__instance != DestroyableSingleton<HudManager>.Instance.KillButton) return true;
             var flag = PlayerControl.LocalPlayer.Is(RoleEnum.Engineer);
             if (!flag) return true;
             if (!PlayerControl.LocalPlayer.CanMove) return false;
             if (PlayerControl.LocalPlayer.Data.IsDead) return false;
-            if (!__instance.enabled) return false;
+            if (!__instance.enabled || __instance.isCoolingDown) return false;
             var role = Role.GetRole<Engineer>(PlayerControl.LocalPlayer);
-            if (!role.ButtonUsable) return false;
+            if (role.EngiFixPerRound == 0 || role.EngiFixPerGame == 0) return false;
+
             var system = ShipStatus.Instance.Systems[SystemTypes.Sabotage].Cast<SabotageSystemType>();
-            if (system == null) return false;
             var specials = system.specials.ToArray();
             var dummyActive = system.dummy.IsActive;
             var sabActive = specials.Any(s => s.IsActive);
             if (!sabActive | dummyActive) return false;
-            role.UsesLeft -= 1;
+            role.EngiFixPerGame--;
+            role.EngiFixPerRound--;
 
             switch (GameOptionsManager.Instance.currentNormalGameOptions.MapId)
             {

@@ -19,6 +19,7 @@ namespace TownOfRoles
     public class KillButtonSprite
     {
         private static Sprite Fix => TownOfRoles.EngineerFix;
+        private static Sprite Hack => TownOfRoles.HackSprite;        
         private static Sprite Camo => TownOfRoles.CamoSprite;        
         private static Sprite Rewind => TownOfRoles.Rewind;
         private static Sprite Medic => TownOfRoles.MedicSprite;
@@ -27,7 +28,9 @@ namespace TownOfRoles
         private static Sprite Revive => TownOfRoles.ReviveSprite;
         private static Sprite Alert => TownOfRoles.AlertSprite;
         private static Sprite Remember => TownOfRoles.RememberSprite;
-        private static Sprite Track => TownOfRoles.TrackSprite;
+
+        private static Sprite Bite => TownOfRoles.PoisonSprite;            
+        private static Sprite Track => TownOfRoles.TrackSprite;    
         private static Sprite Transport => TownOfRoles.TransportSprite;
         private static Sprite Shoot => TownOfRoles.ShootSprite;        
         private static Sprite Mediate => TownOfRoles.MediateSprite;
@@ -103,6 +106,11 @@ namespace TownOfRoles
                 __instance.KillButton.graphic.sprite = Mediate;
                 flag = true;
             }
+            else if (PlayerControl.LocalPlayer.Is(RoleEnum.Vampire))
+            {
+                __instance.KillButton.graphic.sprite = Bite;
+                flag = true;
+            }            
             else if (PlayerControl.LocalPlayer.Is(RoleEnum.Guardian))
             {
                 __instance.KillButton.graphic.sprite = Protect;

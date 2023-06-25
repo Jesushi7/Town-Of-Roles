@@ -72,6 +72,8 @@ namespace TownOfRoles.Patches {
                     else if (role.Value == RoleEnum.Transporter) { playerRole += "<color=#" + Patches.Colors.Transporter.ToHtmlStringRGBA() + ">Transporter</color> > "; }
                     else if (role.Value == RoleEnum.Medium) { playerRole += "<color=#" + Patches.Colors.Medium.ToHtmlStringRGBA() + ">Medium</color> > "; }
                     else if (role.Value == RoleEnum.Trapper) { playerRole += "<color=#" + Patches.Colors.Trapper.ToHtmlStringRGBA() + ">Trapper</color> > "; }
+                    else if (role.Value == RoleEnum.Disguiser) {playerRole += "<color=#"+Patches.Colors.Impostor.ToHtmlStringRGBA()+">Disguiser</color> > ";}
+                     else if (role.Value == RoleEnum.Vulture) {playerRole += "<color=#"+Patches.Colors.Vulture.ToHtmlStringRGBA()+">Vulture</color> > ";}
                     else if (role.Value == RoleEnum.Oracle) { playerRole += "<color=#" + Patches.Colors.Oracle.ToHtmlStringRGBA() + ">Oracle</color> > "; } 
                     else if (role.Value == RoleEnum.Guardian) { playerRole += "<color=#" + Patches.Colors.Guardian.ToHtmlStringRGBA() + ">Guardian</color> > "; }
                     else if (role.Value == RoleEnum.Mystic || role.Value == RoleEnum.CultistMystic) { playerRole += "<color=#" + Patches.Colors.Mystic.ToHtmlStringRGBA() + ">Mystic</color> > "; }

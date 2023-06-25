@@ -22,6 +22,7 @@ namespace TownOfRoles.Patches
         public readonly static Color32 Mystic = new Color32(77, 77, 255, 255);
         public readonly static Color32 Trapper = new Color32(117, 250, 76, 255);    
 		public static readonly Color32 Oracle = new Color32(47, 31, 115, 255);
+        public readonly static Color Hacker = new Color(0.8f, 0.64f, 0.8f, 1f);        
         public readonly static Color Imitator = new Color(0.7f, 0.85f, 0.3f, 1f);
         public readonly static Color32 Chameleon = new Color32(112, 142, 239, 255);        
 
@@ -31,6 +32,7 @@ namespace TownOfRoles.Patches
         public readonly static Color32 Executioner = new Color32(45, 66, 34, 255);  
         public readonly static Color Glitch = Color.green;       
         public readonly static Color Pyromaniac = new Color(0.90f, 0.61f, 0.31f, 1f);
+        public readonly static Color Vulture = new Color(0.55f, 0.25f, 0.02f, 1f);    
         public static Color32 SerialKiller => new(100, 45, 234, 255); //#642DEAFF        
         public readonly static Color Phantom = new Color(0.4f, 0.16f, 0.38f, 1f);
         public static Color32 Incendiary => new(238, 112, 46, 255); //#ee702e        

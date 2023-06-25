@@ -31,6 +31,7 @@ namespace TownOfRoles.CrewmateRoles.SheriffMod
                         role.ClosestPlayer.Is(RoleEnum.Jester) && CustomGameOptions.SheriffKillsJester ||
                         role.ClosestPlayer.Is(RoleEnum.Glitch) && CustomGameOptions.SheriffKillsGlitch ||
                          role.ClosestPlayer.Is(RoleEnum.SerialKiller) && CustomGameOptions.SheriffKillsSerialKiller ||
+                        role.ClosestPlayer.Is(RoleEnum.Vulture) && CustomGameOptions.SheriffKillsVulture ||
                         role.ClosestPlayer.Is(RoleEnum.Juggernaut) && CustomGameOptions.SheriffKillsJuggernaut ||
                         role.ClosestPlayer.Is(RoleEnum.Executioner) && CustomGameOptions.SheriffKillsExecutioner ||
                         role.ClosestPlayer.Is(RoleEnum.Pyromaniac) && CustomGameOptions.SheriffKillsPyromaniac ||

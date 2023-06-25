@@ -20,6 +20,7 @@ namespace TownOfRoles
                         !(
                             playerInfo._object.Is(RoleEnum.Jester) || playerInfo._object.Is(RoleEnum.Amnesiac) ||
                          playerInfo._object.Is(RoleEnum.Guardian)  || 
+                             playerInfo._object.Is(RoleEnum.Vulture) ||
                             playerInfo._object.Is(RoleEnum.Glitch) || playerInfo._object.Is(RoleEnum.Executioner) ||
                             playerInfo._object.Is(RoleEnum.Pyromaniac) ||playerInfo._object.Is(RoleEnum.SerialKiller) || playerInfo._object.Is(RoleEnum.Juggernaut) ||
                             playerInfo._object.Is(RoleEnum.Plaguebearer) || playerInfo._object.Is(RoleEnum.Pestilence) ||
@@ -48,12 +49,20 @@ namespace TownOfRoles
                            || playerControl.Is(RoleEnum.Jester)
                            || playerControl.Is(RoleEnum.Executioner)
                            || playerControl.Is(RoleEnum.Juggernaut)
+                           || playerControl.Is(RoleEnum.Vulture)
                            || playerControl.Is(RoleEnum.Pyromaniac)                    
                            || playerControl.Is(RoleEnum.SerialKiller)                           
                            || playerControl.Is(RoleEnum.Plaguebearer)
                            || playerControl.Is(RoleEnum.Pestilence)
-                           || playerControl.Is(RoleEnum.Werewolf);
-
+                           || playerControl.Is(RoleEnum.Werewolf)
+                           
+                           || (
+                                !CustomGameOptions.BegninNeutralHasTasks &&
+                                (
+                                    playerControl.Is(RoleEnum.Amnesiac) ||
+                                    playerControl.Is(RoleEnum.Guardian)
+                                )
+                            );
                 // If the console is not a sabotage repair console
                 if (flag && !__instance.AllowImpostor)
                 {

@@ -103,6 +103,7 @@ namespace TownOfRoles.NeutralRoles.AmnesiacMod
                 case RoleEnum.Executioner:
                 case RoleEnum.Pyromaniac:
                 case RoleEnum.Amnesiac:
+                case RoleEnum.Vulture:                
                 case RoleEnum.Glitch:             
                 case RoleEnum.Juggernaut:                
                 case RoleEnum.Guardian:
@@ -199,10 +200,21 @@ namespace TownOfRoles.NeutralRoles.AmnesiacMod
                 var sheriffRole = Role.GetRole<Sheriff>(amnesiac);
                 sheriffRole.LastKilled = DateTime.UtcNow;
             }
+            else if (role == RoleEnum.Vulture)
+            {
+                var role2 = Role.GetRole<Vulture>(other);
+                role2.RegenTask();
+            }            
+            else if (role == RoleEnum.Disguiser)
+            {
+                var camoRole = Role.GetRole<Disguiser>(amnesiac);
+                camoRole.LastDisguised = DateTime.UtcNow;
+            }            
             else if (role == RoleEnum.Engineer)
             {
                 var engiRole = Role.GetRole<Engineer>(amnesiac);
-                engiRole.UsesLeft = CustomGameOptions.MaxFixes;
+                engiRole.LastFix  = DateTime.UtcNow;
+                engiRole.LastVent  = DateTime.UtcNow;
             }
             else if (role == RoleEnum.Oracle)
             {

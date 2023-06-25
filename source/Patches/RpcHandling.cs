@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using HarmonyLib;
 using Hazel;
+using Coroutine2 = TownOfRoles.NeutralRoles.VultureMod.Coroutine;
 using Reactor.Utilities;
 using Reactor.Utilities.Extensions;
 using Reactor.Networking.Extensions;
@@ -252,7 +253,7 @@ namespace TownOfRoles
             canHaveAbility3.RemoveAll(player => !player.Is(Faction.Crewmates) || player.Is(RoleEnum.Swapper)
             || player.Is(RoleEnum.Trapper) || player.Is(RoleEnum.Altruist));    
             canHaveAbility3.Shuffle();                         
-            canHaveAbility2.RemoveAll(player => !player.Is(Faction.Neutral) || player.Is(RoleEnum.Amnesiac) || player.Is(RoleEnum.Guardian)
+            canHaveAbility2.RemoveAll(player => !player.Is(Faction.Neutral) || player.Is(RoleEnum.Vulture) || player.Is(RoleEnum.Amnesiac) || player.Is(RoleEnum.Guardian)
             || player.Is(RoleEnum.Executioner) || player.Is(RoleEnum.Jester));
             canHaveAbility2.Shuffle();         
 
@@ -702,7 +703,13 @@ namespace TownOfRoles
                                 break;  
                             case 109:
                                 new Vampire(player);
-                                break;                                  
+                                break;     
+                            case 110:
+                                new Vulture(player);
+                                break;         
+                            case 111:
+                                new Disguiser(player);
+                                break;                                                                                                 
                             case 47:
 						        new Oracle(player);
 						break;                                                                                                                
@@ -848,6 +855,12 @@ namespace TownOfRoles
 					}
 					break;
 				}
+                    case CustomRPC.Camouflage:
+                        var camouflager = Utils.PlayerById(reader.ReadByte());
+                        var camouflagerRole = Role.GetRole<Disguiser>(camouflager);
+                        camouflagerRole.TimeRemaining = CustomGameOptions.DisguiserDuration;
+                        Utils.Camouflage();
+                        break;                
 				case CustomRPC.SavedConfessor:
 				{
 					Oracle oracle2 = Role.GetRole<Oracle>(Utils.PlayerById(reader.ReadByte()));
@@ -869,7 +882,17 @@ namespace TownOfRoles
                     case CustomRPC.NobodyWins:
                         Role.NobodyWinsFunc();
                         break;
+                    case CustomRPC.VultureClean:
+                        readByte1 = reader.ReadByte();
+                        var cannibalPlayer = Utils.PlayerById(readByte1);
+                        var cannibalRole = Role.GetRole<Vulture>(cannibalPlayer);
+                        readByte = reader.ReadByte();
+                        var deadBodies2 = Object.FindObjectsOfType<DeadBody>();
+                        foreach (var body in deadBodies2)
+                            if (body.ParentId == readByte)
+                                Coroutines.Start(Coroutine2.CleanCoroutine(body, cannibalRole));
 
+                        break;
 
                     case CustomRPC.SetCouple:
                         var id = reader.ReadByte();
@@ -884,7 +907,17 @@ namespace TownOfRoles
                         modifierLover2.OtherLover = modifierLover1;
 
                         break;
+                    case CustomRPC.VultureWin:
+                        var theVulture = Role.AllRoles.FirstOrDefault(x => x.RoleType == RoleEnum.Vulture);
+                        ((Vulture) theVulture)?.Wins();
+                        break;
 
+                    case CustomRPC.VultureLose:
+                        foreach (var role in Role.AllRoles)
+                            if (role.RoleType == RoleEnum.Vulture)
+                                ((Vulture) role).Loses();
+
+                        break;
                     case CustomRPC.Start:
                         Utils.ShowDeadBodies = false;
                         Murder.KilledPlayers.Clear();
@@ -913,9 +946,10 @@ namespace TownOfRoles
                         break;
                     case CustomRPC.EngineerFix:
                         var engineer = Utils.PlayerById(reader.ReadByte());
-                        Role.GetRole<Engineer>(engineer).UsesLeft -= 1;
+                        var EngineerRole = Role.GetRole<Engineer>(engineer);
+                        EngineerRole.EngiFixPerRound--;
+                        EngineerRole.EngiFixPerGame--;
                         break;
-
                     case CustomRPC.FixLights:
                         var lights = ShipStatus.Instance.Systems[SystemTypes.Electrical].Cast<SwitchSystem>();
                         lights.ActualSwitches = lights.ExpectedSwitches;
@@ -1514,6 +1548,9 @@ namespace TownOfRoles
                     if (CustomGameOptions.GuardianOn > 0)
                         NeutralNonKillingRoles.Add((typeof(Guardian), 24, CustomGameOptions.GuardianOn, false));
 
+                if (CustomGameOptions.VultureOn > 0)
+                    NeutralNonKillingRoles.Add((typeof(Vulture), 110, CustomGameOptions.VultureOn, false));
+
                     if (CustomGameOptions.GlitchOn > 0)
                         NeutralKillingRoles.Add((typeof(Glitch), 11, CustomGameOptions.GlitchOn, true));
 
@@ -1537,6 +1574,9 @@ namespace TownOfRoles
                     #region Impostor Roles
                     if (CustomGameOptions.UndertakerOn > 0)
                         ImpostorRoles.Add((typeof(Undertaker), 33, CustomGameOptions.UndertakerOn, true));                       
+
+                    if (CustomGameOptions.DisguiserOn > 0)
+                        ImpostorRoles.Add((typeof(Disguiser), 111, CustomGameOptions.DisguiserOn, true));                       
 
                     if (CustomGameOptions.MorphlingOn > 0)
                         ImpostorRoles.Add((typeof(Morphling), 31, CustomGameOptions.MorphlingOn, false));

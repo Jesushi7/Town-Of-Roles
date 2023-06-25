@@ -45,6 +45,7 @@ namespace TownOfRoles
                     {
                         if (option.Type == CustomOptionType.Button)
                             continue;
+                        if (option == Generate.MaxPlayers) continue;
 
                         if (option.Type == CustomOptionType.Header)
                             builder.AppendLine($"\n{option.Name}");
@@ -54,7 +55,7 @@ namespace TownOfRoles
                 }
 
                 __result = builder.ToString();
-                __result = $"<size=1.25>{__result}</size>";
+                __result = $"<size=1.30>{__result}</size>";
             }
         }
 

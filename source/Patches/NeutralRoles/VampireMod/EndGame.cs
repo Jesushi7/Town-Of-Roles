@@ -3,7 +3,7 @@ using HarmonyLib;
 using Hazel;
 using TownOfRoles.Roles;
 
-namespace TownOfRoles.NeutralRoles.VampireMod
+namespace TownOfRoles.NeutralRoles.JackalMod
 {
 	[HarmonyPatch(typeof(GameManager), "RpcEndGame")]
 	public class EndGame
@@ -20,10 +20,10 @@ namespace TownOfRoles.NeutralRoles.VampireMod
 			{
 				foreach (Role role in Role.AllRoles)
 				{
-					bool flag2 = role.RoleType == RoleEnum.Vampire;
+					bool flag2 = role.RoleType == RoleEnum.Jackal;
 					if (flag2)
 					{
-						((Vampire)role).Loses();
+						((Jackal)role).Loses();
 					}
 				}
 				MessageWriter writer = AmongUsClient.Instance.StartRpcImmediately(PlayerControl.LocalPlayer.NetId, 138, 1, -1);

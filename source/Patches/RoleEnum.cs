@@ -11,7 +11,9 @@ namespace TownOfRoles
         Snitch, // 8
         Executioner, // 9
         TimeMaster,            
+        Vulture,
         Glitch, // 11
+        Disguiser,
         Informant, // 12
         Pyromaniac, // 13
         Altruist, // 14

@@ -8,16 +8,16 @@ using TownOfRoles.Patches;
 
 namespace TownOfRoles.Roles
 {
-	public class Vampire : Role
+	public class Jackal : Role
 	{
-		public Vampire(PlayerControl player) : base(player)
+		public Jackal(PlayerControl player) : base(player)
 		{
-			base.Name = "Vampire";
+			base.Name = "Jackal";
 			this.StartText = (() => "Convert crewmates and kill the rest");
 			this.TaskText = (() => "Bite all other players");
-			base.Color = Colors.Vampire;
+			base.Color = Colors.Jackal;
 			this.LastBit = DateTime.UtcNow;
-			base.RoleType = RoleEnum.Vampire;
+			base.RoleType = RoleEnum.Jackal;
 			base.Faction = Faction.Neutral;
 			base.AddToRoleHistory(base.RoleType);
 		}
@@ -73,7 +73,7 @@ namespace TownOfRoles.Roles
 					bool flag4;
 					if (PlayerControl.AllPlayerControls.ToArray().Count((PlayerControl x) => !x.Data.IsDead && !x.Data.Disconnected) <= 4)
 					{
-						flag4 = (PlayerControl.AllPlayerControls.ToArray().Count((PlayerControl x) => !x.Data.IsDead && !x.Data.Disconnected && (x.Data.IsImpostor() || x.Is(Faction.NeutralKilling)) && !x.Is(RoleEnum.Vampire)) == 0);
+						flag4 = (PlayerControl.AllPlayerControls.ToArray().Count((PlayerControl x) => !x.Data.IsDead && !x.Data.Disconnected && (x.Data.IsImpostor() || x.Is(Faction.NeutralKilling)) && !x.Is(RoleEnum.Jackal)) == 0);
 					}
 					else
 					{
@@ -83,7 +83,7 @@ namespace TownOfRoles.Roles
 					if (flag5)
 					{
                         System.Collections.Generic.List<PlayerControl> vampsAlives = (from x in PlayerControl.AllPlayerControls.ToArray()
-						where !x.Data.IsDead && !x.Data.Disconnected && x.Is(RoleEnum.Vampire)
+						where !x.Data.IsDead && !x.Data.Disconnected && x.Is(RoleEnum.Jackal)
 						select x).ToList<PlayerControl>();
 						bool flag6 = vampsAlives.Count == 1;
 						if (flag6)
@@ -96,7 +96,7 @@ namespace TownOfRoles.Roles
 							where !x.Data.IsDead && !x.Data.Disconnected
 							select x).ToList<PlayerControl>();
                             Il2CppSystem.Collections.Generic.List<PlayerControl> killersAlive = (from x in PlayerControl.AllPlayerControls.ToArray()
-							where !x.Data.IsDead && !x.Data.Disconnected && !x.Is(RoleEnum.Vampire) && (x.Is(Faction.Impostors) || x.Is(Faction.NeutralKilling))
+							where !x.Data.IsDead && !x.Data.Disconnected && !x.Is(RoleEnum.Jackal) && (x.Is(Faction.Impostors) || x.Is(Faction.NeutralKilling))
 							select x).ToList<PlayerControl>();
 							bool flag7 = killersAlive.Count > 0;
 							if (flag7)
@@ -124,7 +124,7 @@ namespace TownOfRoles.Roles
 					else
 					{
 						List<PlayerControl> vampsAlives2 = (from x in PlayerControl.AllPlayerControls.ToArray()
-						where !x.Data.IsDead && !x.Data.Disconnected && x.Is(RoleEnum.Vampire)
+						where !x.Data.IsDead && !x.Data.Disconnected && x.Is(RoleEnum.Jackal)
 						select x).ToList<PlayerControl>();
 						bool flag9 = vampsAlives2.Count == 1 || vampsAlives2.Count == 2;
 						if (flag9)
@@ -137,7 +137,7 @@ namespace TownOfRoles.Roles
 							where !x.Data.IsDead && !x.Data.Disconnected
 							select x).ToList<PlayerControl>();
                             Il2CppSystem.Collections.Generic.List<PlayerControl> killersAlive2 = (from x in PlayerControl.AllPlayerControls.ToArray()
-							where !x.Data.IsDead && !x.Data.Disconnected && !x.Is(RoleEnum.Vampire) && (x.Is(Faction.Impostors) || x.Is(Faction.NeutralKilling))
+							where !x.Data.IsDead && !x.Data.Disconnected && !x.Is(RoleEnum.Jackal) && (x.Is(Faction.Impostors) || x.Is(Faction.NeutralKilling))
 							select x).ToList<PlayerControl>();
 							bool flag10 = killersAlive2.Count > 0;
 							if (flag10)

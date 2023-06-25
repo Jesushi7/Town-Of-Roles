@@ -62,7 +62,7 @@ namespace TownOfRoles.Roles
             Enabled = false;
             LastBitten = DateTime.UtcNow;
         }
-        public float PoisonTimer()
+        public float BiteTimer()
         {
             var utcNow = DateTime.UtcNow;
             var timeSpan = utcNow - LastBitten;

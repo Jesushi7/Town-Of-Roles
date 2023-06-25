@@ -125,6 +125,17 @@ namespace TownOfRoles
                         return;
                     }
                 }
+                else if (type == RoleEnum.Vulture)
+                {
+                    var cannibal = (Vulture)role;
+                    if (cannibal.VultureWins)
+                    {
+                        var winners = Utils.potentialWinners.Where(x => x.PlayerName == cannibal.PlayerName).ToList();
+                        TempData.winners = new List<WinningPlayerData>();
+                        foreach (var win in winners) TempData.winners.Add(win);
+                        return;
+                    }
+                }                
                 else if (type == RoleEnum.Pestilence)
                 {
                     var pestilence = (Pestilence)role;

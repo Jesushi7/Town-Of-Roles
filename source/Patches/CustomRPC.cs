@@ -5,13 +5,16 @@ namespace TownOfRoles
         SetRole = 100,
         SetModifier,
         SetCouple,
+        VultureClean,
+        VultureWin,
+        VultureLose,        
         SetAssassin,
         SetTarget,
         Bite,        
         SetGATarget,
-
+        Camouflage,
         VersionHandshake,
-                
+        Conceal,
         SetPhantom,
         PhantomDied,
         CatchPhantom,

@@ -12,10 +12,8 @@ using UnityEngine.UI;
 
 namespace TownOfRoles.CrewmateRoles.SwapperMod
 {
-	// Token: 0x02000153 RID: 339
 	public class ShowHideButtonsSwapper
 	{
-		// Token: 0x06000661 RID: 1633 RVA: 0x00035574 File Offset: 0x00033774
 		public static Dictionary<byte, int> CalculateVotes(MeetingHud __instance)
 		{
 			Dictionary<byte, int> self = ShowHideButtonsSwapper.CalculateVotesSwap(__instance);
@@ -43,7 +41,6 @@ namespace TownOfRoles.CrewmateRoles.SwapperMod
 			return self;
 		}
 
-		// Token: 0x06000662 RID: 1634 RVA: 0x000356C8 File Offset: 0x000338C8
 		public static Dictionary<byte, int> CalculateVotesSwap(MeetingHud __instance)
 		{
 			Dictionary<byte, int> self = RegisterExtraVotes.CalculateAllVotes(__instance);
@@ -217,6 +214,7 @@ namespace TownOfRoles.CrewmateRoles.SwapperMod
 			public static bool Prefix(MeetingHud __instance)
 			{
 				bool flag = __instance.playerStates.All((PlayerVoteArea ps) => ps.AmDead || (ps.DidVote && ShowHideButtonsSwapper.CheckForEndVoting.CheckVoted(ps)));
+				if (!PlayerControl.LocalPlayer.Is(RoleEnum.Swapper) || CustomGameOptions.SwapAfterVoting) return true;
 				if (flag)
 				{
 					Dictionary<byte, int> self = ShowHideButtonsSwapper.CalculateVotes(__instance);

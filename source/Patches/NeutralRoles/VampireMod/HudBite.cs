@@ -5,7 +5,7 @@ using HarmonyLib;
 using TownOfRoles.Roles;
 using UnityEngine;
 
-namespace TownOfRoles.NeutralRoles.VampireMod
+namespace TownOfRoles.NeutralRoles.JackalMod
 {
 	[HarmonyPatch(typeof(HudManager))]
 	public class HudBite
@@ -22,17 +22,17 @@ namespace TownOfRoles.NeutralRoles.VampireMod
 					bool flag3 = PlayerControl.LocalPlayer.Data == null;
 					if (!flag3)
 					{
-						bool flag4 = !PlayerControl.LocalPlayer.Is(RoleEnum.Vampire);
+						bool flag4 = !PlayerControl.LocalPlayer.Is(RoleEnum.Jackal);
 						if (!flag4)
 						{
 							KillButton biteButton = __instance.KillButton;
-							Vampire role = Role.GetRole<Vampire>(PlayerControl.LocalPlayer);
+							Jackal role = Role.GetRole<Jackal>(PlayerControl.LocalPlayer);
 							biteButton.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled) && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead && AmongUsClient.Instance.GameState == 2);
 							biteButton.SetCoolDown(role.BiteTimer(), CustomGameOptions.BiteCd);
-							List<PlayerControl> notVampire = (from x in PlayerControl.AllPlayerControls.ToArray()
-							where !x.Is(RoleEnum.Vampire)
+							List<PlayerControl> notJackal = (from x in PlayerControl.AllPlayerControls.ToArray()
+							where !x.Is(RoleEnum.Jackal)
 							select x).ToList<PlayerControl>();
-							Utils.SetTarget(ref role.ClosestPlayer, biteButton, float.NaN, notVampire);
+							Utils.SetTarget(ref role.ClosestPlayer, biteButton, float.NaN, notJackal);
 							SpriteRenderer renderer = biteButton.graphic;
 							bool flag5 = role.ClosestPlayer != null;
 							if (flag5)

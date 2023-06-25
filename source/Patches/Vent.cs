@@ -40,6 +40,7 @@ namespace TownOfRoles
             else if (CustomGameOptions.GameMode == GameMode.Cultist && player.Is(RoleEnum.Engineer)) return true;
 
             if (player.Is(RoleEnum.Morphling) && !CustomGameOptions.MorphlingVent
+            //|| Role.GetRole<Morphling>(player).Morphed && !CustomGameOptions.MorphlingMorphVent
                 //Swooper + Not allowed to Vent On Polus If The Option is Disabled
                 || player.Is(RoleEnum.Swooper) && GameOptionsManager.Instance.currentNormalGameOptions.MapId == 2 && !CustomGameOptions.SwooperPolusVent
                 || player.Is(RoleEnum.Grenadier) && !CustomGameOptions.GrenadierVent
@@ -51,6 +52,7 @@ namespace TownOfRoles
 
             if (player.Is(RoleEnum.Engineer) ||
                 (player.Is(RoleEnum.Glitch) && CustomGameOptions.GlitchVent) || 
+                (player.Is(RoleEnum.Vulture) && CustomGameOptions.VultureVent) || 
                 (player.Is(RoleEnum.Plaguebearer) && CustomGameOptions.PlaguebearerVent)||  
                 (player.Is(RoleEnum.Pyromaniac) && CustomGameOptions.ArsoVent)||
                 (player.Is(RoleEnum.SerialKiller) && CustomGameOptions.SerialKillerVent) ||
