@@ -172,7 +172,7 @@ namespace TownOfRoles
         public static float SwoopCd => Generate.SwoopCooldown.Get();
         public static float SwoopDuration => Generate.SwoopDuration.Get();      
         public static bool SwooperVent => Generate.SwooperVent.Get();
-        public static bool DeadSnitcholes => Generate.DeadSnitcholes.Get();        
+        public static bool DeadSeesEverything => Generate.DeadSeesEverything.Get();        
         public static bool SeeTasksDuringRound => Generate.SeeTasksDuringRound.Get();
         public static bool SeeTasksDuringMeeting => Generate.SeeTasksDuringMeeting.Get();
         public static bool SeeTasksWhenDead => Generate.SeeTasksWhenDead.Get();

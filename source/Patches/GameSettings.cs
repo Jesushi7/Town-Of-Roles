@@ -29,9 +29,9 @@ namespace TownOfRoles
                 if (GameOptionsManager.Instance.CurrentGameOptions.GameMode == GameModes.HideNSeek) return;
 
                 var builder = new StringBuilder();
-                builder.AppendLine($"<color=#FF0000FF>Use Scroll Wheel If Necessary</color>");                
+                builder.AppendLine($"Use Scroll Wheel If Necessary");                
                 builder.AppendLine("Press Tab To Change Page");
-                if (SettingsPage == 0) builder.AppendLine("Page 2: General Mod Settings");
+                if (SettingsPage == 0) builder.AppendLine("Page 2: Town of Roles Settings");
                 else if (SettingsPage == 1) builder.AppendLine("Page 3: <color=#26ffff>Crewmate</color> Settings");
                 else if (SettingsPage == 2) builder.AppendLine("Page 4: <color=#80797c>Neutral</color> Settings");
                 else if (SettingsPage == 3) builder.AppendLine("Page 5: <color=#FF0000FF>Impostor</color> Settings");

@@ -15,7 +15,7 @@ namespace TownOfRoles.Roles
         {
             Name = "Disguiser";
             StartText = () => "Disguise and turn everyone grey";
-            TaskText = () => "Disguise and get secret kills";
+            TaskText = () => "Hide among others";
             FactionName = "Impostor";
             Color = Patches.Colors.Impostor;
             RoleType = RoleEnum.Disguiser;

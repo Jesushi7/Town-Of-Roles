@@ -85,11 +85,13 @@ namespace TownOfRoles
         Oblivious,
         Watcher,
         ChameleonModifier,
-        Spy
+        Spy,
+        None
     }
 
     public enum AbilityEnum
     {
-        Assassin
+        Assassin,
+        None
     }
 }

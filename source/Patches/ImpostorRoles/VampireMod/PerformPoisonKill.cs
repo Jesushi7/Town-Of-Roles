@@ -134,7 +134,6 @@ namespace TownOfRoles.ImpostorRoles.VampireMod
                         writer3.Write(PlayerControl.LocalPlayer.PlayerId);
                         writer3.Write(role.BittenPlayer.PlayerId);
                         AmongUsClient.Instance.FinishRpcImmediately(writer3);
-                        // role.Player.SetKillTimer(0);
                     }
                     else
                     {

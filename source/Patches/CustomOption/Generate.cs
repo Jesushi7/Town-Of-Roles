@@ -103,7 +103,7 @@ namespace TownOfRoles.CustomOption
         public static CustomNumberOption ReactorShake;           
         public static CustomToggleOption EveryoneVent;        
         public static CustomToggleOption RandomSpawns;               
-        public static CustomToggleOption DeadSnitcholes;
+        public static CustomToggleOption DeadSeesEverything;
         public static CustomNumberOption VanillaGame;
    
         public static CustomNumberOption InitialCooldowns;
@@ -516,6 +516,7 @@ namespace TownOfRoles.CustomOption
             VeteranOn = new CustomNumberOption(num++, MultiMenu.crewmate, "<color=#998040FF>Veteran</color>", 0f, 0f, 100f, 10f,
                 PercentFormat);
 
+
            NeutralRoles = new CustomHeaderOption(num++, MultiMenu.neutral, "<color=#80797c>Neutrals</color>");
             AmnesiacOn = new CustomNumberOption(num++, MultiMenu.neutral, "<color=#80B2FFFF>Amnesiac</color>", 0f, 0f, 100f, 10f,
                 PercentFormat);
@@ -681,7 +682,7 @@ namespace TownOfRoles.CustomOption
             RandomSpawns = new CustomToggleOption(num++, MultiMenu.main, "Enable Random Spawns", false);                   
             OxySlow = new CustomToggleOption(num++, MultiMenu.main, "Oxygen Sabotage Slows Down Players", true);         
             EveryoneVent = new CustomToggleOption(num++, MultiMenu.main, "Everyone Vent Mode", false);
-            DeadSnitcholes =
+            DeadSeesEverything =
                 new CustomToggleOption(num++, MultiMenu.main, "Dead Can See Everyone's Roles/Votes", false);
             VanillaGame = new CustomNumberOption(num++, MultiMenu.main, "Probability Of A Completely Vanilla Game", 0f, 0f, 100f, 5f,
                 PercentFormat);
@@ -731,7 +732,7 @@ namespace TownOfRoles.CustomOption
                  new CustomNumberOption(num++, MultiMenu.main, "Airship/Submerged Decreased Long Tasks", 0, 0, 3, 1);
 
             Assassin = new CustomHeaderOption(num++, MultiMenu.imposter, "<color=#FF0000FF>Assassin Ability</color>");
-            WhoSeesFailedFlash = new CustomStringOption(num++, MultiMenu.imposter, "Who Sees <color=#FF0000FF>Assassins</color> Failed Notification", new[] { "Everyone","<color=#FF0000FF>Impostors</color>","Target + <color=#FF0000FF>Impostors</color>", "Target + <color=#FF0000FF>AssassinS</color>","<color=#FF0000FF>Assassins</color>"});            
+            WhoSeesFailedFlash = new CustomStringOption(num++, MultiMenu.imposter, "Who Sees <color=#FF0000FF>Assassins</color> Failed Notification", new[] { "Everyone","<color=#FF0000FF>Impostors</color>","Target + <color=#FF0000FF>Impostors</color>", "Target + <color=#FF0000FF>Assassins</color>","<color=#FF0000FF>Assassins</color>"});            
             NumberOfImpostorAssassins = new CustomNumberOption(num++, MultiMenu.imposter, "Number Of <color=#FF0000FF>Impostor</color> <color=#FF0000FF>Assassins</color>", 1, 0, 4, 1);
             NumberOfNeutralKillingAssassins = new CustomNumberOption(num++, MultiMenu.imposter, "Number Of <color=#80797c>Neutral</color> <color=#FF0000FF>Killers</color> <color=#FF0000FF>Assassins</color>", 1, 0, 5, 1);
             NumberOfNeutralNonKillingAssassins = new CustomNumberOption(num++, MultiMenu.imposter, "Number Of <color=#80797c>Neutral</color> Non-Killer <color=#FF0000FF>Assassins</color>", 1, 0, 5, 1);            
@@ -863,7 +864,7 @@ namespace TownOfRoles.CustomOption
             SheriffKillOther =
                 new CustomToggleOption(num++, MultiMenu.crewmate, "<color=#f8cd46>Sheriff</color> Miskill Kills <color=#8cffff>Crewmate</color>", false);
             SheriffKillsVulture =
-                new CustomToggleOption(num++, MultiMenu.crewmate,  "<color=#f8cd46>Sheriff</color> Kills <color=#2d4222>Vulture</color>", true);
+                new CustomToggleOption(num++, MultiMenu.crewmate,  "<color=#f8cd46>Sheriff</color> Kills <color=#8C4005FF>Vulture</color>", true);
            SheriffKillsExecutioner =
                 new CustomToggleOption(num++, MultiMenu.crewmate, "<color=#f8cd46>Sheriff</color> Kills <color=#2d4222>Executioner</color>", false);
             SheriffKillsJester =
@@ -957,7 +958,7 @@ namespace TownOfRoles.CustomOption
             MaxNeutralKillingRoles =
                 new CustomNumberOption(num++, MultiMenu.neutral, "Max <color=#80797c>Neutral</color> <color=#FF0000FF>Killing</color> Roles", 1, 0, 4, 1);
             BegninNeutralHasTasks =
-                new CustomToggleOption(num++, MultiMenu.neutral, "Begnin Neutrals Roles Can Use Tasks", false);
+                new CustomToggleOption(num++, MultiMenu.neutral, "Benign Neutrals Can Do Tasks", false);
 
             Amnesiac = new CustomHeaderOption(num++, MultiMenu.neutral, "<color=#80B2FFFF>Amnesiac</color>");
             RememberArrows =

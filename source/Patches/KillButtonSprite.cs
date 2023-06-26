@@ -28,8 +28,6 @@ namespace TownOfRoles
         private static Sprite Revive => TownOfRoles.ReviveSprite;
         private static Sprite Alert => TownOfRoles.AlertSprite;
         private static Sprite Remember => TownOfRoles.RememberSprite;
-
-        private static Sprite Bite => TownOfRoles.PoisonSprite;            
         private static Sprite Track => TownOfRoles.TrackSprite;    
         private static Sprite Transport => TownOfRoles.TransportSprite;
         private static Sprite Shoot => TownOfRoles.ShootSprite;        
@@ -105,12 +103,7 @@ namespace TownOfRoles
             {
                 __instance.KillButton.graphic.sprite = Mediate;
                 flag = true;
-            }
-            else if (PlayerControl.LocalPlayer.Is(RoleEnum.Vampire))
-            {
-                __instance.KillButton.graphic.sprite = Bite;
-                flag = true;
-            }            
+            }         
             else if (PlayerControl.LocalPlayer.Is(RoleEnum.Guardian))
             {
                 __instance.KillButton.graphic.sprite = Protect;
@@ -152,7 +145,7 @@ namespace TownOfRoles
                 __instance.KillButton.buttonLabelText.gameObject.SetActive(true);
                 __instance.KillButton.transform.localPosition = new Vector3(0f, 1f, 0f);
                 __instance.KillButton.buttonLabelText.text = "Kill";
-                flag = PlayerControl.LocalPlayer.Is(RoleEnum.Sheriff)|| PlayerControl.LocalPlayer.Is(RoleEnum.SerialKiller) || PlayerControl.LocalPlayer.Is(RoleEnum.Pestilence) || PlayerControl.LocalPlayer.Is(RoleEnum.Werewolf) || PlayerControl.LocalPlayer.Is(RoleEnum.Juggernaut);
+                flag = PlayerControl.LocalPlayer.Is(RoleEnum.Sheriff)|| PlayerControl.LocalPlayer.Is(RoleEnum.Follower)||PlayerControl.LocalPlayer.Is(RoleEnum.SerialKiller) || PlayerControl.LocalPlayer.Is(RoleEnum.Pestilence) || PlayerControl.LocalPlayer.Is(RoleEnum.Werewolf) || PlayerControl.LocalPlayer.Is(RoleEnum.Juggernaut);
             }
 
             if (!PlayerControl.LocalPlayer.Is(Faction.Impostors) &&
@@ -166,7 +159,7 @@ namespace TownOfRoles
                 __instance.ImpostorVentButton.transform.localPosition = new Vector3(-2f, 0f, 0f);
             }
             
-            else if (PlayerControl.LocalPlayer.Is(RoleEnum.Werewolf) ||  CustomGameOptions.EveryoneVent
+            else if (PlayerControl.LocalPlayer.Is(RoleEnum.Werewolf) || !PlayerControl.LocalPlayer.Is(Faction.Impostors) ||  CustomGameOptions.EveryoneVent
             )
             {
                 __instance.ImpostorVentButton.transform.localPosition = new Vector3(-1f, 1f, 0f);

@@ -72,7 +72,7 @@ namespace TownOfRoles.CrewmateRoles.MedicMod
                     player.myRend().material.SetFloat("_Outline", 1f);
                     player.myRend().material.SetColor("_OutlineColor", ProtectedColor);
                 }            
-                else if (PlayerControl.LocalPlayer.Data.IsDead && CustomGameOptions.DeadSnitcholes)
+                else if (PlayerControl.LocalPlayer.Data.IsDead && CustomGameOptions.DeadSeesEverything)
                 {
                     player.myRend().material.SetColor("_VisorColor", ProtectedColor);
                     player.myRend().material.SetFloat("_Outline", 1f);

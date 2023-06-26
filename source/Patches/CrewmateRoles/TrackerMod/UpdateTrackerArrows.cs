@@ -3,6 +3,7 @@ using TownOfRoles.Roles;
 using UnityEngine;
 using TownOfRoles.Extensions;
 using System;
+using TownOfRoles.ImpostorRoles.CamouflageMod;
 
 namespace TownOfRoles.CrewmateRoles.TrackerMod
 {

@@ -122,7 +122,7 @@ public static bool RoleWins => CrewWin || ImpWin;
 
         internal virtual bool DeadCriteria()
         {
-            if (PlayerControl.LocalPlayer.Data.IsDead && CustomGameOptions.DeadSnitcholes) return Utils.ShowDeadBodies;
+            if (PlayerControl.LocalPlayer.Data.IsDead && CustomGameOptions.DeadSeesEverything) return Utils.ShowDeadBodies;
             return false;
         }
 
@@ -180,7 +180,6 @@ public static bool RoleWins => CrewWin || ImpWin;
 
         protected virtual string NameText(bool revealTasks, bool revealRole, bool revealModifier, bool revealLover, PlayerVoteArea player = null)
         {
-            if (CamouflageUnCamouflage.IsCamoed && player == null) return "";
             if (Player == null) return "";
 
             String PlayerName = Player.GetDefaultOutfit().PlayerName;
@@ -227,22 +226,21 @@ public static bool RoleWins => CrewWin || ImpWin;
 
             Player.nameText().transform.localPosition = new Vector3(0f, 0.15f, -0.5f);
             
-        if(Classes.GameStates.IsMeeting && !PlayerControl.LocalPlayer.Is(Faction.Impostors))
+        if(Classes.GameStates.IsMeeting && PlayerControl.LocalPlayer.Data.IsDead)
         {
             return PlayerName + $"\n<size=70%><color=#" + Patches.Colors.Modifiers.ToHtmlStringRGBA()+ $">{modifier.Name}</color> " + Name +"</size>";
         }
-        if (Classes.GameStates.IsMeeting && PlayerControl.LocalPlayer.Is(Faction.Impostors))       
+        if (Classes.GameStates.IsMeeting)       
         {
             return  PlayerName + "\n" +"<size=70%>" + Name +"</size>";
         }
-        if (PlayerControl.LocalPlayer.Is(Faction.Impostors))
-            {
-            return "<size=70%>" + Name + "</size>" + "\n" + PlayerName;
-            }   
-        else
+        if (PlayerControl.LocalPlayer.Data.IsDead)
         {
             return $"<size=70%><color=#" + Patches.Colors.Modifiers.ToHtmlStringRGBA()+ $">{modifier.Name}</color> " + Name +"</size>\n"+ PlayerName;
         }
+        
+        return $"<size=70%>" + Name +"</size>\n"+ PlayerName;
+        
 
         }
 
@@ -555,14 +553,14 @@ public static bool RoleWins => CrewWin || ImpWin;
                         $"{modifier.ColorString}{modifier.Name}: {modifier.TaskText()}</color>";
                     player.myTasks.Insert(0, modTask);
                 }
-                if (ability != null)
+                /*if (ability != null)
                 {
                     var modTask = new GameObject(ability.Name + "Task").AddComponent<ImportantTextTask>();
                     modTask.transform.SetParent(player.transform, false);
                     modTask.Text =
                         $"{ability.ColorString}{ability.Name}: {ability.TaskText()}</color>";
                     player.myTasks.Insert(0, modTask);
-                }
+                }*/
 
                 if (role == null || role.Hidden) return;
                 if (role.RoleType == RoleEnum.Amnesiac && role.Player != PlayerControl.LocalPlayer) return;

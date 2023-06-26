@@ -10,7 +10,7 @@ namespace TownOfRoles
             [HarmonyArgument(1)] int index, [HarmonyArgument(2)] Transform parent)
         {
             SpriteRenderer spriteRenderer = Object.Instantiate<SpriteRenderer>(__instance.PlayerVotePrefab);
-            if (GameOptionsManager.Instance.currentNormalGameOptions.AnonymousVotes && !PlayerControl.LocalPlayer.Is(ModifierEnum.Watcher) && (!CustomGameOptions.DeadSnitcholes
+            if (GameOptionsManager.Instance.currentNormalGameOptions.AnonymousVotes && !PlayerControl.LocalPlayer.Is(ModifierEnum.Watcher) && (!CustomGameOptions.DeadSeesEverything
              || !PlayerControl.LocalPlayer.Data.IsDead))
             {
                 PlayerMaterial.SetColors(Palette.DisabledGrey, spriteRenderer);

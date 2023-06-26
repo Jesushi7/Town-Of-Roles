@@ -14,13 +14,26 @@ namespace TownOfRoles
 
         public static bool Prefix(HauntMenuMinigame __instance)
         {
+            if (!CustomGameOptions.DeadSeesEverything)
+            {
+                __instance.FilterText.text = " ";
+                return false;
+            }            
             if (GameOptionsManager.Instance.CurrentGameOptions.GameMode == GameModes.HideNSeek) return true;
             var role = Role.GetRole(__instance.HauntTarget);
             var modifier = Modifier.GetModifier(__instance.HauntTarget);
             var ability = Ability.GetAbility(__instance.HauntTarget);
+            var otherString = "";
+            var objectiveString = "";
+            
+            if (role != null)
+                objectiveString += role.Name;
 
-            __instance.FilterText.text = modifier != null ? $"({ability.Name}) {modifier.Name} - {role.Name}"
-                                                          : $"{role.Name}";
+            if (ability != null && ability.AbilityType != AbilityEnum.None)
+                otherString += $" {ability.Name}";
+                
+            if (modifier != null && modifier.ModifierType != ModifierEnum.None)
+                otherString += $" {modifier.Name}";                
             return false;
         }
     }

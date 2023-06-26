@@ -18,32 +18,25 @@ namespace TownOfRoles.NeutralRoles.VultureMod
             if (!PlayerControl.LocalPlayer.Is(RoleEnum.Vulture)) return;
 
             var role = Role.GetRole<Vulture>(PlayerControl.LocalPlayer);
+
+            __instance.KillButton.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
+                    && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
+                    && AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started);
+            __instance.KillButton.SetCoolDown(role.EatTimer(), CustomGameOptions.VultureCd);
+
             if (role.CleanButton == null)
             {
                 role.CleanButton = Object.Instantiate(__instance.KillButton, __instance.KillButton.transform.parent);
                 role.CleanButton.graphic.enabled = true;
                 role.CleanButton.gameObject.SetActive(false);
             }
-            if (role.UsesText == null)
-            {
-                role.UsesText = Object.Instantiate(role.CleanButton.cooldownTimerText, role.CleanButton.transform);
-                role.UsesText.gameObject.SetActive(true);
-                role.UsesText.transform.localPosition = new Vector3(
-                    role.UsesText.transform.localPosition.x + 0.26f,
-                    role.UsesText.transform.localPosition.y + 0.29f,
-                    role.UsesText.transform.localPosition.z);
-                role.UsesText.transform.localScale = role.UsesText.transform.localScale * 0.65f;
-                role.UsesText.alignment = TMPro.TextAlignmentOptions.Right;
-                role.UsesText.fontStyle = TMPro.FontStyles.Bold;
-            }
-            if (role.UsesText != null)
-            {
-                role.UsesText.text = role.EatNeeded + "";
-            }
 
             role.CleanButton.graphic.sprite = EatSprite;
             role.CleanButton.transform.localPosition = new Vector3(0f, 1f, 0f);
 
+            role.CleanButton.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
+                    && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
+                    && AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started);
 
             var data = PlayerControl.LocalPlayer.Data;
             var isDead = data.IsDead;

@@ -200,6 +200,11 @@ namespace TownOfRoles.NeutralRoles.AmnesiacMod
                 var sheriffRole = Role.GetRole<Sheriff>(amnesiac);
                 sheriffRole.LastKilled = DateTime.UtcNow;
             }
+            else if (role == RoleEnum.Follower)
+            {
+                var sheriffRole = Role.GetRole<Follower>(amnesiac);
+                sheriffRole.LastKilled = DateTime.UtcNow;
+            }            
             else if (role == RoleEnum.Vulture)
             {
                 var role2 = Role.GetRole<Vulture>(other);

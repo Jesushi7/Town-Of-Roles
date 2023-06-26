@@ -28,7 +28,6 @@ namespace TownOfRoles.CultistRoles.CultistMod
             }
 
             role.ReviveButton.graphic.sprite = ReviveSprite;
-
             role.ReviveButton.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
                     && AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started);
@@ -79,9 +78,6 @@ namespace TownOfRoles.CultistRoles.CultistMod
             }
             var player = Utils.PlayerById(role.CurrentTarget.ParentId);
             if (role.CurrentTarget && role.ReviveButton.enabled &&
-                !(player.Is(RoleEnum.Sheriff) || player.Is(RoleEnum.Snitch)  || player.Is(RoleEnum.Informant)|| player.Is(RoleEnum.Mystic)
-                || player.Is(RoleEnum.Mayor)|| player.Is(RoleEnum.Medium)|| player.Is(RoleEnum.Altruist)|| player.Is(RoleEnum.Trapper)
-                || player.Is(Faction.Neutral)) &&
                 !(PlayerControl.LocalPlayer.killTimer > GameOptionsManager.Instance.currentNormalGameOptions.KillCooldown - 0.5f))
             {
                 SpriteRenderer component = null;

@@ -145,7 +145,7 @@ namespace TownOfRoles.Modifiers.AssassinMod
                 var guess = Role.GetRole(player);
 
             if ((player2.GetFaction() == PlayerControl.LocalPlayer.GetFaction() && (player2.GetFaction() is Faction.Impostors or Faction.Neutral)) ||
-                CustomGameOptions.DeadSnitcholes)
+                CustomGameOptions.DeadSeesEverything)
             {
                 if (player2 != player)
                     hudManager.Chat.AddChat(PlayerControl.LocalPlayer, $"{player2.name} Guessed the Role {guess.Name} for {player.name}!");

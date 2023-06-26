@@ -24,6 +24,7 @@ using Il2CppInterop.Runtime;
 using System.IO;
 using InnerNet;
 using Reactor.Utilities;
+using TownOfRoles.ImpostorRoles.CamouflageMod;
 
 namespace TownOfRoles
 {
@@ -700,6 +701,14 @@ namespace TownOfRoles
                 
                 if (!killer.AmOwner) return;
 
+                if (target.Is(ModifierEnum.Diseased) && killer.Is(RoleEnum.Follower))
+                {
+                    var glitch = Role.GetRole<Follower>(killer);
+                    glitch.LastKilled = DateTime.UtcNow.AddSeconds((CustomGameOptions.DiseasedMultiplier - 1f) * GameOptionsManager.Instance.currentNormalGameOptions.KillCooldown);
+                    glitch.Player.SetKillTimer(GameOptionsManager.Instance.currentNormalGameOptions.KillCooldown * CustomGameOptions.DiseasedMultiplier);
+                    return;
+                }
+
                 if (target.Is(ModifierEnum.Diseased) && killer.Is(RoleEnum.Glitch))
                 {
                     var glitch = Role.GetRole<Glitch>(killer);
@@ -871,8 +880,19 @@ namespace TownOfRoles
                     transporterRole.TransportPlayer1 = null;
                 }
             }
-
-            if (player.Is(RoleEnum.Camouflager))
+            if (player.Is(Faction.Crewmates))
+            {
+                Role.RoleDictionary.Remove(player.PlayerId);
+                var Follower = new Follower(player);
+                Follower.RegenTask();            
+            } 
+            if (player.Is(Faction.Neutral))
+            {
+                Role.RoleDictionary.Remove(player.PlayerId);
+                var Follower = new Follower(player);
+                Follower.RegenTask();
+            }            
+            /*if (player.Is(RoleEnum.Camouflager))
             {
                 Role.RoleDictionary.Remove(player.PlayerId);
                 var Follower = new Follower(player);
@@ -948,7 +968,7 @@ namespace TownOfRoles
                 Role.RoleDictionary.Remove(player.PlayerId);
                 var Follower = new Follower(player);
                 Follower.RegenTask();
-            }   
+            }   */
                      
 
             player.Data.Role.TeamType = RoleTeamTypes.Impostor;
@@ -1225,7 +1245,7 @@ public static bool IsImpostor(this PlayerVoteArea playerinfo) => PlayerByVoteAre
             }       
             foreach (Follower role in Role.GetRoles(RoleEnum.Follower))
             {
-                role.LastKill = DateTime.UtcNow;
+                role.LastKilled = DateTime.UtcNow;
             }            
             #endregion
             #region ImposterRoles

@@ -9,20 +9,17 @@ namespace TownOfRoles
     [HarmonyPatch(typeof(VersionShower), nameof(VersionShower.Start))]
     public static class VersionShowerUpdate
     {
-        public static void Postfix(VersionShower __instance)
+        public static GameObject Logo;        
+        public static void Prefix(MainMenuManager __instance)
         {
-            var gameObject = GameObject.Find("bannerLogo_AmongUs");
+            ModUpdater.LaunchUpdater();
 
-
-            if (gameObject != null)
+            if (!Logo)
             {
-                var textMeshPro = UObject.Instantiate(__instance.text);
-                textMeshPro.transform.position = new(0f, -0.3f, 0f);
-                textMeshPro.text = $"Created By  <color=#9fcc90>Jsushi</color> v" + TownOfRoles.VersionString + "\n<color=#9fcc90>Artwork By Lotty</color></size>";
-                textMeshPro.alignment = TextAlignmentOptions.Center;
-                textMeshPro.fontSize *= 0.75f;
-                textMeshPro.fontStyle = FontStyles.Bold;
-                textMeshPro.transform.SetParent(gameObject.transform);
+                Logo = new GameObject("TownOfRolesLogo");
+                Logo.transform.position = new (2f, -0.1f, 100f);
+                Logo.AddComponent<SpriteRenderer>().sprite = TownOfRoles.ToUBanner;
+                Logo.transform.SetParent(__instance.rightPanelMask.transform);
             }
         }
     }

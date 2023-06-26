@@ -23,14 +23,14 @@ namespace TownOfRoles.Patches
             else
                 _time += Time.deltaTime;
 
-            foreach (var bubble in __instance.Chat.chatBubPool.activeChildren)
+            /*foreach (var bubble in __instance.Chat.chatBubPool.activeChildren)
             {
                 if (bubble.Cast<ChatBubble>().NameText != null)
                 {
                     bubble.Cast<ChatBubble>().NameText.alignment = TextAlignmentOptions.TopRight;
                     bubble.Cast<ChatBubble>().TextArea.alignment = TextAlignmentOptions.TopRight;
                 }
-            }
+            }*/
 
             if (Classes.GameStates.IsLobby)
                 return;

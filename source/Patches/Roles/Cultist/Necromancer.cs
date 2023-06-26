@@ -13,7 +13,7 @@ namespace TownOfRoles.Roles.Cultist
         public Necromancer(PlayerControl player) : base(player)
         {
             Name = "Necromancer";
-            StartText = () => "Revive The Dead To Do Your Dirty Work";
+            StartText = () => "Revive the dead to do your dirty work";
             TaskText = () => "Revive Crewmates to turn them into Impostors";
             Color = Patches.Colors.Impostor;
             LastRevived = DateTime.UtcNow;

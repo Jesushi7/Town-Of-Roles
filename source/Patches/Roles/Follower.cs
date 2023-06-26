@@ -4,6 +4,7 @@ namespace TownOfRoles.Roles
 {
     public class Follower : Role
     {
+        public DateTime LastKilled;        
         
         public Follower(PlayerControl player) : base(player)
         {
@@ -12,16 +13,15 @@ namespace TownOfRoles.Roles
             TaskText = () => "Follow your Cultist";                      
             FactionName = "Impostor";             
             Faction = Faction.Impostors;
-            LastKill = DateTime.UtcNow;        
+            LastKilled = DateTime.UtcNow;        
             RoleType = RoleEnum.Follower;
             AddToRoleHistory(RoleType);
             Color = Palette.ImpostorRed;
-        }
-        public DateTime LastKill { get; set; }        
+        }   
         public float KillTimer()
         {
             var utcNow = DateTime.UtcNow;
-            var timeSpan = utcNow - LastKill;
+            var timeSpan = utcNow - LastKilled;
             var num = GameOptionsManager.Instance.currentNormalGameOptions.KillCooldown * 1000f;
             var flag2 = num - (float)timeSpan.TotalMilliseconds < 0f;
             if (flag2) return 0;
