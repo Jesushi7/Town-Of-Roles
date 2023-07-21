@@ -1,23 +1,24 @@
 ﻿using System.Linq;
 using Hazel;
-using TownOfRoles.Roles;
+using TownOfSushi.Roles;
 using UnityEngine;
 using UnityEngine.UI;
 using Il2CppInterop.Runtime.InteropTypes.Arrays;
-using TownOfRoles.CrewmateRoles.MedicMod;
-using TownOfRoles.CrewmateRoles.SwapperMod;
-using TownOfRoles.ImpostorRoles.SilencerMod;
-using TownOfRoles.Roles.Modifiers;
-using TownOfRoles.Extensions;
-using TownOfRoles.CrewmateRoles.ImitatorMod;
-using RewiredConsts;
-using Reactor.Utilities;
+using TownOfSushi.CrewmateRoles.MedicMod;
+using TownOfSushi.CrewmateRoles.SwapperMod;
+using TownOfSushi.CrewmateRoles.VigilanteMod;
+using TownOfSushi.NeutralRoles.DoomsayerMod;
+using TownOfSushi.ImpostorRoles.BlackmailerMod;
+using TownOfSushi.Roles.Modifiers;
+using TownOfSushi.Extensions;
+using TownOfSushi.CrewmateRoles.ImitatorMod;
+using TownOfSushi.Patches;
+using Reactor.Utilities.Extensions;
 
-namespace TownOfRoles.Modifiers.AssassinMod
+namespace TownOfSushi.Modifiers.AssassinMod
 {
     public class AssassinKill
     {
-        public static bool HaveFailedGuess = false;        
         public static void RpcMurderPlayer(PlayerControl player, PlayerControl assassin)
         {
             PlayerVoteArea voteArea = MeetingHud.Instance.playerStates.First(
@@ -29,28 +30,9 @@ namespace TownOfRoles.Modifiers.AssassinMod
         {
             MurderPlayer(voteArea, player);
             AssassinKillCount(player, assassin);
-            MessageWriter writer = AmongUsClient.Instance.StartRpcImmediately(PlayerControl.LocalPlayer.NetId,
-                (byte)CustomRPC.AssassinKill, SendOption.Reliable, -1);
-            writer.Write(player.PlayerId);
-            writer.Write(assassin.PlayerId);
-            AmongUsClient.Instance.FinishRpcImmediately(writer);
+            Utils.Rpc(CustomRPC.AssassinKill, player.PlayerId, assassin.PlayerId);
         }
-        public static void AssassinFail(byte playerId, byte targetId)
-        {
-            if ((PlayerControl.LocalPlayer.PlayerId == playerId || PlayerControl.LocalPlayer.PlayerId == targetId) && (CustomGameOptions.WhoSeesFailedFlash == WhoSeesFailedFlash.TargetPlusAssassin))
-                Coroutines.Start(Utils.FlashCoroutine(Color.red));
 
-            if ((PlayerControl.LocalPlayer.Data.IsImpostor() || PlayerControl.LocalPlayer.PlayerId == targetId) && (CustomGameOptions.WhoSeesFailedFlash == WhoSeesFailedFlash.TargetPlusImpostors))
-                Coroutines.Start(Utils.FlashCoroutine(Color.red));
-
-            if (PlayerControl.LocalPlayer.Data.IsImpostor() && CustomGameOptions.WhoSeesFailedFlash == WhoSeesFailedFlash.Impostors)
-                Coroutines.Start(Utils.FlashCoroutine(Color.red));
-                
-            if (CustomGameOptions.WhoSeesFailedFlash == WhoSeesFailedFlash.Everyone)
-                Coroutines.Start(Utils.FlashCoroutine(Color.red));
-
-            HaveFailedGuess = true;
-        }
         public static void MurderPlayer(PlayerControl player, bool checkLover = true)
         {
             PlayerVoteArea voteArea = MeetingHud.Instance.playerStates.First(
@@ -63,7 +45,7 @@ namespace TownOfRoles.Modifiers.AssassinMod
             var assassinPlayer = Role.GetRole(assassin);
             if (player == assassin) assassinPlayer.IncorrectAssassinKills += 1;
             else assassinPlayer.CorrectAssassinKills += 1;
-        }    
+        }
         public static void MurderPlayer(
             PlayerVoteArea voteArea,
             PlayerControl player,
@@ -73,11 +55,9 @@ namespace TownOfRoles.Modifiers.AssassinMod
             var hudManager = DestroyableSingleton<HudManager>.Instance;
             if (checkLover)
             {
-            //DestroyableSingleton<HudManager>.Instance.Chat.AddChat(PlayerControl.LocalPlayer, "The Assassin shot" + ((Object) player).name + "!");                
                 SoundManager.Instance.PlaySound(player.KillSfx, false, 0.8f);
                 hudManager.KillOverlay.ShowKillAnimation(player.Data, player.Data);
             }
-
             var amOwner = player.AmOwner;
             if (amOwner)
             {
@@ -108,134 +88,7 @@ namespace TownOfRoles.Modifiers.AssassinMod
                         StringNames.GhostDoTasks,
                         new Il2CppReferenceArray<Il2CppSystem.Object>(0));
                 }
-
-                player.myTasks.Insert(0, importantTextTask);
-
-                if (player.Is(RoleEnum.Swapper))
-                {
-                    var swapper = Role.GetRole<Swapper>(PlayerControl.LocalPlayer);
-                    swapper.ListOfActives.Clear();
-                    swapper.Buttons.Clear();
-                    SwapVotes.Swap1 = null;
-                    SwapVotes.Swap2 = null;
-                    var buttons = Role.GetRole<Swapper>(player).Buttons;
-                    foreach (var button in buttons)
-                    {
-                        button.SetActive(false);
-                        button.GetComponent<PassiveButton>().OnClick = new Button.ButtonClickedEvent();
-                    }
-                }
-
-                if (player.Is(RoleEnum.Imitator))
-                {
-                    var imitator = Role.GetRole<Imitator>(PlayerControl.LocalPlayer);
-                    imitator.ListOfActives.Clear();
-                    imitator.Buttons.Clear();
-                    SetImitate.Imitate = null;
-                    var buttons = Role.GetRole<Imitator>(player).Buttons;
-                    foreach (var button in buttons)
-                    {
-                        button.SetActive(false);
-                        button.GetComponent<PassiveButton>().OnClick = new Button.ButtonClickedEvent();
-                    }
-                }
-
-                var player2 = PlayerControl.LocalPlayer;
-
-                var guess = Role.GetRole(player);
-
-            if ((player2.GetFaction() == PlayerControl.LocalPlayer.GetFaction() && (player2.GetFaction() is Faction.Impostors or Faction.Neutral)) ||
-                CustomGameOptions.DeadSeesEverything)
-            {
-                if (player2 != player)
-                    hudManager.Chat.AddChat(PlayerControl.LocalPlayer, $"{player2.name} Guessed the Role {guess.Name} for {player.name}!");
-            }
-            
-                if (player.Is(AbilityEnum.Assassin))
-                {
-                    var assassin = Ability.GetAbility<Assassin>(PlayerControl.LocalPlayer);
-                    ShowHideButtons.HideButtons(assassin);
-                }
-            }
-            player.Die(DeathReason.Kill, false);
-
-            var meetingHud = MeetingHud.Instance;
-            if (amOwner)
-            {
-                meetingHud.SetForegroundForDead();
-            }
-            var deadPlayer = new DeadPlayer
-            {
-                PlayerId = player.PlayerId,
-                KillerId = player.PlayerId,
-                KillTime = System.DateTime.UtcNow,
-            };
-
-            Murder.KilledPlayers.Add(deadPlayer);
-            if (voteArea == null) return;
-            if (voteArea.DidVote) voteArea.UnsetVote();
-            voteArea.AmDead = true;
-            voteArea.Overlay.gameObject.SetActive(true);
-            voteArea.Overlay.color = Color.white;
-            voteArea.XMark.gameObject.SetActive(true);
-            voteArea.XMark.transform.localScale = Vector3.one;
-
-            var Silencers = Role.AllRoles.Where(x => x.RoleType == RoleEnum.Silencer && x.Player != null).Cast<Silencer>();
-            foreach (var role in Silencers)
-            {
-                if (role.Silenced != null && voteArea.TargetPlayerId == role.Silenced.PlayerId)
-                {
-                    if (SilenceMeetingUpdate.PrevXMark != null && SilenceMeetingUpdate.PrevOverlay != null)
-                    {
-                        voteArea.XMark.sprite = SilenceMeetingUpdate.PrevXMark;
-                        voteArea.Overlay.sprite = SilenceMeetingUpdate.PrevOverlay;
-                        voteArea.XMark.transform.localPosition = new Vector3(
-                            voteArea.XMark.transform.localPosition.x - SilenceMeetingUpdate.LetterXOffset,
-                            voteArea.XMark.transform.localPosition.y - SilenceMeetingUpdate.LetterYOffset,
-                            voteArea.XMark.transform.localPosition.z);
-                    }
-                }
-            }
-
-            if (PlayerControl.LocalPlayer.Is(RoleEnum.Swapper) && !player.AmOwner && !PlayerControl.LocalPlayer.Data.IsDead)
-            {
                 
-                SwapVotes.Swap1 = voteArea == SwapVotes.Swap1 ? null : SwapVotes.Swap1;
-                SwapVotes.Swap2 = voteArea == SwapVotes.Swap2 ? null : SwapVotes.Swap2;
-                if (SwapVotes.Swap1 == null || SwapVotes.Swap2 == null)
-                {
-                    var writer2 = AmongUsClient.Instance.StartRpcImmediately(PlayerControl.LocalPlayer.NetId,
-                        (byte)CustomRPC.SetSwaps, SendOption.Reliable, -1);
-                    writer2.Write(sbyte.MaxValue);
-                    writer2.Write(sbyte.MaxValue);
-                    AmongUsClient.Instance.FinishRpcImmediately(writer2);
-
-                }
-                var swapperrole = Role.GetRole<Swapper>(PlayerControl.LocalPlayer);
-
-                int index;
-                for (index = 0; index < MeetingHud.Instance.playerStates.Length; index++) if (MeetingHud.Instance.playerStates[index].TargetPlayerId == voteArea.TargetPlayerId) break;
-
-                swapperrole.Buttons[index].GetComponent<SpriteRenderer>().sprite = CrewmateRoles.SwapperMod.AddButton.DisabledSprite;
-                swapperrole.ListOfActives[index] = false;
-                swapperrole.Buttons[index].SetActive(false);
-                swapperrole.Buttons[index].GetComponent<PassiveButton>().OnClick = new Button.ButtonClickedEvent();
-
-            }
-
-            foreach (var playerVoteArea in meetingHud.playerStates)
-            {
-                if (playerVoteArea.VotedFor != player.PlayerId) continue;
-                playerVoteArea.UnsetVote();
-                var voteAreaPlayer = Utils.PlayerById(playerVoteArea.TargetPlayerId);
-                if (!voteAreaPlayer.AmOwner) continue;
-                meetingHud.ClearVote();
-            }
-
-            player.Exiled();
-
-            if (AmongUsClient.Instance.AmHost)
-            {
                 foreach (var role in Role.GetRoles(RoleEnum.Mayor))
                 {
                     if (role is Mayor mayor)
@@ -258,9 +111,156 @@ namespace TownOfRoles.Modifiers.AssassinMod
                             AmongUsClient.Instance.FinishRpcImmediately(writer);
                         }
                     }
+                player.myTasks.Insert(0, importantTextTask);
                 }
-                meetingHud.CheckForEndVoting();
+
+                if (player.Is(RoleEnum.Swapper))
+                {
+                    var swapper = Role.GetRole<Swapper>(PlayerControl.LocalPlayer);
+                    swapper.ListOfActives.Clear();
+                    swapper.Buttons.Clear();
+                    SwapVotes.Swap1 = null;
+                    SwapVotes.Swap2 = null;
+                    Utils.Rpc(CustomRPC.SetSwaps, sbyte.MaxValue, sbyte.MaxValue);
+                    var buttons = Role.GetRole<Swapper>(player).Buttons;
+                    foreach (var button in buttons)
+                    {
+                        button.SetActive(false);
+                        button.GetComponent<PassiveButton>().OnClick = new Button.ButtonClickedEvent();
+                    }
+                }
+
+                if (player.Is(RoleEnum.Imitator))
+                {
+                    var imitator = Role.GetRole<Imitator>(PlayerControl.LocalPlayer);
+                    imitator.ListOfActives.Clear();
+                    imitator.Buttons.Clear();
+                    SetImitate.Imitate = null;
+                    var buttons = Role.GetRole<Imitator>(player).Buttons;
+                    foreach (var button in buttons)
+                    {
+                        button.SetActive(false);
+                        button.GetComponent<PassiveButton>().OnClick = new Button.ButtonClickedEvent();
+                    }
+                }
+
+                if (player.Is(RoleEnum.Vigilante))
+                {
+                    var retributionist = Role.GetRole<Vigilante>(PlayerControl.LocalPlayer);
+                    ShowHideButtonsVigi.HideButtonsVigi(retributionist);
+                }
+
+                if (player.Is(AbilityEnum.Assassin))
+                {
+                    var assassin = Ability.GetAbility<Assassin>(PlayerControl.LocalPlayer);
+                    ShowHideButtons.HideButtons(assassin);
+                }
+
+                if (player.Is(RoleEnum.Doomsayer))
+                {
+                    var doomsayer = Role.GetRole<Doomsayer>(PlayerControl.LocalPlayer);
+                    ShowHideButtonsDoom.HideButtonsDoom(doomsayer);
+                }
+
+                if (player.Is(RoleEnum.Monarch))
+                {
+                    var mayor = Role.GetRole<Monarch>(PlayerControl.LocalPlayer);
+                    mayor.RevealButton.Destroy();
+                }
+
             }
+            player.Die(DeathReason.Kill, false);
+
+            var deadPlayer = new DeadPlayer
+            {
+                PlayerId = player.PlayerId,
+                KillerId = player.PlayerId,
+                KillTime = System.DateTime.UtcNow,
+            };
+
+            Murder.KilledPlayers.Add(deadPlayer);
+            if (voteArea == null) return;
+            if (voteArea.DidVote) voteArea.UnsetVote();
+            voteArea.AmDead = true;
+            voteArea.Overlay.gameObject.SetActive(true);
+            voteArea.Overlay.color = Color.white;
+            voteArea.XMark.gameObject.SetActive(true);
+            voteArea.XMark.transform.localScale = Vector3.one;
+
+            var meetingHud = MeetingHud.Instance;
+            if (amOwner)
+            {
+                meetingHud.SetForegroundForDead();
+            }
+
+            var blackmailers = Role.AllRoles.Where(x => x.RoleType == RoleEnum.Blackmailer && x.Player != null).Cast<Blackmailer>();
+            foreach (var role in blackmailers)
+            {
+                if (role.Blackmailed != null && voteArea.TargetPlayerId == role.Blackmailed.PlayerId)
+                {
+                    if (BlackmailMeetingUpdate.PrevXMark != null && BlackmailMeetingUpdate.PrevOverlay != null)
+                    {
+                        voteArea.XMark.sprite = BlackmailMeetingUpdate.PrevXMark;
+                        voteArea.Overlay.sprite = BlackmailMeetingUpdate.PrevOverlay;
+                        voteArea.XMark.transform.localPosition = new Vector3(
+                            voteArea.XMark.transform.localPosition.x - BlackmailMeetingUpdate.LetterXOffset,
+                            voteArea.XMark.transform.localPosition.y - BlackmailMeetingUpdate.LetterYOffset,
+                            voteArea.XMark.transform.localPosition.z);
+                    }
+                }
+            }
+
+            if (PlayerControl.LocalPlayer.Is(RoleEnum.Vigilante) && !PlayerControl.LocalPlayer.Data.IsDead)
+            {
+                var vigi = Role.GetRole<Vigilante>(PlayerControl.LocalPlayer);
+                ShowHideButtonsVigi.HideTarget(vigi, voteArea.TargetPlayerId);
+            }
+
+            if (PlayerControl.LocalPlayer.Is(AbilityEnum.Assassin) && !PlayerControl.LocalPlayer.Data.IsDead)
+            {
+                var assassin = Ability.GetAbility<Assassin>(PlayerControl.LocalPlayer);
+                ShowHideButtons.HideTarget(assassin, voteArea.TargetPlayerId);
+            }
+
+            if (PlayerControl.LocalPlayer.Is(RoleEnum.Doomsayer) && !PlayerControl.LocalPlayer.Data.IsDead)
+            {
+                var doom = Role.GetRole<Doomsayer>(PlayerControl.LocalPlayer);
+                ShowHideButtonsDoom.HideTarget(doom, voteArea.TargetPlayerId);
+            }
+
+            if (PlayerControl.LocalPlayer.Is(RoleEnum.Swapper) && !PlayerControl.LocalPlayer.Data.IsDead)
+            {
+                var swapper = Role.GetRole<Swapper>(PlayerControl.LocalPlayer);
+                var button = swapper.Buttons[voteArea.TargetPlayerId];
+                if (button.GetComponent<SpriteRenderer>().sprite == TownOfSushi.SwapperSwitch)
+                {
+                    swapper.ListOfActives[voteArea.TargetPlayerId] = false;
+                    if (SwapVotes.Swap1 == voteArea) SwapVotes.Swap1 = null;
+                    if (SwapVotes.Swap2 == voteArea) SwapVotes.Swap2 = null;
+                    Utils.Rpc(CustomRPC.SetSwaps, sbyte.MaxValue, sbyte.MaxValue);
+                }
+                button.SetActive(false);
+                button.GetComponent<PassiveButton>().OnClick = new Button.ButtonClickedEvent();
+                swapper.Buttons[voteArea.TargetPlayerId] = null;
+            }
+
+            foreach (var playerVoteArea in meetingHud.playerStates)
+            {
+                if (playerVoteArea.VotedFor != player.PlayerId) continue;
+                playerVoteArea.UnsetVote();
+                var voteAreaPlayer = Utils.PlayerById(playerVoteArea.TargetPlayerId);
+                if (voteAreaPlayer.Is(RoleEnum.Prosecutor))
+                {
+                    var pros = Role.GetRole<Prosecutor>(voteAreaPlayer);
+                    pros.ProsecuteThisMeeting = false;
+                }
+                if (!voteAreaPlayer.AmOwner) continue;
+                meetingHud.ClearVote();
+            }
+
+            if (AmongUsClient.Instance.AmHost) meetingHud.CheckForEndVoting();
+
+            AddHauntPatch.AssassinatedPlayers.Add(player);
         }
     }
 }

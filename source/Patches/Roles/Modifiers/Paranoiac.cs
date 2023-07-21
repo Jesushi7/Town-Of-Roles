@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace TownOfRoles.Roles.Modifiers
+namespace TownOfSushi.Roles.Modifiers
 {
     public class Paranoiac : Modifier
     {
@@ -9,8 +9,8 @@ namespace TownOfRoles.Roles.Modifiers
         public Paranoiac(PlayerControl player) : base(player)
         {
             Name = "Paranoiac";
-            TaskText = () => "See when someone is close to you";
-            Color = Patches.Colors.Radar;
+            TaskText = () => "Be on high alert";
+            Color = Patches.Colors.Paranoiac;
             ModifierType = ModifierEnum.Paranoiac;
         }
     }

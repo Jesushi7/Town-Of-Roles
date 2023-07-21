@@ -3,21 +3,21 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Reactor.Utilities.Extensions;
-using TownOfRoles.CrewmateRoles.MedicMod;
-using TownOfRoles.Extensions;
-using TownOfRoles.Roles;
+using TownOfSushi.CrewmateRoles.MedicMod;
+using TownOfSushi.Extensions;
+using TownOfSushi.Roles;
 using UnityEngine;
 using Object = UnityEngine.Object;
-using TownOfRoles.Roles.Modifiers;
+using TownOfSushi.Roles.Modifiers;
 using AmongUs.GameOptions;
 
-namespace TownOfRoles.CrewmateRoles.AltruistMod
+namespace TownOfSushi.CrewmateRoles.AltruistMod
 {
     public class Coroutine
     {
         public static ArrowBehaviour Arrow;
         public static PlayerControl Target;
-        public static Sprite Sprite => TownOfRoles.Arrow;
+        public static Sprite Sprite => TownOfSushi.Arrow;
 
         public static IEnumerator AltruistRevive(DeadBody target, Altruist role)
         {
@@ -75,6 +75,8 @@ namespace TownOfRoles.CrewmateRoles.AltruistMod
                 var lover = Modifier.GetModifier<Lover>(player).OtherLover.Player;
 
                 lover.Revive();
+                if (lover.Is(Faction.Impostors)) RoleManager.Instance.SetRole(lover, RoleTypes.Impostor);
+                else RoleManager.Instance.SetRole(lover, RoleTypes.Crewmate);
                 Murder.KilledPlayers.Remove(
                     Murder.KilledPlayers.FirstOrDefault(x => x.PlayerId == lover.PlayerId));
                 revived.Add(lover);
@@ -98,9 +100,7 @@ namespace TownOfRoles.CrewmateRoles.AltruistMod
                 {
                 }
 
-            if (PlayerControl.LocalPlayer.Data.IsImpostor() || PlayerControl.LocalPlayer.Is(RoleEnum.Glitch) || PlayerControl.LocalPlayer.Is(RoleEnum.Juggernaut)
-                || PlayerControl.LocalPlayer.Is(RoleEnum.Pyromaniac) || PlayerControl.LocalPlayer.Is(RoleEnum.Werewolf)
-                || PlayerControl.LocalPlayer.Is(RoleEnum.Plaguebearer) || PlayerControl.LocalPlayer.Is(RoleEnum.Pestilence))
+            if (PlayerControl.LocalPlayer.Data.IsImpostor() || PlayerControl.LocalPlayer.Is(Faction.NeutralKilling))
             {
                 var gameObj = new GameObject();
                 Arrow = gameObj.AddComponent<ArrowBehaviour>();

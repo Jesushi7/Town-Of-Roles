@@ -1,9 +1,9 @@
 using HarmonyLib;
 using Hazel;
 using Reactor.Utilities.Extensions;
-using TownOfRoles.CrewmateRoles.MedicMod;
-using TownOfRoles.Roles;
-using TownOfRoles.Roles.Cultist;
+using TownOfSushi.CrewmateRoles.MedicMod;
+using TownOfSushi.Roles;
+using TownOfSushi.Roles.Cultist;
 using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +11,7 @@ using Object = UnityEngine.Object;
 using System;
 using AmongUs.GameOptions;
 
-namespace TownOfRoles.CultistRoles.NecromancerMod
+namespace TownOfSushi.CultistRoles.NecromancerMod
 {
     [HarmonyPatch(typeof(KillButton), nameof(KillButton.DoClick))]
     public class PerformRevive
@@ -42,17 +42,13 @@ namespace TownOfRoles.CultistRoles.NecromancerMod
                 var playerId = role.CurrentTarget.ParentId;
                 var player = Utils.PlayerById(playerId);
 
-                if (player.Is(RoleEnum.Sheriff) || player.Is(RoleEnum.CultistSnitch) || player.Is(RoleEnum.Mayor)) return false;
+                if (player.Is(RoleEnum.Sheriff) || player.Is(RoleEnum.CultistSnitch) || player.Is(RoleEnum.Survivor) || player.Is(RoleEnum.Monarch)) return false;
                 if (PlayerControl.LocalPlayer.killTimer > GameOptionsManager.Instance.currentNormalGameOptions.KillCooldown - 0.5f) return false;
 
                 role.ReviveCount += 1;
                 role.LastRevived = DateTime.UtcNow;
 
-                var writer = AmongUsClient.Instance.StartRpcImmediately(PlayerControl.LocalPlayer.NetId,
-                    (byte)CustomRPC.Revive, SendOption.Reliable, -1);
-                writer.Write(PlayerControl.LocalPlayer.PlayerId);
-                writer.Write(playerId);
-                AmongUsClient.Instance.FinishRpcImmediately(writer);
+                Utils.Rpc(CustomRPC.Revive, PlayerControl.LocalPlayer.PlayerId, playerId);
 
                 Revive(role.CurrentTarget, role);
                 return false;

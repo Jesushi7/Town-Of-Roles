@@ -1,10 +1,10 @@
 using System.Linq;
 using HarmonyLib;
-using TownOfRoles.Roles;
+using TownOfSushi.Roles;
 using UnityEngine;
 using Hazel;
 
-namespace TownOfRoles.NeutralRoles.JuggernautMod
+namespace TownOfSushi.NeutralRoles.JuggernautMod
 {
     [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]
     public static class HudManagerUpdate

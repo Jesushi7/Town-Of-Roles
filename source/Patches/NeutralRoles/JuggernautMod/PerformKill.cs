@@ -1,11 +1,11 @@
 using System;
 using HarmonyLib;
 using Hazel;
-using TownOfRoles.Roles;
-using TownOfRoles.CrewmateRoles.MedicMod;
+using TownOfSushi.Roles;
+using TownOfSushi.CrewmateRoles.MedicMod;
 using AmongUs.GameOptions;
 
-namespace TownOfRoles.NeutralRoles.JuggernautMod
+namespace TownOfSushi.NeutralRoles.JuggernautMod
 {
     [HarmonyPatch(typeof(KillButton), nameof(KillButton.DoClick))]
     public class PerformKill
@@ -36,6 +36,12 @@ namespace TownOfRoles.NeutralRoles.JuggernautMod
             {
                 role.LastKill = DateTime.UtcNow;
                 role.LastKill = role.LastKill.AddSeconds(-(CustomGameOptions.JuggKCd - CustomGameOptions.ReducedKCdPerKill * role.JuggKills) + CustomGameOptions.ProtectKCReset);
+                return false;
+            }
+            else if (interact[2] == true)
+            {
+                role.LastKill = DateTime.UtcNow;
+                role.LastKill = role.LastKill.AddSeconds(-(CustomGameOptions.JuggKCd - CustomGameOptions.ReducedKCdPerKill * role.JuggKills) + CustomGameOptions.VestKCReset);
                 return false;
             }
             else if (interact[3] == true) return false;

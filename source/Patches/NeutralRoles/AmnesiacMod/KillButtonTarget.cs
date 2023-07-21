@@ -1,8 +1,8 @@
 using HarmonyLib;
-using TownOfRoles.Roles;
+using TownOfSushi.Roles;
 using UnityEngine;
 
-namespace TownOfRoles.NeutralRoles.AmnesiacMod
+namespace TownOfSushi.NeutralRoles.AmnesiacMod
 {
     [HarmonyPatch(typeof(KillButton), nameof(KillButton.SetTarget))]
     public class KillButtonTarget

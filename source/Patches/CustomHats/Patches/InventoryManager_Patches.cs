@@ -1,6 +1,6 @@
-/*using HarmonyLib;
+using HarmonyLib;
 
-namespace TownOfRoles.Patches.CustomHats.Patches
+namespace TownOfSushi.Patches.CustomHats.Patches
 {
     [HarmonyPatch(typeof(InventoryManager), nameof(InventoryManager.CheckUnlockedItems))]
     public class InventoryManager_Patches
@@ -10,5 +10,4 @@ namespace TownOfRoles.Patches.CustomHats.Patches
             HatLoader.LoadHatsRoutine();
         }
     }
-
-}   */
+}   

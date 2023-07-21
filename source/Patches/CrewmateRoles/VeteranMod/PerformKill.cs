@@ -1,8 +1,8 @@
 using HarmonyLib;
 using Hazel;
-using TownOfRoles.Roles;
+using TownOfSushi.Roles;
 
-namespace TownOfRoles.CrewmateRoles.VeteranMod
+namespace TownOfSushi.CrewmateRoles.VeteranMod
 {
     [HarmonyPatch(typeof(KillButton), nameof(KillButton.DoClick))]
     public class Alert
@@ -23,12 +23,8 @@ namespace TownOfRoles.CrewmateRoles.VeteranMod
                 if (role.AlertTimer() != 0) return false;
                 role.TimeRemaining = CustomGameOptions.AlertDuration;
                 role.UsesLeft--;
-                role.RegenTask();
                 role.Alert();
-                var writer = AmongUsClient.Instance.StartRpcImmediately(PlayerControl.LocalPlayer.NetId,
-                    (byte)CustomRPC.Alert, SendOption.Reliable, -1);
-                writer.Write(PlayerControl.LocalPlayer.PlayerId);
-                AmongUsClient.Instance.FinishRpcImmediately(writer);
+                Utils.Rpc(CustomRPC.Alert, PlayerControl.LocalPlayer.PlayerId);
                 return false;
             }
 

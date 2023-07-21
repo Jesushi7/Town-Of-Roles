@@ -1,6 +1,6 @@
 using HarmonyLib;
 
-namespace TownOfRoles.Patches
+namespace TownOfSushi.Patches
 {
     [HarmonyPatch(typeof(ExileController), nameof(ExileController.Begin))]
     [HarmonyPriority(Priority.First)]

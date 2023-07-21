@@ -1,7 +1,7 @@
 using HarmonyLib;
-using TownOfRoles.Roles;
+using TownOfSushi.Roles;
 
-namespace TownOfRoles.ImpostorRoles.MorphlingMod
+namespace TownOfSushi.ImpostorRoles.MorphlingMod
 {
     [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]
     public class MorphUnmorph

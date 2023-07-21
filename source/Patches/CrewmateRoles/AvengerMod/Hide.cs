@@ -1,9 +1,9 @@
 using HarmonyLib;
-using TownOfRoles.Extensions;
-using TownOfRoles.Roles;
+using TownOfSushi.Extensions;
+using TownOfSushi.Roles;
 using UnityEngine;
 
-namespace TownOfRoles.CrewmateRoles.AvengerMod
+namespace TownOfSushi.CrewmateRoles.AvengerMod
 {
     [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]
     [HarmonyPriority(Priority.Last)]
@@ -13,20 +13,20 @@ namespace TownOfRoles.CrewmateRoles.AvengerMod
         {
             foreach (var role in Role.GetRoles(RoleEnum.Avenger))
             {
-                var Avenger = (Avenger) role;
+                var haunter = (Avenger) role;
                 if (role.Player.Data.Disconnected) return;
-                var caught = Avenger.Caught;
+                var caught = haunter.Caught;
                 if (!caught)
                 {
-                    Avenger.Fade();
+                    haunter.Fade();
                 }
-                else if (Avenger.Faded)
+                else if (haunter.Faded)
                 {
-                    Utils.Unmorph(Avenger.Player);
-                    Avenger.Player.myRend().color = Color.white;
-                    Avenger.Player.gameObject.layer = LayerMask.NameToLayer("Ghost");
-                    Avenger.Faded = false;
-                    Avenger.Player.MyPhysics.ResetMoveState();
+                    Utils.Unmorph(haunter.Player);
+                    haunter.Player.myRend().color = Color.white;
+                    haunter.Player.gameObject.layer = LayerMask.NameToLayer("Ghost");
+                    haunter.Faded = false;
+                    haunter.Player.MyPhysics.ResetMoveState();
                 }
             }
         }

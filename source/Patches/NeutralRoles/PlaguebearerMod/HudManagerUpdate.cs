@@ -1,11 +1,10 @@
 using System.Linq;
 using HarmonyLib;
-using TownOfRoles.Roles;
+using TownOfSushi.Roles;
 using UnityEngine;
-using Hazel;
-using TownOfRoles.Extensions;
+using TownOfSushi.Extensions;
 
-namespace TownOfRoles.NeutralRoles.PlaguebearerMod
+namespace TownOfSushi.NeutralRoles.PlaguebearerMod
 {
     [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]
     public static class HudManagerUpdate
@@ -45,13 +44,12 @@ namespace TownOfRoles.NeutralRoles.PlaguebearerMod
             if (role.CanTransform && (PlayerControl.AllPlayerControls.ToArray().Where(x => !x.Data.IsDead && !x.Data.Disconnected).ToList().Count > 1) && !isDead)
             {
                 var transform = false;
-                var alives = PlayerControl.AllPlayerControls.ToArray().Where(x => !x.Data.IsDead && !x.Data.Disconnected).ToList();
-                if (alives.Count == 2)
+                var alives = PlayerControl.AllPlayerControls.ToArray().Where(x => !x.Data.IsDead && !x.Data.Disconnected && x != PlayerControl.LocalPlayer).ToList();
+                if (alives.Count <= 1)
                 {
                     foreach (var player in alives)
                     {
-                        if (player.Data.IsImpostor() || player.Is(RoleEnum.Glitch) || player.Is(RoleEnum.Juggernaut)|| player.Is(RoleEnum.SerialKiller)
-                            || player.Is(RoleEnum.Pyromaniac) || player.Is(RoleEnum.Werewolf))
+                        if (player.Data.IsImpostor() || player.Is(Faction.NeutralKilling))
                         {
                             transform = true;
                         }
@@ -61,10 +59,7 @@ namespace TownOfRoles.NeutralRoles.PlaguebearerMod
                 if (transform)
                 {
                     role.TurnPestilence();
-                    var writer = AmongUsClient.Instance.StartRpcImmediately(PlayerControl.LocalPlayer.NetId,
-                        (byte)CustomRPC.TurnPestilence, SendOption.Reliable, -1);
-                    writer.Write(PlayerControl.LocalPlayer.PlayerId);
-                    AmongUsClient.Instance.FinishRpcImmediately(writer);
+                    Utils.Rpc(CustomRPC.TurnPestilence, PlayerControl.LocalPlayer.PlayerId);
                 }
             }
         }

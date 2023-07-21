@@ -1,11 +1,11 @@
 using System;
 using HarmonyLib;
 using Reactor;
-using TownOfRoles.Roles;
+using TownOfSushi.Roles;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace TownOfRoles
+namespace TownOfSushi
 {
     #region OpenDoorConsole
     [HarmonyPatch(typeof(OpenDoorConsole), nameof(OpenDoorConsole.CanUse))]

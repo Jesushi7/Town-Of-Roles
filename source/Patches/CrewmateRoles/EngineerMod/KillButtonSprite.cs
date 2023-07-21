@@ -1,14 +1,14 @@
 using System.Linq;
 using HarmonyLib;
-using TownOfRoles.Roles;
+using TownOfSushi.Roles;
 using UnityEngine;
 
-namespace TownOfRoles.CrewmateRoles.EngineerMod
+namespace TownOfSushi.CrewmateRoles.EngineerMod
 {
     [HarmonyPatch(typeof(HudManager))]
     public class KillButtonSprite
     {
-        private static Sprite Sprite => TownOfRoles.EngineerFix;
+        private static Sprite Sprite => TownOfSushi.EngineerFix;
 
         private static void UpdtateEngineerVentTimer(HudManager __instance, Engineer role)
         {
@@ -40,7 +40,7 @@ namespace TownOfRoles.CrewmateRoles.EngineerMod
             }
             if (role.UsesText != null)
             {
-                role.UsesText.text = role.EngiFixPerRound + "/" + role.EngiFixPerGame;
+                role.UsesText.text = role.EngiFixPerRound+"/"+role.EngiFixPerGame;
             }
             
             __instance.KillButton.graphic.sprite = Sprite;

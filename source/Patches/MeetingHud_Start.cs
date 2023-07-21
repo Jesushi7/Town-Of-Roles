@@ -3,9 +3,9 @@ using Object = UnityEngine.Object;
 using Hazel;
 using Reactor.Utilities.Extensions;
 using UnityEngine;
-using TownOfRoles.Patches;
+using TownOfSushi.Patches;
 
-namespace TownOfRoles
+namespace TownOfSushi
 {
     [HarmonyPatch(typeof(MeetingHud), nameof(MeetingHud.Start))]
     public class MeetingHud_Start
@@ -37,9 +37,7 @@ namespace TownOfRoles
     {
         public static void Postfix(MeetingHud __instance)
         {
-            var writer = AmongUsClient.Instance.StartRpcImmediately(PlayerControl.LocalPlayer.NetId,
-                (byte)CustomRPC.RemoveAllBodies, SendOption.Reliable, -1);
-            AmongUsClient.Instance.FinishRpcImmediately(writer);
+            Utils.Rpc(CustomRPC.RemoveAllBodies);
             var buggedBodies = Object.FindObjectsOfType<DeadBody>();
             foreach (var body in buggedBodies)
             {

@@ -1,9 +1,9 @@
 using HarmonyLib;
-using TownOfRoles.Roles;
+using TownOfSushi.Roles;
 using UnityEngine;
 using AmongUs.GameOptions;
 
-namespace TownOfRoles.ImpostorRoles.JanitorMod
+namespace TownOfSushi.ImpostorRoles.JanitorMod
 {
     [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]
     public class PlayerControlUpdate
@@ -26,7 +26,7 @@ namespace TownOfRoles.ImpostorRoles.JanitorMod
             role.CleanButton.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
                     && AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started);
-            role.CleanButton.graphic.sprite = TownOfRoles.JanitorClean;
+            role.CleanButton.graphic.sprite = TownOfSushi.JanitorClean;
 
 
             var data = PlayerControl.LocalPlayer.Data;

@@ -1,9 +1,9 @@
 using System;
 using UnityEngine;
 using System.Linq;
-using TownOfRoles.Extensions;
+using TownOfSushi.Extensions;
 
-namespace TownOfRoles.Roles
+namespace TownOfSushi.Roles
 {
     public class Grenadier : Role
     {
@@ -21,13 +21,11 @@ namespace TownOfRoles.Roles
         public Grenadier(PlayerControl player) : base(player)
         {
             Name = "Grenadier";
-            StartText = () => "Flash everyone to get sneaky kills";
-            TaskText = () => "Blind everyone";
+            ImpostorText = () => "Flashbang everyone and get \nsneaky kills during the flash";
+            TaskText = () => "Blind the crewmates";
+            FactionName = "Impostor";                   
             Color = Patches.Colors.Impostor;
             LastFlashed = DateTime.UtcNow;
-            FactionName = "Impostor";   
-                 
-            Faction = Faction.Impostors;              
             RoleType = RoleEnum.Grenadier;
             AddToRoleHistory(RoleType);
             Faction = Faction.Impostors;

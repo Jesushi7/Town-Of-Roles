@@ -1,8 +1,8 @@
 using HarmonyLib;
-using TownOfRoles.Roles;
+using TownOfSushi.Roles;
 using UnityEngine;
 
-namespace TownOfRoles.CrewmateRoles.VeteranMod
+namespace TownOfSushi.CrewmateRoles.VeteranMod
 {
     [HarmonyPatch(typeof(HudManager))]
     public class HudManagerUpdate

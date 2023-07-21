@@ -3,28 +3,37 @@ using HarmonyLib;
 using Reactor.Utilities;
 using Reactor.Utilities.Extensions;
 using TMPro;
-using TownOfRoles.Extensions;
-using TownOfRoles.Roles;
-using TownOfRoles.Roles.Modifiers;
+using TownOfSushi.Extensions;
+using TownOfSushi.Roles;
+using TownOfSushi.Roles.Modifiers;
 using UnityEngine;
 using UnityEngine.UI;
 using Object = UnityEngine.Object;
 
-namespace TownOfRoles.Modifiers.AssassinMod
+namespace TownOfSushi.Modifiers.AssassinMod
 {
     [HarmonyPatch(typeof(MeetingHud), nameof(MeetingHud.Start))]
     public class AddButton
     {
-        private static Sprite CycleBackSprite => TownOfRoles.CycleBackSprite;
-        private static Sprite CycleForwardSprite => TownOfRoles.CycleForwardSprite;
+        private static Sprite CycleBackSprite => TownOfSushi.CycleBackSprite;
+        private static Sprite CycleForwardSprite => TownOfSushi.CycleForwardSprite;
 
-        private static Sprite GuessSprite => TownOfRoles.GuessSprite;
+        private static Sprite GuessSprite => TownOfSushi.GuessSprite;
 
         private static bool IsExempt(PlayerVoteArea voteArea)
         {
             if (voteArea.AmDead) return true;
             var player = Utils.PlayerById(voteArea.TargetPlayerId);
-            if (PlayerControl.LocalPlayer.Is(Faction.Neutral))
+            if (PlayerControl.LocalPlayer.Is(RoleEnum.Vampire))
+            {
+                if (
+                    player == null ||
+                    player.Is(RoleEnum.Vampire) ||
+                    player.Data.IsDead ||
+                    player.Data.Disconnected
+                ) return true;
+            }
+            else if (PlayerControl.LocalPlayer.Is(Faction.NeutralKilling))
             {
                 if (
                     player == null ||
@@ -36,7 +45,7 @@ namespace TownOfRoles.Modifiers.AssassinMod
             {
                 if (
                     player == null ||
-                    (player.Data.IsImpostor() && PlayerControl.LocalPlayer.Data.IsImpostor()) ||
+                    player.Data.IsImpostor() ||
                     player.Data.IsDead ||
                     player.Data.Disconnected
                 ) return true;
@@ -162,6 +171,8 @@ namespace TownOfRoles.Modifiers.AssassinMod
                 var toDie = playerRole.Name == currentGuess ? playerRole.Player : role.Player;
                 if (playerModifier != null)
                     toDie = (playerRole.Name == currentGuess || playerModifier.Name == currentGuess) ? playerRole.Player : role.Player;
+
+                if (!toDie.Is(RoleEnum.Pestilence) || PlayerControl.LocalPlayer.Is(RoleEnum.Pestilence))
                 {
                     if (PlayerControl.LocalPlayer.Is(ModifierEnum.DoubleShot) && toDie == PlayerControl.LocalPlayer)
                     {
@@ -180,7 +191,7 @@ namespace TownOfRoles.Modifiers.AssassinMod
                             if (toDie.IsLover() && CustomGameOptions.BothLoversDie)
                             {
                                 var lover = ((Lover)playerModifier).OtherLover.Player;
-                                ShowHideButtons.HideSingle(role, lover.PlayerId, false);
+                                if (!lover.Is(RoleEnum.Pestilence)) ShowHideButtons.HideSingle(role, lover.PlayerId, false);
                             }
                         }
                     }
@@ -192,7 +203,7 @@ namespace TownOfRoles.Modifiers.AssassinMod
                         if (toDie.IsLover() && CustomGameOptions.BothLoversDie)
                         {
                             var lover = ((Lover)playerModifier).OtherLover.Player;
-                            ShowHideButtons.HideSingle(role, lover.PlayerId, false);
+                            if (!lover.Is(RoleEnum.Pestilence)) ShowHideButtons.HideSingle(role, lover.PlayerId, false);
                         }
                     }
                 }
@@ -213,6 +224,7 @@ namespace TownOfRoles.Modifiers.AssassinMod
 
             if (PlayerControl.LocalPlayer.Data.IsDead) return;
             if (!PlayerControl.LocalPlayer.Is(AbilityEnum.Assassin)) return;
+            if (PlayerControl.LocalPlayer.Is(Faction.NeutralBenign)) return;
 
             var assassinRole = Ability.GetAbility<Assassin>(PlayerControl.LocalPlayer);
             if (assassinRole.RemainingKills <= 0) return;

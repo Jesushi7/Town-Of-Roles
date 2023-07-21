@@ -1,9 +1,9 @@
 using HarmonyLib;
 using Hazel;
-using TownOfRoles.Roles;
-using TownOfRoles.Roles.Cultist;
+using TownOfSushi.Roles;
+using TownOfSushi.Roles.Cultist;
 
-namespace TownOfRoles.CultistRoles.ChameleonMod
+namespace TownOfSushi.CultistRoles.ChameleonMod
 {
     [HarmonyPatch(typeof(KillButton), nameof(KillButton.DoClick))]
     public class Alert
@@ -22,12 +22,8 @@ namespace TownOfRoles.CultistRoles.ChameleonMod
                 if (!__instance.isActiveAndEnabled) return false;
                 if (role.SwoopTimer() != 0) return false;
                 role.TimeRemaining = CustomGameOptions.SwoopDuration;
-                role.RegenTask();
                 role.Swoop();
-                var writer = AmongUsClient.Instance.StartRpcImmediately(PlayerControl.LocalPlayer.NetId,
-                    (byte)CustomRPC.ChameleonSwoop, SendOption.Reliable, -1);
-                writer.Write(PlayerControl.LocalPlayer.PlayerId);
-                AmongUsClient.Instance.FinishRpcImmediately(writer);
+                Utils.Rpc(CustomRPC.ChameleonSwoop, PlayerControl.LocalPlayer.PlayerId);
                 return false;
             }
 

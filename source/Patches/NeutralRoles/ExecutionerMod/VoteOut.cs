@@ -1,7 +1,7 @@
 using HarmonyLib;
-using TownOfRoles.Roles;
+using TownOfSushi.Roles;
 
-namespace TownOfRoles.NeutralRoles.ExecutionerMod
+namespace TownOfSushi.NeutralRoles.ExecutionerMod
 {
     [HarmonyPatch(typeof(ExileController), nameof(ExileController.Begin))]
     internal class MeetingExiledEnd
@@ -13,8 +13,8 @@ namespace TownOfRoles.NeutralRoles.ExecutionerMod
             var player = exiled.Object;
 
             foreach (var role in Role.GetRoles(RoleEnum.Executioner))
-                if (player.PlayerId == ((Executioner) role).target.PlayerId)
-                    ((Executioner) role).Wins();
+                if (player.PlayerId == ((Executioner)role).target.PlayerId)
+                    ((Executioner)role).Wins();
         }
     }
 }

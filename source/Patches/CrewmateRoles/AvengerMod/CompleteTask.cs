@@ -1,16 +1,16 @@
 using System.Linq;
 using HarmonyLib;
-using TownOfRoles.Roles;
+using TownOfSushi.Roles;
 using Reactor.Utilities;
 using UnityEngine;
-using TownOfRoles.Extensions;
+using TownOfSushi.Extensions;
 
-namespace TownOfRoles.CrewmateRoles.AvengerMod
+namespace TownOfSushi.CrewmateRoles.AvengerMod
 {
     [HarmonyPatch(typeof(PlayerControl), nameof(PlayerControl.CompleteTask))]
     public class CompleteTask
     {
-        public static Sprite Sprite => TownOfRoles.Arrow;
+        public static Sprite Sprite => TownOfSushi.Arrow;
         public static void Postfix(PlayerControl __instance)
         {
             if (!__instance.Is(RoleEnum.Avenger)) return;
@@ -26,9 +26,7 @@ namespace TownOfRoles.CrewmateRoles.AvengerMod
                 {
                     Coroutines.Start(Utils.FlashCoroutine(role.Color));
                 }
-                else if (PlayerControl.LocalPlayer.Data.IsImpostor() || (PlayerControl.LocalPlayer.Is(RoleEnum.Glitch) || PlayerControl.LocalPlayer.Is(RoleEnum.Werewolf) 
-                || PlayerControl.LocalPlayer.Is(RoleEnum.Juggernaut)|| PlayerControl.LocalPlayer.Is(RoleEnum.SerialKiller)|| PlayerControl.LocalPlayer.Is(RoleEnum.Plaguebearer) || PlayerControl.LocalPlayer.Is(RoleEnum.Pestilence)
-                || PlayerControl.LocalPlayer.Is(RoleEnum.Pyromaniac) && CustomGameOptions.AvengerRevealsNeutrals))
+                else if (PlayerControl.LocalPlayer.Data.IsImpostor() || (PlayerControl.LocalPlayer.Is(Faction.NeutralKilling) && CustomGameOptions.AvengerRevealsNeutrals))
                 {
                     role.Revealed = true;
                     Coroutines.Start(Utils.FlashCoroutine(role.Color));
@@ -50,9 +48,7 @@ namespace TownOfRoles.CrewmateRoles.AvengerMod
                 {
                     Coroutines.Start(Utils.FlashCoroutine(Color.white));
                 }
-                else if (PlayerControl.LocalPlayer.Data.IsImpostor() || (PlayerControl.LocalPlayer.Is(RoleEnum.Glitch) || PlayerControl.LocalPlayer.Is(RoleEnum.Werewolf) 
-                || PlayerControl.LocalPlayer.Is(RoleEnum.Juggernaut)|| PlayerControl.LocalPlayer.Is(RoleEnum.SerialKiller)||PlayerControl.LocalPlayer.Is(RoleEnum.Plaguebearer) || PlayerControl.LocalPlayer.Is(RoleEnum.Pestilence)
-                || PlayerControl.LocalPlayer.Is(RoleEnum.Pyromaniac)&& CustomGameOptions.AvengerRevealsNeutrals))
+                else if (PlayerControl.LocalPlayer.Data.IsImpostor() || (PlayerControl.LocalPlayer.Is(Faction.NeutralKilling) && CustomGameOptions.AvengerRevealsNeutrals))
                 {
                     Coroutines.Start(Utils.FlashCoroutine(Color.white));
                 }

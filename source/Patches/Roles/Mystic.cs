@@ -3,7 +3,7 @@ using System.Linq;
 using Object = UnityEngine.Object;
 using System;
 
-namespace TownOfRoles.Roles
+namespace TownOfSushi.Roles
 {
     public class Mystic : Role
     {
@@ -15,7 +15,7 @@ namespace TownOfRoles.Roles
         public Mystic(PlayerControl player) : base(player)
         {
             Name = "Mystic";
-            StartText = () => "<color=#4D4DFFFF>Understand when and where kills happen</color>";
+            ImpostorText = () => "<color=#4D99E6FF>Understand when and where kills happen with your arrows \nExamine players to find blood in their bodies.</color>";
             TaskText = () => "Find out where the kills are and who killed";
             Color = Patches.Colors.Mystic;
             RoleType = RoleEnum.Mystic;

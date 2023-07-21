@@ -1,9 +1,9 @@
 using System;
 using HarmonyLib;
-using TownOfRoles.Roles;
+using TownOfSushi.Roles;
 using Object = UnityEngine.Object;
 
-namespace TownOfRoles.CrewmateRoles.EngineerMod
+namespace TownOfSushi.CrewmateRoles.EngineerMod
 {
     public enum EngineerFixPer
     {

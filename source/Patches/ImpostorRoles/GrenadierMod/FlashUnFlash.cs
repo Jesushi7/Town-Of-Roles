@@ -1,7 +1,7 @@
 using HarmonyLib;
-using TownOfRoles.Roles;
+using TownOfSushi.Roles;
 
-namespace TownOfRoles.ImpostorRoles.GrenadierMod
+namespace TownOfSushi.ImpostorRoles.GrenadierMod
 {
     [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]
     [HarmonyPriority(Priority.Last)]

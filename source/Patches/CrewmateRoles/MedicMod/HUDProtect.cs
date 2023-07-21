@@ -1,7 +1,7 @@
 ﻿using HarmonyLib;
-using TownOfRoles.Roles;
+using TownOfSushi.Roles;
 
-namespace TownOfRoles.CrewmateRoles.MedicMod
+namespace TownOfSushi.CrewmateRoles.MedicMod
 {
     [HarmonyPatch(typeof(HudManager))]
     public class HUDProtect

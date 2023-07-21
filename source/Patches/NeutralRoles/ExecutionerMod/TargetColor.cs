@@ -1,11 +1,10 @@
 using HarmonyLib;
 using Hazel;
-using TownOfRoles;
-using TownOfRoles.Extensions;
-using TownOfRoles.Roles;
+using TownOfSushi.Extensions;
+using TownOfSushi.Roles;
 using UnityEngine;
 
-namespace TownOfRoles.NeutralRoles.ExecutionerMod
+namespace TownOfSushi.NeutralRoles.ExecutionerMod
 {
     public enum OnTargetDead
     {
@@ -39,13 +38,10 @@ namespace TownOfRoles.NeutralRoles.ExecutionerMod
 
             role.target.nameText().color = Color.black;
 
-            if (!role.target.Data.IsDead && !role.target.Data.Disconnected) return;
+            if (!role.target.Data.IsDead && !role.target.Data.Disconnected && !role.target.Is(RoleEnum.Vampire)) return;
             if (role.TargetVotedOut) return;
 
-            var writer = AmongUsClient.Instance.StartRpcImmediately(PlayerControl.LocalPlayer.NetId,
-                (byte)CustomRPC.ExecutionerToJester, SendOption.Reliable, -1);
-            writer.Write(PlayerControl.LocalPlayer.PlayerId);
-            AmongUsClient.Instance.FinishRpcImmediately(writer);
+            Utils.Rpc(CustomRPC.ExecutionerToJester, PlayerControl.LocalPlayer.PlayerId);
 
             ExeToJes(PlayerControl.LocalPlayer);
         }
@@ -59,20 +55,20 @@ namespace TownOfRoles.NeutralRoles.ExecutionerMod
             if (CustomGameOptions.OnTargetDead == OnTargetDead.Jester)
             {
                 var jester = new Jester(player);
-                var task = new GameObject("JesterTask").AddComponent<ImportantTextTask>();
-                task.transform.SetParent(player.transform, false);
-                task.Text =
-                    $"{jester.ColorString}Role: {jester.Name}\nYour target is dead. Now you get voted out";
-                player.myTasks.Insert(0, task);
+                jester.SpawnedAs = false;
+                jester.RegenTask();
             }
             else if (CustomGameOptions.OnTargetDead == OnTargetDead.Amnesiac)
             {
                 var amnesiac = new Amnesiac(player);
-                var task = new GameObject("AmnesiacTask").AddComponent<ImportantTextTask>();
-                task.transform.SetParent(player.transform, false);
-                task.Text =
-                    $"{amnesiac.ColorString}Role: {amnesiac.Name}\nYour target is dead. Now remember a new role";
-                player.myTasks.Insert(0, task);
+                amnesiac.SpawnedAs = false;
+                amnesiac.RegenTask();
+            }
+            else if (CustomGameOptions.OnTargetDead == OnTargetDead.Survivor)
+            {
+                var surv = new Survivor(player);
+                surv.SpawnedAs = false;
+                surv.RegenTask();
             }
             else
             {

@@ -1,10 +1,11 @@
-using TownOfRoles.Extensions;
+using TownOfSushi.Extensions;
 using UnityEngine;
 
-namespace TownOfRoles.Roles
+namespace TownOfSushi.Roles
 {
     public class Phantom : Role
     {
+        public RoleEnum formerRole = new RoleEnum();
         public bool Caught;
         public bool CompletedTasks;
         public bool Faded;
@@ -12,17 +13,12 @@ namespace TownOfRoles.Roles
         public Phantom(PlayerControl player) : base(player)
         {
             Name = "Phantom";
-            StartText = () => "";
-            TaskText = () => "Finish tasks to win";
+            ImpostorText = () => "";
+            TaskText = () => "Complete all your tasks without being caught!";
             Color = Patches.Colors.Phantom;
             RoleType = RoleEnum.Phantom;
             AddToRoleHistory(RoleType);
-            Faction = Faction.Neutral;
-        }
-
-        public void Loses()
-        {
-            LostByRPC = true;
+            Faction = Faction.NeutralEvil;
         }
 
         public void Fade()
@@ -42,7 +38,7 @@ namespace TownOfRoles.Roles
             distPercent = Mathf.Max(0, distPercent - 1);
 
             var velocity = Player.gameObject.GetComponent<Rigidbody2D>().velocity.magnitude;
-            color.a = 0.07f + velocity / Player.MyPhysics.GhostSpeed * 0.14f;
+            color.a = 0.07f + velocity / Player.MyPhysics.GhostSpeed * 0.13f;
             color.a = Mathf.Lerp(color.a, 0, distPercent);
 
             if (Player.GetCustomOutfitType() != CustomPlayerOutfitType.PlayerNameOnly)
@@ -53,13 +49,14 @@ namespace TownOfRoles.Roles
                     HatId = "",
                     SkinId = "",
                     VisorId = "",
-                    PlayerName = ""
+                    PlayerName = " ",
+                    PetId = " "
                 });
             }
-
             Player.myRend().color = color;
             Player.nameText().color = Color.clear;
             Player.cosmetics.colorBlindText.color = Color.clear;
+            Player.cosmetics.SetBodyCosmeticsVisible(false);
         }
     }
 }

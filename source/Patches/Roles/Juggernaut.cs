@@ -1,9 +1,9 @@
 ﻿using Hazel;
 using System;
 using System.Linq;
-using TownOfRoles.Extensions;
+using TownOfSushi.Extensions;
 
-namespace TownOfRoles.Roles
+namespace TownOfSushi.Roles
 {
     public class Juggernaut : Role
     {
@@ -14,10 +14,10 @@ namespace TownOfRoles.Roles
             LastKill = DateTime.UtcNow;
             RoleType = RoleEnum.Juggernaut;
             AddToRoleHistory(RoleType);
-            StartText = () => "<color=#8C004DFF>Your power grows with every kill</color>";
-            TaskText = () => "With each kill your kill cooldown decreases";
-            Faction = Faction.Neutral;
-            FactionName = "<color=#5c5e5d>Neutral</color>";           
+            ImpostorText = () => "<color=#8C004DFF>Get a lot of kills \nto gain a very short cooldown</color>";
+            TaskText = () => "With each kill your kill cooldown gets lower";
+            FactionName = "<color=#5c5e5d>Neutral</color>";                   
+            Faction = Faction.NeutralKilling;
         }
 
         public PlayerControl ClosestPlayer;
@@ -25,24 +25,16 @@ namespace TownOfRoles.Roles
         public bool JuggernautWins { get; set; }
         public int JuggKills { get; set; } = 0;
 
-        internal override bool EABBNOODFGL(LogicGameFlowNormal __instance)
+        internal override bool NeutralWin(LogicGameFlowNormal __instance)
         {
             if (Player.Data.IsDead || Player.Data.Disconnected) return true;
 
             if (PlayerControl.AllPlayerControls.ToArray().Count(x => !x.Data.IsDead && !x.Data.Disconnected) <= 2 &&
                     PlayerControl.AllPlayerControls.ToArray().Count(x => !x.Data.IsDead && !x.Data.Disconnected &&
-                    (x.Data.IsImpostor() || x.Is(RoleEnum.Glitch) || x.Is(RoleEnum.Pyromaniac) ||
-                    x.Is(RoleEnum.Werewolf)|| x.Is(RoleEnum.SerialKiller)  || x.Is(RoleEnum.Plaguebearer) || x.Is(RoleEnum.Pestilence))) == 0)
+                    (x.Data.IsImpostor() || x.Is(Faction.NeutralKilling))) == 1)
             {
-                var writer = AmongUsClient.Instance.StartRpcImmediately(
-                    PlayerControl.LocalPlayer.NetId,
-                    (byte)CustomRPC.JuggernautWin,
-                    SendOption.Reliable,
-                    -1
-                );
-                writer.Write(Player.PlayerId);
+                Utils.Rpc(CustomRPC.JuggernautWin, Player.PlayerId);
                 Wins();
-                AmongUsClient.Instance.FinishRpcImmediately(writer);
                 Utils.EndGame();
                 return false;
             }
@@ -53,11 +45,6 @@ namespace TownOfRoles.Roles
         public void Wins()
         {
             JuggernautWins = true;
-        }
-
-        public void Loses()
-        {
-            LostByRPC = true;
         }
 
         public float KillTimer()

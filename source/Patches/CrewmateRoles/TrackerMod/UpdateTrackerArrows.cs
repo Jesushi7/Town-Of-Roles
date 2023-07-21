@@ -1,21 +1,20 @@
 using HarmonyLib;
-using TownOfRoles.Roles;
+using TownOfSushi.Roles;
 using UnityEngine;
-using TownOfRoles.Extensions;
+using TownOfSushi.Extensions;
 using System;
-using TownOfRoles.ImpostorRoles.CamouflageMod;
 
-namespace TownOfRoles.CrewmateRoles.TrackerMod
+namespace TownOfSushi.CrewmateRoles.TrackerMod
 {
-    [HarmonyPatch(typeof(PlayerControl), nameof(PlayerControl.FixedUpdate))]
+    [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]
     public class UpdateTrackerArrows
     {
-        public static Sprite Sprite => TownOfRoles.Arrow;
+        public static Sprite Sprite => TownOfSushi.Arrow;
         private static DateTime _time = DateTime.UnixEpoch;
         private static float Interval => CustomGameOptions.UpdateInterval;
         public static bool CamoedLastTick = false;
 
-        public static void Postfix(PlayerControl __instance)
+        public static void Postfix(HudManager __instance)
         {
             if (PlayerControl.AllPlayerControls.Count <= 1) return;
             if (PlayerControl.LocalPlayer == null) return;
@@ -42,9 +41,9 @@ namespace TownOfRoles.CrewmateRoles.TrackerMod
 
                 if (!CamouflageUnCamouflage.IsCamoed)
                 {
-                    if (ColorUtils.IsRainbow(player.GetDefaultOutfit().ColorId))
+                    if (RainbowUtils.IsRainbow(player.GetDefaultOutfit().ColorId))
                     {
-                        arrow.Value.image.color = ColorUtils.Rainbow;
+                        arrow.Value.image.color = RainbowUtils.Rainbow;
                     }
                     else if (CamoedLastTick)
                     {

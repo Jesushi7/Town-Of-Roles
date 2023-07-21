@@ -3,20 +3,20 @@ using System.Linq;
 using HarmonyLib;
 using Hazel;
 using Reactor;
-using TownOfRoles.Roles;
+using TownOfSushi.Roles;
 using UnityEngine;
 using UnityEngine.UI;
 using Object = UnityEngine.Object;
 using System.Collections.Generic;
-using TownOfRoles.Extensions;
+using TownOfSushi.Extensions;
 
-namespace TownOfRoles.CrewmateRoles.MedicMod
+namespace TownOfSushi.CrewmateRoles.MedicMod
 {
     [HarmonyPatch(typeof(MeetingHud), nameof(MeetingHud.Start))]
     public class AddButton
     {
-        private static Sprite LighterSprite => TownOfRoles.LighterSprite;
-        public static Sprite DarkerSprite => TownOfRoles.DarkerSprite;
+        private static Sprite LighterSprite => TownOfSushi.LighterSprite;
+        public static Sprite DarkerSprite => TownOfSushi.DarkerSprite;
 
         private static bool IsExempt(PlayerVoteArea voteArea)
         {

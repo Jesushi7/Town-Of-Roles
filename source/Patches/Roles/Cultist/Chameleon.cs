@@ -1,8 +1,8 @@
 using System;
-using TownOfRoles.Extensions;
+using TownOfSushi.Extensions;
 using UnityEngine;
 
-namespace TownOfRoles.Roles.Cultist
+namespace TownOfSushi.Roles.Cultist
 {
     public class Chameleon : Role
     {
@@ -13,7 +13,7 @@ namespace TownOfRoles.Roles.Cultist
         public Chameleon(PlayerControl player) : base(player)
         {
             Name = "Chameleon";
-            StartText = () => "<color=#708eef>Turn invisible temporarily</color>";
+            ImpostorText = () => "Turn Invisible Temporarily";
             TaskText = () => "Turn invisible to catch killers";
             Color = Patches.Colors.Chameleon;
             LastSwooped = DateTime.UtcNow;
@@ -52,7 +52,8 @@ namespace TownOfRoles.Roles.Cultist
                     HatId = "",
                     SkinId = "",
                     VisorId = "",
-                    PlayerName = " "
+                    PlayerName = " ",
+                    PetId = ""
                 });
                 Player.myRend().color = color;
                 Player.nameText().color = Color.clear;

@@ -1,4 +1,4 @@
-namespace TownOfRoles.CustomOption
+namespace TownOfSushi.CustomOption
 {
     public class CustomHeaderOption : CustomOption
     {

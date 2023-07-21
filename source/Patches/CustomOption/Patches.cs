@@ -5,12 +5,12 @@ using Reactor.Utilities.Extensions;
 using Il2CppInterop.Runtime.InteropTypes.Arrays;
 using UnityEngine;
 
-namespace TownOfRoles.CustomOption
+namespace TownOfSushi.CustomOption
 {
     public static class Patches
     {
 
-        static string[] Menus = { "Town of Roles", "Crewmate", "Neutral", "Impostor", "Modifier" };
+        static string[] Menus = { " ", "Crewmate", "Neutral", "Impostor", "Modifier" };
 
         public static Export ExportButton;
         public static Import ImportButton;
@@ -67,7 +67,6 @@ namespace TownOfRoles.CustomOption
 
             foreach (var option in CustomOption.AllOptions.Where(x => x.Menu == type))
             {
-                if (AmongUsClient.Instance.GameId == 32 && option == Generate.MaxPlayers) continue;                
                 if (option.Setting != null)
                 {
                     option.Setting.gameObject.SetActive(true);
@@ -165,7 +164,7 @@ namespace TownOfRoles.CustomOption
                     if (title != null)
                     {
                         title.GetComponent<TextTranslatorTMP>().Destroy();
-                        title.GetComponent<TMPro.TextMeshPro>().m_text = $"{Menus[index]} Settings";
+                        title.GetComponent<TMPro.TextMeshPro>().m_text = $"Town of Sushi {Menus[index]} Settings";
                     }
                     var sliderInner = gameGroup?.FindChild("SliderInner");
                     if (sliderInner != null)
@@ -214,17 +213,17 @@ namespace TownOfRoles.CustomOption
                 switch (index)
                 {
                     default:
-                        return TownOfRoles.SettingsSprite;
+                        return TownOfSushi.SettingsButtonSprite;
                     case 0:
-                        return TownOfRoles.SettingsSprite;
+                        return TownOfSushi.SettingsButtonSprite;
                     case 1:
-                        return TownOfRoles.CrewSettingsButtonSprite;
+                        return TownOfSushi.CrewSettingsButtonSprite;
                     case 2:
-                        return TownOfRoles.NeutralSettingsButtonSprite;
+                        return TownOfSushi.NeutralSettingsButtonSprite;
                     case 3:
-                        return TownOfRoles.ImposterSettingsButtonSprite;
+                        return TownOfSushi.ImposterSettingsButtonSprite;
                     case 4:
-                        return TownOfRoles.ModifierSettingsButtonSprite;                      
+                        return TownOfSushi.ModifierSettingsButtonSprite;
                 }
             }
         }
@@ -576,20 +575,6 @@ namespace TownOfRoles.CustomOption
                 Scroller.Inner = __instance.GameSettings.transform;
                 __instance.GameSettings.transform.SetParent(Scroller.transform);
             }
-       /* [HarmonyPatch(typeof(GameSettingMenu), nameof(GameSettingMenu.Update))]
-        class GameSettingMenuUpdatePatch
-        {
-            public static void Postfix(GameSettingMenu __instance)
-            {
-                int value = (int) Generate.MaxPlayers.Get();
-                if (GameOptionsManager.MaxPlayers != value)
-                {
-                    PlayerControl.GameOptions.MaxPlayers = value;
-                    GameStartManager.Instance.LastPlayerCount = value;
-                    PlayerControl.LocalPlayer.RpcSyncSettings(PlayerControl.GameOptions);
-                }
-            }
-        }*/            
         }
     }
 }

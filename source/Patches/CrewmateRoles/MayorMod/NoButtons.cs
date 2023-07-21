@@ -1,6 +1,6 @@
 using HarmonyLib;
 
-namespace TownOfRoles.CrewmateRoles.MayorMod
+namespace TownOfSushi.CrewmateRoles.MayorMod
 {
     [HarmonyPatch(typeof(PlayerControl), nameof(PlayerControl.SetRole))]
     public class NoButtons

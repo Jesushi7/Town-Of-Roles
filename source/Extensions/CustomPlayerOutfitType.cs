@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace TownOfRoles.Extensions
+﻿namespace TownOfSushi.Extensions
 {
     public enum CustomPlayerOutfitType 
     {
@@ -11,6 +7,7 @@ namespace TownOfRoles.Extensions
         Morph,
         Camouflage,
         Swooper,
+        Aurial,
         PlayerNameOnly
 
     }

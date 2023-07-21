@@ -1,8 +1,8 @@
 using System;
-using TownOfRoles.Extensions;
+using TownOfSushi.Extensions;
 using UnityEngine;
 
-namespace TownOfRoles.Roles
+namespace TownOfSushi.Roles
 {
     public class Swooper : Role
     {
@@ -14,12 +14,11 @@ namespace TownOfRoles.Roles
         public Swooper(PlayerControl player) : base(player)
         {
             Name = "Swooper";
-            StartText = () => "Make yourself invisible and sneakily kill";
+            ImpostorText = () => "Turn invisible temporarily and make sneaky kills";
             TaskText = () => "Turn invisible";
+            FactionName = "Impostor";
             Color = Patches.Colors.Impostor;
             LastSwooped = DateTime.UtcNow;
-            FactionName = "Impostor";                           
-            Faction = Faction.Impostors;            
             RoleType = RoleEnum.Swooper;
             AddToRoleHistory(RoleType);
             Faction = Faction.Impostors;
@@ -67,7 +66,8 @@ namespace TownOfRoles.Roles
                     HatId = "",
                     SkinId = "",
                     VisorId = "",
-                    PlayerName = " "
+                    PlayerName = " ",
+                    PetId = ""
                 });
                 Player.myRend().color = color;
                 Player.nameText().color = Color.clear;

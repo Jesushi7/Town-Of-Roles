@@ -1,10 +1,10 @@
 using System.Linq;
 using HarmonyLib;
-using TownOfRoles.Roles;
+using TownOfSushi.Roles;
 using UnityEngine;
 using Hazel;
 
-namespace TownOfRoles.NeutralRoles.PestilenceMod
+namespace TownOfSushi.NeutralRoles.PestilenceMod
 {
     [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]
     public static class HudManagerUpdate
@@ -21,7 +21,7 @@ namespace TownOfRoles.NeutralRoles.PestilenceMod
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
                     && AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started);
 
-            __instance.KillButton.SetCoolDown(role.KillTimer(), GameOptionsManager.Instance.currentNormalGameOptions.KillCooldown);
+            __instance.KillButton.SetCoolDown(role.KillTimer(), CustomGameOptions.PestKillCd);
 
             Utils.SetTarget(ref role.ClosestPlayer, __instance.KillButton);
         }

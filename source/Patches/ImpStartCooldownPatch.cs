@@ -1,10 +1,10 @@
 using HarmonyLib;
 using System;
 using UnityEngine;
-using TownOfRoles.Extensions;
+using TownOfSushi.Extensions;
 using AmongUs.GameOptions;
 
-namespace TownOfRoles
+namespace TownOfSushi
 {
     [HarmonyPatch(typeof(PlayerControl), nameof(PlayerControl.SetKillTimer))]
     public static class PatchKillTimer

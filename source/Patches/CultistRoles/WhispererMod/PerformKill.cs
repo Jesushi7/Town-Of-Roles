@@ -1,12 +1,12 @@
 using HarmonyLib;
 using Hazel;
-using TownOfRoles.Roles;
-using TownOfRoles.Roles.Cultist;
+using TownOfSushi.Roles;
+using TownOfSushi.Roles.Cultist;
 using UnityEngine;
 using System.Collections.Generic;
 using System;
 
-namespace TownOfRoles.CultistRoles.WhispererMod
+namespace TownOfSushi.CultistRoles.WhispererMod
 {
     [HarmonyPatch(typeof(KillButton), nameof(KillButton.DoClick))]
     public class Whisper
@@ -62,10 +62,7 @@ namespace TownOfRoles.CultistRoles.WhispererMod
                     role.WhisperConversion -= CustomGameOptions.DecreasedPercentagePerConversion;
                     if (role.WhisperConversion < 5) role.WhisperConversion = 5;
 
-                    var writer = AmongUsClient.Instance.StartRpcImmediately(PlayerControl.LocalPlayer.NetId,
-                        (byte)CustomRPC.Convert, SendOption.Reliable, -1);
-                    writer.Write(playerConversion.Item1.PlayerId);
-                    AmongUsClient.Instance.FinishRpcImmediately(writer);
+                    Utils.Rpc(CustomRPC.Convert, playerConversion.Item1.PlayerId);
                     removals.Add(playerConversion);
                 }
             }

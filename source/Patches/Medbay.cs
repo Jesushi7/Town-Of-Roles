@@ -1,8 +1,9 @@
+using System;
 using HarmonyLib;
 
-namespace TownOfRoles
+namespace TownOfSushi
 {
-	internal class GiantAndChildMedScan
+	internal class MedScan
 	{
 
 		[HarmonyPatch(typeof(MedScanMinigame))]
@@ -12,12 +13,10 @@ namespace TownOfRoles
 			[HarmonyPostfix]
 			private static void BeginPostfix(MedScanMinigame __instance)
 			{
-                if (PlayerControl.LocalPlayer.Is(ModifierEnum.Giant))
-                {
-					__instance.completeString = __instance.completeString.Replace("3' 6\"", "5' 0\"").Replace("92lb", "188lb");
-				} else if (PlayerControl.LocalPlayer.Is(ModifierEnum.Mini))
-                {
-					__instance.completeString = __instance.completeString.Replace("3' 6\"", "1' 2\"").Replace("92lb", "25lb");
+				// Update medical details for Giant modifier
+				if (PlayerControl.LocalPlayer.Is(ModifierEnum.Giant))
+				{
+					__instance.completeString = __instance.completeString.Replace("3' 6\"", "5' 3\"").Replace("92lb", "184lb");
 				}
 			}
 		}

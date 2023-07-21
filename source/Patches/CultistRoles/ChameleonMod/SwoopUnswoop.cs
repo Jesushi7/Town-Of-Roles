@@ -1,8 +1,8 @@
 using HarmonyLib;
-using TownOfRoles.Roles;
-using TownOfRoles.Roles.Cultist;
+using TownOfSushi.Roles;
+using TownOfSushi.Roles.Cultist;
 
-namespace TownOfRoles.CultistRoles.ChameleonMod
+namespace TownOfSushi.CultistRoles.ChameleonMod
 {
     [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]
     [HarmonyPriority(Priority.Last)]

@@ -1,9 +1,9 @@
 ﻿using HarmonyLib;
 using System.Linq;
-using TownOfRoles.Extensions;
+using TownOfSushi.Extensions;
 using UnityEngine;
 
-namespace TownOfRoles.Patches
+namespace TownOfSushi.Patches
 {
     [HarmonyPatch]
     public static class SizePatch

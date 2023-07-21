@@ -1,7 +1,7 @@
 ﻿using HarmonyLib;
-using TownOfRoles.Roles;
+using TownOfSushi.Roles;
 
-namespace TownOfRoles.NeutralRoles.GlitchMod
+namespace TownOfSushi.NeutralRoles.GlitchMod
 {
     [HarmonyPatch(typeof(KillButton), nameof(KillButton.DoClick))]
     internal class PerformKill

@@ -1,7 +1,7 @@
 using HarmonyLib;
-using TownOfRoles.Roles;
+using TownOfSushi.Roles;
 
-namespace TownOfRoles.NeutralRoles.JesterMod
+namespace TownOfSushi.NeutralRoles.JesterMod
 {
     [HarmonyPatch(typeof(ExileController), nameof(ExileController.Begin))]
     internal class MeetingExiledEnd
@@ -14,7 +14,7 @@ namespace TownOfRoles.NeutralRoles.JesterMod
 
             var role = Role.GetRole(player);
             if (role == null) return;
-            if (role.RoleType == RoleEnum.Jester) ((Jester) role).Wins();
+            if (role.RoleType == RoleEnum.Jester) ((Jester)role).Wins();
         }
     }
 }

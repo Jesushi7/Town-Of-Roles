@@ -1,11 +1,11 @@
 using HarmonyLib;
 using Hazel;
 using System;
-using TownOfRoles.Patches;
-using TownOfRoles.CustomOption;
+using TownOfSushi.Patches;
+using TownOfSushi.CustomOption;
 using AmongUs.GameOptions;
 
-namespace TownOfRoles
+namespace TownOfSushi
 {
     [HarmonyPatch]
     class RandomMap
@@ -37,10 +37,7 @@ namespace TownOfRoles
                 GameOptionsManager.Instance.currentNormalGameOptions.RoleOptions.SetRoleRate(RoleTypes.Engineer, 0, 0);
                 GameOptionsManager.Instance.currentNormalGameOptions.RoleOptions.SetRoleRate(RoleTypes.GuardianAngel, 0, 0);
                 GameOptionsManager.Instance.currentNormalGameOptions.RoleOptions.SetRoleRate(RoleTypes.Shapeshifter, 0, 0);
-                var writer = AmongUsClient.Instance.StartRpcImmediately(PlayerControl.LocalPlayer.NetId,
-                    (byte)CustomRPC.SetSettings, SendOption.Reliable, -1);
-                writer.Write(map);
-                AmongUsClient.Instance.FinishRpcImmediately(writer);
+                Utils.Rpc(CustomRPC.SetSettings, map);
                 if (CustomGameOptions.AutoAdjustSettings) AdjustSettings(map);
             }
             return true;
@@ -114,26 +111,37 @@ namespace TownOfRoles
 
         public static void AdjustCooldowns(float change)
         {
-            Generate.InitialExamineCooldown.Set((float)Generate.InitialExamineCooldown.Value + change, false);
+            Generate.ExamineCooldown.Set((float)Generate.ExamineCooldown.Value + change, false);
+            Generate.DetExamineCooldown.Set((float)Generate.DetExamineCooldown.Value + change, false);
             Generate.SnitchCooldown.Set((float)Generate.SnitchCooldown.Value + change, false);
             Generate.TrackCooldown.Set((float)Generate.TrackCooldown.Value + change, false);
             Generate.TrapCooldown.Set((float)Generate.TrapCooldown.Value + change, false);
+            Generate.SheriffKillCd.Set((float)Generate.SheriffKillCd.Value + change, false);
             Generate.AlertCooldown.Set((float)Generate.AlertCooldown.Value + change, false);
             Generate.TransportCooldown.Set((float)Generate.TransportCooldown.Value + change, false);
             Generate.ProtectCd.Set((float)Generate.ProtectCd.Value + change, false);
-            Generate.ReviveCooldown2.Set((float)Generate.ReviveCooldown2.Value + change, false);            
+            Generate.VestCd.Set((float)Generate.VestCd.Value + change, false);
             Generate.DouseCooldown.Set((float)Generate.DouseCooldown.Value + change, false);
             Generate.InfectCooldown.Set((float)Generate.InfectCooldown.Value + change, false);
+            Generate.PestKillCooldown.Set((float)Generate.PestKillCooldown.Value + change, false);
             Generate.MimicCooldownOption.Set((float)Generate.MimicCooldownOption.Value + change, false);
             Generate.HackCooldownOption.Set((float)Generate.HackCooldownOption.Value + change, false);
+            Generate.GlitchKillCooldownOption.Set((float)Generate.GlitchKillCooldownOption.Value + change, false);
             Generate.RampageCooldown.Set((float)Generate.RampageCooldown.Value + change, false);
             Generate.GrenadeCooldown.Set((float)Generate.GrenadeCooldown.Value + change, false);
             Generate.MorphlingCooldown.Set((float)Generate.MorphlingCooldown.Value + change, false);
             Generate.SwoopCooldown.Set((float)Generate.SwoopCooldown.Value + change, false);
             Generate.MineCooldown.Set((float)Generate.MineCooldown.Value + change, false);
             Generate.DragCooldown.Set((float)Generate.DragCooldown.Value + change, false);
-            Generate.EscapeCooldown.Set((float)Generate.EscapeCooldown.Value + change, false);         
+            Generate.EscapeCooldown.Set((float)Generate.EscapeCooldown.Value + change, false);
             Generate.JuggKillCooldown.Set((float)Generate.JuggKillCooldown.Value + change, false);
+            Generate.ObserveCooldown.Set((float)Generate.ObserveCooldown.Value + change, false);
+            Generate.BiteCooldown.Set((float)Generate.BiteCooldown.Value + change, false);
+            Generate.StakeCooldown.Set((float)Generate.StakeCooldown.Value + change, false);
+            Generate.ConfessCooldown.Set((float)Generate.ConfessCooldown.Value + change, false);
+            Generate.ChargeUpDuration.Set((float)Generate.ChargeUpDuration.Value + change, false);
+            Generate.AbilityCooldown.Set((float)Generate.AbilityCooldown.Value + change, false);
+            Generate.RadiateCooldown.Set((float)Generate.RadiateCooldown.Value + change, false);
             Generate.ReviveCooldown.Set((float)Generate.ReviveCooldown.Value + change, false);
             Generate.WhisperCooldown.Set((float)Generate.WhisperCooldown.Value + change, false);
             GameOptionsManager.Instance.currentNormalGameOptions.KillCooldown += change;

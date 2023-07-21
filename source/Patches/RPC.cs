@@ -1,4 +1,4 @@
-namespace TownOfRoles
+namespace TownOfSushi
 {
     internal enum RPC
     {
@@ -16,7 +16,6 @@ namespace TownOfRoles
         ReportDeadBody, //11
         MurderPlayer, //12
         SendChat, //13
-
         StartMeeting, //14
         SetScanner, //15
         SendChatNote, //16

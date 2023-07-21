@@ -1,10 +1,10 @@
 using System.Linq;
 using HarmonyLib;
-using TownOfRoles.Extensions;
-using TownOfRoles.Roles;
+using TownOfSushi.Extensions;
+using TownOfSushi.Roles;
 using UnityEngine;
 
-namespace TownOfRoles.NeutralRoles.ExecutionerMod
+namespace TownOfSushi.NeutralRoles.ExecutionerMod
 {
     [HarmonyPatch(typeof(EndGameManager), nameof(EndGameManager.Start))]
     public static class Outro

@@ -1,9 +1,9 @@
 using System;
 using HarmonyLib;
-using TownOfRoles.Roles;
+using TownOfSushi.Roles;
 using Object = UnityEngine.Object;
 
-namespace TownOfRoles.CrewmateRoles.MysticMod
+namespace TownOfSushi.CrewmateRoles.MysticMod
 {
     [HarmonyPatch(typeof(Object), nameof(Object.Destroy), typeof(Object))]
     public static class HUDClose

@@ -1,7 +1,7 @@
 using System;
 using HarmonyLib;
 
-namespace TownOfRoles.NeutralRoles.JesterMod
+namespace TownOfSushi.NeutralRoles.JesterMod
 {
 	[HarmonyPatch]
 	public static class Kill

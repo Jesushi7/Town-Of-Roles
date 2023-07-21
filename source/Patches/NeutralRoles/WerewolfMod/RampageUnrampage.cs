@@ -1,7 +1,7 @@
 using HarmonyLib;
-using TownOfRoles.Roles;
+using TownOfSushi.Roles;
 
-namespace TownOfRoles.NeutralRoles.WerewolfMod
+namespace TownOfSushi.NeutralRoles.WerewolfMod
 {
     [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]
     [HarmonyPriority(Priority.Last)]

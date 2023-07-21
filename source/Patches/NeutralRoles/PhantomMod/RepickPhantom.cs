@@ -3,7 +3,7 @@ using System.Linq;
 using Hazel;
 using UnityEngine;
 
-namespace TownOfRoles.NeutralRoles.PhantomMod
+namespace TownOfSushi.NeutralRoles.PhantomMod
 {
     [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]
     public class RepickPhantom
@@ -15,18 +15,14 @@ namespace TownOfRoles.NeutralRoles.PhantomMod
             if (PlayerControl.LocalPlayer.Data == null) return;
             if (PlayerControl.LocalPlayer != SetPhantom.WillBePhantom) return;
             if (PlayerControl.LocalPlayer.Data.IsDead) return;
-            var toChooseFrom = PlayerControl.AllPlayerControls.ToArray().Where(x => x.Is(Faction.Neutral) && x.Data.IsDead && !x.Data.Disconnected).ToList();
-            if (!PlayerControl.LocalPlayer.Is(Faction.Neutral))
+            if (!PlayerControl.LocalPlayer.Is(Faction.NeutralKilling) && !PlayerControl.LocalPlayer.Is(Faction.NeutralEvil) && !PlayerControl.LocalPlayer.Is(Faction.NeutralBenign))
             {
-                var toChooseFromAlive = PlayerControl.AllPlayerControls.ToArray().Where(x => x.Is(Faction.Neutral) && !x.Data.Disconnected).ToList();
+                var toChooseFromAlive = PlayerControl.AllPlayerControls.ToArray().Where(x => (x.Is(Faction.NeutralKilling) || x.Is(Faction.NeutralEvil) || x.Is(Faction.NeutralBenign)) && !x && !x.Data.Disconnected).ToList();
                 if (toChooseFromAlive.Count == 0)
                 {
                     SetPhantom.WillBePhantom = null;
 
-                    var writer2 = AmongUsClient.Instance.StartRpcImmediately(PlayerControl.LocalPlayer.NetId,
-                    (byte)CustomRPC.SetPhantom, SendOption.Reliable, -1);
-                    writer2.Write(byte.MaxValue);
-                    AmongUsClient.Instance.FinishRpcImmediately(writer2);
+                    Utils.Rpc(CustomRPC.SetPhantom, byte.MaxValue);
                 }
                 else
                 {
@@ -35,23 +31,18 @@ namespace TownOfRoles.NeutralRoles.PhantomMod
 
                     SetPhantom.WillBePhantom = pc2;
 
-                    var writer3 = AmongUsClient.Instance.StartRpcImmediately(PlayerControl.LocalPlayer.NetId,
-                        (byte)CustomRPC.SetPhantom, SendOption.Reliable, -1);
-                    writer3.Write(pc2.PlayerId);
-                    AmongUsClient.Instance.FinishRpcImmediately(writer3);
+                    Utils.Rpc(CustomRPC.SetPhantom, pc2.PlayerId);
                 }
                 return;
             }
+            var toChooseFrom = PlayerControl.AllPlayerControls.ToArray().Where(x => !x.Is(Faction.Crewmates) && !x.Is(Faction.Impostors) && !x.Is(ModifierEnum.Lover) && x.Data.IsDead && !x.Data.Disconnected).ToList();
             if (toChooseFrom.Count == 0) return;
             var rand = Random.RandomRangeInt(0, toChooseFrom.Count);
             var pc = toChooseFrom[rand];
 
             SetPhantom.WillBePhantom = pc;
 
-            var writer = AmongUsClient.Instance.StartRpcImmediately(PlayerControl.LocalPlayer.NetId,
-                (byte)CustomRPC.SetPhantom, SendOption.Reliable, -1);
-            writer.Write(pc.PlayerId);
-            AmongUsClient.Instance.FinishRpcImmediately(writer);
+            Utils.Rpc(CustomRPC.SetPhantom, pc.PlayerId);
             return;
         }
     }

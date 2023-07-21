@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace TownOfRoles
+namespace TownOfSushi
 {
     public static class ListExtensions
     {

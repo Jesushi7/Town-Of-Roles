@@ -1,15 +1,13 @@
 using UnityEngine;
-using Hazel;
-using Reactor.Utilities;
-using TownOfRoles.Extensions;
-using Il2CppInterop.Runtime.InteropTypes.Arrays;
 using Reactor.Utilities.Extensions;
-using TownOfRoles.CrewmateRoles.MedicMod;
 using System;
-using TownOfRoles.ImpostorRoles.BomberMod;
+using TownOfSushi.ImpostorRoles.BomberMod;
 using System.Reflection;
+using Hazel;
+using TownOfSushi.CrewmateRoles.MedicMod;
+using TownOfSushi.Patches;
 
-namespace TownOfRoles.Roles
+namespace TownOfSushi.Roles
 {
     public class Bomber : Role
 
@@ -20,20 +18,18 @@ namespace TownOfRoles.Roles
         public bool Detonated = true;
         public Vector3 DetonatePoint;
         public Bomb Bomb = new Bomb();
-        public static AssetBundle bundle = loadBundle();
-        public static Material bombMaterial = bundle.LoadAsset<Material>("bomb").DontUnload();
+        public static Material bombMaterial = TownOfSushi.bundledAssets.Get<Material>("bomb");
         public DateTime StartingCooldown { get; set; }
 
         public Bomber(PlayerControl player) : base(player)
         {
             Name = "Bomber";
-            StartText = () => "Bomb everyone";
-            TaskText = () => "Plant bombs to kill everyone";
-            Color = Patches.Colors.Impostor;
+            ImpostorText = () => "Plant Bombs to kill multiple <color=#8cffff>Crewmates</color> at once";
+            TaskText = () => "Plant bombs to kill crewmates";
+            FactionName = "Impostor";                   
+            Color = Palette.ImpostorRed;
             StartingCooldown = DateTime.UtcNow;
             RoleType = RoleEnum.Bomber;
-            FactionName = "Impostor";                     
-            Faction = Faction.Impostors;              
             AddToRoleHistory(RoleType);
             Faction = Faction.Impostors;
         }
@@ -77,99 +73,16 @@ namespace TownOfRoles.Roles
             while (playersToDie.Count > CustomGameOptions.MaxKillsInDetonation) playersToDie.Remove(playersToDie[playersToDie.Count - 1]);
             foreach (var player in playersToDie)
             {
-                if (!player.Is(RoleEnum.Pestilence))
+                if (!player.Is(RoleEnum.Pestilence) && !player.IsShielded() && !player.IsProtected() && player != ShowRoundOneShield.FirstRoundShielded)
                 {
-                    DetonateKillEnd(player, Player);
-
-                    var writer = AmongUsClient.Instance.StartRpcImmediately(PlayerControl.LocalPlayer.NetId,
-                    (byte)CustomRPC.Detonate, SendOption.Reliable, -1);
-                    writer.Write(player.PlayerId);
-                    writer.Write(Player.PlayerId);
-                    AmongUsClient.Instance.FinishRpcImmediately(writer);
+                    Utils.RpcMultiMurderPlayer(Player, player);
                 }
-            }
-        }
-        public static void DetonateKillEnd(PlayerControl target, PlayerControl killer)
-        {
-            var data = target.Data;
-            if (data != null && !data.IsDead)
-            {
-                if (killer == PlayerControl.LocalPlayer)
-                    SoundManager.Instance.PlaySound(PlayerControl.LocalPlayer.KillSfx, false, 0.8f);
-
-                GetRole(killer).Kills += 1;
-
-                target.gameObject.layer = LayerMask.NameToLayer("Ghost");
-                target.Visible = false;
-
-                if (PlayerControl.LocalPlayer.Is(RoleEnum.Mystic) && !PlayerControl.LocalPlayer.Data.IsDead)
+                else if (player.IsShielded())
                 {
-                    Coroutines.Start(Utils.FlashCoroutine(Patches.Colors.Mystic));
+                    var medic = player.GetMedic().Player.PlayerId;
+                    Utils.Rpc(CustomRPC.AttemptSound, medic, player.PlayerId);
+                    StopKill.BreakShield(medic, player.PlayerId, CustomGameOptions.ShieldBreaks);
                 }
-
-                if (target.AmOwner)
-                {
-                    try
-                    {
-                        if (Minigame.Instance)
-                        {
-                            Minigame.Instance.Close();
-                            Minigame.Instance.Close();
-                        }
-
-                        if (MapBehaviour.Instance)
-                        {
-                            MapBehaviour.Instance.Close();
-                            MapBehaviour.Instance.Close();
-                        }
-                    }
-                    catch
-                    {
-                    }
-
-                    DestroyableSingleton<HudManager>.Instance.KillOverlay.ShowKillAnimation(killer.Data, data);
-                    DestroyableSingleton<HudManager>.Instance.ShadowQuad.gameObject.SetActive(false);
-                    target.nameText().GetComponent<MeshRenderer>().material.SetInt("_Mask", 0);
-                    target.RpcSetScanner(false);
-                    var importantTextTask = new GameObject("_Player").AddComponent<ImportantTextTask>();
-                    importantTextTask.transform.SetParent(AmongUsClient.Instance.transform, false);
-                    if (!GameOptionsManager.Instance.currentNormalGameOptions.GhostsDoTasks)
-                    {
-                        for (var i = 0; i < target.myTasks.Count; i++)
-                        {
-                            var playerTask = target.myTasks.ToArray()[i];
-                            playerTask.OnRemove();
-                            UnityEngine.Object.Destroy(playerTask.gameObject);
-                        }
-
-                        target.myTasks.Clear();
-                        importantTextTask.Text = DestroyableSingleton<TranslationController>.Instance.GetString(
-                            StringNames.GhostIgnoreTasks,
-                            new Il2CppReferenceArray<Il2CppSystem.Object>(0));
-                    }
-                    else
-                    {
-                        importantTextTask.Text = DestroyableSingleton<TranslationController>.Instance.GetString(
-                            StringNames.GhostDoTasks,
-                            new Il2CppReferenceArray<Il2CppSystem.Object>(0));
-                    }
-
-                    target.myTasks.Insert(0, importantTextTask);
-                }
-                killer.MyPhysics.StartCoroutine(killer.KillAnimations.Random().CoPerformKill(target, target));
-                
-                var deadBody = new DeadPlayer
-                {
-                    PlayerId = target.PlayerId,
-                    KillerId = killer.PlayerId,
-                    KillTime = DateTime.UtcNow
-                };
-
-                Murder.KilledPlayers.Add(deadBody);
-
-                if (killer != PlayerControl.LocalPlayer) return;
-
-                if (target.Is(ModifierEnum.Bait)) Utils.BaitReport(killer, target);
             }
         }
         public static Il2CppSystem.Collections.Generic.List<PlayerControl> Shuffle(Il2CppSystem.Collections.Generic.List<PlayerControl> playersToDie)
@@ -184,14 +97,6 @@ namespace TownOfRoles.Roles
                 playersToDie[r] = tmp;
             }
             return playersToDie;
-        }
-
-        public static AssetBundle loadBundle()
-        {
-            var assembly = Assembly.GetExecutingAssembly();
-            var stream = assembly.GetManifestResourceStream("TownOfRoles.Resources.bombershader");
-            var assets = stream.ReadFully();
-            return AssetBundle.LoadFromMemory(assets);
         }
     }
 }

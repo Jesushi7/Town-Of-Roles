@@ -1,20 +1,19 @@
 using System;
 using System.Linq;
 using HarmonyLib;
-using Hazel;
-using TownOfRoles.Roles;
+using TownOfSushi.Roles;
 using UnityEngine;
 using UnityEngine.UI;
 using Object = UnityEngine.Object;
 
-namespace TownOfRoles.CrewmateRoles.ImitatorMod
+namespace TownOfSushi.CrewmateRoles.ImitatorMod
 {
     [HarmonyPatch(typeof(MeetingHud), nameof(MeetingHud.Start))]
-    public class AddButton
+    public class AddButtonImitator
     {
         private static int _mostRecentId;
-        private static Sprite ActiveSprite => TownOfRoles.ImitateSelectSprite;
-        public static Sprite DisabledSprite => TownOfRoles.ImitateDeselectSprite;
+        private static Sprite ActiveSprite => TownOfSushi.ImitateSelectSprite;
+        public static Sprite DisabledSprite => TownOfSushi.ImitateDeselectSprite;
 
 
         public static void GenButton(Imitator role, int index, bool isDead)
@@ -50,7 +49,16 @@ namespace TownOfRoles.CrewmateRoles.ImitatorMod
             void Listener()
             {
                 if (role.ListOfActives.Count(x => x) == 1 &&
-                    role.Buttons[index].GetComponent<SpriteRenderer>().sprite == DisabledSprite) return;
+                    role.Buttons[index].GetComponent<SpriteRenderer>().sprite == DisabledSprite)
+                {
+                    int active = 0;
+                    for (var i = 0; i < role.ListOfActives.Count; i++) if (role.ListOfActives[i]) active = i;
+
+                    role.Buttons[active].GetComponent<SpriteRenderer>().sprite =
+                        role.ListOfActives[active] ? DisabledSprite : ActiveSprite;
+
+                    role.ListOfActives[active] = !role.ListOfActives[active];
+                }
 
                 role.Buttons[index].GetComponent<SpriteRenderer>().sprite =
                     role.ListOfActives[index] ? DisabledSprite : ActiveSprite;
@@ -92,17 +100,18 @@ namespace TownOfRoles.CrewmateRoles.ImitatorMod
                         var imitatedRole = Role.GetRole(player).RoleType;
                         if (imitatedRole == RoleEnum.Avenger)
                         {
-                            var Avenger = Role.GetRole<Avenger>(player);
-                            imitatedRole = Avenger.formerRole;
+                            var haunter = Role.GetRole<Avenger>(player);
+                            imitatedRole = haunter.formerRole;
                         }
-                        if (player.Data.IsDead && !player.Data.Disconnected && (imitatedRole == RoleEnum.Mystic ||
+                        if (player.Data.IsDead && !player.Data.Disconnected && (imitatedRole == RoleEnum.Detective ||
                             imitatedRole == RoleEnum.Mystic ||
-                            imitatedRole == RoleEnum.Snitch || imitatedRole == RoleEnum.Camouflager ||
+                            imitatedRole == RoleEnum.Snitch || 
                             imitatedRole == RoleEnum.Tracker || imitatedRole == RoleEnum.Sheriff ||
                             imitatedRole == RoleEnum.Veteran || imitatedRole == RoleEnum.Altruist ||
                             imitatedRole == RoleEnum.Engineer || imitatedRole == RoleEnum.Medium ||
                             imitatedRole == RoleEnum.Transporter || imitatedRole == RoleEnum.Trapper ||
-                            imitatedRole == RoleEnum.Medic)) imitatable = true;
+                            imitatedRole == RoleEnum.Medic || imitatedRole == RoleEnum.VampireHunter ||
+                            imitatedRole == RoleEnum.Aurial || imitatedRole == RoleEnum.Oracle)) imitatable = true;
                         GenButton(imitatorRole, i, imitatable);
                     }
                 }

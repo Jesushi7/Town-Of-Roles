@@ -1,7 +1,6 @@
-using TownOfRoles.Extensions;
-using UnityEngine;
+using TownOfSushi.Extensions;
 
-namespace TownOfRoles.Roles.Modifiers
+namespace TownOfSushi.Roles.Modifiers
 {
     public class Flash : Modifier, IVisualAlteration
     {
@@ -9,7 +8,7 @@ namespace TownOfRoles.Roles.Modifiers
         public Flash(PlayerControl player) : base(player)
         {
             Name = "Flash";
-            TaskText = () => "You're faster than others";
+            TaskText = () => "Superspeed!";
             Color = Patches.Colors.Flash;
             ModifierType = ModifierEnum.Flash;
         }

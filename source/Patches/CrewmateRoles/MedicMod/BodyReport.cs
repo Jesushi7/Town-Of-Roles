@@ -2,7 +2,7 @@ using System;
 using System.Linq;
 using HarmonyLib;
 
-namespace TownOfRoles.CrewmateRoles.MedicMod
+namespace TownOfSushi.CrewmateRoles.MedicMod
 {
     [HarmonyPatch(typeof(PlayerControl), nameof(PlayerControl.CmdReportDeadBody))]
     internal class BodyReportPatch

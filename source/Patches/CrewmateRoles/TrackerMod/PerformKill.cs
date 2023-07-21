@@ -1,17 +1,16 @@
 ﻿using System;
 using HarmonyLib;
-using TownOfRoles.Roles;
+using TownOfSushi.Roles;
 using UnityEngine;
-using TownOfRoles.Extensions;
+using TownOfSushi.Extensions;
 using AmongUs.GameOptions;
-using TownOfRoles.ImpostorRoles.CamouflageMod;
 
-namespace TownOfRoles.CrewmateRoles.TrackerMod
+namespace TownOfSushi.CrewmateRoles.TrackerMod
 {
     [HarmonyPatch(typeof(KillButton), nameof(KillButton.DoClick))]
     public class PerformKill
     {
-        public static Sprite Sprite => TownOfRoles.Arrow;
+        public static Sprite Sprite => TownOfSushi.Arrow;
         public static bool Prefix(KillButton __instance)
         {
             if (__instance != DestroyableSingleton<HudManager>.Instance.KillButton) return true;
@@ -38,9 +37,9 @@ namespace TownOfRoles.CrewmateRoles.TrackerMod
                 renderer.sprite = Sprite;
                 if (!CamouflageUnCamouflage.IsCamoed)
                 {
-                    if (ColorUtils.IsRainbow(target.GetDefaultOutfit().ColorId))
+                    if (RainbowUtils.IsRainbow(target.GetDefaultOutfit().ColorId))
                     {
-                        renderer.color = ColorUtils.Rainbow;
+                        renderer.color = RainbowUtils.Rainbow;
                     }
                     else
                     {
@@ -62,7 +61,7 @@ namespace TownOfRoles.CrewmateRoles.TrackerMod
             else if (interact[1] == true)
             {
                 role.LastTracked = DateTime.UtcNow;
-                role.LastTracked = role.LastTracked.AddSeconds(CustomGameOptions.ProtectKCReset - CustomGameOptions.SnitchCd);
+                role.LastTracked = role.LastTracked.AddSeconds(CustomGameOptions.ProtectKCReset - CustomGameOptions.TrackCd);
                 return false;
             }
             else if (interact[3] == true) return false;

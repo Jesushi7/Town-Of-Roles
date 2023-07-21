@@ -1,14 +1,14 @@
 using HarmonyLib;
-using TownOfRoles.Roles.Modifiers;
+using TownOfSushi.Roles.Modifiers;
 using UnityEngine;
 using TMPro;
 
-namespace TownOfRoles.Modifiers.ButtonBarryMod
+namespace TownOfSushi.Modifiers.ButtonBarryMod
 {
     [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]
     public class Update
     {
-        public static Sprite Button => TownOfRoles.ButtonSprite;
+        public static Sprite Button => TownOfSushi.ButtonSprite;
 
         public static void Postfix(HudManager __instance)
         {

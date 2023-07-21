@@ -1,8 +1,8 @@
 using HarmonyLib;
-using TownOfRoles.Roles;
+using TownOfSushi.Roles;
 using UnityEngine;
 
-namespace TownOfRoles.ImpostorRoles.UndertakerMod
+namespace TownOfSushi.ImpostorRoles.UndertakerMod
 {
     [HarmonyPatch(typeof(KillButton), nameof(KillButton.SetTarget))]
     public class KillButtonTarget

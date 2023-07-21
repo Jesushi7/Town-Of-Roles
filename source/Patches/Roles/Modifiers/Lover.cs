@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Hazel;
-using TownOfRoles.Patches;
-using TownOfRoles.Roles.Modifiers;
+using TownOfSushi.Patches;
 using UnityEngine;
+using TownOfSushi.Extensions;
 
-namespace TownOfRoles.Roles.Modifiers
+namespace TownOfSushi.Roles.Modifiers
 {
     public class Lover : Modifier
     {
@@ -14,7 +14,7 @@ namespace TownOfRoles.Roles.Modifiers
             Name = "Lover";
             SymbolName = "♥";
             TaskText = () =>
-                "You are in love with " + OtherLover.Player.name;
+                "You are in Love with " + OtherLover.Player.GetDefaultOutfit().PlayerName;
             Color = Colors.Lovers;
             ModifierType = ModifierEnum.Lover;
         }
@@ -40,11 +40,10 @@ namespace TownOfRoles.Roles.Modifiers
 
             foreach(var player in canHaveModifiers)
             {
-                if (player.Is(Faction.Impostors) || ((player.Is(RoleEnum.Glitch) || player.Is(RoleEnum.Pyromaniac) || player.Is(RoleEnum.Plaguebearer)
-                    || player.Is(RoleEnum.Werewolf) ||player.Is(RoleEnum.SerialKiller) || player.Is(RoleEnum.Juggernaut)) && CustomGameOptions.NeutralLovers))
+                if (player.Is(Faction.Impostors) || (player.Is(Faction.NeutralKilling) && !player.Is(RoleEnum.Vampire) && CustomGameOptions.NeutralLovers))
                     impostors.Add(player);
-                else if (player.Is(Faction.Crewmates) || (player.Is(Faction.Neutral) && !player.Is(RoleEnum.Glitch) && !player.Is(RoleEnum.Pyromaniac)
-                    && !player.Is(RoleEnum.Plaguebearer) && !player.Is(RoleEnum.Werewolf) && !player.Is(RoleEnum.Juggernaut) && !player.Is(RoleEnum.SerialKiller)&& CustomGameOptions.NeutralLovers))
+                else if (player.Is(Faction.Crewmates) || (player.Is(Faction.NeutralBenign) && CustomGameOptions.NeutralLovers)
+                     || (player.Is(Faction.NeutralEvil) && CustomGameOptions.NeutralLovers))
                     crewmates.Add(player);
             }
 
@@ -73,30 +72,21 @@ namespace TownOfRoles.Roles.Modifiers
             }
             canHaveModifiers.Remove(secondLover);
 
-            var writer = AmongUsClient.Instance.StartRpcImmediately(PlayerControl.LocalPlayer.NetId,
-                (byte) CustomRPC.SetCouple, SendOption.Reliable, -1);
-            writer.Write(firstLover.PlayerId);
-            writer.Write(secondLover.PlayerId);
+            Utils.Rpc(CustomRPC.SetCouple, firstLover.PlayerId, secondLover.PlayerId);
             var lover1 = new Lover(firstLover);
             var lover2 = new Lover(secondLover);
 
             lover1.OtherLover = lover2;
             lover2.OtherLover = lover1;
-
-            AmongUsClient.Instance.FinishRpcImmediately(writer);
         }
 
-        internal override bool EABBNOODFGL(LogicGameFlowNormal __instance)
+        internal override bool ModifierWin(LogicGameFlowNormal __instance)
         {
             if (FourPeopleLeft()) return false;
 
             if (CheckLoversWin())
             {
-                //System.Console.WriteLine("LOVERS WIN");
-                var writer = AmongUsClient.Instance.StartRpcImmediately(PlayerControl.LocalPlayer.NetId,
-                    (byte) CustomRPC.LoveWin, SendOption.Reliable, -1);
-                writer.Write(Player.PlayerId);
-                AmongUsClient.Instance.FinishRpcImmediately(writer);
+                Utils.Rpc(CustomRPC.LoveWin, Player.PlayerId);
                 Win();
                 Utils.EndGame();
                 return false;

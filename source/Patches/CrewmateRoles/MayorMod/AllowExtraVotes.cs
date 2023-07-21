@@ -1,7 +1,7 @@
 using HarmonyLib;
-using TownOfRoles.Roles;
+using TownOfSushi.Roles;
 
-namespace TownOfRoles.CrewmateRoles.MayorMod
+namespace TownOfSushi.CrewmateRoles.MayorMod
 {
     [HarmonyPatch(typeof(PlayerVoteArea))]
     public class AllowExtraVotes

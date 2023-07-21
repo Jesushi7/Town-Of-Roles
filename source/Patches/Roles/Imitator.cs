@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace TownOfRoles.Roles
+namespace TownOfSushi.Roles
 {
     public class Imitator : Role
     {
@@ -10,17 +10,17 @@ namespace TownOfRoles.Roles
         public readonly List<bool> ListOfActives = new List<bool>();
         public PlayerControl ImitatePlayer = null;
 
-        public PlayerControl LastExaminedPlayer = null;
         public List<RoleEnum> trappedPlayers = null;
+        public PlayerControl confessingPlayer = null;
 
 
         public Imitator(PlayerControl player) : base(player)
         {
             Name = "Imitator";
-            StartText = () => "<color=#B3D94DFF>Copy dead people's role</color>";
+            ImpostorText = () => "<color=#B3D94DFF>Use the abilities of whoever \ndies to help people.</color>";
             TaskText = () => "Use dead roles to benefit the crew";
+            FactionName = "Crewmate";                   
             Color = Patches.Colors.Imitator;
-            FactionName = "Crewmate";              
             RoleType = RoleEnum.Imitator;
             AddToRoleHistory(RoleType);
         }

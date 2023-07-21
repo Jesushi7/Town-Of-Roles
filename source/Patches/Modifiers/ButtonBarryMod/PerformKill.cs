@@ -1,8 +1,8 @@
 using HarmonyLib;
 using Hazel;
-using TownOfRoles.Roles.Modifiers;
+using TownOfSushi.Roles.Modifiers;
 
-namespace TownOfRoles.Modifiers.ButtonBarryMod
+namespace TownOfSushi.Modifiers.ButtonBarryMod
 {
     [HarmonyPatch(typeof(KillButton), nameof(KillButton.DoClick))]
     public class PerformKill
@@ -23,10 +23,7 @@ namespace TownOfRoles.Modifiers.ButtonBarryMod
 
             role.ButtonUsed = true;
 
-            var writer = AmongUsClient.Instance.StartRpcImmediately(PlayerControl.LocalPlayer.NetId,
-                (byte)CustomRPC.BarryButton, SendOption.Reliable, -1);
-            writer.Write(PlayerControl.LocalPlayer.PlayerId);
-            AmongUsClient.Instance.FinishRpcImmediately(writer);
+            Utils.Rpc(CustomRPC.BarryButton, PlayerControl.LocalPlayer.PlayerId);
 
             if (AmongUsClient.Instance.AmHost)
             {

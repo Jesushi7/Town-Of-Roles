@@ -1,12 +1,12 @@
 using System;
 using HarmonyLib;
-using TownOfRoles.Roles;
+using TownOfSushi.Roles;
 using UnityEngine;
 using Object = UnityEngine.Object;
-using TownOfRoles.Patches;
+using TownOfSushi.Patches;
 using Hazel;
 
-namespace TownOfRoles.CrewmateRoles.ImitatorMod
+namespace TownOfSushi.CrewmateRoles.ImitatorMod
 {
     [HarmonyPatch(typeof(AirshipExileController), nameof(AirshipExileController.WrapUpAndSpawn))]
     public static class AirshipExileController_WrapUpAndSpawn
@@ -30,10 +30,7 @@ namespace TownOfRoles.CrewmateRoles.ImitatorMod
 
             Imitate(imitator);
 
-            var writer = AmongUsClient.Instance.StartRpcImmediately(PlayerControl.LocalPlayer.NetId,
-                (byte)CustomRPC.StartImitate, SendOption.Reliable, -1);
-            writer.Write(imitator.Player.PlayerId);
-            AmongUsClient.Instance.FinishRpcImmediately(writer);
+            Utils.Rpc(CustomRPC.StartImitate, imitator.Player.PlayerId);
         }
 
         public static void Postfix(ExileController __instance) => ExileControllerPostfix(__instance);
@@ -41,8 +38,8 @@ namespace TownOfRoles.CrewmateRoles.ImitatorMod
         [HarmonyPatch(typeof(Object), nameof(Object.Destroy), new Type[] { typeof(GameObject) })]
         public static void Prefix(GameObject obj)
         {
-            if (!SubmergedCompatibility.Loaded || GameOptionsManager.Instance.currentNormalGameOptions.MapId != 5) return;
-            if (obj.name.Contains("ExileCutscene")) ExileControllerPostfix(ExileControllerPatch.lastExiled);
+            if (!SubmergedCompatibility.Loaded || GameOptionsManager.Instance?.currentNormalGameOptions?.MapId != 5) return;
+            if (obj.name?.Contains("ExileCutscene") == true) ExileControllerPostfix(ExileControllerPatch.lastExiled);
         }
 
         public static void Imitate(Imitator imitator)
@@ -52,20 +49,16 @@ namespace TownOfRoles.CrewmateRoles.ImitatorMod
             var imitatorRole = Role.GetRole(imitator.ImitatePlayer).RoleType;
             if (imitatorRole == RoleEnum.Avenger)
             {
-                var Avenger = Role.GetRole<Avenger>(imitator.ImitatePlayer);
-                imitatorRole = Avenger.formerRole;
+                var haunter = Role.GetRole<Avenger>(imitator.ImitatePlayer);
+                imitatorRole = haunter.formerRole;
             }
+            if (imitatorRole == RoleEnum.Crewmate) return;
             var role = Role.GetRole(ImitatingPlayer);
             var killsList = (role.Kills, role.CorrectKills, role.IncorrectKills, role.CorrectAssassinKills, role.IncorrectAssassinKills);
             Role.RoleDictionary.Remove(ImitatingPlayer.PlayerId);
-            if (imitatorRole == RoleEnum.Mystic)
-            {
-                var Mystic = new Mystic(ImitatingPlayer);
-                Mystic.LastExamined = Mystic.LastExamined.AddSeconds(CustomGameOptions.InitialExamineCd - CustomGameOptions.ExamineCd);
-            }
+            if (imitatorRole == RoleEnum.Detective) new Detective(ImitatingPlayer);
             if (imitatorRole == RoleEnum.Mystic) new Mystic(ImitatingPlayer);
             if (imitatorRole == RoleEnum.Snitch) new Snitch(ImitatingPlayer);
-            if (imitatorRole == RoleEnum.Camouflager) new Camouflager(ImitatingPlayer);
             if (imitatorRole == RoleEnum.Tracker) new Tracker(ImitatingPlayer);
             if (imitatorRole == RoleEnum.Sheriff) new Sheriff(ImitatingPlayer);
             if (imitatorRole == RoleEnum.Veteran) new Veteran(ImitatingPlayer);
@@ -74,12 +67,26 @@ namespace TownOfRoles.CrewmateRoles.ImitatorMod
             if (imitatorRole == RoleEnum.Medium) new Medium(ImitatingPlayer);
             if (imitatorRole == RoleEnum.Transporter) new Transporter(ImitatingPlayer);
             if (imitatorRole == RoleEnum.Trapper) new Trapper(ImitatingPlayer);
+            if (imitatorRole == RoleEnum.Oracle) new Oracle(ImitatingPlayer);
             if (imitatorRole == RoleEnum.Medic)
             {
                 var medic = new Medic(ImitatingPlayer);
                 medic.UsedAbility = true;
                 medic.StartingCooldown = medic.StartingCooldown.AddSeconds(-10f);
             }
+            if (imitatorRole == RoleEnum.VampireHunter)
+            {
+                var vh = new VampireHunter(ImitatingPlayer);
+                vh.UsesLeft = CustomGameOptions.MaxFailedStakesPerGame;
+                vh.AddedStakes = true;
+            }
+            if (imitatorRole == RoleEnum.Aurial)
+            {
+                var aurial = new Aurial(ImitatingPlayer);
+                aurial.CannotSeeDelay = DateTime.UtcNow;
+                aurial.Loaded = true;
+            }
+
             var newRole = Role.GetRole(ImitatingPlayer);
             newRole.RemoveFromRoleHistory(newRole.RoleType);
             newRole.Kills = killsList.Kills;

@@ -1,19 +1,19 @@
 using HarmonyLib;
 using Hazel;
-using TownOfRoles.Roles;
+using TownOfSushi.Roles;
 
-namespace TownOfRoles.NeutralRoles.GuardianMod
+namespace TownOfSushi.NeutralRoles.GuardianAngelMod
 {
     [HarmonyPatch(typeof(KillButton), nameof(KillButton.DoClick))]
     public class Protect
     {
         public static bool Prefix(KillButton __instance)
         {
-            var flag = PlayerControl.LocalPlayer.Is(RoleEnum.Guardian);
+            var flag = PlayerControl.LocalPlayer.Is(RoleEnum.GuardianAngel);
             if (!flag) return true;
             if (!PlayerControl.LocalPlayer.CanMove) return false;
             if (PlayerControl.LocalPlayer.Data.IsDead) return false;
-            var role = Role.GetRole<Guardian>(PlayerControl.LocalPlayer);
+            var role = Role.GetRole<GuardianAngel>(PlayerControl.LocalPlayer);
             if (!role.ButtonUsable) return false;
             var protectButton = DestroyableSingleton<HudManager>.Instance.KillButton;
             if (__instance == protectButton)
@@ -24,10 +24,7 @@ namespace TownOfRoles.NeutralRoles.GuardianMod
                 role.TimeRemaining = CustomGameOptions.ProtectDuration;
                 role.UsesLeft--;
                 role.Protect();
-                var writer = AmongUsClient.Instance.StartRpcImmediately(PlayerControl.LocalPlayer.NetId,
-                    (byte)CustomRPC.GAProtect, SendOption.Reliable, -1);
-                writer.Write(PlayerControl.LocalPlayer.PlayerId);
-                AmongUsClient.Instance.FinishRpcImmediately(writer);
+                Utils.Rpc(CustomRPC.GAProtect, PlayerControl.LocalPlayer.PlayerId);
                 return false;
             }
 

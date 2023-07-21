@@ -1,15 +1,15 @@
 using HarmonyLib;
-using TownOfRoles.Roles;
-using TownOfRoles.Roles.Cultist;
+using TownOfSushi.Roles;
+using TownOfSushi.Roles.Cultist;
 using UnityEngine;
 using AmongUs.GameOptions;
 
-namespace TownOfRoles.CultistRoles.NecromancerMod
+namespace TownOfSushi.CultistRoles.NecromancerMod
 {
     [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]
     public class ReviveHudManagerUpdate
     {
-        public static Sprite ReviveSprite => TownOfRoles.Revive2Sprite;
+        public static Sprite ReviveSprite => TownOfSushi.Revive2Sprite;
         public static byte DontRevive = byte.MaxValue;
 
         public static void Postfix(HudManager __instance)
@@ -79,7 +79,7 @@ namespace TownOfRoles.CultistRoles.NecromancerMod
             }
             var player = Utils.PlayerById(role.CurrentTarget.ParentId);
             if (role.CurrentTarget && role.ReviveButton.enabled &&
-                !(player.Is(RoleEnum.Sheriff) || player.Is(RoleEnum.CultistSnitch)  || player.Is(RoleEnum.Mayor)) &&
+                !(player.Is(RoleEnum.Sheriff) || player.Is(RoleEnum.CultistSnitch) || player.Is(RoleEnum.Survivor) || player.Is(RoleEnum.Monarch)) &&
                 !(PlayerControl.LocalPlayer.killTimer > GameOptionsManager.Instance.currentNormalGameOptions.KillCooldown - 0.5f))
             {
                 SpriteRenderer component = null;

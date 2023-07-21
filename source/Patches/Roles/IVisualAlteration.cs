@@ -1,4 +1,4 @@
-﻿namespace TownOfRoles.Roles
+﻿namespace TownOfSushi.Roles
 {
     public interface IVisualAlteration
     {

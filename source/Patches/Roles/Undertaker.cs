@@ -1,6 +1,6 @@
 using System;
 
-namespace TownOfRoles.Roles
+namespace TownOfSushi.Roles
 {
     public class Undertaker : Role
     {
@@ -9,13 +9,12 @@ namespace TownOfRoles.Roles
         public Undertaker(PlayerControl player) : base(player)
         {
             Name = "Undertaker";
-            StartText = () => "Drag bodies to hide them";
+            ImpostorText = () => "Drag bodies around to hide \nthem from being reported";
             TaskText = () => "Drag bodies around";
+            FactionName = "Impostor";
             Color = Patches.Colors.Impostor;
             LastDragged = DateTime.UtcNow;
             RoleType = RoleEnum.Undertaker;
-            FactionName = "Impostor";                   
-            Faction = Faction.Impostors;              
             AddToRoleHistory(RoleType);
             Faction = Faction.Impostors;
         }

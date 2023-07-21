@@ -1,7 +1,7 @@
 using HarmonyLib;
-using TownOfRoles.Roles;
+using TownOfSushi.Roles;
 
-namespace TownOfRoles.NeutralRoles.PhantomMod
+namespace TownOfSushi.NeutralRoles.PhantomMod
 {
     [HarmonyPatch(typeof(SpawnInMinigame), nameof(SpawnInMinigame.Begin))]
     public class NoSpawn

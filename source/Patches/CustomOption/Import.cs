@@ -9,7 +9,7 @@ using Il2CppInterop.Runtime.InteropTypes.Arrays;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace TownOfRoles.CustomOption
+namespace TownOfSushi.CustomOption
 {
     public class Import : CustomButtonOption
     {

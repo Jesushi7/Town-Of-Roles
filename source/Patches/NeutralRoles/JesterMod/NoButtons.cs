@@ -1,6 +1,6 @@
 using HarmonyLib;
 
-namespace TownOfRoles.NeutralRoles.JesterMod
+namespace TownOfSushi.NeutralRoles.JesterMod
 {
     [HarmonyPatch(typeof(PlayerControl), nameof(PlayerControl.SetRole))]
     public class NoButtons

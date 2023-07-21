@@ -1,9 +1,9 @@
 ﻿using System.Linq;
 using HarmonyLib;
-using TownOfRoles.Extensions;
-using TownOfRoles.Roles.Modifiers;
+using TownOfSushi.Extensions;
+using TownOfSushi.Roles.Modifiers;
 
-namespace TownOfRoles.Modifiers.UnderdogMod
+namespace TownOfSushi.Modifiers.UnderdogMod
 {
     [HarmonyPatch(typeof(PlayerControl), nameof(PlayerControl.MurderPlayer))]
     public class PerformKill

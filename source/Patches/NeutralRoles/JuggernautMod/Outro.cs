@@ -1,10 +1,10 @@
 using System.Linq;
 using HarmonyLib;
-using TownOfRoles.Extensions;
-using TownOfRoles.Roles;
+using TownOfSushi.Extensions;
+using TownOfSushi.Roles;
 using UnityEngine;
 
-namespace TownOfRoles.NeutralRoles.JuggernautMod
+namespace TownOfSushi.NeutralRoles.JuggernautMod
 {
     [HarmonyPatch(typeof(EndGameManager), nameof(EndGameManager.Start))]
     public static class Outro
@@ -13,6 +13,7 @@ namespace TownOfRoles.NeutralRoles.JuggernautMod
         {
             if (Role.GetRoles(RoleEnum.Jester).Any(x => ((Jester)x).VotedOut)) return;
             if (Role.GetRoles(RoleEnum.Executioner).Any(x => ((Executioner)x).TargetVotedOut)) return;
+            if (Role.GetRoles(RoleEnum.Doomsayer).Any(x => ((Doomsayer)x).WonByGuessing)) return;
             var role = Role.AllRoles.FirstOrDefault(x =>
                 x.RoleType == RoleEnum.Juggernaut && ((Juggernaut)x).JuggernautWins);
             if (role == null) return;

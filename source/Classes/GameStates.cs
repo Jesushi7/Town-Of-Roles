@@ -2,9 +2,8 @@ using System.Linq;
 using AmongUs.GameOptions;
 using HarmonyLib;
 using InnerNet;
-using TownOfRoles.Custom;
 
-namespace TownOfRoles.Classes
+namespace TownOfSushi.Classes
 {
     //Thanks to Town Of Us Reworked for this Code
     [HarmonyPatch]
@@ -12,7 +11,6 @@ namespace TownOfRoles.Classes
     {
         public static bool IsMeeting => IsInGame && MeetingHud.Instance;        
         public static bool IsCountDown => GameStartManager.Instance && GameStartManager.Instance.startState == GameStartManager.StartingStates.Countdown;
-        public static bool LastImp => CustomPlayer.AllPlayers.Count(x => x.Is(Faction.Impostors) && !(x.Data.IsDead || x.Data.Disconnected)) == 1;
         public static bool IsInGame => (AmongUsClient.Instance.GameState == InnerNetClient.GameStates.Started || GameManager.Instance?.GameHasStarted ==  true) && !LobbyBehaviour.Instance;
         public static bool IsLobby => AmongUsClient.Instance.GameState == InnerNetClient.GameStates.Joined || LobbyBehaviour.Instance;
         public static bool IsEnded => AmongUsClient.Instance.GameState == InnerNetClient.GameStates.Ended;

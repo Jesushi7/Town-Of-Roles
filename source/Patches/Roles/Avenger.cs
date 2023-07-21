@@ -1,8 +1,8 @@
 using UnityEngine;
 using System.Collections.Generic;
-using TownOfRoles.Extensions;
+using TownOfSushi.Extensions;
 
-namespace TownOfRoles.Roles
+namespace TownOfSushi.Roles
 {
     public class Avenger : Role
     {
@@ -21,8 +21,8 @@ namespace TownOfRoles.Roles
         public Avenger(PlayerControl player) : base(player)
         {
             Name = "Avenger";
-            StartText = () => "";
-            TaskText = () => "Reveal the impostors";
+            ImpostorText = () => "";
+            TaskText = () => "Complete all your tasks to reveal impostors!";
             Color = Patches.Colors.Avenger;
             RoleType = RoleEnum.Avenger;
             AddToRoleHistory(RoleType);
@@ -45,9 +45,8 @@ namespace TownOfRoles.Roles
             distPercent = Mathf.Max(0, distPercent - 1);
 
             var velocity = Player.gameObject.GetComponent<Rigidbody2D>().velocity.magnitude;
-            color.a = 0.07f + velocity / Player.MyPhysics.GhostSpeed * 0.14f;
+            color.a = 0.07f + velocity / Player.MyPhysics.GhostSpeed * 0.13f;
             color.a = Mathf.Lerp(color.a, 0, distPercent);
-
 
             if (Player.GetCustomOutfitType() != CustomPlayerOutfitType.PlayerNameOnly)
             {
@@ -57,12 +56,14 @@ namespace TownOfRoles.Roles
                     HatId = "",
                     SkinId = "",
                     VisorId = "",
-                    PlayerName = ""
+                    PlayerName = " ",
+                    PetId = ""
                 });
             }
             Player.myRend().color = color;
             Player.nameText().color = Color.clear;
             Player.cosmetics.colorBlindText.color = Color.clear;
+            Player.cosmetics.SetBodyCosmeticsVisible(false);
         }
     }
 }

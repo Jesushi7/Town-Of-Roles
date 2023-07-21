@@ -1,9 +1,9 @@
 using System.Linq;
 using HarmonyLib;
 using Hazel;
-using TownOfRoles.Roles;
+using TownOfSushi.Roles;
 
-namespace TownOfRoles.CrewmateRoles.ImitatorMod
+namespace TownOfSushi.CrewmateRoles.ImitatorMod
 {
     [HarmonyPatch(typeof(MeetingHud))]
     public class SetImitate
@@ -32,19 +32,11 @@ namespace TownOfRoles.CrewmateRoles.ImitatorMod
 
                     if (Imitate == null)
                     {
-                        var writer2 = AmongUsClient.Instance.StartRpcImmediately(PlayerControl.LocalPlayer.NetId,
-                            (byte)CustomRPC.Imitate, SendOption.Reliable, -1);
-                        writer2.Write(imitator.Player.PlayerId);
-                        writer2.Write(sbyte.MaxValue);
-                        AmongUsClient.Instance.FinishRpcImmediately(writer2);
+                        Utils.Rpc(CustomRPC.Imitate, imitator.Player.PlayerId, sbyte.MaxValue);
                         return;
                     }
 
-                    var writer = AmongUsClient.Instance.StartRpcImmediately(PlayerControl.LocalPlayer.NetId,
-                        (byte)CustomRPC.Imitate, SendOption.Reliable, -1);
-                    writer.Write(imitator.Player.PlayerId);
-                    writer.Write(imitator.ImitatePlayer.PlayerId);
-                    AmongUsClient.Instance.FinishRpcImmediately(writer);
+                    Utils.Rpc(CustomRPC.Imitate, imitator.Player.PlayerId, imitator.ImitatePlayer.PlayerId);
                 }
             }
         }

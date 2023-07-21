@@ -1,14 +1,14 @@
 ﻿using HarmonyLib;
-using TownOfRoles.Roles;
+using TownOfSushi.Roles;
 using UnityEngine;
 
-namespace TownOfRoles.ImpostorRoles.EscapistMod
+namespace TownOfSushi.ImpostorRoles.EscapistMod
 {
     [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]
     public class HudManagerUpdate
     {
-        public static Sprite MarkSprite => TownOfRoles.MarkSprite;
-        public static Sprite EscapeSprite => TownOfRoles.EscapeSprite;
+        public static Sprite MarkSprite => TownOfSushi.MarkSprite;
+        public static Sprite EscapeSprite => TownOfSushi.EscapeSprite;
 
 
         public static void Postfix(HudManager __instance)

@@ -1,7 +1,7 @@
 using HarmonyLib;
-using TownOfRoles.Roles;
+using TownOfSushi.Roles;
 
-namespace TownOfRoles.CrewmateRoles.AvengerMod
+namespace TownOfSushi.CrewmateRoles.AvengerMod
 {
     [HarmonyPatch(typeof(SpawnInMinigame), nameof(SpawnInMinigame.Begin))]
     public class NoSpawn

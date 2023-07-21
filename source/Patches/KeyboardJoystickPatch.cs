@@ -1,6 +1,6 @@
 ﻿using HarmonyLib;
 
-namespace TownOfRoles
+namespace TownOfSushi
 {
     [HarmonyPatch(typeof(KeyboardJoystick), nameof(KeyboardJoystick.HandleHud))]
     public class KeyboardJoystickPatch

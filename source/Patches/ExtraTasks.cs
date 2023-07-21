@@ -2,7 +2,7 @@ using AmongUs.GameOptions;
 using HarmonyLib;
 using Random = UnityEngine.Random;
 
-namespace TownOfRoles.Patches
+namespace TownOfSushi.Patches
 {
     [HarmonyPatch(typeof(ShipStatus))]
     public class ShipStatusPatch

@@ -1,13 +1,13 @@
 ﻿using HarmonyLib;
-using TownOfRoles.Roles;
+using TownOfSushi.Roles;
 using UnityEngine;
 
-namespace TownOfRoles.NeutralRoles.WerewolfMod
+namespace TownOfSushi.NeutralRoles.WerewolfMod
 {
     [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]
     public static class HudManagerUpdate
     {
-        public static Sprite RampageSprite => TownOfRoles.RampageSprite;
+        public static Sprite RampageSprite => TownOfSushi.RampageSprite;
         
         public static void Postfix(HudManager __instance)
         {

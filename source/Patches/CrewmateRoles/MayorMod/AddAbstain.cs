@@ -1,9 +1,9 @@
 using HarmonyLib;
 using TMPro;
-using TownOfRoles.Roles;
+using TownOfSushi.Roles;
 using UnityEngine;
 
-namespace TownOfRoles.CrewmateRoles.MayorMod
+namespace TownOfSushi.CrewmateRoles.MayorMod
 {
     public class AddAbstain
     {

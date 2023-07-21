@@ -1,8 +1,7 @@
 using HarmonyLib;
-using TownOfRoles.Roles;
-using Hazel;
+using TownOfSushi.Roles;
 
-namespace TownOfRoles.CrewmateRoles.AvengerMod
+namespace TownOfSushi.CrewmateRoles.AvengerMod
 {
     [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]
     public class HighlightImpostors
@@ -17,25 +16,18 @@ namespace TownOfRoles.CrewmateRoles.AvengerMod
                     var role = Role.GetRole(player);
                     if (player.Is(Faction.Impostors))
                         state.NameText.color = Palette.ImpostorRed;
-                    if (player.Is(RoleEnum.Glitch) || player.Is(RoleEnum.Werewolf) 
-                || player.Is(RoleEnum.Juggernaut) ||  player.Is(RoleEnum.SerialKiller)||player.Is(RoleEnum.Plaguebearer) || player.Is(RoleEnum.Pestilence)
-                || player.Is(RoleEnum.Pyromaniac) && CustomGameOptions.AvengerRevealsNeutrals)
+                    if (player.Is(Faction.NeutralKilling) && CustomGameOptions.AvengerRevealsNeutrals)
                         state.NameText.color = role.Color;
                 }
             }
         }
         public static void Postfix(HudManager __instance)
         {
-            if (!PlayerControl.LocalPlayer.Is(RoleEnum.Avenger)) return;
-            var role = Role.GetRole<Avenger>(PlayerControl.LocalPlayer);
-            if (!role.CompletedTasks || role.Caught) return;
-            if (MeetingHud.Instance)
+            foreach (var haunter in Role.GetRoles(RoleEnum.Avenger))
             {
-                UpdateMeeting(MeetingHud.Instance);
-                var writer = AmongUsClient.Instance.StartRpcImmediately(PlayerControl.LocalPlayer.NetId,
-                        (byte)CustomRPC.AvengerFinished, SendOption.Reliable, -1);
-                writer.Write(role.Player.PlayerId);
-                AmongUsClient.Instance.FinishRpcImmediately(writer);
+                var role = (Avenger)haunter;
+                if (!role.CompletedTasks || role.Caught) return;
+                if (MeetingHud.Instance) UpdateMeeting(MeetingHud.Instance);
             }
         }
     }

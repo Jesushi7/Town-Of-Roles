@@ -1,9 +1,9 @@
 using System.Linq;
 using HarmonyLib;
 using Hazel;
-using TownOfRoles.Roles;
+using TownOfSushi.Roles;
 
-namespace TownOfRoles.CrewmateRoles.EngineerMod
+namespace TownOfSushi.CrewmateRoles.EngineerMod
 {
     [HarmonyPatch(typeof(KillButton), nameof(KillButton.DoClick))]
     public class PerformKill

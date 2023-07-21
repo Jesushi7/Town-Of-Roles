@@ -1,22 +1,23 @@
 using HarmonyLib;
 using Hazel;
-using TownOfRoles.Extensions;
-using TownOfRoles.Roles;
+using TownOfSushi.Extensions;
+using TownOfSushi.Roles;
 using UnityEngine;
 
-namespace TownOfRoles.NeutralRoles.GuardianMod
+namespace TownOfSushi.NeutralRoles.GuardianAngelMod
 {
     public enum BecomeOptions
     {
         Crew,
         Amnesiac,
+        Survivor,
         Jester
     }
 
     [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]
     public class GATargetColor
     {
-        private static void UpdateMeeting(MeetingHud __instance, Guardian role)
+        private static void UpdateMeeting(MeetingHud __instance, GuardianAngel role)
         {
             if (CustomGameOptions.GAKnowsTargetRole) return;
             foreach (var player in __instance.playerStates)
@@ -29,10 +30,10 @@ namespace TownOfRoles.NeutralRoles.GuardianMod
             if (PlayerControl.AllPlayerControls.Count <= 1) return;
             if (PlayerControl.LocalPlayer == null) return;
             if (PlayerControl.LocalPlayer.Data == null) return;
-            if (!PlayerControl.LocalPlayer.Is(RoleEnum.Guardian)) return;
+            if (!PlayerControl.LocalPlayer.Is(RoleEnum.GuardianAngel)) return;
             if (PlayerControl.LocalPlayer.Data.IsDead) return;
 
-            var role = Role.GetRole<Guardian>(PlayerControl.LocalPlayer);
+            var role = Role.GetRole<GuardianAngel>(PlayerControl.LocalPlayer);
 
             if (MeetingHud.Instance != null) UpdateMeeting(MeetingHud.Instance, role);
 
@@ -40,10 +41,7 @@ namespace TownOfRoles.NeutralRoles.GuardianMod
 
             if (!role.target.Data.IsDead && !role.target.Data.Disconnected) return;
 
-            var writer = AmongUsClient.Instance.StartRpcImmediately(PlayerControl.LocalPlayer.NetId,
-                (byte) CustomRPC.GAToSurv, SendOption.Reliable, -1);
-            writer.Write(PlayerControl.LocalPlayer.PlayerId);
-            AmongUsClient.Instance.FinishRpcImmediately(writer);
+            Utils.Rpc(CustomRPC.GAToSurv, PlayerControl.LocalPlayer.PlayerId);
 
             Object.Destroy(role.UsesText);
             DestroyableSingleton<HudManager>.Instance.KillButton.gameObject.SetActive(false);
@@ -67,6 +65,12 @@ namespace TownOfRoles.NeutralRoles.GuardianMod
                 var amnesiac = new Amnesiac(player);
                 amnesiac.SpawnedAs = false;
                 amnesiac.RegenTask();
+            }
+            else if (CustomGameOptions.GaOnTargetDeath == BecomeOptions.Survivor)
+            {
+                var surv = new Survivor(player);
+                surv.SpawnedAs = false;
+                surv.RegenTask();
             }
             else
             {

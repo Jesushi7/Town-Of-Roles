@@ -1,9 +1,9 @@
 ﻿using System.Linq;
 using HarmonyLib;
 using InnerNet;
-using TownOfRoles.Roles;
+using TownOfSushi.Roles;
 
-namespace TownOfRoles.NeutralRoles.GlitchMod
+namespace TownOfSushi.NeutralRoles.GlitchMod
 {
     [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]
     internal class Update

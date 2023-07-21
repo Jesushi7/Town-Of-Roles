@@ -1,11 +1,11 @@
 using HarmonyLib;
 using Hazel;
 using System.Linq;
-using TownOfRoles.CrewmateRoles.AvengerMod;
-using TownOfRoles.Extensions;
-using TownOfRoles.Roles;
+using TownOfSushi.CrewmateRoles.AvengerMod;
+using TownOfSushi.Extensions;
+using TownOfSushi.Roles;
 
-namespace TownOfRoles
+namespace TownOfSushi
 {
     [HarmonyPatch(typeof(PlayerControl), nameof(PlayerControl.OnClick))]
     public class ClickGhostRole
@@ -22,24 +22,20 @@ namespace TownOfRoles
                 {
                     var role = Role.GetRole<Phantom>(__instance);
                     role.Caught = true;
-                    var writer = AmongUsClient.Instance.StartRpcImmediately(PlayerControl.LocalPlayer.NetId,
-                        (byte)CustomRPC.CatchPhantom, SendOption.Reliable, -1);
-                    writer.Write(role.Player.PlayerId);
-                    AmongUsClient.Instance.FinishRpcImmediately(writer);
+                    role.Player.Exiled();
+                    Utils.Rpc(CustomRPC.CatchPhantom, role.Player.PlayerId);
                 }
             }
             else if (__instance.Is(RoleEnum.Avenger))
             {
                 if (CustomGameOptions.AvengerCanBeClickedBy == AvengerCanBeClickedBy.ImpsOnly && !PlayerControl.LocalPlayer.Data.IsImpostor()) return;
-                if (CustomGameOptions.AvengerCanBeClickedBy == AvengerCanBeClickedBy.NonCrew && !(PlayerControl.LocalPlayer.Data.IsImpostor() || PlayerControl.LocalPlayer.Is(Faction.Neutral))) return;
+                if (CustomGameOptions.AvengerCanBeClickedBy == AvengerCanBeClickedBy.NonCrew && !(PlayerControl.LocalPlayer.Data.IsImpostor() || PlayerControl.LocalPlayer.Is(Faction.NeutralKilling))) return;
                 if (tasksLeft <= CustomGameOptions.AvengerTasksRemainingClicked)
                 {
                     var role = Role.GetRole<Avenger>(__instance);
                     role.Caught = true;
-                    var writer = AmongUsClient.Instance.StartRpcImmediately(PlayerControl.LocalPlayer.NetId,
-                        (byte)CustomRPC.CatchAvenger, SendOption.Reliable, -1);
-                    writer.Write(role.Player.PlayerId);
-                    AmongUsClient.Instance.FinishRpcImmediately(writer);
+                    role.Player.Exiled();
+                    Utils.Rpc(CustomRPC.CatchAvenger, role.Player.PlayerId);
                 }
             }
             return;

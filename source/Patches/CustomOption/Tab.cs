@@ -2,7 +2,7 @@
 using System.IO;
 using System.Linq;
 
-namespace TownOfRoles.CustomOption
+namespace TownOfSushi.CustomOption
 {
     public class CustomTabOption : CustomButtonOption
     {

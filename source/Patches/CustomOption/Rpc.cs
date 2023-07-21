@@ -3,7 +3,7 @@ using System.Linq;
 using Hazel;
 using Reactor.Utilities;
 
-namespace TownOfRoles.CustomOption
+namespace TownOfSushi.CustomOption
 {
     public static class Rpc
     {
@@ -35,7 +35,7 @@ namespace TownOfRoles.CustomOption
 
         public static void ReceiveRpc(MessageReader reader)
         {
-            PluginSingleton<TownOfRoles>.Instance.Log.LogInfo("Options received:");
+            PluginSingleton<TownOfSushi>.Instance.Log.LogInfo("Options received:");
             while (reader.BytesRemaining > 0)
             {
                 var id = reader.ReadInt32();
@@ -50,7 +50,7 @@ namespace TownOfRoles.CustomOption
 
                 customOption?.Set(value);
 
-                PluginSingleton<TownOfRoles>.Instance.Log.LogInfo($"{customOption?.Name} : {customOption}:");
+                PluginSingleton<TownOfSushi>.Instance.Log.LogInfo($"{customOption?.Name} : {customOption}:");
             }
         }
     }

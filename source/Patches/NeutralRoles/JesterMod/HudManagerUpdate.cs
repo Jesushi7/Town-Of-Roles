@@ -1,9 +1,9 @@
 using System;
 using HarmonyLib;
-using TownOfRoles.Roles;
+using TownOfSushi.Roles;
 using UnityEngine;
 
-namespace TownOfRoles.NeutralRoles.JesterMod
+namespace TownOfSushi.NeutralRoles.JesterMod
 {
 	[HarmonyPatch(typeof(HudManager), "Update")]
 	public static class HudManagerUpdate

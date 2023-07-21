@@ -1,6 +1,6 @@
 using System;
 
-namespace TownOfRoles.Roles.Modifiers
+namespace TownOfSushi.Roles.Modifiers
 {
     public class ButtonBarry : Modifier
     {
@@ -12,7 +12,7 @@ namespace TownOfRoles.Roles.Modifiers
         public ButtonBarry(PlayerControl player) : base(player)
         {
             Name = "Button Barry";
-            TaskText = () => "Call a button from anywhere";
+            TaskText = () => "Call a button from anywhere!";
             Color = Patches.Colors.ButtonBarry;
             StartingCooldown = DateTime.UtcNow;
             ModifierType = ModifierEnum.ButtonBarry;

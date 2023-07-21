@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-namespace TownOfRoles.Roles
+namespace TownOfSushi.Roles
 {
     public class Medic : Role
     {
@@ -12,13 +12,12 @@ namespace TownOfRoles.Roles
         public Medic(PlayerControl player) : base(player)
         {
             Name = "Medic";
-            StartText = () => "<color=#7efbc2>Protect a Player with a shield</color>";
-            TaskText = () => "Protect a player";
+            ImpostorText = () => "<color=#006600FF>Create a shield to protect a player</color>";
+            TaskText = () => "Protect a <color=#8cffff>Crewmate</color> with a shield";
             Color = Patches.Colors.Medic;
+            FactionName = "Crewmate";                   
             StartingCooldown = DateTime.UtcNow;
             RoleType = RoleEnum.Medic;
-            FactionName = "Crewmate";    
-            Faction = Faction.Crewmates;               
             AddToRoleHistory(RoleType);
             ShieldedPlayer = null;
 
@@ -57,17 +56,6 @@ namespace TownOfRoles.Roles
             LightDarkColors.Add(32, "darker"); // Tawny
             LightDarkColors.Add(33, "lighter"); // Gold
             LightDarkColors.Add(34, "lighter"); // Rainbow
-            LightDarkColors.Add(35, "lighter"); // Ice
-            LightDarkColors.Add(36, "lighter"); // Sunrise       
-            LightDarkColors.Add(37, "darker"); // Northie   
-            LightDarkColors.Add(38, "lighter"); // RaLu     
-            LightDarkColors.Add(39, "Darker");//Fizz           
-            LightDarkColors.Add(40, "Darker");//GGamer       
-            LightDarkColors.Add(41, "lighter");//snax        
-            LightDarkColors.Add(42, "darker");//lotty   
-            LightDarkColors.Add(43, "darker");//bordeaux    
-            LightDarkColors.Add(44, "lighter");//peach  
-            LightDarkColors.Add(45, "darker");//signal orange                                                                                                                                               
         }
         public float StartTimer()
         {

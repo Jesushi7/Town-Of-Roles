@@ -1,9 +1,9 @@
 using HarmonyLib;
-using TownOfRoles.Extensions;
-using TownOfRoles.Roles;
+using TownOfSushi.Extensions;
+using TownOfSushi.Roles;
 using UnityEngine;
 
-namespace TownOfRoles.CrewmateRoles.MedicMod
+namespace TownOfSushi.CrewmateRoles.MedicMod
 {
     public enum ShieldOptions
     {
@@ -67,12 +67,6 @@ namespace TownOfRoles.CrewmateRoles.MedicMod
                 }
                 else if (PlayerControl.LocalPlayer.Is(RoleEnum.Medic) &&
                          (showShielded == ShieldOptions.Medic || showShielded == ShieldOptions.SelfAndMedic))
-                {
-                    player.myRend().material.SetColor("_VisorColor", ProtectedColor);
-                    player.myRend().material.SetFloat("_Outline", 1f);
-                    player.myRend().material.SetColor("_OutlineColor", ProtectedColor);
-                }            
-                else if (PlayerControl.LocalPlayer.Data.IsDead && CustomGameOptions.DeadSeesEverything)
                 {
                     player.myRend().material.SetColor("_VisorColor", ProtectedColor);
                     player.myRend().material.SetFloat("_Outline", 1f);

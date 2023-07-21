@@ -2,9 +2,9 @@
 using System.Linq;
 using Hazel;
 using UnityEngine;
-using TownOfRoles.Extensions;
+using TownOfSushi.Extensions;
 
-namespace TownOfRoles.Roles
+namespace TownOfSushi.Roles
 {
     public class Werewolf : Role
     {
@@ -20,15 +20,15 @@ namespace TownOfRoles.Roles
         public Werewolf(PlayerControl player) : base(player)
         {
             Name = "Werewolf";
-            StartText = () => "<color=#A86629FF>Rampage to kill everyone</color>";
-            TaskText = () => "Rampage to kill everyone";
+            ImpostorText = () => "<color=#A86629FF>Rampage to get a short cooldown \nfor an amount of time and get multi kills.</color>";
+            TaskText = () => "Kill everyone in your Rampage";
+            FactionName = "<color=#5c5e5d>Neutral</color>";
             Color = Patches.Colors.Werewolf;
             LastRampaged = DateTime.UtcNow;
-            FactionName = "<color=#5c5e5d>Neutral</color>";            
             LastKilled = DateTime.UtcNow;
             RoleType = RoleEnum.Werewolf;
             AddToRoleHistory(RoleType);
-            Faction = Faction.Neutral;
+            Faction = Faction.NeutralKilling;
         }
 
         public KillButton RampageButton
@@ -42,24 +42,16 @@ namespace TownOfRoles.Roles
             }
         }
 
-        internal override bool EABBNOODFGL(LogicGameFlowNormal __instance)
+        internal override bool NeutralWin(LogicGameFlowNormal __instance)
         {
             if (Player.Data.IsDead || Player.Data.Disconnected) return true;
 
             if (PlayerControl.AllPlayerControls.ToArray().Count(x => !x.Data.IsDead && !x.Data.Disconnected) <= 2 &&
                     PlayerControl.AllPlayerControls.ToArray().Count(x => !x.Data.IsDead && !x.Data.Disconnected &&
-                    (x.Data.IsImpostor() || x.Is(RoleEnum.Glitch)  ||  x.Is(RoleEnum.SerialKiller) || x.Is(RoleEnum.Pyromaniac) ||
-                    x.Is(RoleEnum.Juggernaut)  || x.Is(RoleEnum.Plaguebearer) || x.Is(RoleEnum.Pestilence))) == 0)
+                    (x.Data.IsImpostor() || x.Is(Faction.NeutralKilling))) == 1)
             {
-                var writer = AmongUsClient.Instance.StartRpcImmediately(
-                    PlayerControl.LocalPlayer.NetId,
-                    (byte) CustomRPC.WerewolfWin,
-                    SendOption.Reliable,
-                    -1
-                );
-                writer.Write(Player.PlayerId);
+                Utils.Rpc(CustomRPC.WerewolfWin, Player.PlayerId);
                 Wins();
-                AmongUsClient.Instance.FinishRpcImmediately(writer);
                 Utils.EndGame();
                 return false;
             }
@@ -67,15 +59,9 @@ namespace TownOfRoles.Roles
             return false;
         }
 
-
         public void Wins()
         {
             WerewolfWins = true;
-        }
-
-        public void Loses()
-        {
-            LostByRPC = true;
         }
 
         protected override void IntroPrefix(IntroCutscene._ShowTeam_d__36 __instance)

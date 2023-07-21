@@ -1,7 +1,7 @@
 using HarmonyLib;
-using TownOfRoles.Roles;
+using TownOfSushi.Roles;
 
-namespace TownOfRoles.ImpostorRoles.UndertakerMod
+namespace TownOfSushi.ImpostorRoles.UndertakerMod
 {
     [HarmonyPatch(typeof(PlayerPhysics), nameof(PlayerPhysics.FixedUpdate))]
     public static class PlayerPhysics_FixedUpdate

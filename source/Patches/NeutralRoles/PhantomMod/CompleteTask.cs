@@ -1,9 +1,8 @@
 using System.Linq;
 using HarmonyLib;
-using Hazel;
-using TownOfRoles.Roles;
+using TownOfSushi.Roles;
 
-namespace TownOfRoles.NeutralRoles.PhantomMod
+namespace TownOfSushi.NeutralRoles.PhantomMod
 {
     [HarmonyPatch(typeof(PlayerControl), nameof(PlayerControl.CompleteTask))]
     public class CompleteTask
@@ -22,10 +21,7 @@ namespace TownOfRoles.NeutralRoles.PhantomMod
                 role.CompletedTasks = true;
                 if (AmongUsClient.Instance.AmHost)
                 {
-                    var writer = AmongUsClient.Instance.StartRpcImmediately(PlayerControl.LocalPlayer.NetId,
-                        (byte)CustomRPC.PhantomWin, SendOption.Reliable, -1);
-                    writer.Write(role.Player.PlayerId);
-                    AmongUsClient.Instance.FinishRpcImmediately(writer);
+                    Utils.Rpc(CustomRPC.PhantomWin, role.Player.PlayerId);
                     Utils.EndGame();
                 }
             }

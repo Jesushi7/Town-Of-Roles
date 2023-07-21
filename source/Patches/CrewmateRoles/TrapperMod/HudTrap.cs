@@ -1,8 +1,8 @@
 ﻿using HarmonyLib;
-using TownOfRoles.Roles;
+using TownOfSushi.Roles;
 using UnityEngine;
 
-namespace TownOfRoles.CrewmateRoles.TrapperMod
+namespace TownOfSushi.CrewmateRoles.TrapperMod
 {
     [HarmonyPatch(typeof(HudManager))]
     public class HudTrap

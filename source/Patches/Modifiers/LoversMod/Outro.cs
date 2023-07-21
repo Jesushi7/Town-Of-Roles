@@ -1,12 +1,12 @@
 using System.Linq;
 using HarmonyLib;
 using TMPro;
-using TownOfRoles.Extensions;
-using TownOfRoles.Roles;
-using TownOfRoles.Roles.Modifiers;
+using TownOfSushi.Extensions;
+using TownOfSushi.Roles;
+using TownOfSushi.Roles.Modifiers;
 using UnityEngine;
 
-namespace TownOfRoles.Modifiers.LoversMod
+namespace TownOfSushi.Modifiers.LoversMod
 {
     [HarmonyPatch(typeof(EndGameManager), nameof(EndGameManager.Start))]
     internal class Outro
@@ -21,17 +21,17 @@ namespace TownOfRoles.Modifiers.LoversMod
                 var color = __instance.WinText.color;
                 color.a = 1f;
                 text.color = color;
-                text.text = "Everyone Lost!";
+                text.text = "Nobody wins";
                 pos = __instance.WinText.transform.localPosition;
                 pos.y = 1.5f;
                 text.transform.position = pos;
-                SoundManager.Instance.PlaySound(__instance.DisconnectStinger, false);                
 //				text.scale = 0.5f;
                 return;
             }
 
             if (Role.GetRoles(RoleEnum.Jester).Any(x => ((Jester)x).VotedOut)) return;
             if (Role.GetRoles(RoleEnum.Executioner).Any(x => ((Executioner)x).TargetVotedOut)) return;
+            if (Role.GetRoles(RoleEnum.Doomsayer).Any(x => ((Doomsayer)x).WonByGuessing)) return;
             if (!Modifier.AllModifiers.Where(x => x.ModifierType == ModifierEnum.Lover)
                 .Any(x => ((Lover) x).LoveCoupleWins)) return;
             PoolablePlayer[] array = Object.FindObjectsOfType<PoolablePlayer>();

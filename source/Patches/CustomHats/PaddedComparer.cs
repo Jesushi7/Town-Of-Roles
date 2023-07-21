@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Reactor;
 
-namespace TownOfRoles.Patches.CustomHats
+namespace TownOfSushi.Patches.CustomHats
 {
     public class PaddedComparer<T> : IComparer<T> where T : IComparable
     {

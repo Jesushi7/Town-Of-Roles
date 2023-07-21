@@ -1,6 +1,6 @@
 using System;
 
-namespace TownOfRoles.Roles.Cultist
+namespace TownOfSushi.Roles.Cultist
 {
     public class Necromancer : Role
     {
@@ -13,7 +13,7 @@ namespace TownOfRoles.Roles.Cultist
         public Necromancer(PlayerControl player) : base(player)
         {
             Name = "Necromancer";
-            StartText = () => "Revive the dead to do your dirty work";
+            ImpostorText = () => "Revive The Dead To Do Your Dirty Work";
             TaskText = () => "Revive Crewmates to turn them into Impostors";
             Color = Patches.Colors.Impostor;
             LastRevived = DateTime.UtcNow;

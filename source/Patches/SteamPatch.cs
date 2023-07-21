@@ -3,7 +3,7 @@ using System.IO;
 using System.Reflection;
 using HarmonyLib;
 
-namespace TownOfRoles
+namespace TownOfSushi
 {
     public class SteamPatch
     {

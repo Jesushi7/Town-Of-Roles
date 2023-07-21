@@ -1,4 +1,4 @@
-namespace TownOfRoles.Roles
+namespace TownOfSushi.Roles
 {
     public class Altruist : Role
     {
@@ -10,8 +10,9 @@ namespace TownOfRoles.Roles
         public Altruist(PlayerControl player) : base(player)
         {
             Name = "Altruist";
-            StartText = () => "Sacrifice yourself to save another";
-            TaskText = () => "Revive a dead body at the cost of your own life";
+            ImpostorText = () => "<color=#660000FF>Find a dead body and sacrifice yourself to \nrevive somebody else and out the killers.</color>";
+            TaskText = () => "Revive a dead body";
+            FactionName = "Crewmate";                   
             Color = Patches.Colors.Altruist;
             RoleType = RoleEnum.Altruist;
             AddToRoleHistory(RoleType);

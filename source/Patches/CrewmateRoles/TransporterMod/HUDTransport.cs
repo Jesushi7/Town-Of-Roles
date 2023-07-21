@@ -1,8 +1,8 @@
 using HarmonyLib;
-using TownOfRoles.Roles;
+using TownOfSushi.Roles;
 using UnityEngine;
 
-namespace TownOfRoles.CrewmateRoles.TransporterMod
+namespace TownOfSushi.CrewmateRoles.TransporterMod
 {
     [HarmonyPatch(typeof(HudManager))]
     public class HUDTransport

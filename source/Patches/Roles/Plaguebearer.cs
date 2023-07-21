@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using Hazel;
 using Reactor.Utilities;
-using TownOfRoles.Extensions;
+using TownOfSushi.Extensions;
 using UnityEngine;
 
-namespace TownOfRoles.Roles
+namespace TownOfSushi.Roles
 {
     public class Plaguebearer : Role
     {
@@ -15,40 +15,32 @@ namespace TownOfRoles.Roles
         public DateTime LastInfected;
         public bool PlaguebearerWins { get; set; }
 
-        public int InfectedAlive => InfectedPlayers.Count(x => Utils.PlayerById(x) != null && Utils.PlayerById(x).Data != null && !Utils.PlayerById(x).Data.IsDead);
-        public bool CanTransform => PlayerControl.AllPlayerControls.ToArray().Count(x => x != null && !x.Data.IsDead) <= InfectedAlive;
+        public int InfectedAlive => InfectedPlayers.Count(x => Utils.PlayerById(x) != null && Utils.PlayerById(x).Data != null && !Utils.PlayerById(x).Data.IsDead && !Utils.PlayerById(x).Data.Disconnected);
+        public bool CanTransform => PlayerControl.AllPlayerControls.ToArray().Count(x => x != null && !x.Data.IsDead && !x.Data.Disconnected) <= InfectedAlive;
 
         public Plaguebearer(PlayerControl player) : base(player)
         {
             Name = "Plaguebearer";
-            StartText = () => "<color=#E6FFB3FF>Infect Everyone To Become</color> <color=#424242FF>Pestilence</color>";
-            TaskText = () => "Spread your virus";
+            ImpostorText = () => "Infect Everyone To Become Pestilence";
+            TaskText = () => "Infect everyone to become Pestilence";
+            FactionName = "<color=#5c5e5d>Neutral</color>";            
             Color = Patches.Colors.Plaguebearer;
             RoleType = RoleEnum.Plaguebearer;
             AddToRoleHistory(RoleType);
-            FactionName = "<color=#5c5e5d>Neutral</color>";                  
-            Faction = Faction.Neutral;
+            Faction = Faction.NeutralKilling;
             InfectedPlayers.Add(player.PlayerId);
         }
 
-        internal override bool EABBNOODFGL(LogicGameFlowNormal __instance)
+        internal override bool NeutralWin(LogicGameFlowNormal __instance)
         {
             if (Player.Data.IsDead || Player.Data.Disconnected) return true;
 
             if (PlayerControl.AllPlayerControls.ToArray().Count(x => !x.Data.IsDead && !x.Data.Disconnected) <= 2 &&
                     PlayerControl.AllPlayerControls.ToArray().Count(x => !x.Data.IsDead && !x.Data.Disconnected &&
-                    (x.Data.IsImpostor() || x.Is(RoleEnum.Glitch) || x.Is(RoleEnum.Pyromaniac) ||
-                    x.Is(RoleEnum.Juggernaut) || x.Is(RoleEnum.SerialKiller)|| x.Is(RoleEnum.Werewolf) || x.Is(RoleEnum.Pestilence))) == 0)
+                    (x.Data.IsImpostor() || x.Is(Faction.NeutralKilling))) == 1)
             {
-                var writer = AmongUsClient.Instance.StartRpcImmediately(
-                    PlayerControl.LocalPlayer.NetId,
-                    (byte)CustomRPC.PlaguebearerWin,
-                    SendOption.Reliable,
-                    -1
-                );
-                writer.Write(Player.PlayerId);
+                Utils.Rpc(CustomRPC.PlaguebearerWin, Player.PlayerId);
                 Wins();
-                AmongUsClient.Instance.FinishRpcImmediately(writer);
                 Utils.EndGame();
                 return false;
             }
@@ -59,11 +51,6 @@ namespace TownOfRoles.Roles
         public void Wins()
         {
             PlaguebearerWins = true;
-        }
-
-        public void Loses()
-        {
-            LostByRPC = true;
         }
 
         protected override void IntroPrefix(IntroCutscene._ShowTeam_d__36 __instance)
@@ -86,30 +73,24 @@ namespace TownOfRoles.Roles
         public void RpcSpreadInfection(PlayerControl source, PlayerControl target)
         {
             new WaitForSeconds(1f);
-            if (InfectedPlayers.Contains(source.PlayerId))
-            {
-                InfectedPlayers.Add(target.PlayerId);
-                var writer = AmongUsClient.Instance.StartRpcImmediately(PlayerControl.LocalPlayer.NetId,
-                    (byte)CustomRPC.Infect, SendOption.Reliable, -1);
-                writer.Write(Player.PlayerId);
-                writer.Write(target.PlayerId);
-                AmongUsClient.Instance.FinishRpcImmediately(writer);
-            }
-            else if (InfectedPlayers.Contains(target.PlayerId))
-            {
-                InfectedPlayers.Add(source.PlayerId);
-                var writer = AmongUsClient.Instance.StartRpcImmediately(PlayerControl.LocalPlayer.NetId,
-                    (byte)CustomRPC.Infect, SendOption.Reliable, -1);
-                writer.Write(Player.PlayerId);
-                writer.Write(source.PlayerId);
-                AmongUsClient.Instance.FinishRpcImmediately(writer);
-            }
+            SpreadInfection(source, target);
+            Utils.Rpc(CustomRPC.Infect, Player.PlayerId, source.PlayerId, target.PlayerId);
+        }
+
+        public void SpreadInfection(PlayerControl source, PlayerControl target)
+        {
+            if (InfectedPlayers.Contains(source.PlayerId) && !InfectedPlayers.Contains(target.PlayerId)) InfectedPlayers.Add(target.PlayerId);
+            else if (InfectedPlayers.Contains(target.PlayerId) && !InfectedPlayers.Contains(source.PlayerId)) InfectedPlayers.Add(source.PlayerId);
         }
 
         public void TurnPestilence()
         {
+            var oldRole = GetRole(Player);
+            var killsList = (oldRole.CorrectAssassinKills, oldRole.IncorrectAssassinKills);
             RoleDictionary.Remove(Player.PlayerId);
             var role = new Pestilence(Player);
+            role.CorrectAssassinKills = killsList.CorrectAssassinKills;
+            role.IncorrectAssassinKills = killsList.IncorrectAssassinKills;
             if (Player == PlayerControl.LocalPlayer)
             {
                 Coroutines.Start(Utils.FlashCoroutine(Patches.Colors.Pestilence));

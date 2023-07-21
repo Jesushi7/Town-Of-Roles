@@ -1,49 +1,27 @@
-using System;
 using Il2CppSystem.Collections.Generic;
-using TownOfRoles.Patches;
+using System;
 
-namespace TownOfRoles.Roles
+namespace TownOfSushi.Roles
 {
-	public class Jester : Role
-	{
+    public class Jester : Role
+    {
+        public bool VotedOut;
+        public bool SpawnedAs = true;
 		public DateTime LastKilled { get; set; }
 
         public Jester(PlayerControl player) : base(player)
         {
             Name = "Jester";
-            StartText = () => "<color=#cb81c0>Get voted out</color>";
+            ImpostorText = () => "<color=#FFBFCCFF>Get voted out</color>";
             TaskText = () => SpawnedAs ? "Trick everyone into voting you" : "Your target was killed.\nNow you trick everyone to vote you and win!";
             Color = Patches.Colors.Jester;
+            FactionName = "<color=#5c5e5d>Neutral</color>";                   
             RoleType = RoleEnum.Jester;
             AddToRoleHistory(RoleType);
-            FactionName = "<color=#5c5e5d>Neutral</color>";              
-            Faction = Faction.Neutral;
+            Faction = Faction.NeutralEvil;
         }
 
-		protected override void IntroPrefix(IntroCutscene._ShowTeam_d__36 __instance)
-		{
-			List<PlayerControl> jestTeam = new List<PlayerControl>();
-			jestTeam.Add(PlayerControl.LocalPlayer);
-			__instance.teamToShow = jestTeam;
-		}
-
-        internal override bool EABBNOODFGL(LogicGameFlowNormal __instance)
-        {
-            if (!VotedOut || !Player.Data.IsDead && !Player.Data.Disconnected) return true;
-            Utils.EndGame();
-            return false;
-        }
-
-		public void Wins()
-		{
-			this.VotedOut = true;
-		}
-
-		public void Loses()
-		{
-			base.LostByRPC = true;
-		}
-
+		public PlayerControl ClosestPlayer;        
 		public float KillTimer()
 		{
 			DateTime utcNow = DateTime.UtcNow;
@@ -62,14 +40,24 @@ namespace TownOfRoles.Roles
 			}
 			return result;
 		}
+        protected override void IntroPrefix(IntroCutscene._ShowTeam_d__36 __instance)
+        {
+            var jestTeam = new List<PlayerControl>();
+            jestTeam.Add(PlayerControl.LocalPlayer);
+            __instance.teamToShow = jestTeam;
+        }
 
-		public bool VotedOut;
+        internal override bool NeutralWin(LogicGameFlowNormal __instance)
+        {
+            if (!VotedOut || !Player.Data.IsDead && !Player.Data.Disconnected) return true;
+            Utils.EndGame();
+            return false;
+        }
 
-		public bool SpawnedAs = true;
-
-		public PlayerControl ClosestPlayer;
-
-
-		public int UsesLeft;
-	}
+        public void Wins()
+        {
+            //System.Console.WriteLine("Reached Here - Jester edition");
+            VotedOut = true;
+        }
+    }
 }

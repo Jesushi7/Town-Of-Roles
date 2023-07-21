@@ -1,7 +1,7 @@
 using System;
 using TMPro;
-using TownOfRoles.CrewmateRoles.EngineerMod;
-namespace TownOfRoles.Roles
+using TownOfSushi.CrewmateRoles.EngineerMod;
+namespace TownOfSushi.Roles
 {
     public class Engineer : Role
     {
@@ -13,7 +13,7 @@ namespace TownOfRoles.Roles
         public Engineer(PlayerControl player) : base(player)
         {
             Name = "Engineer";
-            StartText = () => "<color=#FFA60AFF>Maintain important systems on the ship</color>";
+            ImpostorText = () => "<color=#FFA60AFF>Maintain and fix the sabotages around the map.</color>";
             TaskText = () => CustomGameOptions.GameMode == GameMode.Cultist ? "Vent around" : "Vent and fix sabotages";
             Color = Patches.Colors.Engineer;
             FactionName = "Crewmate";                

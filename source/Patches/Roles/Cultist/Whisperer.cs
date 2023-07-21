@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace TownOfRoles.Roles.Cultist
+namespace TownOfSushi.Roles.Cultist
 {
     public class Whisperer : Role
     {
@@ -17,7 +17,7 @@ namespace TownOfRoles.Roles.Cultist
         public Whisperer(PlayerControl player) : base(player)
         {
             Name = "Whisperer";
-            StartText = () => "Psst";
+            ImpostorText = () => "Psst";
             TaskText = () => "Persuade Crewmates of your ideas";
             Color = Patches.Colors.Impostor;
             LastWhispered = DateTime.UtcNow;
@@ -54,7 +54,7 @@ namespace TownOfRoles.Roles.Cultist
             foreach (var player in PlayerControl.AllPlayerControls)
             {
                 if (!(player.Is(RoleEnum.Sheriff) || player.Is(RoleEnum.CultistSnitch) |
-                    player.Is(RoleEnum.Mayor) || player.Is(RoleEnum.Whisperer)))
+                    player.Is(RoleEnum.Survivor) || player.Is(RoleEnum.Monarch) || player.Is(RoleEnum.Whisperer)))
                 {
                     playerList.Add((player, 100));
                 }

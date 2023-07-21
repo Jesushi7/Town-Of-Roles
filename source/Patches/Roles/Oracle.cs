@@ -1,52 +1,39 @@
 using System;
-using TownOfRoles.Patches;
 
-namespace TownOfRoles.Roles
+namespace TownOfSushi.Roles
 {
-	public class Oracle : Role
-	{
-		public DateTime LastConfessed { get; set; }
+    public class Oracle : Role
+    {
+        public PlayerControl ClosestPlayer;
+        public PlayerControl Confessor;
+        public float Accuracy;
+        public bool FirstMeetingDead;
+        public Faction RevealedFaction;
+        public bool SavedConfessor;
+        public DateTime LastConfessed { get; set; }
 
-		public Oracle(PlayerControl player) : base(player)
-		{
-			Name = "Oracle";
-			StartText = (() => "<color=#2f1f73>Get Other Player's To Confess Their Sins</color>");
-			TaskText = (() => "Get other player to confess");
-			Color = Colors.Oracle;
-			LastConfessed = DateTime.UtcNow;
-			FactionName = "Crewmate";
-			Accuracy = CustomGameOptions.RevealAccuracy;
-			FirstMeetingDead = true;
-			FirstMeetingDead = false;
-			RoleType = RoleEnum.Oracle;
-			AddToRoleHistory(RoleType);
-		}
-
-		public float ConfessTimer()
-		{
-			DateTime utcNow = DateTime.UtcNow;
-			TimeSpan timeSpan = utcNow - LastConfessed;
-			float num = CustomGameOptions.ConfessCd * 1000f;
-			bool flag2 = num - (float)timeSpan.TotalMilliseconds < 0f;
-			bool flag3 = flag2;
-			float result;
-			if (flag3)
-			{
-				result = 0f;
-			}
-			else
-			{
-				result = (num - (float)timeSpan.TotalMilliseconds) / 1000f;
-			}
-			return result;
-		}
-		public PlayerControl ClosestPlayer;
-
-		public PlayerControl Confessor;
-
-		public float Accuracy;
-		public bool FirstMeetingDead;
-		public Faction RevealedFaction;
-		public bool SavedConfessor;
-	}
+        public Oracle(PlayerControl player) : base(player)
+        {
+            Name = "Oracle";
+            ImpostorText = () => "<color=#BF00BFFF>Make other players confess their sins \nwhen you die, you'll reveal someone's faction.</color>";
+            TaskText = () => "Make a player confess";
+            FactionName = "Crewmate";            
+            Color = Patches.Colors.Oracle;
+            LastConfessed = DateTime.UtcNow;
+            Accuracy = CustomGameOptions.RevealAccuracy;
+            FirstMeetingDead = true;
+            FirstMeetingDead = false;
+            RoleType = RoleEnum.Oracle;
+            AddToRoleHistory(RoleType);
+        }
+        public float ConfessTimer()
+        {
+            var utcNow = DateTime.UtcNow;
+            var timeSpan = utcNow - LastConfessed;
+            var num = CustomGameOptions.ConfessCd * 1000f;
+            var flag2 = num - (float)timeSpan.TotalMilliseconds < 0f;
+            if (flag2) return 0;
+            return (num - (float)timeSpan.TotalMilliseconds) / 1000f;
+        }
+    }
 }

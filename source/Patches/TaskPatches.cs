@@ -1,7 +1,7 @@
 using HarmonyLib;
-using TownOfRoles.Extensions;
+using TownOfSushi.Extensions;
 
-namespace TownOfRoles
+namespace TownOfSushi
 {
     internal static class TaskPatches
     {
@@ -19,12 +19,12 @@ namespace TownOfRoles
                         (GameOptionsManager.Instance.currentNormalGameOptions.GhostsDoTasks || !playerInfo.IsDead) && !playerInfo.IsImpostor() &&
                         !(
                             playerInfo._object.Is(RoleEnum.Jester) || playerInfo._object.Is(RoleEnum.Amnesiac) ||
-                         playerInfo._object.Is(RoleEnum.Guardian)  || 
-                             playerInfo._object.Is(RoleEnum.Vulture) ||
+                            playerInfo._object.Is(RoleEnum.Survivor) || playerInfo._object.Is(RoleEnum.GuardianAngel) ||
                             playerInfo._object.Is(RoleEnum.Glitch) || playerInfo._object.Is(RoleEnum.Executioner) ||
-                            playerInfo._object.Is(RoleEnum.Pyromaniac) ||playerInfo._object.Is(RoleEnum.SerialKiller) || playerInfo._object.Is(RoleEnum.Juggernaut) ||
+                            playerInfo._object.Is(RoleEnum.Arsonist) || playerInfo._object.Is(RoleEnum.Juggernaut) ||
                             playerInfo._object.Is(RoleEnum.Plaguebearer) || playerInfo._object.Is(RoleEnum.Pestilence) ||
-                            playerInfo._object.Is(RoleEnum.Werewolf) ||
+                            playerInfo._object.Is(RoleEnum.Werewolf) || playerInfo._object.Is(RoleEnum.Doomsayer) ||
+                            playerInfo._object.Is(RoleEnum.Vampire) ||
                             playerInfo._object.Is(RoleEnum.Phantom) || playerInfo._object.Is(RoleEnum.Avenger)
                         ))
                         for (var j = 0; j < playerInfo.Tasks.Count; j++)
@@ -49,20 +49,13 @@ namespace TownOfRoles
                            || playerControl.Is(RoleEnum.Jester)
                            || playerControl.Is(RoleEnum.Executioner)
                            || playerControl.Is(RoleEnum.Juggernaut)
-                           || playerControl.Is(RoleEnum.Vulture)
-                           || playerControl.Is(RoleEnum.Pyromaniac)                    
-                           || playerControl.Is(RoleEnum.SerialKiller)                           
+                           || playerControl.Is(RoleEnum.Arsonist)
                            || playerControl.Is(RoleEnum.Plaguebearer)
                            || playerControl.Is(RoleEnum.Pestilence)
                            || playerControl.Is(RoleEnum.Werewolf)
-                           
-                           || (
-                                !CustomGameOptions.BegninNeutralHasTasks &&
-                                (
-                                    playerControl.Is(RoleEnum.Amnesiac) ||
-                                    playerControl.Is(RoleEnum.Guardian)
-                                )
-                            );
+                           || playerControl.Is(RoleEnum.Doomsayer)
+                           || playerControl.Is(RoleEnum.Vampire);
+
                 // If the console is not a sabotage repair console
                 if (flag && !__instance.AllowImpostor)
                 {

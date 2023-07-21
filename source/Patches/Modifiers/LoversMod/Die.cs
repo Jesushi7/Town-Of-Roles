@@ -1,9 +1,9 @@
 using HarmonyLib;
-using TownOfRoles.CrewmateRoles.AltruistMod;
-using TownOfRoles.Roles.Modifiers;
-using TownOfRoles.Roles;
+using TownOfSushi.CrewmateRoles.AltruistMod;
+using TownOfSushi.Roles.Modifiers;
+using TownOfSushi.Roles;
 
-namespace TownOfRoles.Modifiers.LoversMod
+namespace TownOfSushi.Modifiers.LoversMod
 {
     [HarmonyPatch(typeof(PlayerControl), nameof(PlayerControl.Die))]
     public class Die
@@ -20,16 +20,13 @@ namespace TownOfRoles.Modifiers.LoversMod
             if (reason == DeathReason.Exile)
             {
                 KillButtonTarget.DontRevive = __instance.PlayerId;
-                otherLover.Exiled();
+                if (!otherLover.Is(RoleEnum.Pestilence)) otherLover.Exiled();
             }
-            else if (!otherLover.Is(RoleEnum.Pestilence))
+            else if (AmongUsClient.Instance.AmHost && !otherLover.Is(RoleEnum.Pestilence)) Utils.RpcMurderPlayer(otherLover, otherLover);
+            if (otherLover.Is(RoleEnum.Sheriff))
             {
-                Utils.MurderPlayer(otherLover, otherLover);
-                if (otherLover.Is(RoleEnum.Sheriff))
-                {
-                    var sheriff = Role.GetRole<Sheriff>(otherLover);
-                    sheriff.IncorrectKills -= 1;
-                }
+                var sheriff = Role.GetRole<Sheriff>(otherLover);
+                sheriff.IncorrectKills -= 1;
             }
 
             return true;

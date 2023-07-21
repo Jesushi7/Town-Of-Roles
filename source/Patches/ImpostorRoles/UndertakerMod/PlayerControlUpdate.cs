@@ -1,9 +1,9 @@
 using HarmonyLib;
-using TownOfRoles.Roles;
+using TownOfSushi.Roles;
 using UnityEngine;
 using AmongUs.GameOptions;
 
-namespace TownOfRoles.ImpostorRoles.UndertakerMod
+namespace TownOfSushi.ImpostorRoles.UndertakerMod
 {
     [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]
     public class PlayerControlUpdate
@@ -20,22 +20,22 @@ namespace TownOfRoles.ImpostorRoles.UndertakerMod
             {
                 role.DragDropButton = Object.Instantiate(__instance.KillButton, __instance.KillButton.transform.parent);
                 role.DragDropButton.graphic.enabled = true;
-                role.DragDropButton.graphic.sprite = TownOfRoles.DragSprite;
+                role.DragDropButton.graphic.sprite = TownOfSushi.DragSprite;
                 role.DragDropButton.gameObject.SetActive(false);
             }
-            if (role.DragDropButton.graphic.sprite != TownOfRoles.DragSprite &&
-                role.DragDropButton.graphic.sprite != TownOfRoles.DropSprite)
-                role.DragDropButton.graphic.sprite = TownOfRoles.DragSprite;
+            if (role.DragDropButton.graphic.sprite != TownOfSushi.DragSprite &&
+                role.DragDropButton.graphic.sprite != TownOfSushi.DropSprite)
+                role.DragDropButton.graphic.sprite = TownOfSushi.DragSprite;
 
-            if (role.DragDropButton.graphic.sprite == TownOfRoles.DropSprite && role.CurrentlyDragging == null)
-                role.DragDropButton.graphic.sprite = TownOfRoles.DragSprite;
+            if (role.DragDropButton.graphic.sprite == TownOfSushi.DropSprite && role.CurrentlyDragging == null)
+                role.DragDropButton.graphic.sprite = TownOfSushi.DragSprite;
 
             role.DragDropButton.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
                     && AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started);
 
 
-            if (role.DragDropButton.graphic.sprite == TownOfRoles.DragSprite)
+            if (role.DragDropButton.graphic.sprite == TownOfSushi.DragSprite)
             {
                 var data = PlayerControl.LocalPlayer.Data;
                 var isDead = data.IsDead;
@@ -67,7 +67,7 @@ namespace TownOfRoles.ImpostorRoles.UndertakerMod
                 KillButtonTarget.SetTarget(killButton, closestBody, role);
             }
 
-            if (role.DragDropButton.graphic.sprite == TownOfRoles.DragSprite)
+            if (role.DragDropButton.graphic.sprite == TownOfSushi.DragSprite)
             {
                 role.DragDropButton.SetCoolDown(role.DragTimer(), CustomGameOptions.DragCd);
             }

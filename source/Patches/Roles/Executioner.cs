@@ -1,8 +1,6 @@
 using Il2CppSystem.Collections.Generic;
-using TownOfRoles.Extensions;
-using UnityEngine;
 
-namespace TownOfRoles.Roles
+namespace TownOfSushi.Roles
 {
     public class Executioner : Role
     {
@@ -12,17 +10,17 @@ namespace TownOfRoles.Roles
         public Executioner(PlayerControl player) : base(player)
         {
             Name = "Executioner";
-            StartText = () =>
-                target == null ? "<color=#2d4222>Vote... uh..Nevermind</color>" : $"<color=#2d4222>Vote out your target</color>";
+            ImpostorText = () =>
+                target == null ? "<color=#8C4005FF>For some reason the game \ndidn't give you a target....wild</color>" : $"<color=#8C4005FF>Vote {target.name} Out</color>";
             TaskText = () =>
                 target == null
-                    ? "Vote... uh..Nevermind."
-                    : $"Vote out your target!\nTarget: {target.name}";
+                    ? "You don't have a target for some reason... weird..."
+                    : $"Eject {target.name}!";
+            FactionName = "<color=#5c5e5d>Neutral</color>";                           
             Color = Patches.Colors.Executioner;
             RoleType = RoleEnum.Executioner;
-            FactionName = "<color=#5c5e5d>Neutral</color>";              
             AddToRoleHistory(RoleType);
-            Faction = Faction.Neutral;
+            Faction = Faction.NeutralEvil;
             Scale = 1.4f;
         }
 
@@ -33,7 +31,7 @@ namespace TownOfRoles.Roles
             __instance.teamToShow = exeTeam;
         }
 
-        internal override bool EABBNOODFGL(LogicGameFlowNormal __instance)
+        internal override bool NeutralWin(LogicGameFlowNormal __instance)
         {
             if (Player.Data.IsDead) return true;
             if (!TargetVotedOut || !target.Data.IsDead) return true;
@@ -45,11 +43,6 @@ namespace TownOfRoles.Roles
         {
             if (Player.Data.IsDead || Player.Data.Disconnected) return;
             TargetVotedOut = true;
-        }
-
-        public void Loses()
-        {
-            LostByRPC = true;
         }
     }
 }

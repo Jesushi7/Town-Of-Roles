@@ -1,8 +1,9 @@
 ﻿using HarmonyLib;
-using TownOfRoles.Roles.Modifiers;
+using TownOfSushi.Roles;
+using TownOfSushi.Roles.Modifiers;
 using UnityEngine.UI;
 
-namespace TownOfRoles.Modifiers.AssassinMod
+namespace TownOfSushi.Modifiers.AssassinMod
 {
     [HarmonyPatch(typeof(MeetingHud), nameof(MeetingHud.Confirm))]
     public class ShowHideButtons
@@ -34,13 +35,16 @@ namespace TownOfRoles.Modifiers.AssassinMod
             if (
                 (killedSelf ||
                 role.RemainingKills == 0 ||
-                !CustomGameOptions.AssassinMultiKill)
+                (!CustomGameOptions.AssassinMultiKill))
                 && doubleshot == false
-            )
-            {
-                HideButtons(role);
-                return;
-            }
+            ) HideButtons(role);
+            else HideTarget(role, targetId);
+        }
+        public static void HideTarget(
+            Assassin role,
+            byte targetId
+        )
+        {
 
             var (cycleBack, cycleForward, guess, guessText) = role.Buttons[targetId];
             if (cycleBack == null || cycleForward == null) return;

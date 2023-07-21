@@ -2,19 +2,19 @@ using System;
 using System.Linq;
 using HarmonyLib;
 using Hazel;
-using TownOfRoles.Roles;
+using TownOfSushi.Roles;
 using UnityEngine;
 using UnityEngine.UI;
 using Object = UnityEngine.Object;
 
-namespace TownOfRoles.CrewmateRoles.SwapperMod
+namespace TownOfSushi.CrewmateRoles.SwapperMod
 {
     [HarmonyPatch(typeof(MeetingHud), nameof(MeetingHud.Start))]
     public class AddButton
     {
         private static int _mostRecentId;
-        private static Sprite ActiveSprite => TownOfRoles.SwapperSwitch;
-        public static Sprite DisabledSprite => TownOfRoles.SwapperSwitchDisabled;
+        private static Sprite ActiveSprite => TownOfSushi.SwapperSwitch;
+        public static Sprite DisabledSprite => TownOfSushi.SwapperSwitchDisabled;
 
         public static void GenButton(Swapper role, int index, bool isDead)
         {
@@ -79,19 +79,11 @@ namespace TownOfRoles.CrewmateRoles.SwapperMod
 
                 if (SwapVotes.Swap1 == null || SwapVotes.Swap2 == null)
                 {
-                    var writer2 = AmongUsClient.Instance.StartRpcImmediately(PlayerControl.LocalPlayer.NetId,
-                        (byte) CustomRPC.SetSwaps, SendOption.Reliable, -1);
-                    writer2.Write(sbyte.MaxValue);
-                    writer2.Write(sbyte.MaxValue);
-                    AmongUsClient.Instance.FinishRpcImmediately(writer2);
+                    Utils.Rpc(CustomRPC.SetSwaps, sbyte.MaxValue, sbyte.MaxValue);
                     return;
                 }
 
-                var writer = AmongUsClient.Instance.StartRpcImmediately(PlayerControl.LocalPlayer.NetId,
-                    (byte) CustomRPC.SetSwaps, SendOption.Reliable, -1);
-                writer.Write(SwapVotes.Swap1.TargetPlayerId);
-                writer.Write(SwapVotes.Swap2.TargetPlayerId);
-                AmongUsClient.Instance.FinishRpcImmediately(writer);
+                Utils.Rpc(CustomRPC.SetSwaps, SwapVotes.Swap1.TargetPlayerId, SwapVotes.Swap2.TargetPlayerId);
             }
 
             return Listener;

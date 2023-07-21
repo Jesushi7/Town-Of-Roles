@@ -1,7 +1,7 @@
 using HarmonyLib;
-using TownOfRoles.Roles.Modifiers;
+using TownOfSushi.Roles.Modifiers;
 
-namespace TownOfRoles.Modifiers.DisperserMod
+namespace TownOfSushi.Modifiers.DisperserMod
 {
     [HarmonyPatch(typeof(KillButton), nameof(KillButton.DoClick))]
     public class PerformKill

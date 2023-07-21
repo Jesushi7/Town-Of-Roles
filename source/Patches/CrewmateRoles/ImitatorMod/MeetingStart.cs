@@ -1,10 +1,10 @@
 ﻿using HarmonyLib;
-using TownOfRoles.Roles;
-using TownOfRoles.CrewmateRoles.MysticMod;
+using TownOfSushi.Roles;
 using System;
 using System.Linq;
+using TownOfSushi.CrewmateRoles.OracleMod;
 
-namespace TownOfRoles.CrewmateRoles.ImitatorMod
+namespace TownOfSushi.CrewmateRoles.ImitatorMod
 {
     [HarmonyPatch(typeof(MeetingHud), nameof(MeetingHud.Start))]
     public class MeetingStart
@@ -14,18 +14,7 @@ namespace TownOfRoles.CrewmateRoles.ImitatorMod
             if (PlayerControl.LocalPlayer.Data.IsDead) return;
             if (!PlayerControl.LocalPlayer.Is(RoleEnum.Imitator)) return;
             var imitatorRole = Role.GetRole<Imitator>(PlayerControl.LocalPlayer);
-            if (imitatorRole.LastExaminedPlayer != null)
-            {
-                if (CustomGameOptions.ExamineReportOn)
-                {
-                    var playerResults = BodyReport.PlayerReportFeedback(imitatorRole.LastExaminedPlayer);
-
-                    if (!string.IsNullOrWhiteSpace(playerResults)) DestroyableSingleton<HudManager>.Instance.Chat.AddChat(PlayerControl.LocalPlayer, playerResults);
-                }
-
-                imitatorRole.LastExaminedPlayer = null;
-            }
-            else if (imitatorRole.trappedPlayers != null)
+            if (imitatorRole.trappedPlayers != null)
             {
                 if (imitatorRole.trappedPlayers.Count == 0)
                 {
@@ -47,6 +36,12 @@ namespace TownOfRoles.CrewmateRoles.ImitatorMod
                         DestroyableSingleton<HudManager>.Instance.Chat.AddChat(PlayerControl.LocalPlayer, message);
                 }
                 imitatorRole.trappedPlayers.Clear();
+            }
+            else if (imitatorRole.confessingPlayer != null)
+            {
+                var playerResults = MeetingStartOracle.PlayerReportFeedback(imitatorRole.confessingPlayer);
+
+                if (!string.IsNullOrWhiteSpace(playerResults)) DestroyableSingleton<HudManager>.Instance.Chat.AddChat(PlayerControl.LocalPlayer, playerResults);
             }
         }
     }

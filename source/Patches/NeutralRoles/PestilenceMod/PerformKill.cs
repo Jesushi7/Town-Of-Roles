@@ -1,9 +1,9 @@
 using System;
 using HarmonyLib;
-using TownOfRoles.Roles;
+using TownOfSushi.Roles;
 using AmongUs.GameOptions;
 
-namespace TownOfRoles.NeutralRoles.PestilenceMod
+namespace TownOfSushi.NeutralRoles.PestilenceMod
 {
     [HarmonyPatch(typeof(KillButton), nameof(KillButton.DoClick))]
     public class PerformKill
@@ -33,7 +33,13 @@ namespace TownOfRoles.NeutralRoles.PestilenceMod
             else if (interact[1] == true)
             {
                 role.LastKill = DateTime.UtcNow;
-                role.LastKill = role.LastKill.AddSeconds(CustomGameOptions.ProtectKCReset - GameOptionsManager.Instance.currentNormalGameOptions.KillCooldown);
+                role.LastKill = role.LastKill.AddSeconds(CustomGameOptions.ProtectKCReset - CustomGameOptions.PestKillCd);
+                return false;
+            }
+            else if (interact[2] == true)
+            {
+                role.LastKill = DateTime.UtcNow;
+                role.LastKill = role.LastKill.AddSeconds(CustomGameOptions.VestKCReset - CustomGameOptions.PestKillCd);
                 return false;
             }
             else if (interact[3] == true) return false;

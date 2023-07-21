@@ -1,11 +1,11 @@
 using HarmonyLib;
-using TownOfRoles.Roles;
+using TownOfSushi.Roles;
 using UnityEngine;
 using System.Linq;
 using System;
-using TownOfRoles.Extensions;
+using TownOfSushi.Extensions;
 
-namespace TownOfRoles.CrewmateRoles.MediumMod
+namespace TownOfSushi.CrewmateRoles.MediumMod
 {
     [HarmonyPatch(typeof(HudManager))]
     public class HUDMediate
@@ -46,7 +46,8 @@ namespace TownOfRoles.CrewmateRoles.MediumMod
                                 HatId = "",
                                 SkinId = "",
                                 VisorId = "",
-                                PlayerName = " "
+                                PlayerName = " ",
+                                PetId = ""
                             });
                             PlayerMaterial.SetColors(Color.grey, player.myRend());
                         }

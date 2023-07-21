@@ -1,10 +1,7 @@
-using System;
-using System.Collections.Generic;
 using HarmonyLib;
 using Hazel;
-using TownOfRoles.Objects;
 
-namespace TownOfRoles.Patches
+namespace TownOfSushi.Patches
 {
     [HarmonyPatch]
     public class MurderPlayer
@@ -14,7 +11,7 @@ namespace TownOfRoles.Patches
         {
             public static bool Prefix(PlayerControl __instance, [HarmonyArgument(0)] PlayerControl target)
             {
-                Utils.MurderPlayer(__instance, target);
+                Utils.MurderPlayer(__instance, target, true);
                 return false;
             }
         }
@@ -33,33 +30,12 @@ namespace TownOfRoles.Patches
                     }
                     else
                     {
-                        var writer = AmongUsClient.Instance.StartRpcImmediately(PlayerControl.LocalPlayer.NetId,
-                            (byte)CustomRPC.CheckMurder, SendOption.Reliable, -1);
-                        writer.Write(PlayerControl.LocalPlayer.PlayerId);
-                        writer.Write(__instance.currentTarget.PlayerId);
-                        AmongUsClient.Instance.FinishRpcImmediately(writer);
+                        Utils.Rpc(CustomRPC.CheckMurder, PlayerControl.LocalPlayer.PlayerId, __instance.currentTarget.PlayerId);
                     }
                     __instance.SetTarget(null);
                 }
                 return false;
             }
         }
-    [HarmonyPatch(typeof(PlayerControl), nameof(PlayerControl.MurderPlayer))]
-    public class Murder
-    {
-        public static List<DeadPlayer> KilledPlayers = new List<DeadPlayer>();
-
-        public static void Postfix(PlayerControl __instance, [HarmonyArgument(0)] PlayerControl target)
-        {
-            var deadBody = new DeadPlayer
-            {
-                PlayerId = target.PlayerId,
-                KillerId = __instance.PlayerId,
-                KillTime = DateTime.UtcNow
-            };
-
-            KilledPlayers.Add(deadBody);
-        }
-    }        
     }
 }

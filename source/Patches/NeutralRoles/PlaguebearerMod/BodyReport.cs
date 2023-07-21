@@ -1,7 +1,7 @@
 using HarmonyLib;
-using TownOfRoles.Roles;
+using TownOfSushi.Roles;
 
-namespace TownOfRoles.NeutralRoles.PlaguebearerMod
+namespace TownOfSushi.NeutralRoles.PlaguebearerMod
 {
     [HarmonyPatch(typeof(PlayerControl), nameof(PlayerControl.CmdReportDeadBody))]
     public class BodyReport
@@ -11,6 +11,7 @@ namespace TownOfRoles.NeutralRoles.PlaguebearerMod
             if (PlayerControl.AllPlayerControls.Count <= 1) return;
             if (PlayerControl.LocalPlayer == null) return;
             if (PlayerControl.LocalPlayer.Data == null) return;
+            if (info == null) return;
 
             foreach (var player in PlayerControl.AllPlayerControls)
             {

@@ -1,16 +1,16 @@
 ﻿using System;
 using HarmonyLib;
 using Hazel;
-using TownOfRoles.Roles;
+using TownOfSushi.Roles;
 using UnityEngine;
 
-namespace TownOfRoles.ImpostorRoles.MorphlingMod
+namespace TownOfSushi.ImpostorRoles.MorphlingMod
 {
     [HarmonyPatch(typeof(KillButton), nameof(KillButton.DoClick))]
     public class PerformKill
     {
-        public static Sprite SampleSprite => TownOfRoles.SampleSprite;
-        public static Sprite MorphSprite => TownOfRoles.MorphSprite;
+        public static Sprite SampleSprite => TownOfSushi.SampleSprite;
+        public static Sprite MorphSprite => TownOfSushi.MorphSprite;
 
         public static bool Prefix(KillButton __instance)
         {
@@ -37,12 +37,7 @@ namespace TownOfRoles.ImpostorRoles.MorphlingMod
                 {
                     if (__instance.isCoolingDown) return false;
                     if (role.MorphTimer() != 0) return false;
-                    var writer = AmongUsClient.Instance.StartRpcImmediately(PlayerControl.LocalPlayer.NetId,
-                        (byte) CustomRPC.Morph,
-                        SendOption.Reliable, -1);
-                    writer.Write(PlayerControl.LocalPlayer.PlayerId);
-                    writer.Write(role.SampledPlayer.PlayerId);
-                    AmongUsClient.Instance.FinishRpcImmediately(writer);
+                    Utils.Rpc(CustomRPC.Morph, PlayerControl.LocalPlayer.PlayerId, role.SampledPlayer.PlayerId);
                     role.TimeRemaining = CustomGameOptions.MorphlingDuration;
                     role.MorphedPlayer = role.SampledPlayer;
                     Utils.Morph(role.Player, role.SampledPlayer, true);

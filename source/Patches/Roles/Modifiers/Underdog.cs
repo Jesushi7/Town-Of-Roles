@@ -1,13 +1,13 @@
-﻿using TownOfRoles.Modifiers.UnderdogMod;
+﻿using TownOfSushi.Modifiers.UnderdogMod;
 
-namespace TownOfRoles.Roles.Modifiers
+namespace TownOfSushi.Roles.Modifiers
 {
     public class Underdog : Modifier
     {
         public Underdog(PlayerControl player) : base(player)
         {
             Name = "Underdog";
-            TaskText = () => "When all the impostors die you get a short cooldown";
+            TaskText = () => "When you're alone your kill cooldown is shortened";
             Color = Patches.Colors.Impostor;
             ModifierType = ModifierEnum.Underdog;
         }

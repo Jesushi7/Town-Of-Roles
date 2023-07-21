@@ -1,15 +1,16 @@
 using UnityEngine;
+using System.Collections.Generic;
 
-namespace TownOfRoles.Roles.Modifiers
+namespace TownOfSushi.Roles.Modifiers
 {
     public class Spy : Modifier
     {
         public Spy(PlayerControl player) : base(player)
         {
             Name = "Spy";
-            TaskText = () => "You can see colors in Admin Table";
-            Color = Patches.Colors.Spy;
-            ModifierType = ModifierEnum.Spy;
+            TaskText = () => "You can see colors on admin table";
+            Color = Patches.Colors.Sleuth;
+            ModifierType = ModifierEnum.Sleuth;
         }
     }
 }

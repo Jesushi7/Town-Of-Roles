@@ -1,11 +1,11 @@
-namespace TownOfRoles.Roles.Cultist
+namespace TownOfSushi.Roles.Cultist
 {
     public class CultistMystic : Role
     {
         public CultistMystic(PlayerControl player) : base(player)
         {
             Name = "Mystic";
-            StartText = () => "<color=#4D4DFFFF>Understand when someone gets converted</color>";
+            ImpostorText = () => "Understand When Someone Gets Converted";
             TaskText = () => "Know when someone gets converted";
             Color = Patches.Colors.Mystic;
             RoleType = RoleEnum.CultistMystic;

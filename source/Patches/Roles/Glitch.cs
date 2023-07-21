@@ -4,22 +4,22 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using TownOfRoles.CrewmateRoles.MedicMod;
+using TownOfSushi.CrewmateRoles.MedicMod;
 using Reactor.Utilities;
 using Reactor.Utilities.Extensions;
-using TownOfRoles.Extensions;
-using TownOfRoles.Roles.Modifiers;
+using TownOfSushi.Extensions;
+using TownOfSushi.Roles.Modifiers;
 using UnityEngine;
 using Object = UnityEngine.Object;
 using AmongUs.GameOptions;
 
-namespace TownOfRoles.Roles
+namespace TownOfSushi.Roles
 {
     public class Glitch : Role, IVisualAlteration
     {
-        public static Sprite MimicSprite = TownOfRoles.MimicSprite;
-        public static Sprite HackSprite = TownOfRoles.HackSprite;
-        public static Sprite LockSprite = TownOfRoles.LockSprite;
+        public static Sprite MimicSprite = TownOfSushi.MimicSprite;
+        public static Sprite HackSprite = TownOfSushi.HackSprite;
+        public static Sprite LockSprite = TownOfSushi.LockSprite;
 
         public bool lastMouse;
 
@@ -30,8 +30,6 @@ namespace TownOfRoles.Roles
             LastHack = DateTime.UtcNow;
             LastMimic = DateTime.UtcNow;
             LastKill = DateTime.UtcNow;
-            FactionName = "<color=#5c5e5d>Neutral</color>";   
-            Faction = Faction.Neutral;              
             HackButton = null;
             MimicButton = null;
             KillTarget = null;
@@ -40,9 +38,10 @@ namespace TownOfRoles.Roles
             IsUsingMimic = false;
             RoleType = RoleEnum.Glitch;
             AddToRoleHistory(RoleType);
-            StartText = () => "<color=#00FF00FF>Murder, Mimic, Hack. Everyone</color>";
+            ImpostorText = () => "<color=#00FF00FF>Murder everyone in order to win \nyou can hack and mimic people.</color>";
             TaskText = () => "Murder everyone to win";
-            Faction = Faction.Neutral;
+            FactionName = "<color=#5c5e5d>Neutral</color>";                   
+            Faction = Faction.NeutralKilling;
         }
 
         public PlayerControl ClosestPlayer;
@@ -59,24 +58,16 @@ namespace TownOfRoles.Roles
         public PlayerControl MimicTarget { get; set; }
         public bool GlitchWins { get; set; }
 
-        internal override bool EABBNOODFGL(LogicGameFlowNormal __instance)
+        internal override bool NeutralWin(LogicGameFlowNormal __instance)
         {
             if (Player.Data.IsDead || Player.Data.Disconnected) return true;
 
             if (PlayerControl.AllPlayerControls.ToArray().Count(x => !x.Data.IsDead && !x.Data.Disconnected) <= 2 &&
                     PlayerControl.AllPlayerControls.ToArray().Count(x => !x.Data.IsDead && !x.Data.Disconnected &&
-                    (x.Data.IsImpostor() || x.Is(RoleEnum.Pyromaniac)|| x.Is(RoleEnum.SerialKiller) || x.Is(RoleEnum.Juggernaut) ||
-                    x.Is(RoleEnum.Werewolf) || x.Is(RoleEnum.Plaguebearer) || x.Is(RoleEnum.Pestilence))) == 0)
+                    (x.Data.IsImpostor() || x.Is(Faction.NeutralKilling))) == 1)
             {
-                var writer = AmongUsClient.Instance.StartRpcImmediately(
-                    PlayerControl.LocalPlayer.NetId,
-                    (byte) CustomRPC.GlitchWin,
-                    SendOption.Reliable,
-                    -1
-                );
-                writer.Write(Player.PlayerId);
+                Utils.Rpc(CustomRPC.GlitchWin, Player.PlayerId);
                 Wins();
-                AmongUsClient.Instance.FinishRpcImmediately(writer);
                 Utils.EndGame();
                 return false;
             }
@@ -88,11 +79,6 @@ namespace TownOfRoles.Roles
         {
             //System.Console.WriteLine("Reached Here - Glitch Edition");
             GlitchWins = true;
-        }
-
-        public void Loses()
-        {
-            LostByRPC = true;
         }
 
         protected override void IntroPrefix(IntroCutscene._ShowTeam_d__36 __instance)
@@ -198,10 +184,7 @@ namespace TownOfRoles.Roles
 
         public void RpcSetHacked(PlayerControl hacked)
         {
-            var writer = AmongUsClient.Instance.StartRpcImmediately(PlayerControl.LocalPlayer.NetId,
-                (byte)CustomRPC.SetHacked, SendOption.Reliable, -1);
-            writer.Write(hacked.PlayerId);
-            AmongUsClient.Instance.FinishRpcImmediately(writer);
+            Utils.Rpc(CustomRPC.SetHacked, hacked.PlayerId);
             SetHacked(hacked);
         }
 
@@ -404,11 +387,7 @@ namespace TownOfRoles.Roles
 
             public static IEnumerator Mimic(Glitch __instance, PlayerControl mimicPlayer)
             {
-                var writer = AmongUsClient.Instance.StartRpcImmediately(PlayerControl.LocalPlayer.NetId,
-                    (byte)CustomRPC.SetMimic, SendOption.Reliable, -1);
-                writer.Write(PlayerControl.LocalPlayer.PlayerId);
-                writer.Write(mimicPlayer.PlayerId);
-                AmongUsClient.Instance.FinishRpcImmediately(writer);
+                Utils.Rpc(CustomRPC.SetMimic, PlayerControl.LocalPlayer.PlayerId, mimicPlayer.PlayerId);
 
                 Utils.Morph(__instance.Player, mimicPlayer, true);
 
@@ -441,12 +420,7 @@ namespace TownOfRoles.Roles
                         __instance.MimicTarget = null;
                         Utils.Unmorph(__instance.Player);
 
-                        var writer2 = AmongUsClient.Instance.StartRpcImmediately(
-                            PlayerControl.LocalPlayer.NetId, (byte)CustomRPC.RpcResetAnim, SendOption.Reliable,
-                            -1);
-                        writer2.Write(PlayerControl.LocalPlayer.PlayerId);
-                        writer2.Write(mimicPlayer.PlayerId);
-                        AmongUsClient.Instance.FinishRpcImmediately(writer2);
+                        Utils.Rpc(CustomRPC.RpcResetAnim, PlayerControl.LocalPlayer.PlayerId, mimicPlayer.PlayerId);
                         yield break;
                     }
 
@@ -470,9 +444,9 @@ namespace TownOfRoles.Roles
                     && !MeetingHud.Instance && !__gInstance.Player.Data.IsDead
                     && AmongUsClient.Instance.GameState == InnerNetClient.GameStates.Started);
                 __instance.KillButton.SetCoolDown(
-                    GameOptionsManager.Instance.currentNormalGameOptions.KillCooldown -
+                    CustomGameOptions.GlitchKillCooldown -
                     (float)(DateTime.UtcNow - __gInstance.LastKill).TotalSeconds,
-                    GameOptionsManager.Instance.currentNormalGameOptions.KillCooldown);
+                    CustomGameOptions.GlitchKillCooldown);
 
                 __instance.KillButton.SetTarget(null);
                 __gInstance.KillTarget = null;
@@ -502,7 +476,13 @@ namespace TownOfRoles.Roles
                     else if (interact[1] == true)
                     {
                         __gInstance.LastKill = DateTime.UtcNow;
-                        __gInstance.LastKill = __gInstance.LastKill.AddSeconds(CustomGameOptions.ProtectKCReset - GameOptionsManager.Instance.currentNormalGameOptions.KillCooldown);
+                        __gInstance.LastKill = __gInstance.LastKill.AddSeconds(CustomGameOptions.ProtectKCReset - CustomGameOptions.GlitchKillCooldown);
+                        return;
+                    }
+                    else if (interact[2] == true)
+                    {
+                        __gInstance.LastKill = DateTime.UtcNow;
+                        __gInstance.LastKill = __gInstance.LastKill.AddSeconds(CustomGameOptions.VestKCReset - CustomGameOptions.GlitchKillCooldown);
                         return;
                     }
                     else if (interact[3] == true) return;
@@ -678,7 +658,6 @@ namespace TownOfRoles.Roles
 
                     foreach (var player in PlayerControl.AllPlayerControls.ToArray().Where(x =>
                         x != null &&
-                        x.Data != null &&
                         x != PlayerControl.LocalPlayer &&
                         !x.Data.Disconnected))
                     {

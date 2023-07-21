@@ -1,10 +1,10 @@
 using System.Linq;
 using HarmonyLib;
-using TownOfRoles.Extensions;
-using TownOfRoles.Roles;
+using TownOfSushi.Extensions;
+using TownOfSushi.Roles;
 using UnityEngine;
 
-namespace TownOfRoles.NeutralRoles.PhantomMod
+namespace TownOfSushi.NeutralRoles.PhantomMod
 {
     [HarmonyPatch(typeof(EndGameManager), nameof(EndGameManager.Start))]
     public static class Outro
@@ -18,7 +18,7 @@ namespace TownOfRoles.NeutralRoles.PhantomMod
             array[0].NameText().text = role.ColorString + array[0].NameText().text + "</color>";
             __instance.BackgroundBar.material.color = role.Color;
             var text = Object.Instantiate(__instance.WinText);
-            text.text = "Phantom did all tasks!\n Phantom Wins!";
+            text.text = "Phantom Wins!";
             text.color = role.Color;
             var pos = __instance.WinText.transform.localPosition;
             pos.y = 1.5f;

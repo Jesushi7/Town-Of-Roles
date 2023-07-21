@@ -1,4 +1,4 @@
-namespace TownOfRoles.CustomOption
+namespace TownOfSushi.CustomOption
 {
     public enum CustomOptionType
     {

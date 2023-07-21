@@ -1,6 +1,6 @@
 using HarmonyLib;
 
-namespace TownOfRoles.Patches
+namespace TownOfSushi.Patches
 {
     public static class CanMove
     {

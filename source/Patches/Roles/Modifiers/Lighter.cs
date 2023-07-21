@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace TownOfRoles.Roles.Modifiers
+namespace TownOfSushi.Roles.Modifiers
 {
     public class Lighter : Modifier
     {

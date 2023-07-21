@@ -1,9 +1,9 @@
 using HarmonyLib;
-using TownOfRoles.Roles;
+using TownOfSushi.Roles;
 using UnityEngine;
-using TownOfRoles.Extensions;
+using TownOfSushi.Extensions;
 
-namespace TownOfRoles.NeutralRoles.GuardianMod
+namespace TownOfSushi.NeutralRoles.GuardianAngelMod
 {
     public enum ProtectOptions
     {
@@ -21,9 +21,9 @@ namespace TownOfRoles.NeutralRoles.GuardianMod
 
         public static void Postfix(HudManager __instance)
         {
-            foreach (var role in Role.GetRoles(RoleEnum.Guardian))
+            foreach (var role in Role.GetRoles(RoleEnum.GuardianAngel))
             {
-                var ga = (Guardian) role;
+                var ga = (GuardianAngel) role;
 
                 var player = ga.target;
                 if (player == null) continue;
@@ -51,7 +51,7 @@ namespace TownOfRoles.NeutralRoles.GuardianMod
                         player.myRend().material.SetFloat("_Outline", 1f);
                         player.myRend().material.SetColor("_OutlineColor", ProtectedColor);
                     }
-                    else if (PlayerControl.LocalPlayer.Is(RoleEnum.Guardian) &&
+                    else if (PlayerControl.LocalPlayer.Is(RoleEnum.GuardianAngel) &&
                              (showProtected == ProtectOptions.GA || showProtected == ProtectOptions.SelfAndGA))
                     {
                         player.myRend().material.SetColor("_VisorColor", ProtectedColor);

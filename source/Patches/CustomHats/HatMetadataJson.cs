@@ -1,8 +1,7 @@
-namespace TownOfRoles.Patches.CustomHats
+namespace TownOfSushi.Patches.CustomHats
 {
     public class HatMetadataJson
     {
         public HatMetadataElement[] Credits { get; set; }
-
     }
 }

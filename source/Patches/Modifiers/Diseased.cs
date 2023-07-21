@@ -1,6 +1,6 @@
 using HarmonyLib;
 
-namespace TownOfRoles.Modifiers
+namespace TownOfSushi.Modifiers
 {
     public class Diseased
     {

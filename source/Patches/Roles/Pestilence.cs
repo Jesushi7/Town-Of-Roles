@@ -1,9 +1,9 @@
 using Hazel;
 using System;
 using System.Linq;
-using TownOfRoles.Extensions;
+using TownOfSushi.Extensions;
 
-namespace TownOfRoles.Roles
+namespace TownOfSushi.Roles
 {
     public class Pestilence : Role
     {
@@ -14,33 +14,25 @@ namespace TownOfRoles.Roles
             LastKill = DateTime.UtcNow;
             RoleType = RoleEnum.Pestilence;
             AddToRoleHistory(RoleType);
-            StartText = () => "";
-            TaskText = () => "Kill everyone with your unstoppable abilities";
-            Faction = Faction.Neutral;
+            ImpostorText = () => "";
+            TaskText = () => "Kill everyone with your unstoppable abilities!";
+            Faction = Faction.NeutralKilling;
         }
 
         public PlayerControl ClosestPlayer;
         public DateTime LastKill { get; set; }
         public bool PestilenceWins { get; set; }
 
-        internal override bool EABBNOODFGL(LogicGameFlowNormal __instance)
+        internal override bool NeutralWin(LogicGameFlowNormal __instance)
         {
             if (Player.Data.IsDead || Player.Data.Disconnected) return true;
 
             if (PlayerControl.AllPlayerControls.ToArray().Count(x => !x.Data.IsDead && !x.Data.Disconnected) <= 2 &&
                     PlayerControl.AllPlayerControls.ToArray().Count(x => !x.Data.IsDead && !x.Data.Disconnected &&
-                    (x.Data.IsImpostor() || x.Is(RoleEnum.Glitch) || x.Is(RoleEnum.Pyromaniac) ||
-                    x.Is(RoleEnum.Juggernaut)  || x.Is(RoleEnum.SerialKiller)|| x.Is(RoleEnum.Werewolf) || x.Is(RoleEnum.Plaguebearer))) == 0)
+                    (x.Data.IsImpostor() || x.Is(Faction.NeutralKilling))) == 1)
             {
-                var writer = AmongUsClient.Instance.StartRpcImmediately(
-                    PlayerControl.LocalPlayer.NetId,
-                    (byte)CustomRPC.PestilenceWin,
-                    SendOption.Reliable,
-                    -1
-                );
-                writer.Write(Player.PlayerId);
+                Utils.Rpc(CustomRPC.PestilenceWin, Player.PlayerId);
                 Wins();
-                AmongUsClient.Instance.FinishRpcImmediately(writer);
                 Utils.EndGame();
                 return false;
             }
@@ -53,16 +45,11 @@ namespace TownOfRoles.Roles
             PestilenceWins = true;
         }
 
-        public void Loses()
-        {
-            LostByRPC = true;
-        }
-
         public float KillTimer()
         {
             var utcNow = DateTime.UtcNow;
             var timeSpan = utcNow - LastKill;
-            var num = GameOptionsManager.Instance.currentNormalGameOptions.KillCooldown * 1000f;
+            var num = CustomGameOptions.PestKillCd * 1000f;
             var flag2 = num - (float)timeSpan.TotalMilliseconds < 0f;
             if (flag2) return 0;
             return (num - (float)timeSpan.TotalMilliseconds) / 1000f;

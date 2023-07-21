@@ -2,16 +2,16 @@ using System;
 using UnityEngine;
 using TMPro;
 using AmongUs.GameOptions;
-using TownOfRoles.Extensions;
+using TownOfSushi.Extensions;
 
-namespace TownOfRoles.Roles
+namespace TownOfSushi.Roles
 {
-    public class Guardian : Role
+    public class GuardianAngel : Role
     {
         public bool Enabled;
         public DateTime LastProtected;
         public float TimeRemaining;
-        public bool GAImpWin { get; set; }
+
         public int UsesLeft;
         public TextMeshPro UsesText;
 
@@ -19,21 +19,21 @@ namespace TownOfRoles.Roles
 
         public PlayerControl target;
 
-        public Guardian(PlayerControl player) : base(player)
+        public GuardianAngel(PlayerControl player) : base(player)
         {
-            Name = "Guardian";
-            StartText = () =>
-                target == null ? "<color=#B3FFFFFF>You don't have a client for some reason... weird...</color>" : $"<color=#B3FFFFFF>Protect {target.name} With Your Life!</color>";
+            Name = "Guardian Angel";
+            ImpostorText = () =>
+                target == null ? "<color=#B3FFFFFF>The game couldn't give you a target....sorry</color>" : $"<color=#B3FFFFFF>Protect {target.name} with your life!</color>";
             TaskText = () =>
                 target == null
-                    ? "You don't have a client for some reason... weird..."
-                    : $"Protect your client!\nClient: {target.name}";
-            Color = Patches.Colors.Guardian;
+                    ? "You don't have a target for some reason... weird..."
+                    : $"Protect {target.name}!";
+            FactionName = "<color=#5c5e5d>Neutral</color>";                           
+            Color = Patches.Colors.GuardianAngel;
             LastProtected = DateTime.UtcNow;
-            FactionName = "<color=#5c5e5d>Neutral</color>";                
-            RoleType = RoleEnum.Guardian;
+            RoleType = RoleEnum.GuardianAngel;
             AddToRoleHistory(RoleType);
-            Faction = Faction.Neutral;
+            Faction = Faction.NeutralBenign;
             Scale = 1.4f;
 
             UsesLeft = CustomGameOptions.MaxProtects;
@@ -60,7 +60,7 @@ namespace TownOfRoles.Roles
 
         public void UnProtect()
         {
-            var ga = GetRole<Guardian>(Player);
+            var ga = GetRole<GuardianAngel>(Player);
             if (!ga.target.IsShielded())
             {
                 ga.target.myRend().material.SetColor("_VisorColor", Palette.VisorColor);
@@ -68,18 +68,6 @@ namespace TownOfRoles.Roles
             }
             Enabled = false;
             LastProtected = DateTime.UtcNow;
-        }
-
-        public void ImpTargetWin()
-        {
-            Player.Data.Role.TeamType = RoleTeamTypes.Impostor;
-            if (Player.Data.IsDead) RoleManager.Instance.SetRole(Player, RoleTypes.ImpostorGhost);
-            else RoleManager.Instance.SetRole(Player, RoleTypes.Impostor);
-        }
-
-        public void ImpTargetLose()
-        {
-            LostByRPC = true;
         }
 
         protected override void IntroPrefix(IntroCutscene._ShowTeam_d__36 __instance)

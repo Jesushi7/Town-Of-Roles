@@ -1,7 +1,7 @@
 using HarmonyLib;
-using TownOfRoles.Roles;
+using TownOfSushi.Roles;
 
-namespace TownOfRoles.NeutralRoles.GuardianMod
+namespace TownOfSushi.NeutralRoles.GuardianAngelMod
 {
     [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]
     [HarmonyPriority(Priority.Last)]
@@ -10,9 +10,9 @@ namespace TownOfRoles.NeutralRoles.GuardianMod
         [HarmonyPriority(Priority.Last)]
         public static void Postfix(HudManager __instance)
         {
-            foreach (var role in Role.GetRoles(RoleEnum.Guardian))
+            foreach (var role in Role.GetRoles(RoleEnum.GuardianAngel))
             {
-                var ga = (Guardian) role;
+                var ga = (GuardianAngel) role;
                 if (ga.Protecting)
                     ga.Protect();
                 else if (ga.Enabled) ga.UnProtect();

@@ -1,10 +1,10 @@
 using System.Collections.Generic;
-using TownOfRoles.Roles;
-using TownOfRoles.Roles.Modifiers;
+using TownOfSushi.Roles;
+using TownOfSushi.Roles.Modifiers;
 using UnityEngine;
 using System;
 
-namespace TownOfRoles.Extensions
+namespace TownOfSushi.Extensions
 {
     public static class AmongUsExtensions
     {
@@ -101,8 +101,8 @@ namespace TownOfRoles.Extensions
             playerControl.RawSetColor(newOutfit.ColorId);
             playerControl.RawSetHat(newOutfit.HatId, newOutfit.ColorId);
             playerControl.RawSetVisor(newOutfit.VisorId, newOutfit.ColorId);
-            playerControl.RawSetPet(newOutfit.PetId, newOutfit.ColorId);
-            playerControl.RawSetSkin(newOutfit.SkinId, newOutfit.ColorId);
+            if (!playerControl.Data.IsDead) playerControl.RawSetPet(newOutfit.PetId, newOutfit.ColorId);
+            if (!playerControl.Data.IsDead) playerControl.RawSetSkin(newOutfit.SkinId, newOutfit.ColorId);
             playerControl.cosmetics.colorBlindText.color = Color.white;
             if (PlayerControl.LocalPlayer.Data.IsImpostor() && playerControl.Data.IsImpostor()) playerControl.nameText().color = Patches.Colors.Impostor;
         }

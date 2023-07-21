@@ -1,10 +1,11 @@
-namespace TownOfRoles
+namespace TownOfSushi
 {
     public enum Faction
     {
         Crewmates,
         Impostors,
-        Neutral,
-        None
+        NeutralBenign,
+        NeutralEvil,
+        NeutralKilling
     }
 }

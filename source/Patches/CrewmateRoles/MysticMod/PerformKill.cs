@@ -1,12 +1,12 @@
 ﻿using System;
 using HarmonyLib;
-using TownOfRoles.Roles;
+using TownOfSushi.Roles;
 using UnityEngine;
-using TownOfRoles.CrewmateRoles.MedicMod;
+using TownOfSushi.CrewmateRoles.MedicMod;
 using Reactor.Utilities;
 using AmongUs.GameOptions;
 
-namespace TownOfRoles.CrewmateRoles.MysticMod
+namespace TownOfSushi.CrewmateRoles.MysticMod
 {
     [HarmonyPatch(typeof(KillButton), nameof(KillButton.DoClick))]
     public class PerformKill

@@ -1,9 +1,9 @@
 using System.Collections.Generic;
-using TownOfRoles.Extensions;
+using TownOfSushi.Extensions;
 using UnityEngine;
 using System.Linq;
 
-namespace TownOfRoles.Roles
+namespace TownOfSushi.Roles
 {
     public class Informant : Role
     {
@@ -14,15 +14,14 @@ namespace TownOfRoles.Roles
         public Informant(PlayerControl player) : base(player)
         {
             Name = "Informant";
-            StartText = () => "<color=#D4AF37FF>Complete all your tasks to find the impostors</color>";
+            ImpostorText = () => "<color=#D4AF37FF>Complete all of your tasks \nto find the killers and out them</color>";
             TaskText = () =>
                 TasksDone
-                    ? "Find the arrows to know the killers"
-                    : "Complete your tasks";
+                    ? "Find the arrows pointing to the Killers!"
+                    : "Finish your tasks";
+                    FactionName = "Crewmate";                     
             Color = Patches.Colors.Informant;
             RoleType = RoleEnum.Informant;
-            FactionName = "Crewmate";    
-            Faction = Faction.Crewmates;                 
             AddToRoleHistory(RoleType);
         }
 
@@ -42,7 +41,7 @@ namespace TownOfRoles.Roles
             {
                 return Revealed || base.RoleCriteria();
             }
-            else if (Role.GetRole(localPlayer).Faction == Faction.Neutral && !Player.Data.IsDead)
+            else if (GetRole(localPlayer).Faction == Faction.NeutralKilling && !Player.Data.IsDead)
             {
                 return Revealed && CustomGameOptions.InformantSeesNeutrals || base.RoleCriteria();
             }

@@ -3,15 +3,14 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using TMPro;
-using TownOfRoles.CrewmateRoles.TrapperMod;
+using TownOfSushi.CrewmateRoles.TrapperMod;
 using UnityEngine;
 
-namespace TownOfRoles.Roles
+namespace TownOfSushi.Roles
 {
     public class Trapper : Role
     {
-        public static AssetBundle bundle = loadBundle();
-        public static Material trapMaterial = bundle.LoadAsset<Material>("trap").DontUnload();
+        public static Material trapMaterial = TownOfSushi.bundledAssets.Get<Material>("trap");
 
         public List<Trap> traps = new List<Trap>();
         public DateTime LastTrapped { get; set; }
@@ -24,12 +23,11 @@ namespace TownOfRoles.Roles
         public Trapper(PlayerControl player) : base(player)
         {
             Name = "Trapper";
-            StartText = () => "<color=#75fa4c>Place traps to know roles</color>";
-            TaskText = () => "Place traps";
+            ImpostorText = () => "<color=#A7D1B3FF>Create traps to get a list of the roles\n of the players that go into your trap</color>";
+            TaskText = () => "Place traps around the map";
+            FactionName = "Crewmate";
             Color = Patches.Colors.Trapper;
             RoleType = RoleEnum.Trapper;
-            FactionName = "Crewmate";    
-            Faction = Faction.Crewmates;               
             LastTrapped = DateTime.UtcNow;
             trappedPlayers = new List<RoleEnum>();
             AddToRoleHistory(RoleType);
@@ -45,15 +43,6 @@ namespace TownOfRoles.Roles
             var flag2 = num - (float)timeSpan.TotalMilliseconds < 0f;
             if (flag2) return 0;
             return (num - (float)timeSpan.TotalMilliseconds) / 1000f;
-        }
-
-
-        public static AssetBundle loadBundle()
-        {
-            var assembly = Assembly.GetExecutingAssembly();
-            var stream = assembly.GetManifestResourceStream("TownOfRoles.Resources.trappershader");
-            var assets = stream.ReadFully();
-            return AssetBundle.LoadFromMemory(assets);
         }
     }
 }

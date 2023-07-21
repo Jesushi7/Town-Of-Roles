@@ -1,14 +1,15 @@
 ﻿using HarmonyLib;
-using TownOfRoles.Roles;
+using TownOfSushi.Roles;
 using UnityEngine;
+using TownOfSushi.Modifiers.UnderdogMod;
 
-namespace TownOfRoles.ImpostorRoles.BomberMod
+namespace TownOfSushi.ImpostorRoles.BomberMod
 {
     [HarmonyPatch(typeof(KillButton), nameof(KillButton.DoClick))]
     public class Plant
     {
-        public static Sprite PlantSprite => TownOfRoles.PlantSprite;
-        public static Sprite DetonateSprite => TownOfRoles.DetonateSprite;
+        public static Sprite PlantSprite => TownOfSushi.PlantSprite;
+        public static Sprite DetonateSprite => TownOfSushi.DetonateSprite;
         public static bool Prefix(KillButton __instance)
         {
             var flag = PlayerControl.LocalPlayer.Is(RoleEnum.Bomber);
@@ -33,7 +34,14 @@ namespace TownOfRoles.ImpostorRoles.BomberMod
                     role.PlantButton.graphic.sprite = DetonateSprite;
                     role.TimeRemaining = CustomGameOptions.DetonateDelay;
                     role.PlantButton.SetCoolDown(role.TimeRemaining, CustomGameOptions.DetonateDelay);
-                    PlayerControl.LocalPlayer.SetKillTimer(GameOptionsManager.Instance.currentNormalGameOptions.KillCooldown + CustomGameOptions.DetonateDelay);
+                    if (PlayerControl.LocalPlayer.Is(ModifierEnum.Underdog))
+                    {
+                        var lowerKC = GameOptionsManager.Instance.currentNormalGameOptions.KillCooldown - CustomGameOptions.UnderdogKillBonus + CustomGameOptions.DetonateDelay;
+                        var normalKC = GameOptionsManager.Instance.currentNormalGameOptions.KillCooldown + CustomGameOptions.DetonateDelay;
+                        var upperKC = GameOptionsManager.Instance.currentNormalGameOptions.KillCooldown + CustomGameOptions.UnderdogKillBonus + CustomGameOptions.DetonateDelay;
+                        PlayerControl.LocalPlayer.SetKillTimer(PerformKill.LastImp() ? lowerKC : (PerformKill.IncreasedKC() ? normalKC : upperKC));
+                    }
+                    else PlayerControl.LocalPlayer.SetKillTimer(GameOptionsManager.Instance.currentNormalGameOptions.KillCooldown + CustomGameOptions.DetonateDelay);
                     DestroyableSingleton<HudManager>.Instance.KillButton.SetTarget(null);
                     role.Bomb = BombExtentions.CreateBomb(pos);
                     return false;

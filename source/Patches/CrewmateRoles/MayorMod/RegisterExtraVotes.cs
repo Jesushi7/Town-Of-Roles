@@ -5,14 +5,14 @@ using HarmonyLib;
 using Hazel;
 using InnerNet;
 using Reactor.Utilities;
-using TownOfRoles.Extensions;
-using TownOfRoles.Roles;
-using TownOfRoles.Roles.Modifiers;
+using TownOfSushi.Extensions;
+using TownOfSushi.Roles;
+using TownOfSushi.Roles.Modifiers;
 using Il2CppInterop.Runtime.InteropTypes.Arrays;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace TownOfRoles.CrewmateRoles.MayorMod
+namespace TownOfSushi.CrewmateRoles.MayorMod
 {
     [HarmonyPatch(typeof(MeetingHud))]
     public class RegisterExtraVotes
@@ -192,8 +192,8 @@ namespace TownOfRoles.CrewmateRoles.MayorMod
             {
                 // __instance.exiledPlayer = __instance.wasTie ? null : __instance.exiledPlayer;
                 var exiledString = exiled == null ? "null" : exiled.PlayerName;
-                PluginSingleton<TownOfRoles>.Instance.Log.LogMessage($"Exiled PlayerName = {exiledString}");
-                PluginSingleton<TownOfRoles>.Instance.Log.LogMessage($"Was a tie = {tie}");
+                PluginSingleton<TownOfSushi>.Instance.Log.LogMessage($"Exiled PlayerName = {exiledString}");
+                PluginSingleton<TownOfSushi>.Instance.Log.LogMessage($"Was a tie = {tie}");
             }
         }
 

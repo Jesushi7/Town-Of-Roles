@@ -1,17 +1,17 @@
 ﻿using System;
 using HarmonyLib;
 using Hazel;
-using TownOfRoles.Roles;
+using TownOfSushi.Roles;
 using UnityEngine;
 using Reactor.Networking.Extensions;
 
-namespace TownOfRoles.ImpostorRoles.EscapistMod
+namespace TownOfSushi.ImpostorRoles.EscapistMod
 {
     [HarmonyPatch(typeof(KillButton), nameof(KillButton.DoClick))]
     public class PerformKill
     {
-        public static Sprite MarkSprite => TownOfRoles.MarkSprite;
-        public static Sprite EscapeSprite => TownOfRoles.EscapeSprite;
+        public static Sprite MarkSprite => TownOfSushi.MarkSprite;
+        public static Sprite EscapeSprite => TownOfSushi.EscapeSprite;
 
         public static bool Prefix(KillButton __instance)
         {
@@ -36,11 +36,7 @@ namespace TownOfRoles.ImpostorRoles.EscapistMod
                 {
                     if (__instance.isCoolingDown) return false;
                     if (role.EscapeTimer() != 0) return false;
-                    var writer = AmongUsClient.Instance.StartRpcImmediately(PlayerControl.LocalPlayer.NetId,
-                    (byte)CustomRPC.Escape, SendOption.Reliable, -1);
-                    writer.Write(PlayerControl.LocalPlayer.PlayerId);
-                    writer.Write(role.EscapePoint);
-                    AmongUsClient.Instance.FinishRpcImmediately(writer);
+                    Utils.Rpc(CustomRPC.Escape, PlayerControl.LocalPlayer.PlayerId, role.EscapePoint);
                     role.LastEscape = DateTime.UtcNow;
                     Escapist.Escape(role.Player);
                 }

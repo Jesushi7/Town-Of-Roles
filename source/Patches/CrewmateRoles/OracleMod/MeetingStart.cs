@@ -1,114 +1,53 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using HarmonyLib;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using HarmonyLib;
-using TownOfRoles.Extensions;
-using TownOfRoles.Roles;
+using TownOfSushi.Extensions;
+using TownOfSushi.Roles;
 
-namespace TownOfRoles.CrewmateRoles.OracleMod
+namespace TownOfSushi.CrewmateRoles.OracleMod
 {
-	[HarmonyPatch(typeof(MeetingHud), "Start")]
-	public class MeetingStart
-	{
-		public static void Postfix(MeetingHud __instance)
-		{
-			bool isDead = PlayerControl.LocalPlayer.Data.IsDead;
-			if (!isDead)
-			{
-				bool flag = !PlayerControl.LocalPlayer.Is(RoleEnum.Oracle);
-				if (!flag)
-				{
-					Oracle oracleRole = Role.GetRole<Oracle>(PlayerControl.LocalPlayer);
-					bool flag2 = oracleRole.Confessor != null;
-					if (flag2)
-					{
-						string playerResults = MeetingStart.PlayerReportFeedback(oracleRole.Confessor);
-						bool flag3 = !string.IsNullOrWhiteSpace(playerResults);
-						if (flag3)
-						{
-							DestroyableSingleton<HudManager>.Instance.Chat.AddChat(PlayerControl.LocalPlayer, playerResults);
-						}
-					}
-				}
-			}
-		}
+    [HarmonyPatch(typeof(MeetingHud), nameof(MeetingHud.Start))]
+    public class MeetingStartOracle
+    {
+        public static void Postfix(MeetingHud __instance)
+        {
+            if (PlayerControl.LocalPlayer.Data.IsDead) return;
+            if (!PlayerControl.LocalPlayer.Is(RoleEnum.Oracle)) return;
+            var oracleRole = Role.GetRole<Oracle>(PlayerControl.LocalPlayer);
+            if (oracleRole.Confessor != null)
+            {
+                var playerResults = PlayerReportFeedback(oracleRole.Confessor);
 
-		public static string PlayerReportFeedback(PlayerControl player)
-		{
-			bool flag = player.Data.IsDead || player.Data.Disconnected;
-			string result;
-			if (flag)
-			{
-				result = "Your confessor failed to survive so you received no confession";
-			}
-			else
-			{
-				List<PlayerControl> allPlayers = (from x in PlayerControl.AllPlayerControls.ToArray()
-				where !x.Data.IsDead && !x.Data.Disconnected && x != PlayerControl.LocalPlayer && x != player
-				select x).ToList<PlayerControl>();
-				bool flag2 = allPlayers.Count < 2;
-				if (flag2)
-				{
-					result = "Too few people alive to receive a confessional";
-				}
-				else
-				{
-					List<PlayerControl> evilPlayers = (from x in PlayerControl.AllPlayerControls.ToArray()
-					where !x.Data.IsDead && !x.Data.Disconnected && (x.Is(Faction.Impostors) || 
-					(x.Is(Faction.Neutral) &&  x.Is(RoleEnum.Glitch)&&  x.Is(RoleEnum.Werewolf)&&  x.Is(RoleEnum.SerialKiller) &&  x.Is(RoleEnum.Pyromaniac) 
-					&&  x.Is(RoleEnum.Plaguebearer) &&  x.Is(RoleEnum.Pestilence) && CustomGameOptions.NeutralKillingShowsEvil) 
-					|| (x.Is(Faction.Neutral)&&  x.Is(RoleEnum.Jester) &&  x.Is(RoleEnum.Executioner)
-					&&  x.Is(RoleEnum.Guardian) &&  x.Is(RoleEnum.Amnesiac) &&  x.Is(RoleEnum.Phantom) && CustomGameOptions.NeutralNonKillersShowsEvil))
-					select x).ToList<PlayerControl>();
-					bool flag3 = evilPlayers.Count == 0;
-					if (flag3)
-					{
-						result = player.GetDefaultOutfit().PlayerName + " confesses to knowing that there are no more evil players!";
-					}
-					else
-					{
-						allPlayers.Shuffle<PlayerControl>();
-						evilPlayers.Shuffle<PlayerControl>();
-						PlayerControl secondPlayer = allPlayers[0];
-						bool firstTwoEvil = false;
-						foreach (PlayerControl evilPlayer in evilPlayers)
-						{
-							bool flag4 = evilPlayer == player || evilPlayer == secondPlayer;
-							if (flag4)
-							{
-								firstTwoEvil = true;
-							}
-						}
-						bool flag5 = firstTwoEvil;
-						if (flag5)
-						{
-							PlayerControl thirdPlayer = allPlayers[1];
-							DefaultInterpolatedStringHandler defaultInterpolatedStringHandler = new DefaultInterpolatedStringHandler(50, 3);
-							defaultInterpolatedStringHandler.AppendFormatted(player.GetDefaultOutfit().PlayerName);
-							defaultInterpolatedStringHandler.AppendLiteral(" confesses to knowing that they, ");
-							defaultInterpolatedStringHandler.AppendFormatted(secondPlayer.GetDefaultOutfit().PlayerName);
-							defaultInterpolatedStringHandler.AppendLiteral(" and/or ");
-							defaultInterpolatedStringHandler.AppendFormatted(thirdPlayer.GetDefaultOutfit().PlayerName);
-							defaultInterpolatedStringHandler.AppendLiteral(" is evil!");
-							result = defaultInterpolatedStringHandler.ToStringAndClear();
-						}
-						else
-						{
-							PlayerControl thirdPlayer2 = evilPlayers[0];
-							DefaultInterpolatedStringHandler defaultInterpolatedStringHandler = new DefaultInterpolatedStringHandler(50, 3);
-							defaultInterpolatedStringHandler.AppendFormatted(player.GetDefaultOutfit().PlayerName);
-							defaultInterpolatedStringHandler.AppendLiteral(" confesses to knowing that they, ");
-							defaultInterpolatedStringHandler.AppendFormatted(secondPlayer.GetDefaultOutfit().PlayerName);
-							defaultInterpolatedStringHandler.AppendLiteral(" and/or ");
-							defaultInterpolatedStringHandler.AppendFormatted(thirdPlayer2.GetDefaultOutfit().PlayerName);
-							defaultInterpolatedStringHandler.AppendLiteral(" is evil!");
-							result = defaultInterpolatedStringHandler.ToStringAndClear();
-						}
-					}
-				}
-			}
-			return result;
-		}
-	}
+                if (!string.IsNullOrWhiteSpace(playerResults)) DestroyableSingleton<HudManager>.Instance.Chat.AddChat(PlayerControl.LocalPlayer, playerResults);
+            }
+        }
+
+        public static string PlayerReportFeedback(PlayerControl player)
+        {
+            if (player.Data.IsDead || player.Data.Disconnected) return "Your confessor failed to survive so you received no confession";
+            var allPlayers = PlayerControl.AllPlayerControls.ToArray().Where(x => !x.Data.IsDead && !x.Data.Disconnected && x != PlayerControl.LocalPlayer && x != player).ToList();
+            if (allPlayers.Count < 2) return "Too few people alive to receive a confessional";
+            var evilPlayers = PlayerControl.AllPlayerControls.ToArray().Where(x => !x.Data.IsDead && !x.Data.Disconnected &&
+            (x.Is(Faction.Impostors) || (x.Is(Faction.NeutralKilling) && CustomGameOptions.NeutralKillingShowsEvil) ||
+            (x.Is(Faction.NeutralEvil) && CustomGameOptions.NeutralEvilShowsEvil) || (x.Is(Faction.NeutralBenign) && CustomGameOptions.NeutralBenignShowsEvil))).ToList();
+            if (evilPlayers.Count == 0) return $"{player.GetDefaultOutfit().PlayerName} confesses to knowing that there are no more evil players!"; 
+            allPlayers.Shuffle();
+            evilPlayers.Shuffle();
+            var secondPlayer = allPlayers[0];
+            var firstTwoEvil = false;
+            foreach (var evilPlayer in evilPlayers)
+            {
+                if (evilPlayer == player || evilPlayer == secondPlayer) firstTwoEvil = true;
+            }
+            if (firstTwoEvil)
+            {
+                var thirdPlayer = allPlayers[1];
+                return $"{player.GetDefaultOutfit().PlayerName} confesses to knowing that they, {secondPlayer.GetDefaultOutfit().PlayerName} and/or {thirdPlayer.GetDefaultOutfit().PlayerName} is evil!";
+            }
+            else
+            {
+                var thirdPlayer = evilPlayers[0];
+                return $"{player.GetDefaultOutfit().PlayerName} confesses to knowing that they, {secondPlayer.GetDefaultOutfit().PlayerName} and/or {thirdPlayer.GetDefaultOutfit().PlayerName} is evil!";
+            }
+        }
+    }
 }

@@ -1,25 +1,32 @@
 using HarmonyLib;
-using TMPro;
 using UnityEngine;
-using UObject = UnityEngine.Object;
 
-namespace TownOfRoles
+namespace TownOfSushi
 {
     [HarmonyPriority(Priority.VeryHigh)] // to show this message first, or be overrided if any plugins do
     [HarmonyPatch(typeof(VersionShower), nameof(VersionShower.Start))]
     public static class VersionShowerUpdate
     {
-        public static GameObject Logo;        
-        public static void Prefix(MainMenuManager __instance)
+        public static void Postfix(VersionShower __instance)
         {
-            ModUpdater.LaunchUpdater();
+            var text = __instance.text;
+            text.text += " - <size=100%><color=#00FF00FF>TownOfSushi v" + TownOfSushi.VersionString + "\nBanner By Gun</color></size>";
+            text.transform.localPosition += new Vector3(-0.8f, -0.08f, 0f);
 
-            if (!Logo)
+            if (GameObject.Find("RightPanel"))
             {
-                Logo = new GameObject("TownOfRolesLogo");
-                Logo.transform.position = new (2f, -0.1f, 100f);
-                Logo.AddComponent<SpriteRenderer>().sprite = TownOfRoles.ToUBanner;
-                Logo.transform.SetParent(__instance.rightPanelMask.transform);
+                text.transform.SetParent(GameObject.Find("RightPanel").transform);
+
+                var aspect = text.gameObject.AddComponent<AspectPosition>();
+                aspect.Alignment = AspectPosition.EdgeAlignments.Top;
+                aspect.DistanceFromEdge = new Vector3(-0.2f, 2.5f, 8f);
+
+                aspect.StartCoroutine(Effects.Lerp(0.1f, new System.Action<float>((p) =>
+                {
+                    aspect.AdjustPosition();
+                })));
+
+                return;
             }
         }
     }

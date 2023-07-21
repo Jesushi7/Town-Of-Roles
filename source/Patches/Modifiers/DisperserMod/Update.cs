@@ -1,14 +1,14 @@
 using HarmonyLib;
-using TownOfRoles.Roles.Modifiers;
+using TownOfSushi.Roles.Modifiers;
 using UnityEngine;
 using TMPro;
 
-namespace TownOfRoles.Modifiers.DisperserMod
+namespace TownOfSushi.Modifiers.DisperserMod
 {
     [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]
     public class Update
     {
-        public static Sprite DisperseButton => TownOfRoles.DisperseSprite;
+        public static Sprite DisperseButton => TownOfSushi.DisperseSprite;
 
         public static void Postfix(HudManager __instance)
         {

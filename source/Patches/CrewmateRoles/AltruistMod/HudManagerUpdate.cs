@@ -1,9 +1,9 @@
 using HarmonyLib;
-using TownOfRoles.Roles;
+using TownOfSushi.Roles;
 using UnityEngine;
 using AmongUs.GameOptions;
 
-namespace TownOfRoles.CrewmateRoles.AltruistMod
+namespace TownOfSushi.CrewmateRoles.AltruistMod
 {
     [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]
     public class HudManagerUpdate

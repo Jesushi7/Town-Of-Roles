@@ -1,10 +1,10 @@
 using AmongUs.GameOptions;
 using HarmonyLib;
-using TownOfRoles.Extensions;
-using TownOfRoles.Roles;
+using TownOfSushi.Extensions;
+using TownOfSushi.Roles;
 using UnityEngine;
 
-namespace TownOfRoles
+namespace TownOfSushi
 {
     [HarmonyPatch(typeof(ShipStatus), nameof(ShipStatus.CalculateLightRadius))]
     public static class LowLights
@@ -34,14 +34,23 @@ namespace TownOfRoles
             }
 
             var switchSystem = __instance.Systems[SystemTypes.Electrical].Cast<SwitchSystem>();
-            if (player.IsImpostor() || player._object.Is(RoleEnum.Glitch) ||player._object.Is(ModifierEnum.Lighter)||
-                player._object.Is(RoleEnum.Juggernaut) || player._object.Is(RoleEnum.Werewolf) 
-                 || player._object.Is(RoleEnum.SerialKiller) || player._object.Is(RoleEnum.Pestilence) ||
+            if (player.IsImpostor() || player._object.Is(RoleEnum.Glitch)||player._object.Is(ModifierEnum.Lighter) ||
+                player._object.Is(RoleEnum.Juggernaut) || player._object.Is(RoleEnum.Pestilence) ||
                 (player._object.Is(RoleEnum.Jester) && CustomGameOptions.JesterImpVision) ||
-                (player._object.Is(RoleEnum.Pyromaniac) && CustomGameOptions.ArsoImpVision))
+                (player._object.Is(RoleEnum.Arsonist) && CustomGameOptions.ArsoImpVision) ||
+                (player._object.Is(RoleEnum.Vampire) && CustomGameOptions.VampImpVision))
             {
                 __result = __instance.MaxLightRadius * GameOptionsManager.Instance.currentNormalGameOptions.ImpostorLightMod;
                 return false;
+            }
+            else if (player._object.Is(RoleEnum.Werewolf))
+            {
+                var role = Role.GetRole<Werewolf>(player._object);
+                if (role.Rampaged)
+                {
+                    __result = __instance.MaxLightRadius * GameOptionsManager.Instance.currentNormalGameOptions.ImpostorLightMod;
+                    return false;
+                }
             }
 
             if (Patches.SubmergedCompatibility.isSubmerged())
@@ -53,6 +62,18 @@ namespace TownOfRoles
             var t = switchSystem.Value / 255f;
 
             if (player._object.Is(ModifierEnum.Nightowl)) t = 1;
+
+            if (player._object.Is(RoleEnum.Monarch))
+            {
+                var role = Role.GetRole<Monarch>(player._object);
+                if (role.Revealed)
+                {
+                    __result = Mathf.Lerp(__instance.MinLightRadius, __instance.MaxLightRadius/2, t) *
+                       GameOptionsManager.Instance.currentNormalGameOptions.CrewLightMod;
+                    return false;
+                }
+            }
+
             __result = Mathf.Lerp(__instance.MinLightRadius, __instance.MaxLightRadius, t) *
                        GameOptionsManager.Instance.currentNormalGameOptions.CrewLightMod;
             return false;

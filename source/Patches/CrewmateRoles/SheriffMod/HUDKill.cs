@@ -1,9 +1,9 @@
 ﻿using HarmonyLib;
-using TownOfRoles.Extensions;
-using TownOfRoles.Roles;
+using TownOfSushi.Extensions;
+using TownOfSushi.Roles;
 using UnityEngine;
 
-namespace TownOfRoles.CrewmateRoles.SheriffMod
+namespace TownOfSushi.CrewmateRoles.SheriffMod
 {
     [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]
     public class HUDKill
@@ -30,7 +30,7 @@ namespace TownOfRoles.CrewmateRoles.SheriffMod
                 KillButton.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
                     && AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started);
-                KillButton.SetCoolDown(role.SheriffKillTimer(), GameOptionsManager.Instance.currentNormalGameOptions.KillCooldown);
+                KillButton.SetCoolDown(role.SheriffKillTimer(), CustomGameOptions.SheriffKillCd);
                 Utils.SetTarget(ref role.ClosestPlayer, KillButton);
             }
             else

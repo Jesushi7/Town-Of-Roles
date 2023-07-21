@@ -1,6 +1,6 @@
-/*using HarmonyLib;
+using HarmonyLib;
 
-namespace TownOfRoles.Patches.CustomHats.Patches
+namespace TownOfSushi.Patches.CustomHats.Patches
 {
     [HarmonyPatch(typeof(AmongUsClient), nameof(AmongUsClient.Awake))]
     public class AmongUsClient_Patches
@@ -15,4 +15,4 @@ namespace TownOfRoles.Patches.CustomHats.Patches
             }
         }        
     }
-}*/
+}

@@ -1,7 +1,7 @@
 ﻿using HarmonyLib;
-using TownOfRoles.Roles;
+using TownOfSushi.Roles;
 
-namespace TownOfRoles.CrewmateRoles.MysticMod
+namespace TownOfSushi.CrewmateRoles.MysticMod
 {
     [HarmonyPatch(typeof(HudManager))]
     public class HudExamine

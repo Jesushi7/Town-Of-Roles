@@ -1,13 +1,13 @@
 using UnityEngine;
 
-namespace TownOfRoles.Roles.Modifiers
+namespace TownOfSushi.Roles.Modifiers
 {
     public class Tiebreaker : Modifier
     {
         public Tiebreaker(PlayerControl player) : base(player)
         {
             Name = "Tiebreaker";
-            TaskText = () => "Break the tie";
+            TaskText = () => "Your vote breaks ties";
             Color = Patches.Colors.Tiebreaker;
             ModifierType = ModifierEnum.Tiebreaker;
         }

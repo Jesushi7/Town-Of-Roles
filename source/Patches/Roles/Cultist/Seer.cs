@@ -1,7 +1,7 @@
 using System;
 using TMPro;
 
-namespace TownOfRoles.Roles.Cultist
+namespace TownOfSushi.Roles.Cultist
 {
     public class CultistSnitch : Role
     {
@@ -12,7 +12,7 @@ namespace TownOfRoles.Roles.Cultist
         public CultistSnitch(PlayerControl player) : base(player)
         {
             Name = "Snitch";
-            StartText = () => "Reveal If Other Players Have Been Converted";
+            ImpostorText = () => "Reveal If Other Players Have Been Converted";
             TaskText = () => "Reveal if other players have been converted";
             Color = Patches.Colors.Snitch;
             LastInvestigated = DateTime.UtcNow;

@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using TownOfRoles.Extensions;
-using TownOfRoles.Roles;
+using TownOfSushi.Extensions;
 
-namespace TownOfRoles.CrewmateRoles.MedicMod
+namespace TownOfSushi.CrewmateRoles.MedicMod
 {
     public class DeadPlayer
     {
@@ -29,11 +28,9 @@ namespace TownOfRoles.CrewmateRoles.MedicMod
 
             if (br.Killer.PlayerId == br.Body.PlayerId)
                 return
-                    $"Body Report: The kill appears to have been a Sheriff Shot! (Killed {Math.Round(br.KillAge / 1000)}s ago)";
+                    $"Body Report: The kill appears to have been a suicide! (Killed {Math.Round(br.KillAge / 1000)}s ago)";
 
-            bool grenade = false;
-            foreach (Role grenadier in Role.GetRoles(RoleEnum.Grenadier)) grenade = ((Grenadier) grenadier).flashedPlayers.Contains(br.Reporter);
-if (!(CustomGameOptions.MedicFlashReport && grenade) && br.KillAge < CustomGameOptions.MedicReportNameDuration * 1000)
+            if (br.KillAge < CustomGameOptions.MedicReportNameDuration * 1000)
                 return
                     $"Body Report: The killer appears to be {br.Killer.Data.PlayerName}! (Killed {Math.Round(br.KillAge / 1000)}s ago)";
 

@@ -1,27 +1,25 @@
 using Reactor.Utilities;
 using System;
-using TownOfRoles.Patches;
+using TownOfSushi.Patches;
 using UnityEngine;
 
-namespace TownOfRoles.Roles
+namespace TownOfSushi.Roles
 {
     public class Escapist : Role
     {
         public KillButton _escapeButton;
         public DateTime LastEscape;
-        public Vector3 EscapePoint;
+        public Vector3 EscapePoint = new();
 
         public Escapist(PlayerControl player) : base(player)
         {
             Name = "Escapist";
-            StartText = () => "Mark a place to get away from kills";
-            TaskText = () => "Teleport to get away from bodies";
+            ImpostorText = () => "Get away from kills with ease";
+            TaskText = () => "Teleport around the map";
+            FactionName = "Impostor";                   
             Color = Patches.Colors.Impostor;
             RoleType = RoleEnum.Escapist;
             AddToRoleHistory(RoleType);
-            FactionName = "Impostor";  
-                  
-            Faction = Faction.Impostors;              
             Faction = Faction.Impostors;
         }
 
@@ -49,6 +47,7 @@ namespace TownOfRoles.Roles
         {
             escapist.MyPhysics.ResetMoveState();
             var escapistRole = Role.GetRole<Escapist>(escapist);
+            if (escapistRole.EscapePoint == Vector3.zero) return;
             var position = escapistRole.EscapePoint;
             escapist.NetTransform.SnapTo(new Vector2(position.x, position.y));
 

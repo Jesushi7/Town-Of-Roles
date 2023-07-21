@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using AmongUs.GameOptions;
 using HarmonyLib;
-using TownOfRoles.Roles;
+using TownOfSushi.Roles;
 
-namespace TownOfRoles.NeutralRoles.JesterMod
+namespace TownOfSushi.NeutralRoles.JesterMod
 {
 	[HarmonyPatch(typeof(KillButton), "DoClick")]
 	public class PerformKill
@@ -94,7 +94,7 @@ namespace TownOfRoles.NeutralRoles.JesterMod
 													if (flag11)
 													{
 														role.LastKilled = DateTime.UtcNow;
-														role.LastKilled = role.LastKilled.AddSeconds((double)(GameOptionsManager.Instance.currentNormalGameOptions.KillCooldown + CustomGameOptions.ProtectKCReset));
+														role.LastKilled = role.LastKilled.AddSeconds((double)(GameOptionsManager.Instance.currentNormalGameOptions.KillCooldown + CustomGameOptions.VestKCReset));
 														result = false;
 													}
 													else

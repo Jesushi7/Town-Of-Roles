@@ -1,12 +1,12 @@
 using System;
 using HarmonyLib;
 using Hazel;
-using TownOfRoles.Roles;
+using TownOfSushi.Roles;
 using UnityEngine;
 using Reactor.Networking.Extensions;
 using AmongUs.GameOptions;
 
-namespace TownOfRoles.ImpostorRoles.UndertakerMod
+namespace TownOfSushi.ImpostorRoles.UndertakerMod
 {
     [HarmonyPatch(typeof(KillButton), nameof(KillButton.DoClick))]
     public class PerformKillButton
@@ -21,7 +21,7 @@ namespace TownOfRoles.ImpostorRoles.UndertakerMod
 
             if (__instance == role.DragDropButton)
             {
-                if (role.DragDropButton.graphic.sprite == TownOfRoles.DragSprite)
+                if (role.DragDropButton.graphic.sprite == TownOfSushi.DragSprite)
                 {
                     if (__instance.isCoolingDown) return false;
                     if (!__instance.enabled) return false;
@@ -35,24 +35,17 @@ namespace TownOfRoles.ImpostorRoles.UndertakerMod
                         foreach (var pb in Role.GetRoles(RoleEnum.Plaguebearer)) ((Plaguebearer)pb).RpcSpreadInfection(player, role.Player);
                     }
 
-                    var writer = AmongUsClient.Instance.StartRpcImmediately(PlayerControl.LocalPlayer.NetId,
-                        (byte) CustomRPC.Drag, SendOption.Reliable, -1);
-                    writer.Write(PlayerControl.LocalPlayer.PlayerId);
-                    writer.Write(playerId);
-                    AmongUsClient.Instance.FinishRpcImmediately(writer);
+                    Utils.Rpc(CustomRPC.Drag, PlayerControl.LocalPlayer.PlayerId, playerId);
 
                     role.CurrentlyDragging = role.CurrentTarget;
 
                     KillButtonTarget.SetTarget(__instance, null, role);
-                    __instance.graphic.sprite = TownOfRoles.DropSprite;
+                    __instance.graphic.sprite = TownOfSushi.DropSprite;
                     return false;
                 }
                 else
                 {
                     if (!__instance.enabled) return false;
-                    var writer = AmongUsClient.Instance.StartRpcImmediately(PlayerControl.LocalPlayer.NetId,
-                        (byte) CustomRPC.Drop, SendOption.Reliable, -1);
-                    writer.Write(PlayerControl.LocalPlayer.PlayerId);
                     Vector3 position = PlayerControl.LocalPlayer.transform.position;
 
                     if (Patches.SubmergedCompatibility.isSubmerged())
@@ -69,14 +62,12 @@ namespace TownOfRoles.ImpostorRoles.UndertakerMod
 
                     position.y -= 0.3636f;
 
-                    writer.Write(position);
-                    writer.Write(position.z);
-                    AmongUsClient.Instance.FinishRpcImmediately(writer);
+                    Utils.Rpc(CustomRPC.Drop, PlayerControl.LocalPlayer.PlayerId, position, position.z);
 
                     var body = role.CurrentlyDragging;
                     foreach (var body2 in role.CurrentlyDragging.bodyRenderers) body2.material.SetFloat("_Outline", 0f);
                     role.CurrentlyDragging = null;
-                    __instance.graphic.sprite = TownOfRoles.DragSprite;
+                    __instance.graphic.sprite = TownOfSushi.DragSprite;
                     role.LastDragged = DateTime.UtcNow;
 
                     body.transform.position = position;

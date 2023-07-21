@@ -1,27 +1,27 @@
 ﻿using HarmonyLib;
 using System.Linq;
-using TownOfRoles.CustomOption;
 
-namespace TownOfRoles.Patches
+namespace TownOfSushi.Patches
 {
     [HarmonyPatch(typeof(OverlayKillAnimation), nameof(OverlayKillAnimation.Initialize))]
     static class OverlayKillAnimationPatch
     {
-        static int currentOutfitTypeCache;
+        static int currentOutfitTypeCache = 0;
 
-        public static void Prefix(GameData.PlayerInfo kInfo)
+        [HarmonyPrefix]
+        public static void Prefix(GameData.PlayerInfo kInfo, GameData.PlayerInfo vInfo)
         {
-            var playerControl = PlayerControl.AllPlayerControls.ToArray().FirstOrDefault(p => p.PlayerId == kInfo.PlayerId);
+            PlayerControl playerControl = PlayerControl.AllPlayerControls.ToArray().FirstOrDefault(p => p.PlayerId == kInfo.PlayerId);
             currentOutfitTypeCache = (int)playerControl.CurrentOutfitType;
+            playerControl.CurrentOutfitType = PlayerOutfitType.Default;
 
-            if (!CustomGameOptions.AppearanceAnimation)
-                playerControl.CurrentOutfitType = PlayerOutfitType.Default;
         }
-
-        public static void Postfix(GameData.PlayerInfo kInfo)
+        [HarmonyPostfix]
+        public static void Postfix(GameData.PlayerInfo kInfo, GameData.PlayerInfo vInfo)
         {
-            var playerControl = PlayerControl.AllPlayerControls.ToArray().FirstOrDefault(p => p.PlayerId == kInfo.PlayerId);
+            PlayerControl playerControl = PlayerControl.AllPlayerControls.ToArray().FirstOrDefault(p => p.PlayerId == kInfo.PlayerId);
             playerControl.CurrentOutfitType = (PlayerOutfitType)currentOutfitTypeCache;
         }
+
     }
 }

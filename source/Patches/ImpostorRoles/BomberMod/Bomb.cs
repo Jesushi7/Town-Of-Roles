@@ -2,7 +2,7 @@
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace TownOfRoles.ImpostorRoles.BomberMod
+namespace TownOfSushi.ImpostorRoles.BomberMod
 {
     public class Bomb
     {

@@ -2,18 +2,42 @@ using System.Collections.Generic;
 using System.Linq;
 using HarmonyLib;
 using Hazel;
-using TownOfRoles.CrewmateRoles.MayorMod;
-using TownOfRoles.Extensions;
-using TownOfRoles.Roles;
+using TownOfSushi.CrewmateRoles.MonarchMod;
+using TownOfSushi.Extensions;
+using TownOfSushi.Roles;
 using Il2CppInterop.Runtime.InteropTypes.Arrays;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Analytics;
 
-namespace TownOfRoles.CrewmateRoles.SwapperMod
+namespace TownOfSushi.CrewmateRoles.SwapperMod
 {
     public class ShowHideButtonsSwapper
     {
         public static Dictionary<byte, int> CalculateVotes(MeetingHud __instance)
+        {
+            var self = CalculateVotesSwap(__instance);
+
+            var maxIdx = self.MaxPair(out var tie);
+
+            var exiled = GameData.Instance.AllPlayers.ToArray().FirstOrDefault(v => !tie && v.PlayerId == maxIdx.Key);
+
+            foreach (var oracle in Role.GetRoles(RoleEnum.Oracle))
+            {
+                var oracleRole = (Oracle)oracle;
+                if (oracleRole.Player.Data.IsDead || oracleRole.Player.Data.Disconnected || exiled == null || oracleRole.Confessor == null) continue;
+                if (oracleRole.Confessor.PlayerId == exiled.PlayerId)
+                {
+                    oracleRole.SavedConfessor = true;
+                    Utils.Rpc(CustomRPC.Bless, oracleRole.Player.PlayerId);
+                    var dictionary = new Dictionary<byte, int>();
+                    return dictionary;
+                }
+            }
+
+            return self;
+        }
+        public static Dictionary<byte, int> CalculateVotesSwap(MeetingHud __instance)
         {
             var self = RegisterExtraVotes.CalculateAllVotes(__instance);
             if (SwapVotes.Swap1 == null || SwapVotes.Swap2 == null) return self;
@@ -79,11 +103,7 @@ namespace TownOfRoles.CrewmateRoles.SwapperMod
 
                 if (SwapVotes.Swap1 == null || SwapVotes.Swap2 == null) return true;
 
-                var writer = AmongUsClient.Instance.StartRpcImmediately(PlayerControl.LocalPlayer.NetId,
-                    (byte) CustomRPC.SetSwaps, SendOption.Reliable, -1);
-                writer.Write(SwapVotes.Swap1.TargetPlayerId);
-                writer.Write(SwapVotes.Swap2.TargetPlayerId);
-                AmongUsClient.Instance.FinishRpcImmediately(writer);
+                Utils.Rpc(CustomRPC.SetSwaps, SwapVotes.Swap1.TargetPlayerId, SwapVotes.Swap2.TargetPlayerId);
                 return true;
             }
         }
@@ -112,8 +132,7 @@ namespace TownOfRoles.CrewmateRoles.SwapperMod
                 return true;
             }
             public static bool Prefix(MeetingHud __instance)
-            {				
-                if (!PlayerControl.LocalPlayer.Is(RoleEnum.Swapper) || CustomGameOptions.SwapAfterVoting) return true;
+            {
                 if (__instance.playerStates.All(ps => ps.AmDead || ps.DidVote && CheckVoted(ps)))
                 {
                     var self = CalculateVotes(__instance);
@@ -134,15 +153,6 @@ namespace TownOfRoles.CrewmateRoles.SwapperMod
                     }
 
                     __instance.RpcVotingComplete(array, exiled, tie);
-
-                    foreach (var role in Role.GetRoles(RoleEnum.Mayor))
-                    {
-                        var writer = AmongUsClient.Instance.StartRpcImmediately(PlayerControl.LocalPlayer.NetId,
-                            (byte)CustomRPC.SetExtraVotes, SendOption.Reliable, -1);
-                        writer.Write(role.Player.PlayerId);
-                        writer.WriteBytesAndSize(((Mayor)role).ExtraVotes.ToArray());
-                        AmongUsClient.Instance.FinishRpcImmediately(writer);
-                    }
                 }
 
                 return false;

@@ -8,7 +8,7 @@ using Object = UnityEngine.Object;
 using Reactor.Networking.Extensions;
 using System;
 
-namespace TownOfRoles.Roles.Modifiers
+namespace TownOfSushi.Roles.Modifiers
 {
     public class Disperser : Modifier
     {
@@ -19,7 +19,7 @@ namespace TownOfRoles.Roles.Modifiers
         public Disperser(PlayerControl player) : base(player)
         {
             Name = "Disperser";
-            TaskText = () => "Transport everyone to a random vent";
+            TaskText = () => "Separate the Crew";
             Color = Patches.Colors.Impostor;
             StartingCooldown = DateTime.UtcNow;
             ModifierType = ModifierEnum.Disperser;

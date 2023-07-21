@@ -1,11 +1,11 @@
 using HarmonyLib;
-using TownOfRoles.Extensions;
-using TownOfRoles.Roles;
-using TownOfRoles.Roles.Cultist;
+using TownOfSushi.Extensions;
+using TownOfSushi.Roles;
+using TownOfSushi.Roles.Cultist;
 using UnityEngine;
 using static UnityEngine.ParticleSystem.PlaybackState;
 
-namespace TownOfRoles.CultistRoles.WhispererMod
+namespace TownOfSushi.CultistRoles.WhispererMod
 {
 
     [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]
@@ -18,8 +18,8 @@ namespace TownOfRoles.CultistRoles.WhispererMod
                 foreach (var state in __instance.playerStates)
                 {
                     if (player.PlayerId != state.TargetPlayerId) continue;
-                    if (player.Is(RoleEnum.Sheriff) || player.Is(RoleEnum.Mayor) || player.Is(RoleEnum.CultistSnitch)
-                    ) state.NameText.color = new Color(0f, 1f, 1f, 1f);
+                    if (player.Is(RoleEnum.Sheriff) || player.Is(RoleEnum.Monarch) || player.Is(RoleEnum.CultistSnitch)
+                    || player.Is(RoleEnum.Survivor)) state.NameText.color = new Color(0f, 1f, 1f, 1f);
                 }
             }
 
@@ -51,8 +51,8 @@ namespace TownOfRoles.CultistRoles.WhispererMod
 
             foreach (var player in PlayerControl.AllPlayerControls)
             {
-                if (player.Is(RoleEnum.Sheriff) || player.Is(RoleEnum.Mayor) || player.Is(RoleEnum.CultistSnitch)
-                    ) player.nameText().color = new Color(0f, 1f, 1f, 1f);
+                if (player.Is(RoleEnum.Sheriff) || player.Is(RoleEnum.Monarch) || player.Is(RoleEnum.CultistSnitch)
+                    || player.Is(RoleEnum.Survivor)) player.nameText().color = new Color(0f, 1f, 1f, 1f);
             }
 
             if (PlayerControl.LocalPlayer.Is(RoleEnum.Necromancer)) return;

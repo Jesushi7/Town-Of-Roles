@@ -3,7 +3,7 @@ using System.Linq;
 using Hazel;
 using UnityEngine;
 
-namespace TownOfRoles.CrewmateRoles.AvengerMod
+namespace TownOfSushi.CrewmateRoles.AvengerMod
 {
     [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]
     public class RepickAvenger
@@ -15,6 +15,26 @@ namespace TownOfRoles.CrewmateRoles.AvengerMod
             if (PlayerControl.LocalPlayer.Data == null) return;
             if (PlayerControl.LocalPlayer != SetAvenger.WillBeAvenger) return;
             if (PlayerControl.LocalPlayer.Data.IsDead) return;
+            if (!PlayerControl.LocalPlayer.Is(Faction.Crewmates))
+            {
+                var toChooseFromAlive = PlayerControl.AllPlayerControls.ToArray().Where(x => x.Is(Faction.Crewmates)&& !x.Data.Disconnected).ToList();
+                if (toChooseFromAlive.Count == 0)
+                {
+                    SetAvenger.WillBeAvenger = null;
+
+                    Utils.Rpc(CustomRPC.SetAvenger, byte.MaxValue);
+                }
+                else
+                {
+                    var rand2 = Random.RandomRangeInt(0, toChooseFromAlive.Count);
+                    var pc2 = toChooseFromAlive[rand2];
+
+                    SetAvenger.WillBeAvenger = pc2;
+
+                    Utils.Rpc(CustomRPC.SetAvenger, pc2.PlayerId);
+                }
+                return;
+            }
             var toChooseFrom = PlayerControl.AllPlayerControls.ToArray().Where(x => x.Is(Faction.Crewmates) && x.Data.IsDead && !x.Data.Disconnected).ToList();
             if (toChooseFrom.Count == 0) return;
             var rand = Random.RandomRangeInt(0, toChooseFrom.Count);
@@ -22,10 +42,7 @@ namespace TownOfRoles.CrewmateRoles.AvengerMod
 
             SetAvenger.WillBeAvenger = pc;
 
-            var writer = AmongUsClient.Instance.StartRpcImmediately(PlayerControl.LocalPlayer.NetId,
-                (byte)CustomRPC.SetAvenger, SendOption.Reliable, -1);
-            writer.Write(pc.PlayerId);
-            AmongUsClient.Instance.FinishRpcImmediately(writer);
+            Utils.Rpc(CustomRPC.SetAvenger, pc.PlayerId);
             return;
         }
     }

@@ -1,11 +1,10 @@
 using HarmonyLib;
-using TownOfRoles.Extensions;
-using TownOfRoles.Roles;
+using TownOfSushi.Extensions;
+using TownOfSushi.Roles;
 using UnityEngine;
 using AmongUs.GameOptions;
-using TownOfRoles;
 
-namespace TownOfRoles
+namespace TownOfSushi
 {
     [HarmonyPatch(typeof(HudManager))]
     public static class HudManagerVentPatch
@@ -25,10 +24,9 @@ namespace TownOfRoles
     [HarmonyPatch(typeof(Vent), nameof(Vent.CanUse))]
     public static class VentPatches
     {
-    public static bool CanVent(PlayerControl player, GameData.PlayerInfo playerInfo)
-        {              
-            if (GameOptionsManager.Instance.CurrentGameOptions.GameMode == GameModes.HideNSeek)
-                return false;
+        public static bool CanVent(PlayerControl player, GameData.PlayerInfo playerInfo)
+        {
+            if (GameOptionsManager.Instance.CurrentGameOptions.GameMode == GameModes.HideNSeek) return false;
 
             if (player.inVent)
                 return true;
@@ -40,31 +38,30 @@ namespace TownOfRoles
             else if (CustomGameOptions.GameMode == GameMode.Cultist && player.Is(RoleEnum.Engineer)) return true;
 
             if (player.Is(RoleEnum.Morphling) && !CustomGameOptions.MorphlingVent
-            //|| Role.GetRole<Morphling>(player).Morphed && !CustomGameOptions.MorphlingMorphVent
-                //Swooper + Not allowed to Vent On Polus If The Option is Disabled
-                || player.Is(RoleEnum.Swooper) && GameOptionsManager.Instance.currentNormalGameOptions.MapId == 2 && !CustomGameOptions.SwooperPolusVent
+                || player.Is(RoleEnum.Swooper) && !CustomGameOptions.SwooperVent
                 || player.Is(RoleEnum.Grenadier) && !CustomGameOptions.GrenadierVent
-                || player.Is(RoleEnum.Escapist) && !CustomGameOptions.EscapistVent                
-                || player.Is(RoleEnum.Bomber) && !CustomGameOptions.BomberVent)
+                || player.Is(RoleEnum.Undertaker) && !CustomGameOptions.UndertakerVent
+                || player.Is(RoleEnum.Escapist) && !CustomGameOptions.EscapistVent
+                || player.Is(RoleEnum.Bomber) && !CustomGameOptions.BomberVent
+                || (player.Is(RoleEnum.Undertaker) && Role.GetRole<Undertaker>(player).CurrentlyDragging != null && !CustomGameOptions.UndertakerVentWithBody))
                 return false;
-            if (player.Is(RoleEnum.Undertaker))
+
+            if (player.Is(RoleEnum.Engineer)||
+                (player.Is(RoleEnum.Glitch) && CustomGameOptions.GlitchVent) || (player.Is(RoleEnum.Juggernaut) && CustomGameOptions.JuggVent) ||
+                (player.Is(RoleEnum.Pestilence) && CustomGameOptions.PestVent) || CustomGameOptions.EveryoneVent|| (player.Is(RoleEnum.Jester) && CustomGameOptions.JesterVent) ||
+                (player.Is(RoleEnum.Vampire) && CustomGameOptions.VampVent))
                 return true;
 
-            if (player.Is(RoleEnum.Engineer) ||
-                (player.Is(RoleEnum.Glitch) && CustomGameOptions.GlitchVent) || 
-                (player.Is(RoleEnum.Vulture) && CustomGameOptions.VultureVent) || 
-                (player.Is(RoleEnum.Plaguebearer) && CustomGameOptions.PlaguebearerVent)||  
-                (player.Is(RoleEnum.Pyromaniac) && CustomGameOptions.ArsoVent)||
-                (player.Is(RoleEnum.SerialKiller) && CustomGameOptions.SerialKillerVent) ||
-                (player.Is(RoleEnum.Juggernaut) && CustomGameOptions.JuggVent) ||
-                (player.Is(RoleEnum.Werewolf) && CustomGameOptions.WerewolfVent)||
-                CustomGameOptions.EveryoneVent||
-                (player.Is(RoleEnum.Pestilence) && CustomGameOptions.PestVent) || (player.Is(RoleEnum.Jester) && CustomGameOptions.JesterVent))
-                return true;
+            if (player.Is(RoleEnum.Werewolf) && CustomGameOptions.WerewolfVent)
+            {
+                var role = Role.GetRole<Werewolf>(PlayerControl.LocalPlayer);
+                if (role.Rampaged) return true;
+            }
 
             return playerInfo.IsImpostor();
         }
-    public static void Postfix(Vent __instance,
+
+        public static void Postfix(Vent __instance,
             [HarmonyArgument(0)] GameData.PlayerInfo playerInfo,
             [HarmonyArgument(1)] ref bool canUse,
             [HarmonyArgument(2)] ref bool couldUse,
@@ -74,7 +71,8 @@ namespace TownOfRoles
             PlayerControl playerControl = playerInfo.Object;
             if (GameOptionsManager.Instance.CurrentGameOptions.GameMode == GameModes.Normal) couldUse = CanVent(playerControl, playerInfo) && !playerControl.MustCleanVent(__instance.Id) && (!playerInfo.IsDead || playerControl.inVent) && (playerControl.CanMove || playerControl.inVent);
             else if (GameOptionsManager.Instance.CurrentGameOptions.GameMode == GameModes.HideNSeek && playerControl.Data.IsImpostor()) couldUse = false;
-            else couldUse = true;
+            else couldUse = canUse;
+
             var ventitaltionSystem = ShipStatus.Instance.Systems[SystemTypes.Ventilation].Cast<VentilationSystem>();
             if (ventitaltionSystem != null && ventitaltionSystem.PlayersCleaningVents != null)
             {
@@ -83,8 +81,8 @@ namespace TownOfRoles
                     if (item == __instance.Id)
                         couldUse = false;
                 }
-
             }
+
             canUse = couldUse;
 
             if (Patches.SubmergedCompatibility.isSubmerged())
@@ -124,8 +122,9 @@ namespace TownOfRoles
             __result = num;
         }
     }
+
     [HarmonyPatch(typeof(Vent), nameof(Vent.SetButtons))]
-    public static class EnterVentPatch
+    public static class JesterEnterVent
     {
         public static bool Prefix(Vent __instance)
         {

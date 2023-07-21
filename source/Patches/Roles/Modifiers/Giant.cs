@@ -1,7 +1,7 @@
-using TownOfRoles.Extensions;
+using TownOfSushi.Extensions;
 using UnityEngine;
 
-namespace TownOfRoles.Roles.Modifiers
+namespace TownOfSushi.Roles.Modifiers
 {
     public class Giant : Modifier, IVisualAlteration
     {
@@ -18,7 +18,7 @@ namespace TownOfRoles.Roles.Modifiers
         {
             appearance = Player.GetDefaultAppearance();
             appearance.SpeedFactor = CustomGameOptions.GiantSlow;
-            appearance.SizeFactor = new Vector3(CustomGameOptions.GiantSize, CustomGameOptions.GiantSize, CustomGameOptions.GiantSize);
+            appearance.SizeFactor = new Vector3(1.0f, 1.0f, 1.0f);
             return true;
         }
     }

@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace TownOfRoles.CustomOption
+namespace TownOfSushi.CustomOption
 {
     public class CustomOption
     {
@@ -34,8 +34,6 @@ namespace TownOfRoles.CustomOption
         public object DefaultValue { get; set; }
 
         public static bool LobbyTextScroller { get; set; } = true;
-
-        protected internal bool Indent { get; set; }
 
         public override string ToString()
         {
