@@ -8,7 +8,7 @@ namespace TownOfRoles.Roles.Modifiers
         {
             Name = "Multitasker";
             TaskText = () => "Your task windows are transparent";
-            Color = Patches.Colors.Modifiers;
+            Color = Patches.Colors.Multitasker;
             ModifierType = ModifierEnum.Multitasker;
         }
     }

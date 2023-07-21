@@ -1,5 +1,6 @@
 using HarmonyLib;
 using Hazel;
+using TownOfRoles;
 using TownOfRoles.Extensions;
 using TownOfRoles.Roles;
 using UnityEngine;
@@ -10,6 +11,7 @@ namespace TownOfRoles.NeutralRoles.ExecutionerMod
     {
         Crew,
         Amnesiac,
+        Survivor,
         Jester
     }
 
@@ -57,14 +59,20 @@ namespace TownOfRoles.NeutralRoles.ExecutionerMod
             if (CustomGameOptions.OnTargetDead == OnTargetDead.Jester)
             {
                 var jester = new Jester(player);
-                jester.SpawnedAs = false;
-                jester.RegenTask();
+                var task = new GameObject("JesterTask").AddComponent<ImportantTextTask>();
+                task.transform.SetParent(player.transform, false);
+                task.Text =
+                    $"{jester.ColorString}Role: {jester.Name}\nYour target is dead. Now you get voted out";
+                player.myTasks.Insert(0, task);
             }
             else if (CustomGameOptions.OnTargetDead == OnTargetDead.Amnesiac)
             {
                 var amnesiac = new Amnesiac(player);
-                amnesiac.SpawnedAs = false;
-                amnesiac.RegenTask();
+                var task = new GameObject("AmnesiacTask").AddComponent<ImportantTextTask>();
+                task.transform.SetParent(player.transform, false);
+                task.Text =
+                    $"{amnesiac.ColorString}Role: {amnesiac.Name}\nYour target is dead. Now remember a new role";
+                player.myTasks.Insert(0, task);
             }
             else
             {

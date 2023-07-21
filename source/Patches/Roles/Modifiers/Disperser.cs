@@ -20,7 +20,7 @@ namespace TownOfRoles.Roles.Modifiers
         {
             Name = "Disperser";
             TaskText = () => "Transport everyone to a random vent";
-            Color = Patches.Colors.Modifiers;
+            Color = Patches.Colors.Impostor;
             StartingCooldown = DateTime.UtcNow;
             ModifierType = ModifierEnum.Disperser;
         }

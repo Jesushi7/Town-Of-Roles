@@ -78,7 +78,7 @@ namespace TownOfRoles
 
                 __instance.ReportButton.gameObject.SetActive(false);
 
-                if (!GameStates.IsLobby)
+                if (!Classes.GameStates.IsLobby)
                     return;
 
                 __instance.ImpostorVentButton.gameObject.SetActive(false);

@@ -10,7 +10,7 @@ namespace TownOfRoles.CustomOption
     public static class Patches
     {
 
-        static string[] Menus = { "General Mod", "Crew", "Neutral", "Imposter", "Modifier" };
+        static string[] Menus = { "Town of Roles", "Crewmate", "Neutral", "Impostor", "Modifier" };
 
         public static Export ExportButton;
         public static Import ImportButton;

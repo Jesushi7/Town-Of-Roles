@@ -8,7 +8,7 @@ namespace TownOfRoles.Roles.Modifiers
         {
             Name = "Blind";
             TaskText = () => "Your report button does not light up";
-            Color = Patches.Colors.Modifiers;
+            Color = Patches.Colors.Blind;
             ModifierType = ModifierEnum.Blind;
         }
     }

@@ -13,7 +13,7 @@ namespace TownOfRoles.Roles.Cultist
         public Chameleon(PlayerControl player) : base(player)
         {
             Name = "Chameleon";
-            StartText = () => "Turn Invisible Temporarily";
+            StartText = () => "<color=#708eef>Turn invisible temporarily</color>";
             TaskText = () => "Turn invisible to catch killers";
             Color = Patches.Colors.Chameleon;
             LastSwooped = DateTime.UtcNow;

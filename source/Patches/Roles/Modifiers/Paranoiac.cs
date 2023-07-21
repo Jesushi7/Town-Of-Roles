@@ -10,7 +10,7 @@ namespace TownOfRoles.Roles.Modifiers
         {
             Name = "Paranoiac";
             TaskText = () => "See when someone is close to you";
-            Color = Patches.Colors.Modifiers;
+            Color = Patches.Colors.Radar;
             ModifierType = ModifierEnum.Paranoiac;
         }
     }

@@ -219,7 +219,6 @@ namespace TownOfRoles.NeutralRoles.AmnesiacMod
             {
                 var engiRole = Role.GetRole<Engineer>(amnesiac);
                 engiRole.LastFix  = DateTime.UtcNow;
-                engiRole.LastVent  = DateTime.UtcNow;
             }
             else if (role == RoleEnum.Oracle)
             {

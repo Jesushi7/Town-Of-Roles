@@ -1,10 +1,10 @@
-using System.Linq;
+/*using System.Linq;
 using HarmonyLib;
 using TownOfRoles.Extensions;
 using TownOfRoles.Roles;
 using UnityEngine;
 
-namespace TownOfRoles.NeutralRoles.SerialKillerMod
+namespace TownOfRoles.CrewmateRoles.CrewmateMod
 {
     [HarmonyPatch(typeof(EndGameManager), nameof(EndGameManager.Start))]
     public class Outro
@@ -13,13 +13,13 @@ namespace TownOfRoles.NeutralRoles.SerialKillerMod
         {
             if (Role.GetRoles(RoleEnum.Jester).Any(x => ((Jester)x).VotedOut)) return;
             if (Role.GetRoles(RoleEnum.Executioner).Any(x => ((Executioner)x).TargetVotedOut)) return;
-            var role = Role.AllRoles.FirstOrDefault(x => x.RoleType == RoleEnum.SerialKiller && ((SerialKiller) x).SerialKillerWins);
+            var role = Role.AllRoles.FirstOrDefault(x => x.Faction == Faction.Crewmates && ((Crewmate) x).CrewmateWins);
             if (role == null) return;
             PoolablePlayer[] array = Object.FindObjectsOfType<PoolablePlayer>();
             foreach (var player in array) player.NameText().text = role.ColorString + player.NameText().text + "</color>";
-            __instance.BackgroundBar.material.color = role.Color;
+            __instance.BackgroundBar.material.color = Patches.Colors.Crewmate;
             var text = Object.Instantiate(__instance.WinText);
-            text.text = "Serial Killer Wins!";
+            text.text = "Crewmate Wins!";
             text.color = role.Color;
             var pos = __instance.WinText.transform.localPosition;
             pos.y = 1.5f;
@@ -27,4 +27,4 @@ namespace TownOfRoles.NeutralRoles.SerialKillerMod
             text.text = $"<size=4>{text.text}</size>";
         }
     }
-}
+}*/

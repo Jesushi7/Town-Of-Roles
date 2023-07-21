@@ -8,7 +8,7 @@ namespace TownOfRoles.Roles.Modifiers
         {
             Name = "Drunk";
             TaskText = () => "Your controls are inverted!";
-            Color = Patches.Colors.Modifiers;
+            Color = Patches.Colors.Drunk;
             ModifierType = ModifierEnum.Drunk;
         }
     }

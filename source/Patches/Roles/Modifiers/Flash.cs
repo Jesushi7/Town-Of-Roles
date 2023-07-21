@@ -10,7 +10,7 @@ namespace TownOfRoles.Roles.Modifiers
         {
             Name = "Flash";
             TaskText = () => "You're faster than others";
-            Color = Patches.Colors.Modifiers;
+            Color = Patches.Colors.Flash;
             ModifierType = ModifierEnum.Flash;
         }
 

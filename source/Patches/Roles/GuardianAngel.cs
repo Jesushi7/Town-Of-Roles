@@ -11,7 +11,7 @@ namespace TownOfRoles.Roles
         public bool Enabled;
         public DateTime LastProtected;
         public float TimeRemaining;
-
+        public bool GAImpWin { get; set; }
         public int UsesLeft;
         public TextMeshPro UsesText;
 

@@ -25,6 +25,8 @@ using System.IO;
 using InnerNet;
 using Reactor.Utilities;
 using TownOfRoles.ImpostorRoles.CamouflageMod;
+using TownOfRoles.Custom;
+using UObject = UnityEngine.Object;
 
 namespace TownOfRoles
 {
@@ -57,7 +59,7 @@ namespace TownOfRoles
         {
            player.SetOutfit(CustomPlayerOutfitType.Default);
         }
-
+       
         public static void Camouflage()
         {
             foreach (var player in PlayerControl.AllPlayerControls)
@@ -111,7 +113,7 @@ namespace TownOfRoles
         {
             return Ability.GetAbility(player)?.AbilityType == abilityType;
         }
-
+        public static List<DeadBody> AllBodies => UObject.FindObjectsOfType<DeadBody>().ToList();
         public static bool Is(this PlayerControl player, Faction faction)
         {
             return Role.GetRole(player)?.Faction == faction;
@@ -133,7 +135,7 @@ namespace TownOfRoles
 
             return impostors;
         }
-
+        public static bool Last(PlayerControl player) => (Classes.GameStates.LastImp && player.Is(Faction.Impostors));
         public static RoleEnum GetRole(PlayerControl player)
         {
             if (player == null) return RoleEnum.None;
@@ -153,6 +155,9 @@ namespace TownOfRoles
 
             return null;
         }
+public static void LogSomething(object message) => PluginSingleton<TownOfRoles>.Instance.Log.LogMessage(message);        
+        public static bool RoundOne;        
+        public static List<Vent> AllVents => UObject.FindObjectsOfType<Vent>().ToList();        
         public static void DefaultOutfit(PlayerControl player)
         {
             player.myRend().color = new Color32(255, 255, 255, 255);
@@ -165,7 +170,7 @@ namespace TownOfRoles
                 DefaultOutfit(player);
                 player.myRend().color = new Color32(255, 255, 255, 255);
             }
-        }
+        }     
         public static bool IsShielded(this PlayerControl player)
         {
             return Role.GetRoles(RoleEnum.Medic).Any(role =>
@@ -400,6 +405,7 @@ namespace TownOfRoles
             }
             return playerControlList;
         }
+        
         public static Faction GetFaction(this PlayerControl player)
         {
             if (player == null)
@@ -412,39 +418,73 @@ namespace TownOfRoles
 
             return role.Faction;
         }        
- public static IEnumerator FlashCoro(Color color, string message = "", float duration = 1f, float size = 100f)
+        public static void Flash(Color32 color, string message, float duration = 0.5f, float size = 100f) => Flash(color, duration, message, size);
+
+        public static void Flash(Color32 color, float duration = 0.5f, string message = "", float size = 100f) => Coroutines.Start(FlashCoro(color, duration, message, size));        
+
+        public static IEnumerator FlashCoro(Color color, float duration, string message, float size)
         {
-            if (!HudManager.Instance || HudManager.Instance.FullScreen == null)
-                yield break;
+            color.a = 0.3f;
 
-            HudManager.Instance.FullScreen.gameObject.SetActive(true);
-            HudManager.Instance.FullScreen.enabled = true;
+            if (HudManager.InstanceExists && HudManager.Instance.FullScreen)
+            {
+                var fullscreen = HudManager.Instance.FullScreen;
+                fullscreen.enabled = true;
+                fullscreen.gameObject.active = true;
+                fullscreen.color = color;
+            }
 
-            // Message Text
-            var messageText = Object.Instantiate(HudManager.Instance.KillButton.cooldownTimerText, HudManager.Instance.transform);
-            messageText.text = $"<size={size}%>{message}</size>";
-            messageText.enableWordWrapping = false;
-            messageText.transform.localScale = Vector3.one * 0.5f;
-            messageText.transform.localPosition = new Vector3(0f, 0f, 0f);
-            messageText.gameObject.SetActive(true);
-            HudManager.Instance.StartCoroutine(Effects.Lerp(duration, new Action<float>((p) =>
+            HudManager.Instance.Notifier.AddItem($"<color=#FFFFFFFF><size={size}%>{message}</size></color>");
+
+            yield return new WaitForSeconds(duration);
+
+            if (HudManager.InstanceExists && HudManager.Instance.FullScreen)
             {
                 var fullscreen = HudManager.Instance.FullScreen;
 
-                if (p < 0.5)
+                if (fullscreen.color.Equals(color))
+                    fullscreen.color = new(1f, 0f, 0f, 0.37254903f);
+
+                var fs = false;
+
+                if (ShipStatus.Instance)
                 {
-                    if (fullscreen != null)
-                        fullscreen.color = new Color(color.r, color.g, color.b, Mathf.Clamp01(p * 1.5f));
+                    switch (TownOfRoles.VanillaOptions.MapId)
+                    {
+                        case 0:
+                        case 1:
+                        case 3:
+                            var reactor1 = ShipStatus.Instance.Systems[SystemTypes.Reactor].Cast<ReactorSystemType>();
+                            var oxygen1 = ShipStatus.Instance.Systems[SystemTypes.LifeSupp].Cast<LifeSuppSystemType>();
+                            fs = reactor1.IsActive || oxygen1.IsActive;
+                            break;
+
+                        case 2:
+                            var seismic = ShipStatus.Instance.Systems[SystemTypes.Laboratory].Cast<ReactorSystemType>();
+                            fs = seismic.IsActive;
+                            break;
+
+                        case 4:
+                            var reactor = ShipStatus.Instance.Systems[SystemTypes.Reactor].Cast<HeliSabotageSystem>();
+                            fs = reactor.IsActive;
+                            break;
+
+                        case 5:
+                            fs = CustomPlayer.Local.myTasks.Any(x => x.TaskType == SubmergedCompatibility.RetrieveOxygenMask);
+                            break;
+
+                        case 6:
+                            var reactor3 = ShipStatus.Instance.Systems[SystemTypes.Reactor].Cast<ReactorSystemType>();
+                            var oxygen3 = ShipStatus.Instance.Systems[SystemTypes.LifeSupp].Cast<LifeSuppSystemType>();
+                            var seismic2 = ShipStatus.Instance.Systems[SystemTypes.Laboratory].Cast<ReactorSystemType>();
+                            fs = reactor3.IsActive || seismic2.IsActive || oxygen3.IsActive;
+                            break;
+                    }
                 }
-                else if (fullscreen != null)
-                    fullscreen.color = new Color(color.r, color.g, color.b, Mathf.Clamp01((1 - p) * 1.5f));
 
-                if (p == 1f && fullscreen != null)
-                    fullscreen.enabled = false;
-
-                if (p == 1f)
-                    messageText.gameObject.Destroy();
-            })));
+                fullscreen.enabled = fs;
+                fullscreen.gameObject.active = fs;
+            }
         }
         public static PlayerControl GetClosestPlayer(PlayerControl refPlayer, List<PlayerControl> AllPlayers)
         {
@@ -503,6 +543,7 @@ namespace TownOfRoles
             else
                 return 0f;
         }
+        
         public static void SetTarget(
             ref PlayerControl closestPlayer,
             KillButton button,
@@ -600,6 +641,18 @@ namespace TownOfRoles
                         target.Is(RoleEnum.Jester) && CustomGameOptions.SheriffKillsJester) sheriff.CorrectKills += 1;
                     else if (killer == target) sheriff.IncorrectKills += 1;
                 }
+
+                var targetRole = Role.GetRole(target);
+            
+            if (target.Is(ModifierEnum.VIP))
+            {
+                Flash(targetRole.Color);
+
+                if (!Role.LocalRole.AllArrows.ContainsKey(target.PlayerId))
+                    Role.LocalRole.AllArrows.Add(target.PlayerId, new(PlayerControl.LocalPlayer, Colors.VIP));
+                else
+                    Role.LocalRole.AllArrows[target.PlayerId].Update(Colors.VIP);
+            }
             
             var playerName = PlayerControl.LocalPlayer.name;
             var blank = "";                

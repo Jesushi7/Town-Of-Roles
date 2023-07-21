@@ -86,6 +86,7 @@ namespace TownOfRoles
         Watcher,
         ChameleonModifier,
         Spy,
+        VIP,
         None
     }
 

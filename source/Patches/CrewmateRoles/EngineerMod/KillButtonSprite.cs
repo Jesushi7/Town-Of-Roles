@@ -14,19 +14,6 @@ namespace TownOfRoles.CrewmateRoles.EngineerMod
         {
             var ventButton = __instance.ImpostorVentButton;
             if (ventButton.cooldownTimerText == null) ventButton.cooldownTimerText = Object.Instantiate(__instance.KillButton.cooldownTimerText, ventButton.transform);
-            if (PlayerControl.LocalPlayer.inVent)
-            {
-                if (role.TimeRemaining <= 0)
-                {
-                    ventButton.DoClick();
-                }
-                ventButton.SetCoolDown(role.TimeRemaining, CustomGameOptions.EngiVentDuration);
-                role.TimeRemaining -= Time.deltaTime;
-            }
-            else
-            {
-                ventButton.SetCoolDown(role.EngineerTimer(role.LastVent, CustomGameOptions.EngiVentCooldown), CustomGameOptions.EngiVentCooldown);
-            }
         }
 
         [HarmonyPatch(nameof(HudManager.Update))]
@@ -37,7 +24,6 @@ namespace TownOfRoles.CrewmateRoles.EngineerMod
             if (PlayerControl.LocalPlayer.Data == null) return;
             if (!PlayerControl.LocalPlayer.Is(RoleEnum.Engineer)) return;
             var role = Role.GetRole<Engineer>(PlayerControl.LocalPlayer);
-            if (CustomGameOptions.EngiHasVentCooldown) UpdtateEngineerVentTimer(__instance, role);
             if (__instance.KillButton == null) return;
 
             if (role.UsesText == null && role.EngiFixPerRound > 0 && role.EngiFixPerGame > 0)
@@ -48,7 +34,7 @@ namespace TownOfRoles.CrewmateRoles.EngineerMod
                     role.UsesText.transform.localPosition.x + 0.26f,
                     role.UsesText.transform.localPosition.y + 0.29f,
                     role.UsesText.transform.localPosition.z);
-                role.UsesText.transform.localScale = role.UsesText.transform.localScale * 0.65f;
+                role.UsesText.transform.localScale = role.UsesText.transform.localScale * 0.55f;
                 role.UsesText.alignment = TMPro.TextAlignmentOptions.Right;
                 role.UsesText.fontStyle = TMPro.FontStyles.Bold;
             }
@@ -58,9 +44,6 @@ namespace TownOfRoles.CrewmateRoles.EngineerMod
             }
             
             __instance.KillButton.graphic.sprite = Sprite;
-            if ((CustomGameOptions.EngineerFixPer == EngineerFixPer.Custom) && CustomGameOptions.EngiHasCooldown) __instance.KillButton.SetCoolDown(role.EngineerTimer(role.LastFix, CustomGameOptions.EngiCooldown), CustomGameOptions.EngiCooldown);
-            else __instance.KillButton.SetCoolDown(0f, 10f);
-            __instance.KillButton.SetCoolDown(0f, 10f);
             __instance.KillButton.gameObject.SetActive(!PlayerControl.LocalPlayer.Data.IsDead &&
                                                        __instance.UseButton.isActiveAndEnabled && !MeetingHud.Instance && role.EngiFixPerRound > 0 && role.EngiFixPerGame > 0);
             if (PlayerControl.LocalPlayer.Data.IsDead) return;

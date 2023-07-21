@@ -8,7 +8,7 @@ namespace TownOfRoles.Roles.Modifiers
         {
             Name = "Watcher";
             TaskText = () => "You can see anonymous votes";
-            Color = Patches.Colors.Modifiers;
+            Color = Patches.Colors.Watcher;
             ModifierType = ModifierEnum.Watcher;
         }
     }

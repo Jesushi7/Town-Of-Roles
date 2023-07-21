@@ -3,6 +3,7 @@ namespace TownOfRoles.Roles
 {
     public class Crewmate : Role
     {
+        public bool CrewmateWins { get; set; }        
         public Crewmate(PlayerControl player) : base(player)
         {
             Name = "Crewmate";
@@ -14,5 +15,9 @@ namespace TownOfRoles.Roles
             AddToRoleHistory(RoleType);
             Color = Patches.Colors.Crewmate;
         }
+        public void Wins()
+        {
+            CrewmateWins = true;
+        }        
     }
 }

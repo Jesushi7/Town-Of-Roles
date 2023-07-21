@@ -8,7 +8,7 @@ namespace TownOfRoles.Roles.Modifiers
         {
             Name = "Diseased";
             TaskText = () => "Killing you gives your killer a high kill cooldown";
-            Color = Patches.Colors.Modifiers;
+            Color = Patches.Colors.Diseased;
             ModifierType = ModifierEnum.Diseased;     
         }
     }

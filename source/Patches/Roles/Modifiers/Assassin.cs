@@ -60,7 +60,7 @@ namespace TownOfRoles.Roles.Modifiers
                 if (CustomGameOptions.GuardianOn > 0) ColorMapping.Add("Guardian", Colors.Guardian);
                 if (CustomGameOptions.VultureOn > 0) ColorMapping.Add("Vulture", Colors.Vulture);
                 if (CustomGameOptions.ExecutionerOn > 0) ColorMapping.Add("Executioner", Colors.Executioner);
-                if (CustomGameOptions.JesterOn > 0 || (CustomGameOptions.ExecutionerOn > 0 && CustomGameOptions.OnTargetDead == OnTargetDead.Jester) || (CustomGameOptions.GuardianOn > 0 && CustomGameOptions.GaOnTargetDeath == BecomeOptions.Jester)) ColorMapping.Add("Jester", Colors.Jester);
+                if (CustomGameOptions.JesterOn > 0 || (CustomGameOptions.ExecutionerOn > 0 && CustomGameOptions.GaOnTargetDeath == BecomeOptions.Jester) || (CustomGameOptions.GuardianOn > 0 && CustomGameOptions.GaOnTargetDeath == BecomeOptions.Jester)) ColorMapping.Add("Jester", Colors.Jester);
                 if (CustomGameOptions.PyromaniacOn > 0 && !PlayerControl.LocalPlayer.Is(RoleEnum.Pyromaniac)) ColorMapping.Add("Pyromaniac", Colors.Pyromaniac);
                 if (CustomGameOptions.GlitchOn > 0 && !PlayerControl.LocalPlayer.Is(RoleEnum.Glitch)) ColorMapping.Add("The Glitch", Colors.Glitch);
                 if (CustomGameOptions.WerewolfOn > 0 && !PlayerControl.LocalPlayer.Is(RoleEnum.Werewolf)) ColorMapping.Add("Werewolf", Colors.Werewolf);
@@ -88,14 +88,14 @@ namespace TownOfRoles.Roles.Modifiers
                 }
             // Add extra options if the options are on
             if (CustomGameOptions.AssassinCrewmateGuess) ColorMapping.Add("Crewmate", Colors.Crewmate);
-            if (CustomGameOptions.AssassinGuessModifiers && CustomGameOptions.BaitOn > 0) ColorMapping.Add("Bait", Colors.Modifiers);
-            if (CustomGameOptions.AssassinGuessModifiers && CustomGameOptions.BlindOn > 0) ColorMapping.Add("Blind", Colors.Modifiers);
-            if (CustomGameOptions.AssassinGuessModifiers && CustomGameOptions.DiseasedOn > 0) ColorMapping.Add("Diseased", Colors.Modifiers);
-            if (CustomGameOptions.AssassinGuessModifiers && CustomGameOptions.MultitaskerOn > 0) ColorMapping.Add("Multitasker", Colors.Modifiers);
-            if (CustomGameOptions.AssassinGuessModifiers && CustomGameOptions.NightowlOn > 0) ColorMapping.Add("Nightowl", Colors.Modifiers);
-            if (CustomGameOptions.AssassinGuessModifiers && CustomGameOptions.LighterOn > 0) ColorMapping.Add("Lighter", Colors.Modifiers);            
-            if (CustomGameOptions.AssassinGuessSpy && CustomGameOptions.SpyOn > 0) ColorMapping.Add("Spy", Colors.Modifiers); 
-            if (CustomGameOptions.AssassinGuessButtonBarry && CustomGameOptions.ButtonBarryOn > 0) ColorMapping.Add("Button Barry", Colors.Modifiers);                         
+            if (CustomGameOptions.AssassinGuessModifiers && CustomGameOptions.BaitOn > 0) ColorMapping.Add("Bait", Colors.Bait);
+            if (CustomGameOptions.AssassinGuessModifiers && CustomGameOptions.BlindOn > 0) ColorMapping.Add("Blind", Colors.Blind);
+            if (CustomGameOptions.AssassinGuessModifiers && CustomGameOptions.DiseasedOn > 0) ColorMapping.Add("Diseased", Colors.Diseased);
+            if (CustomGameOptions.AssassinGuessModifiers && CustomGameOptions.MultitaskerOn > 0) ColorMapping.Add("Multitasker", Colors.Multitasker);
+            if (CustomGameOptions.AssassinGuessModifiers && CustomGameOptions.NightowlOn > 0) ColorMapping.Add("Nightowl", Colors.Torch);
+            if (CustomGameOptions.AssassinGuessModifiers && CustomGameOptions.LighterOn > 0) ColorMapping.Add("Lighter", Colors.Lighter);            
+            if (CustomGameOptions.AssassinGuessSpy && CustomGameOptions.SpyOn > 0) ColorMapping.Add("Spy", Colors.Spy); 
+            if (CustomGameOptions.AssassinGuessButtonBarry && CustomGameOptions.ButtonBarryOn > 0) ColorMapping.Add("Button Barry", Colors.ButtonBarry);                         
             if (CustomGameOptions.AssassinGuessLovers && CustomGameOptions.LoversOn > 0) ColorMapping.Add("Lover", Colors.Lovers);
 
             // Sorts the list alphabetically. 

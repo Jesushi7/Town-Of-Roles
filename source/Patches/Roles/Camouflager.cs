@@ -13,7 +13,7 @@ namespace TownOfRoles.Roles
         public Camouflager(PlayerControl player) : base(player)
         {
             Name = "Camouflager";
-            StartText = () => "<color=#708eef>Turn Invisible Temporarily</color>";
+            StartText = () => "<color=#708eef>Turn invisible temporarily</color>";
             TaskText = () => "Turn invisible to catch killers";
             Color = Patches.Colors.Chameleon;
             LastSwooped = DateTime.UtcNow;

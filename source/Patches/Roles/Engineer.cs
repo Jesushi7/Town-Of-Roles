@@ -5,11 +5,9 @@ namespace TownOfRoles.Roles
 {
     public class Engineer : Role
     {
-        public float EngiCooldown { get; set; }
         public float EngiFixPerRound { get; set; }
         public float EngiFixPerGame { get; set; }
         public DateTime LastFix { get; set; }
-        public DateTime LastVent { get; set; }
         public TextMeshPro UsesText;
         public float TimeRemaining;
         public Engineer(PlayerControl player) : base(player)
@@ -20,7 +18,6 @@ namespace TownOfRoles.Roles
             Color = Patches.Colors.Engineer;
             FactionName = "Crewmate";                
             RoleType = RoleEnum.Engineer;
-            EngiCooldown = CustomGameOptions.EngiCooldown;
             EngiFixPerRound = CustomGameOptions.EngineerFixPer  ==  EngineerFixPer.Custom ? CustomGameOptions.EngiFixPerRound : 1;
             EngiFixPerGame = CustomGameOptions.EngiFixPerGame;
 

@@ -7,13 +7,13 @@ namespace TownOfRoles.Patches
         // Crewmate Colors
         public readonly static Color Mayor = new Color(0.44f, 0.31f, 0.66f, 1f);
         public readonly static Color32 Sheriff = new Color32(248, 205, 70, 255); 
-        public readonly static Color Engineer = new Color(1f, 0.65f, 0.04f, 1f);
+        public readonly static Color Engineer = new Color(1f, 0.65f, 0.04f, 1f);      
         public readonly static Color32 Swapper = new Color32(134, 55, 86, 255);
         public readonly static Color32 Medic = new Color32(126, 251, 194, 255);      
         public readonly static Color32 Snitch = new Color32(97, 178, 108, 255);
         public readonly static Color Informant = new Color(0.83f, 0.69f, 0.22f, 1f);
-        public readonly static Color32 Altruist = new Color32(45, 106, 165, 255); 
-        public readonly static Color32 Watcher = new Color32(25, 43, 82, 255); 
+        public readonly static Color Altruist = new Color(0.4f, 0f, 0f, 1f);
+        public readonly static Color32 Watcher = new Color32(140, 0, 255, 255); 
         public readonly static Color Veteran = new Color(0.6f, 0.5f, 0.25f, 1f);
         public readonly static Color Avenger = new Color(0.83f, 0.83f, 0.83f, 1f);
         public readonly static Color Tracker = new Color(0f, 0.6f, 0f, 1f);
@@ -53,7 +53,26 @@ namespace TownOfRoles.Patches
         public readonly static Color32 Crewmate = new Color32(140, 255, 255, 255); 
         public readonly static Color32 Neutral = new Color32(99, 99, 99, 255); 
 
-        public readonly static Color32 Modifiers = new Color32(156,190,228, 255);         
+        //Modifiers
+
+        //public readonly static Color32 Modifiers = new Color32(156,190,228, 255);  
+        public static Color32 Mini => new(169, 56, 214, 255); 
+        public readonly static Color32 VIP = new Color32(255, 255, 0, 255);         
+        public static Color32 Oblivious => new(133, 170, 91, 255); //#85AA5BFF         
+        public static Color32 Lighter => new(225, 200, 73, 255);        
+        public readonly static Color Bait = new Color(0f, 0.7f, 0.7f, 1f);
+        public readonly static Color Blind = new Color(0.6f, 0.6f, 0.6f, 1f);
+        public static Color32 Drunk => new(117, 128, 0, 255);              
+        public readonly static Color Diseased = Color.grey;
+        public readonly static Color Torch = new Color(1f, 1f, 0.6f, 1f);
+        public readonly static Color ButtonBarry = new Color(0.9f, 0f, 1f, 1f);
+        public readonly static Color Flash = new Color(1f, 0.5f, 0.5f, 1f);
+        public readonly static Color Giant = new Color(1f, 0.7f, 0.3f, 1f);
+        public readonly static Color Sleuth = new Color(0.5f, 0.2f, 0.2f, 1f);
+        public readonly static Color Tiebreaker = new Color(0.6f, 0.9f, 0.6f, 1f);
+        public readonly static Color Spy = new Color(0.8f, 0.64f, 0.8f, 1f);        
+        public readonly static Color Radar = new Color(1f, 0f, 0.5f, 1f);
+        public readonly static Color Multitasker = new Color(1f, 0.5f, 0.3f, 1f);               
 
     }
 }

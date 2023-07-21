@@ -12,7 +12,7 @@ namespace TownOfRoles.Roles
         public Medic(PlayerControl player) : base(player)
         {
             Name = "Medic";
-            StartText = () => "<color=#7efbc2>Protect a Player With a Shield</color>";
+            StartText = () => "<color=#7efbc2>Protect a Player with a shield</color>";
             TaskText = () => "Protect a player";
             Color = Patches.Colors.Medic;
             StartingCooldown = DateTime.UtcNow;

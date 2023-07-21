@@ -9,7 +9,7 @@ namespace TownOfRoles.Roles.Modifiers
         {
             Name = "Mini";
             TaskText = () => "You are tiny";
-            Color = Patches.Colors.Modifiers;
+            Color = Patches.Colors.Mini;
             ModifierType = ModifierEnum.Mini;
         }
 

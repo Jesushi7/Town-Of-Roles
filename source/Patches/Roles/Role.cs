@@ -13,6 +13,8 @@ using Random = UnityEngine.Random;
 using TownOfRoles.Extensions;
 using AmongUs.GameOptions;
 using TownOfRoles.Patches;
+using TownOfRoles.Custom;
+using TownOfRoles.Classes;
 
 namespace TownOfRoles.Roles
 {
@@ -71,7 +73,7 @@ namespace TownOfRoles.Roles
         protected internal int IncorrectAssassinKills { get; set; } = 0;
 
         public bool Local => PlayerControl.LocalPlayer.PlayerId == Player.PlayerId;
-public static bool RoleWins => CrewWin || ImpWin;
+        public static bool RoleWins => CrewWin || ImpWin;
         protected internal bool Hidden { get; set; } = false;
 
         protected internal Faction Faction { get; set; } = Faction.Crewmates;
@@ -148,6 +150,12 @@ public static bool RoleWins => CrewWin || ImpWin;
         {
             return GetRole(PlayerControl.LocalPlayer) == this;
         }
+        public readonly static List<Ability> AllAbilities = new();        
+        public static Role LocalRole => GetRole(CustomPlayer.Local);
+        public static Ability GetAbility(PlayerControl player) => AllAbilities.Find(x => x.Player == player);
+        public static Ability LocalAbility => GetAbility(CustomPlayer.Local);   
+
+        public Dictionary<byte, CustomArrow> AllArrows = new();
 
         internal virtual bool RoleCriteria()
         {
@@ -193,7 +201,6 @@ public static bool RoleWins => CrewWin || ImpWin;
                     PlayerName += "<color=#B3FFFFFF> ★</color>";
                 }
             }
-
             foreach (var role in GetRoles(RoleEnum.Executioner))
             {
                 var exe = (Executioner) role;
@@ -207,6 +214,7 @@ public static bool RoleWins => CrewWin || ImpWin;
             {
                 if (modifier.ModifierType == ModifierEnum.Lover && (revealModifier || revealLover))
                     PlayerName += $" {modifier.GetColoredSymbol()}";
+
                 else if (modifier.ModifierType != ModifierEnum.Lover && revealModifier)
                     PlayerName += $" {modifier.GetColoredSymbol()}";
             }
@@ -226,17 +234,17 @@ public static bool RoleWins => CrewWin || ImpWin;
 
             Player.nameText().transform.localPosition = new Vector3(0f, 0.15f, -0.5f);
             
-        if(Classes.GameStates.IsMeeting && PlayerControl.LocalPlayer.Data.IsDead)
+        if(GameStates.IsMeeting && PlayerControl.LocalPlayer.Data.IsDead)
         {
-            return PlayerName + $"\n<size=70%><color=#" + Patches.Colors.Modifiers.ToHtmlStringRGBA()+ $">{modifier.Name}</color> " + Name +"</size>";
+            return PlayerName + $"\n<size=70%>" + $"{modifier.Name}</color> " + Name +"</size>";
         }
-        if (Classes.GameStates.IsMeeting)       
+        if (GameStates.IsMeeting)       
         {
             return  PlayerName + "\n" +"<size=70%>" + Name +"</size>";
         }
         if (PlayerControl.LocalPlayer.Data.IsDead)
         {
-            return $"<size=70%><color=#" + Patches.Colors.Modifiers.ToHtmlStringRGBA()+ $">{modifier.Name}</color> " + Name +"</size>\n"+ PlayerName;
+            return $"<size=70%>" + $">{modifier.Name}</color> " + Name +"</size>\n"+ PlayerName;
         }
         
         return $"<size=70%>" + Name +"</size>\n"+ PlayerName;
@@ -273,13 +281,13 @@ public static bool RoleWins => CrewWin || ImpWin;
             {
                 var task = new GameObject(Name + "Task").AddComponent<ImportantTextTask>();
                 task.transform.SetParent(Player.transform, false);
-                task.Text = $"{ColorString}{Name}: {TaskText()}</color>";
+                task.Text = $"{ColorString}Role: {Name}\n{TaskText()}</color>";
                 Player.myTasks.Insert(0, task);
                 return;
             }
 
             Player.myTasks.ToArray()[0].Cast<ImportantTextTask>().Text =
-                $"{ColorString}{Name}: {TaskText()}</color>";
+                $"{ColorString}Role: {Name}\n{TaskText()}</color>";
         }
 
         public static T Gen<T>(Type type, PlayerControl player, CustomRPC rpc)
@@ -550,23 +558,22 @@ public static bool RoleWins => CrewWin || ImpWin;
                     var modTask = new GameObject(modifier.Name + "Task").AddComponent<ImportantTextTask>();
                     modTask.transform.SetParent(player.transform, false);
                     modTask.Text =
-                        $"{modifier.ColorString}{modifier.Name}: {modifier.TaskText()}</color>";
+                        $"{modifier.ColorString}Modifier: {modifier.Name} \n{modifier.TaskText()}</color>";
                     player.myTasks.Insert(0, modTask);
                 }
-                /*if (ability != null)
+                if (ability != null)
                 {
                     var modTask = new GameObject(ability.Name + "Task").AddComponent<ImportantTextTask>();
                     modTask.transform.SetParent(player.transform, false);
-                    modTask.Text =
-                        $"{ability.ColorString}{ability.Name}: {ability.TaskText()}</color>";
+                   modTask.Text = $"{ability.ColorString}Ability: {ability.Name}\n{ability.TaskText()}</color>";                       
                     player.myTasks.Insert(0, modTask);
-                }*/
+                }
 
                 if (role == null || role.Hidden) return;
                 if (role.RoleType == RoleEnum.Amnesiac && role.Player != PlayerControl.LocalPlayer) return;
                 var task = new GameObject(role.Name + "Task").AddComponent<ImportantTextTask>();
                 task.transform.SetParent(player.transform, false);
-                task.Text = $"{role.ColorString}{role.Name}: {role.TaskText()}</color>";
+                task.Text = $"{role.ColorString}Role: {role.Name}\n{role.TaskText()}</color>";
                 player.myTasks.Insert(0, task);
             }
         }
@@ -677,8 +684,8 @@ public static bool RoleWins => CrewWin || ImpWin;
                             var info = ExileController.Instance.exiled;
                             var role = GetRole(info.Object);
                             if (role == null) return;
-                            var roleName = role.RoleType == RoleEnum.Glitch ? role.Name : $" {role.Name}";
-                            __result = $"{info.PlayerName} was The {roleName}.";
+                            var roleName = role.RoleType == RoleEnum.Glitch ? role.Name : $"The {role.Name}";
+                            __result = $"{info.PlayerName} was {roleName}.";
                             return;
                         }
                 }

@@ -11,7 +11,7 @@ namespace TownOfRoles.Roles.Modifiers
         {
             Name = "Chameleon";
             TaskText = () => "You are hard to see";
-            Color = Patches.Colors.Modifiers;
+            Color = Patches.Colors.Chameleon;
             ModifierType = ModifierEnum.ChameleonModifier;
         }
 

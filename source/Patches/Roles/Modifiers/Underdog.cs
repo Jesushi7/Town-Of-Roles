@@ -8,7 +8,7 @@ namespace TownOfRoles.Roles.Modifiers
         {
             Name = "Underdog";
             TaskText = () => "When all the impostors die you get a short cooldown";
-            Color = Patches.Colors.Modifiers;
+            Color = Patches.Colors.Impostor;
             ModifierType = ModifierEnum.Underdog;
         }
 

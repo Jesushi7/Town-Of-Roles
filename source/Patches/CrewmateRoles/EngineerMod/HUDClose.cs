@@ -28,7 +28,6 @@ namespace TownOfRoles.CrewmateRoles.EngineerMod
                 }
                 if (CustomGameOptions.EngineerFixPer != EngineerFixPer.Custom) return;
                 engineer.EngiFixPerRound = CustomGameOptions.EngiFixPerRound;
-                if (CustomGameOptions.EngiHasCooldown) engineer.LastFix = DateTime.UtcNow;
 
             }
         }

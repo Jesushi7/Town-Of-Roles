@@ -39,6 +39,7 @@ namespace TownOfRoles
     public static class CustomGameOptions
     {
         public static int MayorOn => (int)Generate.MayorOn.Get();
+        public static int VIPOn => (int)Generate.VIPOn.Get();        
         public static int JesterOn => (int)Generate.JesterOn.Get();     
         public static int OracleOn => (int)Generate.OracleOn.Get();             
         public static int SheriffOn => (int)Generate.SheriffOn.Get();
@@ -129,6 +130,7 @@ namespace TownOfRoles
         public static int MayorVoteBank => (int)Generate.MayorVoteBank.Get();
         public static bool MayorAnonymous => Generate.MayorAnonymous.Get();
         public static bool SwapperButton => Generate.SwapperButton.Get();
+        public static bool MayorButton => Generate.MayorButton.Get();        
         public static bool JesterButton => Generate.JesterButton.Get();
         public static bool JesterVent => Generate.JesterVent.Get();
         public static bool JesterKill => Generate.JesterKill.Get();        
@@ -191,12 +193,7 @@ namespace TownOfRoles
         public static bool AddPyromaniac => Generate.AddPyromaniac.Get();
         public static bool AddPlaguebearer => Generate.AddPlaguebearer.Get();
         public static bool ParallelMedScans => Generate.ParallelMedScans.Get();
-        public static bool EngiHasVentCooldown => (bool)Generate.EngiHasVentCooldown.Get();
-        public static float EngiVentCooldown => (float) Generate.EngiVentCooldown.Get();
-        public static float EngiVentDuration => (float) Generate.EngiVentDuration.Get();
         public static EngineerFixPer EngineerFixPer => (EngineerFixPer)Generate.EngineerPer.Get();
-        public static bool EngiHasCooldown => (bool)Generate.EngiHasCooldown.Get();
-        public static float EngiCooldown => (float) Generate.EngiCooldown.Get();
         public static float EngiFixPerRound => (float) Generate.EngiFixPerRound.Get();
         public static float EngiFixPerGame => (float) Generate.EngiFixPerGame.Get();
         public static float ReviveDuration => Generate.ReviveDuration.Get();
@@ -265,6 +262,7 @@ namespace TownOfRoles
         public static ProtectOptions ShowProtect => (ProtectOptions)Generate.ShowProtect.Get();
         public static BecomeOptions GaOnTargetDeath => (BecomeOptions)Generate.GaOnTargetDeath.Get();
         public static bool GATargetKnows => Generate.GATargetKnows.Get();
+        
         public static bool GAKnowsTargetRole => Generate.GAKnowsTargetRole.Get();
         public static float MysticArrowDuration => Generate.MysticArrowDuration.Get();
         public static float SilenceCd => Generate.SilenceCooldown.Get();

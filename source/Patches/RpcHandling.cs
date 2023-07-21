@@ -782,7 +782,10 @@ namespace TownOfRoles
                                 break; 
                             case 22:
                                 new Spy(player2);
-                                break;                                                                                                                                                                                                                                                          
+                                break;       
+                            case 23:
+                                new VIP(player2);
+                                break;                                                                                                                                                                                                                                                                                      
                         }
                         break;
 
@@ -1043,7 +1046,11 @@ namespace TownOfRoles
                     case CustomRPC.SerialKillerWin:
                         var SerialKiller = Role.AllRoles.FirstOrDefault(x => x.RoleType == RoleEnum.SerialKiller);
                         ((SerialKiller)SerialKiller)?.Wins();
-                        break;                        
+                        break;          
+                    case CustomRPC.CrewWin:
+                        var crewin = Role.AllRoles.FirstOrDefault(x => x.Faction == Faction.Crewmates);
+                        ((Crewmate)crewin)?.Wins();
+                        break;                                             
                     case CustomRPC.SetHacked:
                         var hackPlayer = Utils.PlayerById(reader.ReadByte());
                         if (hackPlayer.PlayerId == PlayerControl.LocalPlayer.PlayerId)
@@ -1626,6 +1633,9 @@ namespace TownOfRoles
                     #region Global Modifiers
                     if (Check(CustomGameOptions.TiebreakerOn))
                         GlobalModifiers.Add((typeof(Tiebreaker), 4, CustomGameOptions.TiebreakerOn));
+
+                    if (Check(CustomGameOptions.VIPOn))
+                        GlobalModifiers.Add((typeof(VIP), 23, CustomGameOptions.VIPOn));
 
                     if (Check(CustomGameOptions.FlashOn))
                         GlobalModifiers.Add((typeof(Flash), 3, CustomGameOptions.FlashOn));

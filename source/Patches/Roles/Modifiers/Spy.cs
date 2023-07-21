@@ -8,7 +8,7 @@ namespace TownOfRoles.Roles.Modifiers
         {
             Name = "Spy";
             TaskText = () => "You can see colors in Admin Table";
-            Color = Patches.Colors.Modifiers;
+            Color = Patches.Colors.Spy;
             ModifierType = ModifierEnum.Spy;
         }
     }

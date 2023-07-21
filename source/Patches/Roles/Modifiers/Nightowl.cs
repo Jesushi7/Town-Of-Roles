@@ -8,7 +8,7 @@ namespace TownOfRoles.Roles.Modifiers
         {
             Name = "Nightowl";
             TaskText = () => "You can see in the dark";
-            Color = Patches.Colors.Modifiers;
+            Color = Patches.Colors.Torch;
             ModifierType = ModifierEnum.Nightowl;
         }
     }

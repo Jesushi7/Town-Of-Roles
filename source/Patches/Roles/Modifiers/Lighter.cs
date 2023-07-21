@@ -8,7 +8,7 @@ namespace TownOfRoles.Roles.Modifiers
         {
             Name = "Lighter";
             TaskText = () => "You Have Impostor Vision";
-            Color = Patches.Colors.Modifiers;
+            Color = Patches.Colors.Lighter;
             ModifierType = ModifierEnum.Lighter;
         }
     }

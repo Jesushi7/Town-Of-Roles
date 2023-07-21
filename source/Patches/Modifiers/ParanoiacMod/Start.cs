@@ -23,7 +23,7 @@ namespace TownOfRoles.Modifiers.ParanoiacMod
                     gameObj.transform.parent = PlayerControl.LocalPlayer.gameObject.transform;
                     var renderer = gameObj.AddComponent<SpriteRenderer>();
                     renderer.sprite = Sprite;
-                    renderer.color = Colors.Modifiers;
+                    renderer.color = Colors.Radar;
                     arrow.image = renderer;
                     gameObj.layer = 5;
                     arrow.target = PlayerControl.LocalPlayer.transform.position;

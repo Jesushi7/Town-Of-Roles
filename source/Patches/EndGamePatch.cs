@@ -97,39 +97,51 @@ namespace TownOfRoles.Patches {
 
                 if (playerControl.Is(ModifierEnum.Giant) && playerControl.Is(AbilityEnum.Assassin))
                 {
-                    playerRole += " (<color=#" + Patches.Colors.Modifiers.ToHtmlStringRGBA() + ">Giant</color>)";
+                    playerRole += " (<color=#" + Patches.Colors.Giant.ToHtmlStringRGBA() + ">Giant</color>)";
                 }              
                 else if (playerControl.Is(ModifierEnum.ButtonBarry))
                 {
-                    playerRole += " (<color=#" + Patches.Colors.Modifiers.ToHtmlStringRGBA() + ">Button Barry</color>)";
+                    playerRole += " (<color=#" + Patches.Colors.ButtonBarry.ToHtmlStringRGBA() + ">Button Barry</color>)";
                 }
                 else if (playerControl.Is(ModifierEnum.Blind))
                 {
-                    playerRole += " (<color=#" + Patches.Colors.Modifiers.ToHtmlStringRGBA() + ">Blind</color>)";
+                    playerRole += " (<color=#" + Patches.Colors.Blind.ToHtmlStringRGBA() + ">Blind</color>)";
                 }
                 else if (playerControl.Is(ModifierEnum.Bait))
                 {
-                    playerRole += " (<color=#" + Patches.Colors.Modifiers.ToHtmlStringRGBA() + ">Bait</color>)";
+                    playerRole += " (<color=#" + Patches.Colors.Bait.ToHtmlStringRGBA() + ">Bait</color>)";
                 }
+                else if (playerControl.Is(ModifierEnum.VIP))
+                {
+                    playerRole += " (<color=#" + Patches.Colors.VIP.ToHtmlStringRGBA() + ">VIP</color>)";
+                }                
                 else if (playerControl.Is(ModifierEnum.Diseased))
                 {
-                    playerRole += " (<color=#" + Patches.Colors.Modifiers.ToHtmlStringRGBA() + ">Diseased</color>)";
+                    playerRole += " (<color=#" + Patches.Colors.Diseased.ToHtmlStringRGBA() + ">Diseased</color>)";
                 }
                 else if (playerControl.Is(ModifierEnum.Flash))
                 {
-                    playerRole += " (<color=#" + Patches.Colors.Modifiers.ToHtmlStringRGBA() + ">Flash</color>)";
+                    playerRole += " (<color=#" + Patches.Colors.Flash.ToHtmlStringRGBA() + ">Flash</color>)";
                 }
                 else if (playerControl.Is(ModifierEnum.Tiebreaker))
                 {
-                    playerRole += " (<color=#" + Patches.Colors.Modifiers.ToHtmlStringRGBA() + ">Tiebreaker</color>)";
+                    playerRole += " (<color=#" + Patches.Colors.Tiebreaker.ToHtmlStringRGBA() + ">Tiebreaker</color>)";
                 }
                 else if (playerControl.Is(ModifierEnum.Lighter))
                 {
-                    playerRole += " (<color=#" + Patches.Colors.Modifiers.ToHtmlStringRGBA() + ">Lighter</color>)";
-                }                
+                    playerRole += " (<color=#" + Patches.Colors.Lighter.ToHtmlStringRGBA() + ">Lighter</color>)";
+                }     
+                else if (playerControl.Is(ModifierEnum.Watcher))
+                {
+                    playerRole += " (<color=#" + Patches.Colors.Watcher.ToHtmlStringRGBA() + ">Watcher</color>)";
+                }                   
+                else if (playerControl.Is(ModifierEnum.Drunk))
+                {
+                    playerRole += " (<color=#" + Patches.Colors.Drunk.ToHtmlStringRGBA() + ">Drunk</color>)";
+                }                           
                 else if (playerControl.Is(ModifierEnum.Nightowl))
                 {
-                    playerRole += " (<color=#" + Patches.Colors.Modifiers.ToHtmlStringRGBA() + ">Nightowl</color>)";
+                    playerRole += " (<color=#" + Patches.Colors.Torch.ToHtmlStringRGBA() + ">Nightowl</color>)";
                 }
                 else if (playerControl.Is(ModifierEnum.Lover))
                 {
@@ -137,35 +149,35 @@ namespace TownOfRoles.Patches {
                 }
                 else if (playerControl.Is(ModifierEnum.Mini))
                 {
-                    playerRole += " (<color=#" + Patches.Colors.Modifiers.ToHtmlStringRGBA() + ">Mini</color>)";
+                    playerRole += " (<color=#" + Patches.Colors.Mini.ToHtmlStringRGBA() + ">Mini</color>)";
                 }     
                 else if (playerControl.Is(ModifierEnum.Spy))
                 {
-                    playerRole += " (<color=#" + Patches.Colors.Modifiers.ToHtmlStringRGBA() + ">Spy</color>)";
+                    playerRole += " (<color=#" + Patches.Colors.Spy.ToHtmlStringRGBA() + ">Spy</color>)";
                 }                                 
                 else if (playerControl.Is(ModifierEnum.Sleuth))
                 {
-                    playerRole += " (<color=#" + Patches.Colors.Modifiers.ToHtmlStringRGBA() + ">Sleuth</color>)";
+                    playerRole += " (<color=#" + Patches.Colors.Sleuth.ToHtmlStringRGBA() + ">Sleuth</color>)";
                 }
                 else if (playerControl.Is(ModifierEnum.Paranoiac))
                 {
-                    playerRole += " (<color=#" + Patches.Colors.Modifiers.ToHtmlStringRGBA() + ">Paranoiac</color>)";
+                    playerRole += " (<color=#" + Patches.Colors.Radar.ToHtmlStringRGBA() + ">Paranoiac</color>)";
                 }
                 else if (playerControl.Is(ModifierEnum.Disperser))
                 {
-                    playerRole += " (<color=#" + Patches.Colors.Modifiers.ToHtmlStringRGBA() + ">Disperser</color>)";
+                    playerRole += " (<color=#" + Patches.Colors.Impostor.ToHtmlStringRGBA() + ">Disperser</color>)";
                 }
                 else if (playerControl.Is(ModifierEnum.Multitasker))
                 {
-                    playerRole += " (<color=#" + Patches.Colors.Modifiers.ToHtmlStringRGBA() + ">Multitasker</color>)";
+                    playerRole += " (<color=#" + Patches.Colors.Multitasker.ToHtmlStringRGBA() + ">Multitasker</color>)";
                 }
                 else if (playerControl.Is(ModifierEnum.DoubleShot))
                 {
-                    playerRole += " (<color=#" + Patches.Colors.Modifiers.ToHtmlStringRGBA() + ">Double Shot</color>)";
+                    playerRole += " (<color=#" + Patches.Colors.Impostor.ToHtmlStringRGBA() + ">Double Shot</color>)";
                 }
                 else if (playerControl.Is(ModifierEnum.Underdog))
                 {
-                    playerRole += " (<color=#" + Patches.Colors.Modifiers.ToHtmlStringRGBA() + ">Underdog</color>)";
+                    playerRole += " (<color=#" + Patches.Colors.Impostor.ToHtmlStringRGBA() + ">Underdog</color>)";
                 }
                 var player = Role.GetRole(playerControl);
                 if (playerControl.Is(RoleEnum.Phantom) || playerControl.Is(Faction.Crewmates))
@@ -216,10 +228,10 @@ namespace TownOfRoles.Patches {
             roleSummary.transform.localScale = new Vector3(1f, 1f, 1f);
 
             var roleSummaryText = new StringBuilder();
-            roleSummaryText.AppendLine("<size=117%>End Game Summary</size>");
+            roleSummaryText.AppendLine("End game summary:");
             foreach(var data in AdditionalTempData.playerRoles) {
                 var role = string.Join(" ", data.Role);
-                roleSummaryText.AppendLine($"<size=75%>{data.PlayerName} - {role}</size>");
+                roleSummaryText.AppendLine($"{data.PlayerName} - {role}");
             }
             TMPro.TMP_Text roleSummaryTextMesh = roleSummary.GetComponent<TMPro.TMP_Text>();
             roleSummaryTextMesh.alignment = TMPro.TextAlignmentOptions.TopLeft;

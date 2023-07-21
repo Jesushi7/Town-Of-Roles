@@ -8,7 +8,7 @@ namespace TownOfRoles.Roles.Modifiers
         {
             Name = "Oblivious";
             TaskText = () => "You don't have a report button";
-            Color = Patches.Colors.Modifiers;
+            Color = Patches.Colors.Oblivious;
             ModifierType = ModifierEnum.Oblivious;
         }
     }

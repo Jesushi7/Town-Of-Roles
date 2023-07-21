@@ -32,7 +32,7 @@ namespace TownOfRoles.Patches
                 }
             }*/
 
-            if (Classes.GameStates.IsLobby)
+            /*if (Classes.GameStates.IsLobby)
                 return;
 
             foreach (var bubble in __instance.Chat.chatBubPool.activeChildren)
@@ -49,7 +49,7 @@ namespace TownOfRoles.Patches
                         }
                     }
                 }
-            }
+            }*/
         }
     }
 }

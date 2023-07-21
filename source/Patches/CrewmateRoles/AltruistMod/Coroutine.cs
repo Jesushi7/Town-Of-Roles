@@ -70,13 +70,6 @@ namespace TownOfRoles.CrewmateRoles.AltruistMod
             }
             if (target != null) Object.Destroy(target.gameObject);
 
-            var player2 = Utils.PlayerById(parentId);
-
-            foreach (var poisoner in Role.GetRoles(RoleEnum.Vampire))
-            {
-                var poisonerRole = (Vampire)poisoner;
-                if (poisonerRole.BittenPlayer == player2) poisonerRole.BittenPlayer = poisonerRole.Player;
-            }
             if (player.IsLover() && CustomGameOptions.BothLoversDie)
             {
                 var lover = Modifier.GetModifier<Lover>(player).OtherLover.Player;
@@ -105,9 +98,8 @@ namespace TownOfRoles.CrewmateRoles.AltruistMod
                 {
                 }
 
-
             if (PlayerControl.LocalPlayer.Data.IsImpostor() || PlayerControl.LocalPlayer.Is(RoleEnum.Glitch) || PlayerControl.LocalPlayer.Is(RoleEnum.Juggernaut)
-                || PlayerControl.LocalPlayer.Is(RoleEnum.Pyromaniac)  || PlayerControl.LocalPlayer.Is(RoleEnum.Werewolf)|| PlayerControl.LocalPlayer.Is(RoleEnum.SerialKiller) 
+                || PlayerControl.LocalPlayer.Is(RoleEnum.Pyromaniac) || PlayerControl.LocalPlayer.Is(RoleEnum.Werewolf)
                 || PlayerControl.LocalPlayer.Is(RoleEnum.Plaguebearer) || PlayerControl.LocalPlayer.Is(RoleEnum.Pestilence))
             {
                 var gameObj = new GameObject();
