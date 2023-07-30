@@ -28,7 +28,7 @@ namespace TownOfSushi
                     cam.orthographicSize = 3f;
             }
 
-            ResolutionManager.ResolutionChanged.Invoke((float)Screen.width / Screen.height);
+             ResolutionManager.ResolutionChanged.Invoke((float)Screen.width / Screen.height, Screen.width, Screen.height, Screen.fullScreen); 
         }
     }
 

@@ -68,33 +68,6 @@ namespace TownOfSushi.ImpostorRoles.BlackmailerMod
             }
         }
 
-        [HarmonyPatch(typeof(MeetingHud), nameof(MeetingHud.Update))]
-        public class MeetingHud_Update
-        {
-            public static Sprite Overlay => TownOfSushi.BlackmailOverlaySprite;
-
-            public static void Postfix(MeetingHud __instance)
-            {
-                var blackmailers = Role.AllRoles.Where(x => x.RoleType == RoleEnum.Blackmailer && x.Player != null).Cast<Blackmailer>();
-
-                foreach (var role in blackmailers)
-                {
-                    if (role.Blackmailed != null && !role.Blackmailed.Data.IsDead)
-                    {
-                        var playerState = __instance.playerStates.FirstOrDefault(x => x.TargetPlayerId == role.Blackmailed.PlayerId);
-                        playerState.Overlay.gameObject.SetActive(true);
-                        if (PrevOverlay == null) PrevOverlay = playerState.Overlay.sprite;
-                        playerState.Overlay.sprite = Overlay;
-                        if (__instance.state != MeetingHud.VoteStates.Animating && shookAlready == false)
-                        {
-                            shookAlready = true;
-                            (__instance as MonoBehaviour).StartCoroutine(Effects.SwayX(playerState.transform));
-                        }
-                    }
-                }
-            }
-        }
-
         [HarmonyPatch(typeof(TextBoxTMP), nameof(TextBoxTMP.SetText))]
         public class StopChatting
         {

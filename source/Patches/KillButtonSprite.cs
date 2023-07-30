@@ -25,6 +25,7 @@ namespace TownOfSushi
         private static Sprite Revive => TownOfSushi.ReviveSprite;
         private static Sprite Alert => TownOfSushi.AlertSprite;
         private static Sprite Remember => TownOfSushi.RememberSprite;
+        private static Sprite Camo => TownOfSushi.CamouflageSprite;        
         private static Sprite Track => TownOfSushi.TrackSprite;
         private static Sprite Transport => TownOfSushi.TransportSprite;
         private static Sprite Mediate => TownOfSushi.MediateSprite;
@@ -96,6 +97,11 @@ namespace TownOfSushi
                 __instance.KillButton.graphic.sprite = Transport;
                 flag = true;
             }
+            else if (PlayerControl.LocalPlayer.Is(RoleEnum.Camouflager))
+            {
+                __instance.KillButton.graphic.sprite = Camo;
+                flag = true;
+            }            
             else if (PlayerControl.LocalPlayer.Is(RoleEnum.Medium))
             {
                 __instance.KillButton.graphic.sprite = Mediate;
@@ -161,12 +167,13 @@ namespace TownOfSushi
                 __instance.KillButton.graphic.sprite = Radiate;
                 flag = true;
             }
+
             else
             {
                 __instance.KillButton.graphic.sprite = Kill;
                 __instance.KillButton.buttonLabelText.gameObject.SetActive(true);
                 __instance.KillButton.buttonLabelText.text = "Kill";
-                flag = PlayerControl.LocalPlayer.Is(RoleEnum.Sheriff) || PlayerControl.LocalPlayer.Is(RoleEnum.Pestilence) ||
+                flag = PlayerControl.LocalPlayer.Is(RoleEnum.Pestilence) || PlayerControl.LocalPlayer.Is(RoleEnum.Sheriff)  ||
                     PlayerControl.LocalPlayer.Is(RoleEnum.Werewolf) || PlayerControl.LocalPlayer.Is(RoleEnum.Juggernaut);
             }
             if (!PlayerControl.LocalPlayer.Is(Faction.Impostors) &&
@@ -180,7 +187,7 @@ namespace TownOfSushi
             {
                 __instance.ImpostorVentButton.transform.localPosition = new Vector3(-2f, 0f, 0f);
             }
-            else if (PlayerControl.LocalPlayer.Is(RoleEnum.Werewolf)||  CustomGameOptions.EveryoneVent)
+            else if (PlayerControl.LocalPlayer.Is(RoleEnum.Werewolf)|| PlayerControl.LocalPlayer.Is(RoleEnum.Arsonist)||CustomGameOptions.EveryoneVent)
             {
                 __instance.ImpostorVentButton.transform.localPosition = new Vector3(-1f, 1f, 0f);
             }

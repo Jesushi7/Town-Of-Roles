@@ -10,7 +10,7 @@ namespace TownOfSushi
         public static void Postfix(VersionShower __instance)
         {
             var text = __instance.text;
-            text.text += " - <size=100%><color=#00FF00FF>TownOfSushi v" + TownOfSushi.VersionString + "\nBanner By Gun</color></size>";
+            text.text += " - <color=#00FF00FF>TownOfSushi v" + TownOfSushi.VersionString + "</color>";
             text.transform.localPosition += new Vector3(-0.8f, -0.08f, 0f);
 
             if (GameObject.Find("RightPanel"))

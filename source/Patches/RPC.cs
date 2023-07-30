@@ -1,3 +1,5 @@
+
+
 namespace TownOfSushi
 {
     internal enum RPC
@@ -33,5 +35,5 @@ namespace TownOfSushi
         RepairSystem, //28
         SetTasks, //29
         UpdateGameData //30
-    }
+    }  
 }

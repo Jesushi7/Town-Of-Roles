@@ -10,7 +10,7 @@ namespace TownOfSushi.CustomOption
     public static class Patches
     {
 
-        static string[] Menus = { " ", "Crewmate", "Neutral", "Impostor", "Modifier" };
+        static string[] Menus = { "", "Crewmate", "Neutral", "Impostor", "Modifier & Ability" };
 
         public static Export ExportButton;
         public static Import ImportButton;

@@ -33,7 +33,24 @@ namespace TownOfSushi.Patches.ScreenEffects
                 });
             });
         }
-
+        
+        public static Texture2D LoadDiskTexture(string path)
+        {
+            try
+            {
+                var texture = EmptyTexture();
+                var byteTexture = Il2CppSystem.IO.File.ReadAllBytes(path);
+                _ = ImageConversion.LoadImage(texture, byteTexture, false);
+                texture.hideFlags |= HideFlags.HideAndDontSave | HideFlags.DontUnloadUnusedAsset;
+                return texture;
+            }
+            catch
+            {
+                Logger<TownOfSushi>.Error("Error loading texture from disk: " + path);
+                return null;
+            }
+        }
+        private static Texture2D EmptyTexture() => new(2, 2, TextureFormat.ARGB32, true);        
         private static AssetBundle loadBundle(string bundlename)
         {
             var assembly = Assembly.GetExecutingAssembly();

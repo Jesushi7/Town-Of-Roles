@@ -7,6 +7,7 @@
         Morph,
         Camouflage,
         Swooper,
+        NoNames,
         Aurial,
         PlayerNameOnly
 

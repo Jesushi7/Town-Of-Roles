@@ -18,7 +18,7 @@ namespace TownOfSushi.Patches
     [HarmonyPriority(Priority.First)]
     class AddHauntPatch
     {
-        public static List<PlayerControl> AssassinatedPlayers = new List<PlayerControl>();
+        public static Il2CppSystem.Collections.Generic.List<PlayerControl> AssassinatedPlayers = new Il2CppSystem.Collections.Generic.List<PlayerControl>();
 
         public static void ExileControllerPostfix(ExileController __instance)
         {

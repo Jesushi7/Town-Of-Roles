@@ -8,6 +8,9 @@ using TownOfSushi.Roles;
 using TownOfSushi.Extensions;
 using AmongUs.GameOptions;
 using TownOfSushi.Patches.ScreenEffects;
+using TMPro;
+using System.IO;
+using UObject = UnityEngine.Object;
 
 namespace TownOfSushi.Patches {
 
@@ -22,6 +25,7 @@ namespace TownOfSushi.Patches {
             public string PlayerName { get; set; }
             public string Role {get;set;}
         }
+
     }
 
 
@@ -83,6 +87,7 @@ namespace TownOfSushi.Patches {
                     else if (role.Value == RoleEnum.Necromancer) { playerRole += "<color=#" + Patches.Colors.Impostor.ToHtmlStringRGBA() + ">Necromancer</color> > "; }
                     else if (role.Value == RoleEnum.Whisperer) { playerRole += "<color=#" + Patches.Colors.Impostor.ToHtmlStringRGBA() + ">Whisperer</color> > "; }
                     else if (role.Value == RoleEnum.Chameleon) { playerRole += "<color=#" + Patches.Colors.Chameleon.ToHtmlStringRGBA() + ">Chameleon</color> > "; }
+                    else if (role.Value == RoleEnum.Camouflager) { playerRole += "<color=#" + Patches.Colors.Camouflager.ToHtmlStringRGBA() + ">Camouflager</color> > "; }
                     else if (role.Value == RoleEnum.Imitator) { playerRole += "<color=#" + Patches.Colors.Imitator.ToHtmlStringRGBA() + ">Imitator</color> > "; }
                     else if (role.Value == RoleEnum.Bomber) { playerRole += "<color=#" + Patches.Colors.Impostor.ToHtmlStringRGBA() + ">Bomber</color> > "; }
                     else if (role.Value == RoleEnum.Doomsayer) { playerRole += "<color=#" + Patches.Colors.Doomsayer.ToHtmlStringRGBA() + ">Doomsayer</color> > "; }
@@ -147,6 +152,10 @@ namespace TownOfSushi.Patches {
                 {
                     playerRole += " (<color=#" + Patches.Colors.Nightowl.ToHtmlStringRGBA() + ">Nightowl</color>)";
                 }
+                else if (playerControl.Is(ModifierEnum.Mini))
+                {
+                    playerRole += " (<color=#" + Patches.Colors.Mini.ToHtmlStringRGBA() + ">Mini</color>)";
+                }                
                 else if (playerControl.Is(ModifierEnum.Lover))
                 {
                     playerRole += " (<color=#" + Patches.Colors.Lovers.ToHtmlStringRGBA() + ">Lover</color>)";
@@ -155,6 +164,10 @@ namespace TownOfSushi.Patches {
                 {
                     playerRole += " (<color=#" + Patches.Colors.Sleuth.ToHtmlStringRGBA() + ">Sleuth</color>)";
                 }
+                else if (playerControl.Is(ModifierEnum.Watcher))
+                {
+                    playerRole += " (<color=#" + Patches.Colors.Watcher.ToHtmlStringRGBA() + ">Watcher</color>)";
+                }                
                 else if (playerControl.Is(ModifierEnum.Paranoiac))
                 {
                     playerRole += " (<color=#" + Patches.Colors.Paranoiac.ToHtmlStringRGBA() + ">Paranoiac</color>)";
@@ -210,40 +223,113 @@ namespace TownOfSushi.Patches {
         }
     }
 
-    [HarmonyPatch(typeof(EndGameManager), nameof(EndGameManager.SetEverythingUp))]
-    public class EndGameManagerSetUpPatch {
-        public static void Postfix(EndGameManager __instance)
+        [HarmonyPatch(typeof(EndGameManager), nameof(EndGameManager.SetEverythingUp))]
+        public static class ShipStatusSetUpPatch
         {
-            if (GameOptionsManager.Instance.CurrentGameOptions.GameMode == GameModes.HideNSeek) return;
+            public static void Postfix(EndGameManager __instance)
+            {
+                if (GameOptionsManager.Instance.CurrentGameOptions.GameMode == GameModes.HideNSeek)
+                    return;
 
-            GameObject bonusText = UnityEngine.Object.Instantiate(__instance.WinText.gameObject);
-            bonusText.transform.position = new Vector3(__instance.WinText.transform.position.x, __instance.WinText.transform.position.y - 0.8f, __instance.WinText.transform.position.z);
-            bonusText.transform.localScale = new Vector3(0.7f, 0.7f, 1f);
-            TMPro.TMP_Text textRenderer = bonusText.GetComponent<TMPro.TMP_Text>();
-            textRenderer.text = "";
+                var position = Camera.main.ViewportToWorldPoint(new(0f, 1f, Camera.main.nearClipPlane));
+                var roleSummary = UObject.Instantiate(__instance.WinText.gameObject);
+                roleSummary.transform.position = new(__instance.Navigation.ExitButton.transform.position.x + 0.1f, position.y - 0.1f, -14f);
+                roleSummary.transform.localScale = new(1f, 1f, 1f);
 
-            var position = Camera.main.ViewportToWorldPoint(new Vector3(0f, 1f, Camera.main.nearClipPlane));
-            GameObject roleSummary = UnityEngine.Object.Instantiate(__instance.WinText.gameObject);
-            roleSummary.transform.position = new Vector3(__instance.Navigation.ExitButton.transform.position.x + 0.1f, position.y - 0.1f, -14f); 
-            roleSummary.transform.localScale = new Vector3(1f, 1f, 1f);
+                var roleSummaryText = new StringBuilder();
+                var roleSummaryCache = new StringBuilder();
+                var winnersText = new StringBuilder();
+                var winnersCache = new StringBuilder();
+                var losersText = new StringBuilder();
+                var losersCache = new StringBuilder();
+                var discText = new StringBuilder();
+                var discCache = new StringBuilder();
 
-            var roleSummaryText = new StringBuilder();
-            roleSummaryText.AppendLine("End game summary:");
-            foreach(var data in AdditionalTempData.playerRoles) {
-                var role = string.Join(" ", data.Role);
-                roleSummaryText.AppendLine($"{data.PlayerName} - {role}");
+                var winnerCount = 0;
+                var loserCount = 0;
+                var discCount = 0;
+
+                roleSummaryText.AppendLine("<size=125%><u><b>End Game Summary</b></u>:</size>");
+                roleSummaryText.AppendLine();
+                roleSummaryCache.AppendLine("End Game Summary:");
+                roleSummaryCache.AppendLine();
+                winnersText.AppendLine("<size=105%><b>Winners</b></size>");
+                losersText.AppendLine("<size=105%><b>Losers</b></size>");
+                winnersCache.AppendLine("Winners");
+                losersCache.AppendLine("Losers");
+                discCache.AppendLine("Disconnected");
+
+                foreach (var data in AdditionalTempData.playerRoles)
+                {
+                    var role = string.Join(" ", data.Role);
+                    var dataString = $"<size=75%>{data.PlayerName} - {role}</size>";
+
+                    if (data.PlayerName.IsWinner())
+                    {
+                        winnersText.AppendLine(dataString);
+                        winnerCount++;
+                    }
+                    else
+                    {
+                        losersText.AppendLine(dataString);
+                        loserCount++;
+                    }
+                }
+
+                if (winnerCount == 0)
+                {
+                    winnersText.AppendLine("<size=75%>No One Won</size>");
+                    winnersCache.AppendLine("No One Won");
+                }
+
+                if (loserCount == 0)
+                {
+                    losersText.AppendLine("<size=75%>No One Lost</size>");
+                    losersCache.AppendLine("No One Lost");
+                }
+
+                roleSummaryText.Append(winnersText);
+                roleSummaryText.AppendLine();
+                roleSummaryText.Append(losersText);
+                roleSummaryCache.Append(winnersCache);
+                roleSummaryCache.AppendLine();
+                roleSummaryCache.Append(losersCache);
+
+                if (discCount > 0)
+                {
+                    roleSummaryText.AppendLine();
+                    roleSummaryText.Append(discText);
+                    roleSummaryCache.AppendLine();
+                    roleSummaryCache.Append(discCache);
+                }
+
+                var roleSummaryTextMesh = roleSummary.GetComponent<TMP_Text>();
+                roleSummaryTextMesh.alignment = TextAlignmentOptions.TopLeft;
+                roleSummaryTextMesh.color = Color.white;
+                roleSummaryTextMesh.fontSizeMin = 1.5f;
+                roleSummaryTextMesh.fontSizeMax = 1.5f;
+                roleSummaryTextMesh.fontSize = 1.5f;
+                roleSummaryTextMesh.text = $"{roleSummaryText}";
+                roleSummaryTextMesh.GetComponent<RectTransform>().anchoredPosition = new(position.x + 3.5f, position.y - 0.1f);
+
+                var text = Path.Combine(Application.persistentDataPath, "Summary-temp");
+
+                try
+                {
+                    File.WriteAllText(text, roleSummaryCache.ToString());
+                    var text2 = Path.Combine(Application.persistentDataPath, "Summary");
+                    File.Delete(text2);
+                    File.Move(text, text2);
+                } catch {}
             }
-            TMPro.TMP_Text roleSummaryTextMesh = roleSummary.GetComponent<TMPro.TMP_Text>();
-            roleSummaryTextMesh.alignment = TMPro.TextAlignmentOptions.TopLeft;
-            roleSummaryTextMesh.color = Color.white;
-            roleSummaryTextMesh.fontSizeMin = 1.5f;
-            roleSummaryTextMesh.fontSizeMax = 1.5f;
-            roleSummaryTextMesh.fontSize = 1.5f;
-             
-            var roleSummaryTextMeshRectTransform = roleSummaryTextMesh.GetComponent<RectTransform>();
-            roleSummaryTextMeshRectTransform.anchoredPosition = new Vector2(position.x + 3.5f, position.y - 0.1f);
-            roleSummaryTextMesh.text = roleSummaryText.ToString();
-            AdditionalTempData.clear();
+        private static bool IsWinner(this string playerName)
+        {
+        foreach(var win in TempData.winners)
+        {
+        if(win.PlayerName == playerName)
+        return true;
         }
-    }
+     return false;
+        }            
+        }
 }

@@ -62,6 +62,7 @@ namespace TownOfSushi
         CultistSnitch,
         CultistMystic,
         Chameleon,
+        Camouflager,        
         CultistInformant,
 
         None
@@ -71,6 +72,7 @@ namespace TownOfSushi
     {
         Lover,
         Nightowl,
+        Mini,        
         Diseased,
         Flash,
         Tiebreaker,
@@ -85,6 +87,7 @@ namespace TownOfSushi
         Multitasker,
         DoubleShot,
         Underdog,
+        Watcher,
         Drunk,
         Lighter,
         Frosty

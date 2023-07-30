@@ -54,21 +54,19 @@ namespace TownOfSushi.CrewmateRoles.MedicMod
                 var showShielded = CustomGameOptions.ShowShielded;
                 if (showShielded == ShieldOptions.Everyone)
                 {
-                    player.myRend().material.SetColor("_VisorColor", ProtectedColor);
                     player.myRend().material.SetFloat("_Outline", 1f);
                     player.myRend().material.SetColor("_OutlineColor", ProtectedColor);
                 }
                 else if (PlayerControl.LocalPlayer.PlayerId == player.PlayerId && (showShielded == ShieldOptions.Self ||
                     showShielded == ShieldOptions.SelfAndMedic))
                 {
-                    player.myRend().material.SetColor("_VisorColor", ProtectedColor);
                     player.myRend().material.SetFloat("_Outline", 1f);
                     player.myRend().material.SetColor("_OutlineColor", ProtectedColor);
                 }
                 else if (PlayerControl.LocalPlayer.Is(RoleEnum.Medic) &&
                          (showShielded == ShieldOptions.Medic || showShielded == ShieldOptions.SelfAndMedic))
                 {
-                    player.myRend().material.SetColor("_VisorColor", ProtectedColor);
+
                     player.myRend().material.SetFloat("_Outline", 1f);
                     player.myRend().material.SetColor("_OutlineColor", ProtectedColor);
                 }

@@ -159,6 +159,13 @@ namespace TownOfSushi.Patches
                 grenadier.LastFlashed = grenadier.LastFlashed.AddSeconds(CustomGameOptions.InitialCooldowns - CustomGameOptions.GrenadeCd);
             }
 
+            if (PlayerControl.LocalPlayer.Is(RoleEnum.Camouflager))
+            {
+                var chameleon = Role.GetRole<Camouflager>(PlayerControl.LocalPlayer);
+                chameleon.LastSwooped = DateTime.UtcNow;
+                chameleon.LastSwooped = chameleon.LastSwooped.AddSeconds(CustomGameOptions.InitialCooldowns - CustomGameOptions.CamouflagerSwoopCd);
+            }
+
             if (PlayerControl.LocalPlayer.Is(RoleEnum.Miner))
             {
                 var miner = Role.GetRole<Miner>(PlayerControl.LocalPlayer);

@@ -4,6 +4,7 @@ using System.Linq;
 using TownOfSushi.Roles;
 using TownOfSushi.Roles.Modifiers;
 using TownOfSushi.Extensions;
+using TownOfSushi.Classes;
 
 namespace TownOfSushi
 {
@@ -161,7 +162,7 @@ namespace TownOfSushi
                         TempData.winners.Add(phantomData);
                         return;
                     }
-                }
+                }               
             }
 
             foreach (var modifier in Modifier.AllModifiers)

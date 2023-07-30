@@ -32,6 +32,7 @@ namespace TownOfSushi
     public static class CustomGameOptions
     {
         public static int MonarchOn => (int)Generate.MonarchOn.Get();
+        public static int WatcherOn => (int)Generate.WatcherOn.Get();        
         public static int MayorOn => (int)Generate.MayorOn.Get();        
         public static int JesterOn => (int)Generate.JesterOn.Get();
         public static int SheriffOn => (int)Generate.SheriffOn.Get();
@@ -47,6 +48,7 @@ namespace TownOfSushi
         public static int MorphlingOn => (int)Generate.MorphlingOn.Get();
         public static int ExecutionerOn => (int)Generate.ExecutionerOn.Get();
         public static int SpyOn => (int)Generate.SpyOn.Get();
+        public static int CamouflagerOn => (int)Generate.CamouflagerOn.Get();            
         public static int InformantOn => (int)Generate.InformantOn.Get();
         public static int MinerOn => (int)Generate.MinerOn.Get();
         public static int SwooperOn => (int)Generate.SwooperOn.Get();
@@ -60,6 +62,7 @@ namespace TownOfSushi
         public static int VeteranOn => (int)Generate.VeteranOn.Get();
         public static int TrackerOn => (int)Generate.TrackerOn.Get();
         public static int TrapperOn => (int)Generate.TrapperOn.Get();
+        public static int MiniOn => (int)Generate.MiniOn.Get();          
         public static int TraitorOn => (int)Generate.TraitorOn.Get();
         public static int TransporterOn => (int)Generate.TransporterOn.Get();
         public static int MediumOn => (int)Generate.MediumOn.Get();
@@ -105,6 +108,7 @@ namespace TownOfSushi
         public static bool SheriffKillsDoomsayer => Generate.SheriffKillsDoomsayer.Get();
         public static bool SheriffKillsExecutioner => Generate.SheriffKillsExecutioner.Get();
         public static bool SheriffKillsJester => Generate.SheriffKillsJester.Get();
+        public static bool SheriffKillsLovers => Generate.SheriffKillsLovers.Get();        
         public static bool SheriffKillsArsonist => Generate.SheriffKillsArsonist.Get();
         public static bool SheriffKillsJuggernaut => Generate.SheriffKillsJuggernaut.Get();
         public static bool SheriffKillsPlaguebearer => Generate.SheriffKillsPlaguebearer.Get();
@@ -141,12 +145,14 @@ namespace TownOfSushi
         public static float GlitchKillCooldown => Generate.GlitchKillCooldownOption.Get();
         public static int GlitchHackDistance => Generate.GlitchHackDistanceOption.Get();
         public static bool GlitchVent => Generate.GlitchVent.Get();
+        public static bool ArsoVent => Generate.ArsoVent.Get();        
         public static float JuggKCd => Generate.JuggKillCooldown.Get();
         public static float ReducedKCdPerKill => Generate.ReducedKCdPerKill.Get();
         public static bool JuggVent => Generate.JuggVent.Get();
         public static float MorphlingCd => Generate.MorphlingCooldown.Get();
         public static float MorphlingDuration => Generate.MorphlingDuration.Get();
         public static bool MorphlingVent => Generate.MorphlingVent.Get();
+        public static bool NoNames => Generate.NoNames.Get();         
         public static bool EveryoneVent => Generate.EveryoneVent.Get();              
         public static bool ColourblindComms => Generate.ColourblindComms.Get();          
         public static OnTargetDead OnTargetDead => (OnTargetDead)Generate.OnTargetDead.Get();
@@ -161,7 +167,6 @@ namespace TownOfSushi
         public static bool SwooperVent => Generate.SwooperVent.Get();
         public static bool ImpostorSeeRoles => Generate.ImpostorSeeRoles.Get();
         public static bool DeadSeeRoles => Generate.DeadSeeRoles.Get();
-        public static bool HiddenRoles => Generate.HiddenRoles.Get();
         public static bool FirstDeathShield => Generate.FirstDeathShield.Get();
         public static bool SeeTasksDuringRound => Generate.SeeTasksDuringRound.Get();
         public static bool SeeTasksDuringMeeting => Generate.SeeTasksDuringMeeting.Get();
@@ -193,6 +198,8 @@ namespace TownOfSushi
         public static float DragCd => Generate.DragCooldown.Get();
         public static float UndertakerDragSpeed => Generate.UndertakerDragSpeed.Get();
         public static bool UndertakerVent => Generate.UndertakerVent.Get();
+        public static float MiniSpeed => Generate.MiniSpeed.Get();        
+        public static float MiniSize => Generate.MiniSize.Get();           
         public static bool UndertakerVentWithBody => Generate.UndertakerVentWithBody.Get();
         public static bool AssassinGuessNeutralBenign => Generate.AssassinGuessNeutralBenign.Get();
         public static bool AssassinGuessNeutralEvil => Generate.AssassinGuessNeutralEvil.Get();
@@ -212,6 +219,7 @@ namespace TownOfSushi
         public static float UnderdogKillBonus => Generate.UnderdogKillBonus.Get();
         public static bool UnderdogIncreasedKC => Generate.UnderdogIncreasedKC.Get();
         public static int PhantomTasksRemaining => (int)Generate.PhantomTasksRemaining.Get();
+        public static bool VigilanteGuessCrewRolesIfLovers => Generate.VigilanteGuessCrewRolesIfLovers.Get();
         public static bool VigilanteGuessNeutralBenign => Generate.VigilanteGuessNeutralBenign.Get();
         public static bool VigilanteGuessNeutralEvil => Generate.VigilanteGuessNeutralEvil.Get();
         public static bool VigilanteGuessNeutralKilling => Generate.VigilanteGuessNeutralKilling.Get();
@@ -286,6 +294,8 @@ namespace TownOfSushi
         public static int MinAmountOfPlayersInTrap => (int) Generate.MinAmountOfPlayersInTrap.Get();
         public static float InitialExamineCd => Generate.InitialExamineCooldown.Get();
         public static float ExamineCd => Generate.ExamineCooldown.Get();
+        public static float CamouflagerSwoopCd => Generate.CamouflagerSwoopCd.Get();
+        public static float CamouflagerSwoopDuration => Generate.CamouflagerSwoopDuration.Get();            
         public static float RecentKill => Generate.RecentKill.Get();
         public static bool MysticReportOn => Generate.MysticReportOn.Get();
         public static float MysticRoleDuration => Generate.MysticRoleDuration.Get();

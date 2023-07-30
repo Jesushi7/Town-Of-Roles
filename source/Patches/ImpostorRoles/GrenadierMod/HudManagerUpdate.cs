@@ -34,7 +34,7 @@ namespace TownOfSushi.ImpostorRoles.GrenadierMod
                         if (data == null || data.Disconnected || data.IsDead || PlayerControl.LocalPlayer.Data.IsDead)
                             continue;
                         if (role.flashedPlayers.Contains(player)) {
-                            player.myRend().material.SetColor("_VisorColor", Color.black);
+                            player.myRend().material.SetColor("_VisorColor", Color.gray);
                             player.nameText().color = Color.black;
                         } else {
                             player.myRend().material.SetColor("_VisorColor", Palette.VisorColor);

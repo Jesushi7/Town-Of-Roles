@@ -13,7 +13,7 @@ namespace TownOfSushi.Roles
         public Swapper(PlayerControl player) : base(player)
         {
             Name = "Swapper";
-            ImpostorText = () => "<color=#66E666FF>Swap the votes between two players \nand help the crewmates to win:</color>";
+            ImpostorText = () => "<color=#66E666FF>Swap the votes between two players \nand help the crewmates to win.</color>";
             TaskText = () => "Swap votes";
             FactionName = "Crewmate";
             Color = Patches.Colors.Swapper;

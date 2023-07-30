@@ -32,6 +32,7 @@ namespace TownOfSushi.CrewmateRoles.SheriffMod
                         role.ClosestPlayer.Is(RoleEnum.Doomsayer) && CustomGameOptions.SheriffKillsDoomsayer ||
                         role.ClosestPlayer.Is(RoleEnum.Vampire) && CustomGameOptions.SheriffKillsVampire ||
                         role.ClosestPlayer.Is(RoleEnum.Jester) && CustomGameOptions.SheriffKillsJester ||
+                        role.ClosestPlayer.Is(ModifierEnum.Lover) && CustomGameOptions.SheriffKillsLovers ||
                         role.ClosestPlayer.Is(RoleEnum.Glitch) && CustomGameOptions.SheriffKillsGlitch ||
                         role.ClosestPlayer.Is(RoleEnum.Juggernaut) && CustomGameOptions.SheriffKillsJuggernaut ||
                         role.ClosestPlayer.Is(RoleEnum.Executioner) && CustomGameOptions.SheriffKillsExecutioner ||

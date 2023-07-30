@@ -30,10 +30,10 @@ namespace TownOfSushi
                 var builder = new StringBuilder();
                 builder.AppendLine("Press Tab To Change Page");
                 builder.AppendLine($"Currently Viewing Page ({(SettingsPage + 2)}/6)");
-                if (SettingsPage == 0) builder.AppendLine("Town of Sushi Settings");
-                else if (SettingsPage == 1) builder.AppendLine("Crewmate Role Settings");
-                else if (SettingsPage == 2) builder.AppendLine("Neutral Role Settings");
-                else if (SettingsPage == 3) builder.AppendLine("Impostor Role Settings");
+                if (SettingsPage == 0) builder.AppendLine("General Mod Settings");
+                else if (SettingsPage == 1) builder.AppendLine("Crewmate Settings");
+                else if (SettingsPage == 2) builder.AppendLine("Neutral Settings");
+                else if (SettingsPage == 3) builder.AppendLine("Impostor Settings");
                 else if (SettingsPage == 4) builder.AppendLine("Modifier Settings");
 
                 if (SettingsPage == -1) builder.Append(new StringBuilder(__result));
@@ -44,7 +44,7 @@ namespace TownOfSushi
                     {
                         if (option.Type == CustomOptionType.Button)
                             continue;
-                        if (Classes.GameStates.IsLobby)
+
                         if (option.Type == CustomOptionType.Header)
                             builder.AppendLine($"\n{option.Name}");
                         else
@@ -70,16 +70,10 @@ namespace TownOfSushi
         {
             public static void Postfix(HudManager __instance)
             {
-                if (!Classes.GameStates.IsLobby)
-                    return;
-
-                __instance.ReportButton.gameObject.SetActive(false);
-
-                if (!Classes.GameStates.IsLobby)
-                    return;
-
-                __instance.ImpostorVentButton.gameObject.SetActive(false);
-
+                /*if (Classes.GameStates.IsLobby)
+                {
+                    __instance.ImpostorVentButton = 
+                }*/
                 if (Input.GetKeyDown(KeyCode.Tab))
                 {
                     if (SettingsPage > 3)

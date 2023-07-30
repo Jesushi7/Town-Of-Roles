@@ -14,7 +14,7 @@ namespace TownOfSushi.Roles
         {
             Name = "Phantom";
             ImpostorText = () => "";
-            TaskText = () => "Complete all your tasks without being caught!";
+            TaskText = () => "Complete all your tasks without being caught to win!";
             Color = Patches.Colors.Phantom;
             RoleType = RoleEnum.Phantom;
             AddToRoleHistory(RoleType);

@@ -40,21 +40,21 @@ namespace TownOfSushi.NeutralRoles.GuardianAngelMod
                     var showProtected = CustomGameOptions.ShowProtect;
                     if (showProtected == ProtectOptions.Everyone)
                     {
-                        player.myRend().material.SetColor("_VisorColor", ProtectedColor);
+    
                         player.myRend().material.SetFloat("_Outline", 1f);
                         player.myRend().material.SetColor("_OutlineColor", ProtectedColor);
                     }
                     else if (PlayerControl.LocalPlayer.PlayerId == player.PlayerId && (showProtected == ProtectOptions.Self ||
                         showProtected == ProtectOptions.SelfAndGA))
                     {
-                        player.myRend().material.SetColor("_VisorColor", ProtectedColor);
+    
                         player.myRend().material.SetFloat("_Outline", 1f);
                         player.myRend().material.SetColor("_OutlineColor", ProtectedColor);
                     }
                     else if (PlayerControl.LocalPlayer.Is(RoleEnum.GuardianAngel) &&
                              (showProtected == ProtectOptions.GA || showProtected == ProtectOptions.SelfAndGA))
                     {
-                        player.myRend().material.SetColor("_VisorColor", ProtectedColor);
+    
                         player.myRend().material.SetFloat("_Outline", 1f);
                         player.myRend().material.SetColor("_OutlineColor", ProtectedColor);
                     }

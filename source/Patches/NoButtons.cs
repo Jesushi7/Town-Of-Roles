@@ -13,6 +13,8 @@ namespace TownOfSushi.Patches
                 if (PlayerControl.LocalPlayer.Is(RoleEnum.Executioner)) PlayerControl.LocalPlayer.RemainingEmergencies = 0;
             if (!CustomGameOptions.SwapperButton)
                 if (PlayerControl.LocalPlayer.Is(RoleEnum.Swapper)) PlayerControl.LocalPlayer.RemainingEmergencies = 0;
+            if (!CustomGameOptions.MayorButton)
+                if (PlayerControl.LocalPlayer.Is(RoleEnum.Mayor)) PlayerControl.LocalPlayer.RemainingEmergencies = 0;
         }
     }
 
@@ -27,6 +29,8 @@ namespace TownOfSushi.Patches
                 if (PlayerControl.LocalPlayer.Is(RoleEnum.Executioner)) PlayerControl.LocalPlayer.RemainingEmergencies = 0;
             if (!CustomGameOptions.SwapperButton)
                 if (PlayerControl.LocalPlayer.Is(RoleEnum.Swapper)) PlayerControl.LocalPlayer.RemainingEmergencies = 0;
+             if (!CustomGameOptions.MayorButton)
+                if (PlayerControl.LocalPlayer.Is(RoleEnum.Mayor)) PlayerControl.LocalPlayer.RemainingEmergencies = 0;
         }
     }
 }

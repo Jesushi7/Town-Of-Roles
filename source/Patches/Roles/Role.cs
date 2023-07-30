@@ -25,6 +25,7 @@ namespace TownOfSushi.Roles
         public static bool NobodyWins;
         public static bool SurvOnlyWins;
         public static bool VampireWins;
+        public static bool CrewWins;
 
         public List<KillButton> ExtraButtons = new List<KillButton>();
 
@@ -129,7 +130,7 @@ namespace TownOfSushi.Roles
                 CustomGameOptions.ImpostorSeeRoles) return true;
             return false;
         }
-
+        public static bool RoleWins => CrewWins;
         internal virtual bool VampireCriteria()
         {
             if (RoleType == RoleEnum.Vampire && PlayerControl.LocalPlayer.Is(RoleEnum.Vampire)) return true;
@@ -180,6 +181,7 @@ namespace TownOfSushi.Roles
         {
             SurvOnlyWins = true;
         }
+
         public static void VampWin()
         {
             foreach (var jest in GetRoles(RoleEnum.Jester))
@@ -235,6 +237,19 @@ namespace TownOfSushi.Roles
                 return flag;
             }
 
+            bool CrewWin()
+            {
+                var alives = PlayerControl.AllPlayerControls.ToArray()
+                    .Where(x => !x.Data.IsDead && !x.Data.Disconnected).ToList();
+                if (alives.Count == 0) return false;
+                var flag = false;
+                foreach (var player in alives)
+                {
+                    if (player.Is(Faction.Crewmates)) flag = true;
+                }
+                return flag;
+            }
+
             if (CheckNoImpsNoCrews())
             {
                 if (SurvOnly())
@@ -245,6 +260,16 @@ namespace TownOfSushi.Roles
                     Utils.EndGame();
                     return false;
                 }
+
+                if (CrewWin())
+                {
+                    Utils.Rpc(CustomRPC.CrewWin);
+
+                    CrewWin();
+                    Utils.EndGame();
+                    return false;
+                }  
+                              
                 else
                 {
                     Utils.Rpc(CustomRPC.NobodyWins);
@@ -313,6 +338,7 @@ namespace TownOfSushi.Roles
 
             Player.nameText().transform.localPosition = new Vector3(0f, 0.15f, -0.5f);
             
+
         if(GameStates.IsMeeting && PlayerControl.LocalPlayer.Data.IsDead)
         {
             return PlayerName + $"\n<size=70%>" + $"{modifier.Name}</color> " + Name +"</size>";

@@ -21,8 +21,8 @@ namespace TownOfSushi.Roles
         public Plaguebearer(PlayerControl player) : base(player)
         {
             Name = "Plaguebearer";
-            ImpostorText = () => "Infect Everyone To Become Pestilence";
-            TaskText = () => "Infect everyone to become Pestilence";
+            ImpostorText = () => "<color=#E6FFB3FF>Spread your infection and stay alive \nuntil you become Pestilence.</color>";
+            TaskText = () => "Spread your infection";
             FactionName = "<color=#5c5e5d>Neutral</color>";            
             Color = Patches.Colors.Plaguebearer;
             RoleType = RoleEnum.Plaguebearer;

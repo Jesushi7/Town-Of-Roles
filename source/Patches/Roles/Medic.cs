@@ -21,7 +21,7 @@ namespace TownOfSushi.Roles
             AddToRoleHistory(RoleType);
             ShieldedPlayer = null;
 
-            LightDarkColors.Add(0, "darker"); // Red
+                        LightDarkColors.Add(0, "darker"); // Red
             LightDarkColors.Add(1, "darker"); // Blue
             LightDarkColors.Add(2, "darker"); // Green
             LightDarkColors.Add(3, "lighter"); // Pink
@@ -56,6 +56,15 @@ namespace TownOfSushi.Roles
             LightDarkColors.Add(32, "darker"); // Tawny
             LightDarkColors.Add(33, "lighter"); // Gold
             LightDarkColors.Add(34, "lighter"); // Rainbow
+            LightDarkColors.Add(35, "lighter"); // Sloth
+            LightDarkColors.Add(36, "lighter"); // Northie :)
+            LightDarkColors.Add(37, "darker"); // Darkness
+            LightDarkColors.Add(38, "darker"); // Juggernaut   
+            LightDarkColors.Add(39, "lighter"); // RaLu
+            LightDarkColors.Add(40, "lighter"); // Diddly
+            LightDarkColors.Add(42, "lighter"); // Hannah
+            LightDarkColors.Add(43, "lighter"); // RufusZeno
+            LightDarkColors.Add(44, "lighter"); // Veteran  
         }
         public float StartTimer()
         {

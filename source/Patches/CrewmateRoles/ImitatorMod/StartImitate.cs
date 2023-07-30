@@ -59,6 +59,7 @@ namespace TownOfSushi.CrewmateRoles.ImitatorMod
             if (imitatorRole == RoleEnum.Detective) new Detective(ImitatingPlayer);
             if (imitatorRole == RoleEnum.Mystic) new Mystic(ImitatingPlayer);
             if (imitatorRole == RoleEnum.Snitch) new Snitch(ImitatingPlayer);
+            if (imitatorRole == RoleEnum.Camouflager) new Camouflager(ImitatingPlayer);            
             if (imitatorRole == RoleEnum.Tracker) new Tracker(ImitatingPlayer);
             if (imitatorRole == RoleEnum.Sheriff) new Sheriff(ImitatingPlayer);
             if (imitatorRole == RoleEnum.Veteran) new Veteran(ImitatingPlayer);

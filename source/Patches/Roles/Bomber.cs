@@ -25,7 +25,7 @@ namespace TownOfSushi.Roles
         {
             Name = "Bomber";
             ImpostorText = () => "Plant Bombs to kill multiple <color=#8cffff>Crewmates</color> at once";
-            TaskText = () => "Plant bombs to kill crewmates";
+            TaskText = () => "Plant bombs";
             FactionName = "Impostor";                   
             Color = Palette.ImpostorRed;
             StartingCooldown = DateTime.UtcNow;
@@ -73,7 +73,7 @@ namespace TownOfSushi.Roles
             while (playersToDie.Count > CustomGameOptions.MaxKillsInDetonation) playersToDie.Remove(playersToDie[playersToDie.Count - 1]);
             foreach (var player in playersToDie)
             {
-                if (!player.Is(RoleEnum.Pestilence) && !player.IsShielded() && !player.IsProtected() && player != ShowRoundOneShield.FirstRoundShielded)
+                if (!player.Is(RoleEnum.Pestilence) && !player.IsShielded() && !player.IsVesting()  && !player.IsProtected() && player != ShowRoundOneShield.FirstRoundShielded)
                 {
                     Utils.RpcMultiMurderPlayer(Player, player);
                 }

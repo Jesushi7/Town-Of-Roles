@@ -57,7 +57,7 @@ namespace TownOfSushi.Patches
                     cam.orthographicSize = size;
             }
 
-            ResolutionManager.ResolutionChanged.Invoke((float)Screen.width / Screen.height);
+              ResolutionManager.ResolutionChanged.Invoke((float)Screen.width / Screen.height, Screen.width, Screen.height, Screen.fullScreen); 
         }
 
         public static void ZoomStart()
@@ -71,7 +71,7 @@ namespace TownOfSushi.Patches
                     cam.orthographicSize = size;
             }
 
-            ResolutionManager.ResolutionChanged.Invoke((float)Screen.width / Screen.height);
+            ResolutionManager.ResolutionChanged.Invoke((float)Screen.width / Screen.height, Screen.width, Screen.height, Screen.fullScreen); 
         }
     }
 }

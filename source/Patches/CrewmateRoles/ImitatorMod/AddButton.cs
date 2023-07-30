@@ -104,7 +104,7 @@ namespace TownOfSushi.CrewmateRoles.ImitatorMod
                             imitatedRole = haunter.formerRole;
                         }
                         if (player.Data.IsDead && !player.Data.Disconnected && (imitatedRole == RoleEnum.Detective ||
-                            imitatedRole == RoleEnum.Mystic ||
+                            imitatedRole == RoleEnum.Mystic ||imitatedRole == RoleEnum.Camouflager ||
                             imitatedRole == RoleEnum.Snitch || 
                             imitatedRole == RoleEnum.Tracker || imitatedRole == RoleEnum.Sheriff ||
                             imitatedRole == RoleEnum.Veteran || imitatedRole == RoleEnum.Altruist ||

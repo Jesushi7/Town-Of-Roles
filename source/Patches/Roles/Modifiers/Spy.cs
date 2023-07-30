@@ -9,8 +9,8 @@ namespace TownOfSushi.Roles.Modifiers
         {
             Name = "Spy";
             TaskText = () => "You can see colors on admin table";
-            Color = Patches.Colors.Sleuth;
-            ModifierType = ModifierEnum.Sleuth;
+            Color = Patches.Colors.Spy;
+            ModifierType = ModifierEnum.Spy;
         }
     }
 }

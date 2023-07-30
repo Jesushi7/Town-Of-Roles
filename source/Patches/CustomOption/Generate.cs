@@ -26,15 +26,12 @@ namespace TownOfSushi.CustomOption
         public static CustomNumberOption VeteranOn;
         public static CustomNumberOption VigilanteOn;
 
+
         public static CustomHeaderOption CrewSupportRoles;
         public static CustomNumberOption EngineerOn;
-        public static CustomNumberOption ImitatorOn;
-        public static CustomNumberOption MayorOn;        
-        public static CustomNumberOption MonarchOn;
+        public static CustomNumberOption ImitatorOn; 
+        public static CustomNumberOption MonarchOn;            
         public static CustomNumberOption MediumOn;
-        public static CustomNumberOption ProsecutorOn;
-        public static CustomNumberOption SwapperOn;
-        public static CustomNumberOption TransporterOn;
 
         public static CustomHeaderOption NeutralBenignRoles;
         public static CustomNumberOption AmnesiacOn;
@@ -42,6 +39,11 @@ namespace TownOfSushi.CustomOption
         public static CustomNumberOption SurvivorOn;
 
         public static CustomHeaderOption CrewChaosRoles;
+        public static CustomNumberOption ProsecutorOn;
+        public static CustomNumberOption SwapperOn;
+        public static CustomNumberOption TransporterOn;
+        public static CustomNumberOption CamouflagerOn;   
+        public static CustomNumberOption MayorOn;   
 
         public static CustomHeaderOption NeutralEvilRoles;
         public static CustomNumberOption DoomsayerOn;
@@ -56,6 +58,10 @@ namespace TownOfSushi.CustomOption
         public static CustomNumberOption GlitchOn;
         public static CustomNumberOption VampireOn;
         public static CustomNumberOption WerewolfOn;
+
+        public static CustomHeaderOption Camouflager;
+        public static CustomNumberOption CamouflagerSwoopCd;
+        public static CustomNumberOption CamouflagerSwoopDuration;
 
         public static CustomHeaderOption ImpostorConcealingRoles;
         public static CustomNumberOption EscapistOn;
@@ -81,8 +87,9 @@ namespace TownOfSushi.CustomOption
         public static CustomNumberOption BaitOn;
         public static CustomNumberOption DiseasedOn;
         public static CustomNumberOption FrostyOn;
+        public static CustomNumberOption MiniOn;        
+        public static CustomNumberOption NightowlOn;        
         public static CustomNumberOption MultitaskerOn;
-        public static CustomNumberOption NightowlOn;
 
         public static CustomHeaderOption GlobalModifiers;
         public static CustomNumberOption ButtonBarryOn;
@@ -93,6 +100,7 @@ namespace TownOfSushi.CustomOption
         public static CustomNumberOption ParanoiacOn;
         public static CustomNumberOption SleuthOn;
         public static CustomNumberOption TiebreakerOn;
+        public static CustomNumberOption WatcherOn;
 
         public static CustomHeaderOption ImpostorModifiers;
         public static CustomNumberOption DisperserOn;
@@ -118,13 +126,13 @@ namespace TownOfSushi.CustomOption
         public static CustomHeaderOption CustomGameSettings;
         public static CustomToggleOption RandomSpawns;         
         public static CustomToggleOption ColourblindComms;        
-        public static CustomToggleOption EveryoneVent;          
+        public static CustomToggleOption EveryoneVent;     
+        public static CustomToggleOption NoNames;                 
         public static CustomToggleOption ImpostorSeeRoles;
         public static CustomToggleOption DeadSeeRoles;
         public static CustomNumberOption InitialCooldowns;
         public static CustomToggleOption ParallelMedScans;
         public static CustomStringOption SkipButtonDisable;
-        public static CustomToggleOption HiddenRoles;
         public static CustomToggleOption FirstDeathShield;
 
         public static CustomHeaderOption BetterPolusSettings;
@@ -186,6 +194,7 @@ namespace TownOfSushi.CustomOption
         public static CustomToggleOption SheriffKillsDoomsayer;
         public static CustomToggleOption SheriffKillsExecutioner;
         public static CustomToggleOption SheriffKillsJester;
+        public static CustomToggleOption SheriffKillsLovers;        
         public static CustomToggleOption SheriffKillsArsonist;
         public static CustomToggleOption SheriffKillsJuggernaut;
         public static CustomToggleOption SheriffKillsPlaguebearer;
@@ -215,6 +224,10 @@ namespace TownOfSushi.CustomOption
         public static CustomToggleOption NeutEvilRed;
         public static CustomToggleOption NeutKillingRed;
         public static CustomToggleOption TraitorColourSwap;
+
+        public static CustomHeaderOption Mini;
+        public static CustomNumberOption MiniSize;     
+        public static CustomNumberOption MiniSpeed;
 
         public static CustomHeaderOption Spy;
         public static CustomStringOption WhoSeesDead;
@@ -270,6 +283,7 @@ namespace TownOfSushi.CustomOption
         public static CustomNumberOption InformantTasksRemaining;
         public static CustomToggleOption InformantSeesImpInMeeting;
         public static CustomToggleOption InformantSeesTraitor;
+        
 
         public static CustomHeaderOption Altruist;
         public static CustomNumberOption ReviveDuration;
@@ -288,7 +302,8 @@ namespace TownOfSushi.CustomOption
         public static CustomNumberOption MaxDoused;
         public static CustomToggleOption ArsoImpVision;
         public static CustomToggleOption IgniteCdRemoved;
-
+        public static CustomToggleOption ArsoVent;
+        
         public static CustomHeaderOption Undertaker;
         public static CustomNumberOption DragCooldown;
         public static CustomNumberOption UndertakerDragSpeed;
@@ -322,6 +337,7 @@ namespace TownOfSushi.CustomOption
         public static CustomToggleOption VigilanteGuessNeutralBenign;
         public static CustomToggleOption VigilanteGuessNeutralEvil;
         public static CustomToggleOption VigilanteGuessNeutralKilling;
+        public static CustomToggleOption VigilanteGuessCrewRolesIfLovers;        
         public static CustomToggleOption VigilanteGuessLovers;
         public static CustomToggleOption VigilanteAfterVoting;
 
@@ -400,6 +416,7 @@ namespace TownOfSushi.CustomOption
         public static CustomToggleOption ExamineReportOn;        
         public static CustomNumberOption MysticArrowDuration;
 
+
         public static CustomHeaderOption Blackmailer;
         public static CustomNumberOption BlackmailCooldown;
 
@@ -434,7 +451,7 @@ namespace TownOfSushi.CustomOption
         public static CustomToggleOption DoomsayerGuessNeutralBenign;
         public static CustomToggleOption DoomsayerGuessNeutralEvil;
         public static CustomToggleOption DoomsayerGuessNeutralKilling;
-        public static CustomToggleOption DoomsayerGuessImpostors;
+        public static CustomToggleOption DoomsayerGuessImpostors;       
         public static CustomToggleOption DoomsayerAfterVoting;
         public static CustomNumberOption DoomsayerGuessesToWin;
 
@@ -516,6 +533,8 @@ namespace TownOfSushi.CustomOption
             Patches.ImportButton = new Import(num++);
 
             CrewChaosRoles = new CustomHeaderOption(num++, MultiMenu.crewmate, "Crewmate Chaos Roles");
+            CamouflagerOn = new CustomNumberOption(num++, MultiMenu.crewmate, "<color=#708eef>Camouflager</color>", 0f, 0f, 100f, 10f,
+                PercentFormat);              
             MayorOn = new CustomNumberOption(num++, MultiMenu.crewmate, "<color=#7efbc2>Mayor</color>", 0f, 0f, 100f, 10f,
                 PercentFormat);  
             ProsecutorOn = new CustomNumberOption(num++, MultiMenu.crewmate, "<color=#B38000FF>Prosecutor</color>", 0f, 0f, 100f, 10f,
@@ -528,9 +547,9 @@ namespace TownOfSushi.CustomOption
             CrewInvestigativeRoles = new CustomHeaderOption(num++, MultiMenu.crewmate, "Crewmate Investigative Roles");
             AurialOn = new CustomNumberOption(num++, MultiMenu.crewmate, $"<color=#B34D99FF>Aurial</color>", 0f, 0f, 100f, 10f,
                 PercentFormat);
-            DetectiveOn = new CustomNumberOption(num++, MultiMenu.crewmate, "<color=#4D4DFFFF>Detective</color>", 0f, 0f, 100f, 10f,
-                PercentFormat);
             AvengerOn = new CustomNumberOption(num++, MultiMenu.crewmate, "<color=#D3D3D3FF>Avenger</color>", 0f, 0f, 100f, 10f,
+                PercentFormat);                              
+            DetectiveOn = new CustomNumberOption(num++, MultiMenu.crewmate, "<color=#4D4DFFFF>Detective</color>", 0f, 0f, 100f, 10f,
                 PercentFormat);
             MysticOn = new CustomNumberOption(num++, MultiMenu.crewmate, "<color=#4D99E6FF>Mystic</color>", 0f, 0f, 100f, 10f,
                 PercentFormat);
@@ -634,19 +653,12 @@ namespace TownOfSushi.CustomOption
             UndertakerOn = new CustomNumberOption(num++, MultiMenu.imposter, "<color=#FF0000FF>Undertaker</color>", 0f, 0f, 100f, 10f,
                 PercentFormat);
 
-            CrewmateModifiers = new CustomHeaderOption(num++, MultiMenu.modifiers, "Crewmate Modifiers");
-            AftermathOn = new CustomNumberOption(num++, MultiMenu.modifiers, "<color=#A6FFA6FF>Aftermath</color>", 0f, 0f, 100f, 10f,
-                PercentFormat);
-            LighterOn = new CustomNumberOption(num++, MultiMenu.modifiers, "<color=#e1c849>Lighter</color>", 0f, 0f, 100f, 10f,
-                PercentFormat);                 
-            FrostyOn = new CustomNumberOption(num++, MultiMenu.modifiers, "<color=#99FFFFFF>Frosty</color>", 0f, 0f, 100f, 10f,
-                PercentFormat);
-            MultitaskerOn = new CustomNumberOption(num++, MultiMenu.modifiers, "<color=#FF804DFF>Multitasker</color>", 0f, 0f, 100f, 10f,
-                PercentFormat);
-            NightowlOn = new CustomNumberOption(num++, MultiMenu.modifiers, "<color=#FFFF99FF>Nightowl</color>", 0f, 0f, 100f, 10f,
-                PercentFormat);
+           
 
-            GlobalModifiers = new CustomHeaderOption(num++, MultiMenu.modifiers, "Global Modifiers");
+
+            GlobalModifiers = new CustomHeaderOption(num++, MultiMenu.modifiers, "Modifiers & Abilities");
+            AftermathOn = new CustomNumberOption(num++, MultiMenu.modifiers, "<color=#A6FFA6FF>Aftermath</color>", 0f, 0f, 100f, 10f,
+                PercentFormat);            
             BaitOn = new CustomNumberOption(num++, MultiMenu.modifiers, "<color=#00B3B3FF>Bait</color>", 0f, 0f, 100f, 10f,
                 PercentFormat);            
             ButtonBarryOn = new CustomNumberOption(num++, MultiMenu.modifiers, "<color=#E600FFFF>Button Barry</color>", 0f, 0f, 100f, 10f,
@@ -659,10 +671,20 @@ namespace TownOfSushi.CustomOption
                 PercentFormat);                            
             FlashOn = new CustomNumberOption(num++, MultiMenu.modifiers, "<color=#FF8080FF>Flash</color>", 0f, 0f, 100f, 10f,
                 PercentFormat);
+            FrostyOn = new CustomNumberOption(num++, MultiMenu.modifiers, "<color=#99FFFFFF>Frosty</color>", 0f, 0f, 100f, 10f,
+                PercentFormat);                
             GiantOn = new CustomNumberOption(num++, MultiMenu.modifiers, "<color=#FFB34DFF>Giant</color>", 0f, 0f, 100f, 10f,
                 PercentFormat);
+            LighterOn = new CustomNumberOption(num++, MultiMenu.modifiers, "<color=#e1c849>Lighter</color>", 0f, 0f, 100f, 10f,
+                PercentFormat);  
             LoversOn = new CustomNumberOption(num++, MultiMenu.modifiers, "<color=#FF66CCFF>Lovers</color>", 0f, 0f, 100f, 10f,
-                PercentFormat);
+                PercentFormat);                                    
+            MiniOn = new CustomNumberOption(num++, MultiMenu.modifiers, "<color=#f590bc>Mini</color>", 0f, 0f, 100f, 10f,
+                PercentFormat);  
+            MultitaskerOn = new CustomNumberOption(num++, MultiMenu.modifiers, "<color=#FF804DFF>Multitasker</color>", 0f, 0f, 100f, 10f,
+                PercentFormat);     
+            NightowlOn = new CustomNumberOption(num++, MultiMenu.modifiers, "<color=#FFFF99FF>Nightowl</color>", 0f, 0f, 100f, 10f,
+                PercentFormat);                                          
             ParanoiacOn = new CustomNumberOption(num++, MultiMenu.modifiers, "<color=#FF0080FF>Paranoiac</color>", 0f, 0f, 100f, 10f,
                 PercentFormat);
             SleuthOn = new CustomNumberOption(num++, MultiMenu.modifiers, "<color=#803333FF>Sleuth</color>", 0f, 0f, 100f, 10f,
@@ -671,6 +693,8 @@ namespace TownOfSushi.CustomOption
                 PercentFormat);                
             TiebreakerOn = new CustomNumberOption(num++, MultiMenu.modifiers, "<color=#99E699FF>Tiebreaker</color>", 0f, 0f, 100f, 10f,
                 PercentFormat);
+            WatcherOn = new CustomNumberOption(num++, MultiMenu.modifiers, "<color=#001aff>Watcher</color>", 0f, 0f, 100f, 10f,
+                PercentFormat);
 
             ImpostorModifiers = new CustomHeaderOption(num++, MultiMenu.modifiers, "Impostor Modifiers");
             DisperserOn = new CustomNumberOption(num++, MultiMenu.modifiers, "<color=#FF0000FF>Disperser</color>", 0f, 0f, 100f, 10f,
@@ -678,6 +702,23 @@ namespace TownOfSushi.CustomOption
             UnderdogOn = new CustomNumberOption(num++, MultiMenu.modifiers, "<color=#FF0000FF>Underdog</color>", 0f, 0f, 100f, 10f,
                 PercentFormat);
 
+            Assassin = new CustomHeaderOption(num++, MultiMenu.modifiers, "<color=#FF0000FF>Assassin Ability</color>");
+            NumberOfImpostorAssassins = new CustomNumberOption(num++, MultiMenu.modifiers, "Number Of Impostor Assassins", 1, 0, 4, 1);
+            NumberOfNeutralAssassins = new CustomNumberOption(num++, MultiMenu.modifiers, "Number Of Neutral Assassins", 1, 0, 5, 1);
+            AmneTurnImpAssassin = new CustomToggleOption(num++, MultiMenu.modifiers, "Amnesiac Turned Impostor Gets Ability", true);
+            AmneTurnNeutAssassin = new CustomToggleOption(num++, MultiMenu.modifiers, "Amnesiac Turned Neutral Killing Gets Ability", true);
+            TraitorCanAssassin = new CustomToggleOption(num++, MultiMenu.modifiers, "Traitor Gets Ability", true);
+            AssassinKills = new CustomNumberOption(num++, MultiMenu.modifiers, "Number Of Assassin Kills", 1, 1, 15, 1);
+            AssassinMultiKill = new CustomToggleOption(num++, MultiMenu.modifiers, "Assassin Can Kill More Than Once Per Meeting", true);
+            AssassinCrewmateGuess = new CustomToggleOption(num++, MultiMenu.modifiers, "Assassin Can Guess \"Crewmate\"", false);
+            AssassinGuessNeutralBenign = new CustomToggleOption(num++, MultiMenu.modifiers, "Assassin Can Guess Neutral Benign Roles", true);
+            AssassinGuessNeutralEvil = new CustomToggleOption(num++, MultiMenu.modifiers, "Assassin Can Guess Neutral Evil Roles", true);
+            AssassinGuessNeutralKilling = new CustomToggleOption(num++, MultiMenu.modifiers, "Assassin Can Guess Neutral Killing Roles", true);
+            AssassinGuessImpostors = new CustomToggleOption(num++, MultiMenu.modifiers, "Assassin Can Guess Impostor Roles", true);
+            AssassinGuessModifiers = new CustomToggleOption(num++, MultiMenu.modifiers, "Assassin Can Guess Some Modifiers", true);
+            AssassinGuessLovers = new CustomToggleOption(num++, MultiMenu.modifiers, "Assassin Can Guess Lovers", true);
+            AssassinateAfterVoting = new CustomToggleOption(num++, MultiMenu.modifiers, "Assassin Can Guess After Voting", true);
+        
             GameModeSettings =
                 new CustomHeaderOption(num++, MultiMenu.main, "Game Mode Settings");
             GameMode = new CustomStringOption(num++, MultiMenu.main, "Game Mode", new[] {"Classic", "All Any", "Killing Only", "Cultist" });
@@ -786,9 +827,11 @@ namespace TownOfSushi.CustomOption
 
             CustomGameSettings =
                 new CustomHeaderOption(num++, MultiMenu.main, "Custom Game Settings");
+            FirstDeathShield = new CustomToggleOption(num++, MultiMenu.main, "Shield Last Game First Kill", true);                
             ColourblindComms = new CustomToggleOption(num++, MultiMenu.main, "Camouflage Comms", false);                   
             RandomSpawns = new CustomToggleOption(num++, MultiMenu.main, "Enable Random Spawns", false);                   
             EveryoneVent = new CustomToggleOption(num++, MultiMenu.main, "Everyone Vent Mode", false);
+            NoNames = new CustomToggleOption(num++, MultiMenu.main, "Disable Player Names", false);
             ImpostorSeeRoles = new CustomToggleOption(num++, MultiMenu.main, "Impostors Can See The Roles Of Their Team", false);
             DeadSeeRoles =
                 new CustomToggleOption(num++, MultiMenu.main, "Dead Can See Everyone's Roles/Votes", false);
@@ -796,8 +839,6 @@ namespace TownOfSushi.CustomOption
                 new CustomNumberOption(num++, MultiMenu.main, "Game Start Cooldowns", 10f, 10f, 30f, 2.5f, CooldownFormat);
             ParallelMedScans = new CustomToggleOption(num++, MultiMenu.main, "Parallel Medbay Scans", false);
             SkipButtonDisable = new CustomStringOption(num++, MultiMenu.main, "Disable Meeting Skip Button", new[] { "No", "Emergency", "Always" });
-            HiddenRoles = new CustomToggleOption(num++, MultiMenu.main, "Enable Hidden Roles", true);
-            FirstDeathShield = new CustomToggleOption(num++, MultiMenu.main, "First Death Shield Next Game", true);
 
             TaskTrackingSettings =
                 new CustomHeaderOption(num++, MultiMenu.main, "Task Tracking Settings");
@@ -805,23 +846,6 @@ namespace TownOfSushi.CustomOption
             SeeTasksDuringMeeting = new CustomToggleOption(num++, MultiMenu.main, "See Tasks During Meetings", false);
             SeeTasksWhenDead = new CustomToggleOption(num++, MultiMenu.main, "See Tasks When Dead", true);
 
-            Assassin = new CustomHeaderOption(num++, MultiMenu.imposter, "<color=#FF0000FF>Assassin Ability</color>");
-            NumberOfImpostorAssassins = new CustomNumberOption(num++, MultiMenu.imposter, "Number Of Impostor Assassins", 1, 0, 4, 1);
-            NumberOfNeutralAssassins = new CustomNumberOption(num++, MultiMenu.imposter, "Number Of Neutral Assassins", 1, 0, 5, 1);
-            AmneTurnImpAssassin = new CustomToggleOption(num++, MultiMenu.imposter, "Amnesiac Turned Impostor Gets Ability", false);
-            AmneTurnNeutAssassin = new CustomToggleOption(num++, MultiMenu.imposter, "Amnesiac Turned Neutral Killing Gets Ability", false);
-            TraitorCanAssassin = new CustomToggleOption(num++, MultiMenu.imposter, "Traitor Gets Ability", false);
-            AssassinKills = new CustomNumberOption(num++, MultiMenu.imposter, "Number Of Assassin Kills", 1, 1, 15, 1);
-            AssassinMultiKill = new CustomToggleOption(num++, MultiMenu.imposter, "Assassin Can Kill More Than Once Per Meeting", false);
-            AssassinCrewmateGuess = new CustomToggleOption(num++, MultiMenu.imposter, "Assassin Can Guess \"Crewmate\"", false);
-            AssassinGuessNeutralBenign = new CustomToggleOption(num++, MultiMenu.imposter, "Assassin Can Guess Neutral Benign Roles", false);
-            AssassinGuessNeutralEvil = new CustomToggleOption(num++, MultiMenu.imposter, "Assassin Can Guess Neutral Evil Roles", false);
-            AssassinGuessNeutralKilling = new CustomToggleOption(num++, MultiMenu.imposter, "Assassin Can Guess Neutral Killing Roles", false);
-            AssassinGuessImpostors = new CustomToggleOption(num++, MultiMenu.imposter, "Assassin Can Guess Impostor Roles", false);
-            AssassinGuessModifiers = new CustomToggleOption(num++, MultiMenu.imposter, "Assassin Can Guess Some Modifiers", false);
-            AssassinGuessLovers = new CustomToggleOption(num++, MultiMenu.imposter, "Assassin Can Guess Lovers", false);
-            AssassinateAfterVoting = new CustomToggleOption(num++, MultiMenu.imposter, "Assassin Can Guess After Voting", false);
-        
             Mayor =
                 new CustomHeaderOption(num++, MultiMenu.crewmate, "<color=#7efbc2>Mayor</color>");
             MayorVoteBank =
@@ -882,6 +906,13 @@ namespace TownOfSushi.CustomOption
                  new CustomNumberOption(num++, MultiMenu.crewmate, "Tasks Remaining When Alert Is Sent", 1, 1, 5, 1);
             AvengerRevealsNeutrals = new CustomToggleOption(num++, MultiMenu.crewmate, "Avenger Reveals Neutral Roles", false);
             AvengerCanBeClickedBy = new CustomStringOption(num++, MultiMenu.crewmate, "Who Can Click Avenger", new[] { "All", "Non-Crew", "Imps Only" });
+
+            Camouflager = new CustomHeaderOption(num++, MultiMenu.crewmate, "<color=#708eef>Camouflager</color>");
+            CamouflagerSwoopCd =
+                new CustomNumberOption(num++, MultiMenu.crewmate, "Swoop Cooldown", 25f, 10f, 60f, 2.5f, CooldownFormat);
+            CamouflagerSwoopDuration =
+                new CustomNumberOption(num++, MultiMenu.crewmate, "Swoop Duration", 10f, 5f, 15f, 1f, CooldownFormat);            
+
 
             Mystic =
                 new CustomHeaderOption(num++, MultiMenu.crewmate, "<color=#4D99E6FF>Mystic</color>");
@@ -974,18 +1005,20 @@ namespace TownOfSushi.CustomOption
                 new CustomToggleOption(num++, MultiMenu.crewmate, "Sheriff Kills Executioner", false);
             SheriffKillsJester =
                 new CustomToggleOption(num++, MultiMenu.crewmate, "Sheriff Kills Jester", false);
+            SheriffKillsLovers =
+                new CustomToggleOption(num++, MultiMenu.crewmate, "Sheriff Kills Lovers", false);                
             SheriffKillsArsonist =
-                new CustomToggleOption(num++, MultiMenu.crewmate, "Sheriff Kills Arsonist", false);
+                new CustomToggleOption(num++, MultiMenu.crewmate, "Sheriff Kills Arsonist", true);
             SheriffKillsGlitch =
-                new CustomToggleOption(num++, MultiMenu.crewmate, "Sheriff Kills The Glitch", false);
+                new CustomToggleOption(num++, MultiMenu.crewmate, "Sheriff Kills The Glitch", true);
             SheriffKillsJuggernaut =
-                new CustomToggleOption(num++, MultiMenu.crewmate, "Sheriff Kills Juggernaut", false);
+                new CustomToggleOption(num++, MultiMenu.crewmate, "Sheriff Kills Juggernaut", true);
             SheriffKillsPlaguebearer =
-                new CustomToggleOption(num++, MultiMenu.crewmate, "Sheriff Kills Plaguebearer", false);
+                new CustomToggleOption(num++, MultiMenu.crewmate, "Sheriff Kills Plaguebearer", true);
             SheriffKillsVampire =
-                new CustomToggleOption(num++, MultiMenu.crewmate, "Sheriff Kills Vampire", false);
+                new CustomToggleOption(num++, MultiMenu.crewmate, "Sheriff Kills Vampire", true);
             SheriffKillsWerewolf =
-                new CustomToggleOption(num++, MultiMenu.crewmate, "Sheriff Kills Werewolf", false);
+                new CustomToggleOption(num++, MultiMenu.crewmate, "Sheriff Kills Werewolf", true);
             SheriffKillCd =
                 new CustomNumberOption(num++, MultiMenu.crewmate, "Sheriff Kill Cooldown", 25f, 10f, 40f, 2.5f, CooldownFormat);
             SheriffBodyReport = new CustomToggleOption(num++, MultiMenu.crewmate, "Sheriff Can Report Who They've Killed");
@@ -1016,6 +1049,7 @@ namespace TownOfSushi.CustomOption
             VigilanteGuessNeutralBenign = new CustomToggleOption(num++, MultiMenu.crewmate, "Vigilante Can Guess Neutral Benign Roles", false);
             VigilanteGuessNeutralEvil = new CustomToggleOption(num++, MultiMenu.crewmate, "Vigilante Can Guess Neutral Evil Roles", false);
             VigilanteGuessNeutralKilling = new CustomToggleOption(num++, MultiMenu.crewmate, "Vigilante Can Guess Neutral Killing Roles", false);
+            VigilanteGuessCrewRolesIfLovers = new CustomToggleOption(num++, MultiMenu.crewmate, "Vigilante Can Guess Crewmate Roles When Their Lover Is Not Crewmate Aligned", false);
             VigilanteGuessLovers = new CustomToggleOption(num++, MultiMenu.crewmate, "Vigilante Can Guess Lovers", false);
             VigilanteAfterVoting = new CustomToggleOption(num++, MultiMenu.crewmate, "Vigilante Can Guess After Voting", false);
 
@@ -1045,11 +1079,11 @@ namespace TownOfSushi.CustomOption
             Engineer =
                 new CustomHeaderOption(num++, MultiMenu.crewmate, "<color=#FFA60AFF>Engineer</color>");
             EngineerPer =
-                new CustomStringOption(num++, MultiMenu.crewmate,  "Engineer Fix Per", new[] { "Custom", "Round", "Game" });
+                new CustomStringOption(num++, MultiMenu.crewmate,  "Engineer Mode", new[] { "Custom", "Round", "Game" });
             EngiFixPerRound = 
-                new CustomNumberOption(num++, MultiMenu.crewmate,  "Engineer Max Fix Per Round", 1, 0, 10, 1);
+                new CustomNumberOption(num++, MultiMenu.crewmate,  "Engineer Max Fixes Per Round", 1, 0, 10, 1);
             EngiFixPerGame =
-                new CustomNumberOption(num++, MultiMenu.crewmate,  "Engineer Max Fix Per Game", 2, 0, 100, 1);
+                new CustomNumberOption(num++, MultiMenu.crewmate,  "Engineer Max Fixes Per Game", 2, 0, 100, 1);
 
 
             Medium =
@@ -1149,7 +1183,10 @@ namespace TownOfSushi.CustomOption
                 new CustomToggleOption(num++, MultiMenu.neutral, "Arsonist Has Impostor Vision", false);
             IgniteCdRemoved =
                 new CustomToggleOption(num++, MultiMenu.neutral, "Ignite Cooldown Removed When Arsonist Is Last Killer", false);
+            ArsoVent =
+                new CustomToggleOption(num++, MultiMenu.neutral, "Arsonist Can Vent", false);
 
+                
             Juggernaut =
                 new CustomHeaderOption(num++, MultiMenu.neutral, "<color=#8C004DFF>Juggernaut</color>");
             JuggKillCooldown = new CustomNumberOption(num++, MultiMenu.neutral, "Juggernaut Initial Kill Cooldown", 25f, 10f, 60f, 2.5f, CooldownFormat);
@@ -1172,11 +1209,12 @@ namespace TownOfSushi.CustomOption
             HackCooldownOption = new CustomNumberOption(num++, MultiMenu.neutral, "Hack Cooldown", 25f, 10f, 60f, 2.5f, CooldownFormat);
             HackDurationOption = new CustomNumberOption(num++, MultiMenu.neutral, "Hack Duration", 10f, 1f, 15f, 1f, CooldownFormat);
             GlitchKillCooldownOption =
-                new CustomNumberOption(num++, MultiMenu.neutral, "Glitch Kill Cooldown", 25f, 10f, 120f, 2.5f, CooldownFormat);
+                new CustomNumberOption(num++, MultiMenu.neutral, "The Glitch Kill Cooldown", 25f, 10f, 120f, 2.5f, CooldownFormat);
             GlitchHackDistanceOption =
-                new CustomStringOption(num++, MultiMenu.neutral, "Glitch Hack Distance", new[] { "Short", "Normal", "Long" });
+                new CustomStringOption(num++, MultiMenu.neutral, "The Glitch Hack Distance", new[] { "Short", "Normal", "Long" });
             GlitchVent =
-                new CustomToggleOption(num++, MultiMenu.neutral, "Glitch Can Vent", false);
+                new CustomToggleOption(num++, MultiMenu.neutral, "The Glitch Can Vent", false);
+
 
             Vampire = new CustomHeaderOption(num++, MultiMenu.neutral, "<color=#262626FF>Vampire</color>");
             BiteCooldown =
@@ -1193,6 +1231,7 @@ namespace TownOfSushi.CustomOption
                 new CustomToggleOption(num++, MultiMenu.neutral, "Can Convert Neutral Benign Roles", false);
             CanBiteNeutralEvil =
                 new CustomToggleOption(num++, MultiMenu.neutral, "Can Convert Neutral Evil Roles", false);
+
 
             Werewolf = new CustomHeaderOption(num++, MultiMenu.neutral, "<color=#A86629FF>Werewolf</color>");
             RampageCooldown =
@@ -1298,6 +1337,11 @@ namespace TownOfSushi.CustomOption
             Frosty = new CustomHeaderOption(num++, MultiMenu.modifiers, "<color=#99FFFFFF>Frosty</color>");
             ChillDuration = new CustomNumberOption(num++, MultiMenu.modifiers, "Chill Duration", 10f, 1f, 15f, 1f, CooldownFormat);
             ChillStartSpeed = new CustomNumberOption(num++, MultiMenu.modifiers, "Chill Start Speed", 0.75f, 0.25f, 0.95f, 0.05f, MultiplierFormat);
+
+            Mini = new CustomHeaderOption(num++, MultiMenu.modifiers, "<color=#f590bc>Mini</color>");
+            MiniSize = new CustomNumberOption(num++, MultiMenu.modifiers, "Mini Size", 0.45f, 0.3f, 0.6f, 0.5f, MultiplierFormat);
+            MiniSpeed = new CustomNumberOption(num++, MultiMenu.modifiers, "Mini Speed", 1.25f, 1.05f, 2.5f, 0.05f, MultiplierFormat);
+
 
             Flash = new CustomHeaderOption(num++, MultiMenu.modifiers, "<color=#FF8080FF>Flash</color>");
             FlashSpeed = new CustomNumberOption(num++, MultiMenu.modifiers, "Flash Speed", 1.25f, 1.05f, 2.5f, 0.05f, MultiplierFormat);

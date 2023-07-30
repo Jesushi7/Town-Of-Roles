@@ -48,7 +48,14 @@ namespace TownOfSushi
         {
             if (!(PlayerControl.LocalPlayer.Is(RoleEnum.Aurial) && !Role.GetRole<Aurial>(PlayerControl.LocalPlayer).NormalVision)) player.SetOutfit(CustomPlayerOutfitType.Default);
         }
+        public static void NoNames()
+        {
+            if (CustomGameOptions.NoNames)
+            foreach (var player in PlayerControl.AllPlayerControls)
+            {
 
+            }
+        }
         public static void Camouflage()
         {
             if (PlayerControl.LocalPlayer.Is(RoleEnum.Aurial) && !Role.GetRole<Aurial>(PlayerControl.LocalPlayer).NormalVision) return;
@@ -67,10 +74,22 @@ namespace TownOfSushi
                         PlayerName = " ",
                         PetId = ""
                     });
-                    PlayerMaterial.SetColors(Color.grey, player.myRend());
+                    PlayerMaterial.SetColors(Color.black, player.myRend());
                     player.nameText().color = Color.clear;
                     player.cosmetics.colorBlindText.color = Color.clear;
                   
+                }
+                else if (CustomGameOptions.NoNames && !Classes.GameStates.IsMeeting)
+                {
+                if (player.GetCustomOutfitType() != CustomPlayerOutfitType.NoNames)
+                {
+                    player.SetOutfit(CustomPlayerOutfitType.NoNames, new GameData.PlayerOutfit()
+                    {
+                        PlayerName = " ",
+                        
+                    });                  
+                    player.nameText().color = Color.clear;
+                }
                 }
             }
         }
@@ -499,6 +518,7 @@ namespace TownOfSushi
                         target.Is(RoleEnum.Juggernaut) && CustomGameOptions.SheriffKillsJuggernaut ||
                         target.Is(RoleEnum.Vampire) && CustomGameOptions.SheriffKillsVampire ||
                         target.Is(RoleEnum.Executioner) && CustomGameOptions.SheriffKillsExecutioner ||
+                        target.Is(ModifierEnum.Lover) && CustomGameOptions.SheriffKillsLovers ||
                         target.Is(RoleEnum.Doomsayer) && CustomGameOptions.SheriffKillsDoomsayer ||
                         target.Is(RoleEnum.Jester) && CustomGameOptions.SheriffKillsJester) sheriff.CorrectKills += 1;
                     else if (killer == target) sheriff.IncorrectKills += 1;
@@ -1178,6 +1198,11 @@ namespace TownOfSushi
                 var transporter = Role.GetRole<Transporter>(PlayerControl.LocalPlayer);
                 transporter.LastTransported = DateTime.UtcNow;
             }
+            if (PlayerControl.LocalPlayer.Is(RoleEnum.Camouflager))
+            {
+                var camo = Role.GetRole<Camouflager>(PlayerControl.LocalPlayer);
+                camo.LastSwooped = DateTime.UtcNow;
+            }               
             if (PlayerControl.LocalPlayer.Is(RoleEnum.Veteran))
             {
                 var veteran = Role.GetRole<Veteran>(PlayerControl.LocalPlayer);

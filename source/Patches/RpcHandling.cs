@@ -29,12 +29,12 @@ using UnityEngine;
 using Coroutine = TownOfSushi.ImpostorRoles.JanitorMod.Coroutine;
 using Object = UnityEngine.Object;
 using PerformKillButton = TownOfSushi.NeutralRoles.AmnesiacMod.PerformKillButton;
-using Random = UnityEngine.Random; //using Il2CppSystem;
+using Random = UnityEngine.Random; 
 using TownOfSushi.Patches;
 using AmongUs.GameOptions;
 using TownOfSushi.NeutralRoles.VampireMod;
-using TownOfSushi.CrewmateRoles.MonarchMod;
 using System.Reflection;
+using TownOfSushi.CrewmateRoles.MonarchMod;
 
 namespace TownOfSushi
 {
@@ -49,6 +49,7 @@ namespace TownOfSushi
         private static readonly List<(Type, int)> GlobalModifiers = new();
         private static readonly List<(Type, int)> ImpostorModifiers = new();
         private static readonly List<(Type, int)> ButtonModifiers = new();
+        private static readonly List<(Type, int)> WatcherModifier = new();        
         private static readonly List<(Type, int)> AssassinModifiers = new();
         private static readonly List<(Type, CustomRPC, int)> AssassinAbility = new();
         private static bool PhantomOn;
@@ -298,6 +299,7 @@ namespace TownOfSushi
             SortModifiers(GlobalModifiers, crewmates.Count + impostors.Count);
             SortModifiers(ImpostorModifiers, impostors.Count);
             SortModifiers(ButtonModifiers, crewmates.Count + impostors.Count);
+            SortModifiers(WatcherModifier, crewmates.Count + impostors.Count);
 
             if (CustomGameOptions.GameMode == GameMode.AllAny)
             {
@@ -391,6 +393,14 @@ namespace TownOfSushi
             canHaveModifier.RemoveAll(player => player.Is(RoleEnum.Glitch));
 
             foreach (var (type, id) in ButtonModifiers)
+            {
+                if (canHaveModifier.Count == 0) break;
+                Role.GenModifier<Modifier>(type, canHaveModifier);
+            }
+
+
+            canHaveModifier.RemoveAll(player => player.Is(RoleEnum.Prosecutor));
+            foreach (var (type, id) in WatcherModifier)
             {
                 if (canHaveModifier.Count == 0) break;
                 Role.GenModifier<Modifier>(type, canHaveModifier);
@@ -510,8 +520,7 @@ namespace TownOfSushi
 
             NeutralKillingRoles.Add((typeof(Glitch), 10, true));
             NeutralKillingRoles.Add((typeof(Werewolf), 10, true));
-            if (CustomGameOptions.HiddenRoles)
-                NeutralKillingRoles.Add((typeof(Juggernaut), 10, true));
+            NeutralKillingRoles.Add((typeof(Juggernaut), 10, true));
             if (CustomGameOptions.AddArsonist)
                 NeutralKillingRoles.Add((typeof(Arsonist), 10, true));
             if (CustomGameOptions.AddPlaguebearer)
@@ -687,7 +696,7 @@ namespace TownOfSushi
                     case CustomRPC.VampireWin:
                         Role.VampWin();
                         break;
-
+                        
                     case CustomRPC.SetCouple:
                         var id = reader.ReadByte();
                         var id2 = reader.ReadByte();
@@ -709,6 +718,7 @@ namespace TownOfSushi
                         ShowRoundOneShield.DiedFirst = "";
                         Murder.KilledPlayers.Clear();
                         Role.NobodyWins = false;
+                        Role.CrewWins = false;
                         Role.SurvOnlyWins = false;
                         Role.VampireWins = false;
                         ExileControllerPatch.lastExiled = null;
@@ -766,7 +776,12 @@ namespace TownOfSushi
                             prosRole.ProsecuteThisMeeting = true;
                         }
                         break;
-
+                    case CustomRPC.CamouflagerSwoop:
+                        var chameleon2 = Utils.PlayerById(reader.ReadByte());
+                        var chameleonRole2 = Role.GetRole<Chameleon>(chameleon2);
+                        chameleonRole2.TimeRemaining = CustomGameOptions.SwoopDuration;
+                        chameleonRole2.Swoop();
+                        break;   
                     case CustomRPC.Bite:
                         var newVamp = Utils.PlayerById(reader.ReadByte());
                         Bite.Convert(newVamp);
@@ -1209,7 +1224,7 @@ namespace TownOfSushi
         {
             public static void Postfix()
             {
-                PluginSingleton<TownOfSushi>.Instance.Log.LogMessage("RPC SET ROLE");
+                PluginSingleton<TownOfSushi>.Instance.Log.LogMessage("RPC SPAWN ROLES");
                 var infected = GameData.Instance.AllPlayers.ToArray().Where(o => o.IsImpostor());
 
                 Utils.ShowDeadBodies = false;
@@ -1230,6 +1245,7 @@ namespace TownOfSushi
                 ShowRoundOneShield.DiedFirst = "";
                 Role.NobodyWins = false;
                 Role.SurvOnlyWins = false;
+                Role.CrewWins = false;
                 Role.VampireWins = false;
                 ExileControllerPatch.lastExiled = null;
                 PatchKillTimer.GameStarted = false;
@@ -1245,7 +1261,9 @@ namespace TownOfSushi
                 ImpostorModifiers.Clear();
                 ButtonModifiers.Clear();
                 AssassinModifiers.Clear();
+                WatcherModifier.Clear();
                 AssassinAbility.Clear();
+
 
                 Murder.KilledPlayers.Clear();
                 KillButtonTarget.DontRevive = byte.MaxValue;
@@ -1288,6 +1306,9 @@ namespace TownOfSushi
 
                     if (CustomGameOptions.SheriffOn > 0)
                         CrewmateRoles.Add((typeof(Sheriff), CustomGameOptions.SheriffOn, false));
+
+                    if (CustomGameOptions.CamouflagerOn > 0)
+                        CrewmateRoles.Add((typeof(Camouflager), CustomGameOptions.CamouflagerOn, false));                        
 
                     if (CustomGameOptions.EngineerOn > 0)
                         CrewmateRoles.Add((typeof(Engineer), CustomGameOptions.EngineerOn, false));
@@ -1419,9 +1440,6 @@ namespace TownOfSushi
                     if (Check(CustomGameOptions.NightowlOn))
                         CrewmateModifiers.Add((typeof(Nightowl), CustomGameOptions.NightowlOn));
 
-                    if (Check(CustomGameOptions.AftermathOn))
-                        CrewmateModifiers.Add((typeof(Aftermath), CustomGameOptions.AftermathOn));
-
                     if (Check(CustomGameOptions.MultitaskerOn))
                         CrewmateModifiers.Add((typeof(Multitasker), CustomGameOptions.MultitaskerOn));
 
@@ -1434,7 +1452,13 @@ namespace TownOfSushi
                         GlobalModifiers.Add((typeof(Flash), CustomGameOptions.FlashOn));
 
                     if (Check(CustomGameOptions.FrostyOn))
-                        GlobalModifiers.Add((typeof(Frosty), CustomGameOptions.FrostyOn));
+                        CrewmateModifiers.Add((typeof(Frosty), CustomGameOptions.FrostyOn));
+
+                    if (Check(CustomGameOptions.AftermathOn))
+                        GlobalModifiers.Add((typeof(Aftermath), CustomGameOptions.AftermathOn));
+
+                    if (Check(CustomGameOptions.MiniOn))
+                        GlobalModifiers.Add((typeof(Mini), CustomGameOptions.MiniOn));
 
                     if (Check(CustomGameOptions.DiseasedOn))
                         GlobalModifiers.Add((typeof(Diseased), CustomGameOptions.DiseasedOn));
@@ -1450,6 +1474,9 @@ namespace TownOfSushi
 
                     if (Check(CustomGameOptions.ButtonBarryOn))
                         ButtonModifiers.Add((typeof(ButtonBarry), CustomGameOptions.ButtonBarryOn));
+
+                    if (Check(CustomGameOptions.WatcherOn))
+                        WatcherModifier.Add((typeof(Watcher), CustomGameOptions.WatcherOn));
 
                     if (Check(CustomGameOptions.DrunkOn))
                         GlobalModifiers.Add((typeof(Drunk), CustomGameOptions.DrunkOn)); 
@@ -1471,7 +1498,7 @@ namespace TownOfSushi
                         AssassinModifiers.Add((typeof(DoubleShot), CustomGameOptions.DoubleShotOn));
 
                     if (CustomGameOptions.SpyOn > 0)
-                        ImpostorModifiers.Add((typeof(Spy), CustomGameOptions.SpyOn));
+                        GlobalModifiers.Add((typeof(Spy), CustomGameOptions.SpyOn));
 
                     if (CustomGameOptions.UnderdogOn > 0)
                         ImpostorModifiers.Add((typeof(Underdog), CustomGameOptions.UnderdogOn));

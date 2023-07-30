@@ -1,6 +1,6 @@
 ## *Note: This repository is a fork of Town of Us Reactivated.*
 
-![LOGO](./Images/TownOfUsBanner.png)
+![LOGO](./Images/TOU-logo.png)
 
 An Among Us mod that adds a bunch of roles, modifiers and game settings
 

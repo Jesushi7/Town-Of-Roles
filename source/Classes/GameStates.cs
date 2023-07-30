@@ -14,6 +14,8 @@ namespace TownOfSushi.Classes
         public static bool IsInGame => (AmongUsClient.Instance.GameState == InnerNetClient.GameStates.Started || GameManager.Instance?.GameHasStarted ==  true) && !LobbyBehaviour.Instance;
         public static bool IsLobby => AmongUsClient.Instance.GameState == InnerNetClient.GameStates.Joined || LobbyBehaviour.Instance;
         public static bool IsEnded => AmongUsClient.Instance.GameState == InnerNetClient.GameStates.Ended;
+       /* public static bool CrewWins => !Custom.CustomPlayer.AllPlayers.Any(x => !x.Data.IsDead && !x.Data.Disconnected && (x.Is(Faction.Impostors) ||
+            x.Is(Faction.NeutralKilling) || x.Is(Faction.NeutralEvil) || x.Is(Faction.NeutralBenign) || x.NotOnTheSameSide()) && !x.CrewSided());        */
         public static bool IsHnS => GameOptionsManager.Instance.CurrentGameOptions.GameMode == GameModes.HideNSeek;
         public static bool IsNormal => GameOptionsManager.Instance.CurrentGameOptions.GameMode == GameModes.Normal;
         public static bool IsOnlineGame => AmongUsClient.Instance.NetworkMode == NetworkModes.OnlineGame;

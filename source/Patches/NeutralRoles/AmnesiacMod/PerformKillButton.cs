@@ -92,6 +92,7 @@ namespace TownOfSushi.NeutralRoles.AmnesiacMod
                 case RoleEnum.Prosecutor:
                 case RoleEnum.Oracle:
                 case RoleEnum.Aurial:
+                case RoleEnum.Camouflager:
 
                     rememberImp = false;
                     rememberNeut = false;
@@ -383,6 +384,12 @@ namespace TownOfSushi.NeutralRoles.AmnesiacMod
             else if (role == RoleEnum.Swooper)
             {
                 var swooperRole = Role.GetRole<Swooper>(amnesiac);
+                swooperRole.LastSwooped = DateTime.UtcNow;
+            }
+
+            else if (role == RoleEnum.Camouflager)
+            {
+                var swooperRole = Role.GetRole<Camouflager>(amnesiac);
                 swooperRole.LastSwooped = DateTime.UtcNow;
             }
 

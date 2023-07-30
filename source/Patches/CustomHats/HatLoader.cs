@@ -85,8 +85,7 @@ namespace TownOfSushi.Patches.CustomHats
                         hatBehaviour.ProductId = hatCredit.Id;
                         hatBehaviour.name = hatCredit.Name;
                         hatBehaviour.Free = true;
-                        hatBehaviours.Add(hatBehaviour);
-                        
+                        hatBehaviours.Add(hatBehaviour);         
                     }
                 }
                 catch (Exception e)

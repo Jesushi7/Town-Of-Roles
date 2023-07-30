@@ -20,6 +20,7 @@ using Il2CppInterop.Runtime.InteropTypes.Arrays;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TownOfSushi.Patches.ScreenEffects;
+using AmongUs.GameOptions;
 
 namespace TownOfSushi
 {
@@ -85,6 +86,7 @@ namespace TownOfSushi
         public static Sprite ImitateSelectSprite;
         public static Sprite ImitateDeselectSprite;
         public static Sprite ObserveSprite;
+ public static NormalGameOptionsV07 VanillaOptions => GameOptionsManager.Instance.currentNormalGameOptions;        
         public static Sprite BiteSprite;
         public static Sprite StakeSprite;
         public static Sprite RevealSprite;
@@ -247,7 +249,7 @@ namespace TownOfSushi
             var img = imageStream.ReadFully();
             LoadImage(tex, img, true);
             tex.DontDestroy();
-            var sprite = Sprite.Create(tex, new Rect(0.0f, 0.0f, tex.width, tex.height), pivot, pixelsPerUnit);
+            var sprite = Sprite.Create(tex, new UnityEngine.Rect(0.0f, 0.0f, tex.width, tex.height), pivot, pixelsPerUnit);
             sprite.DontDestroy();
             return sprite;
         }

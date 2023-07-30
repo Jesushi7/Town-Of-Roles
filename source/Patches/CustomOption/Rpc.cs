@@ -41,7 +41,7 @@ namespace TownOfSushi.CustomOption
                 var id = reader.ReadInt32();
                 var customOption =
                     CustomOption.AllOptions.FirstOrDefault(option =>
-                        option.ID == id); // Works but may need to change to gameObject.name check
+                        option.ID == id); 
                 var type = customOption?.Type;
                 object value = null;
                 if (type == CustomOptionType.Toggle) value = reader.ReadBoolean();

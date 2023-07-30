@@ -11,9 +11,7 @@ namespace TownOfSushi
         [HarmonyPostfix]
         public static void Postfix(PingTracker __instance)
         {
-            var position = __instance.GetComponent<AspectPosition>();
-            position.DistanceFromEdge = new Vector3(3.6f, 0.1f, 0);
-            position.AdjustPosition();
+            __instance.text.alignment = TMPro.TextAlignmentOptions.TopRight;
 
         var ping = AmongUsClient.Instance.Ping;
         string color = "#ff4500";

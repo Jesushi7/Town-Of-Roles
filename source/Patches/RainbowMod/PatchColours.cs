@@ -28,6 +28,20 @@ namespace TownOfSushi.RainbowMod
                 999997 => "Tawny",
                 999998 => "Gold",
                 999999 => "Rainbow",
+                //TOR Colors
+                000001 => "Sloth",     
+                000002 => "Northie :)",     
+                000003 => "Darkness",   
+                000004 => "Juggernaut",    
+                000005 => "RaLu",   
+                000006 => "Diddly",         
+                000007 => "Hannah",     
+                000008 => "Poop Color",    
+                000009 => "Burnishe Bronze",              
+                000010 => "Lotty",      
+                000011 => "Snax",        
+                000012=> "GGamer",  
+                000013=> "Blackberry",                                                                                                                                         
                 _ => null
             };
             if (newResult != null)
