@@ -10,4 +10,5 @@ namespace TownOfSushi
             __result = false;
         }
     }
+    
 }
